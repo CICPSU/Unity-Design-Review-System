@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &100000
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 400000}
+  - 114: {fileID: 11400000}
+  m_Layer: 0
+  m_Name: _GUIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &400000
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -252.856339, y: 391.953552, z: 204.051102}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0617e78d145d33438d23c2d008588b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MiniMapTexture: {fileID: 8400000, guid: 1d0f85dbb08787f4697301f8985197ad, type: 2}
+  MiniMapMaterial: {fileID: 2100000, guid: 8b6d0889969af5a458a67238694cff11, type: 2}
+  compass: {fileID: 2800000, guid: ff15a6598cac619478779547b650462f, type: 3}
+  leftOffset: 410
+  topOffset: 10
+  mapWidth: 400
+  mapHeight: 400
+  leftOffsetCompass: 110
+  topOffsetCompass: 10
+  compassWidth: 100
+  compassHeight: 100
+  mapProportionOfScreen: .200000003
+  compassProportionOfScreen: .0599999987
+  maxOrthographicSize: 5
+  miniMapCam: {fileID: 0}
+  avatar: {fileID: 0}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 100000}
+  m_IsPrefabParent: 1
