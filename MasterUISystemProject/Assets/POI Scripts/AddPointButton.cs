@@ -21,9 +21,9 @@ public class AddPointButton : MonoBehaviour {
 			POI_ReferenceHub.Instance.InvalidInputWarning.gameObject.SetActive(true);
 		}
 
-		Vector3 pos = new Vector3 (float.Parse(POI_ReferenceHub.Instance.poiInfoFields [0].value), float.Parse(POI_ReferenceHub.Instance.poiInfoFields [1].value), float.Parse(POI_ReferenceHub.Instance.poiInfoFields [2].value));
-		Vector3 rot = new Vector3 (0, float.Parse(POI_ReferenceHub.Instance.poiInfoFields [3].value), 0);
-		POI point = new POI (sFlag, POI_ReferenceHub.Instance.poiInfoFields [4].value, pos, rot, POI_GlobalVariables.defaultMarker);
+		Vector3 pos = new Vector3 (float.Parse(POI_ReferenceHub.Instance.poiInfoFields [0].text), float.Parse(POI_ReferenceHub.Instance.poiInfoFields [1].text), float.Parse(POI_ReferenceHub.Instance.poiInfoFields [2].text));
+		Vector3 rot = new Vector3 (0, float.Parse(POI_ReferenceHub.Instance.poiInfoFields [3].text), 0);
+		POI point = new POI (sFlag, POI_ReferenceHub.Instance.poiInfoFields [4].text, pos, rot, POI_GlobalVariables.defaultMarker);
 		//generate button and marker pair
 		POIButtonManager.instance.GenerateButMarkerPair (point);
 		//add the point into the orginalHandler
@@ -34,7 +34,7 @@ public class AddPointButton : MonoBehaviour {
 	}
 
 	bool checkButtonNameExist(){
-		string butName = POI_ReferenceHub.Instance.poiInfoFields [4].value;
+		string butName = POI_ReferenceHub.Instance.poiInfoFields [4].text;
 		foreach (POI point in POIButtonManager.originalHandler.projectPOIs){
 			if(point.buttonName == butName){
 				return true; //button name existed
@@ -47,7 +47,7 @@ public class AddPointButton : MonoBehaviour {
 	bool validateInput(){
 		for(int i =0; i < 4; i++){ //traverse the poi input fields, 0-4 are pos and rot input fields
 			 InputField field = POI_ReferenceHub.Instance.poiInfoFields[i];
-			string value = field.value;
+			string value = field.text;
 			float result; //dummy var for filling in tryparse below
 			if(!float.TryParse(value, out result)){
 				return false;
