@@ -23,10 +23,10 @@ public class PullCurrentTransform : MonoBehaviour {
     public void GatherCurrentTransform()
     {
 
-        poiTransformFields[0].value = characterTransform.position.x.ToString();
-		poiTransformFields[1].value = characterTransform.position.y.ToString();
-		poiTransformFields[2].value = characterTransform.position.z.ToString();
-		poiTransformFields[3].value = characterTransform.rotation.eulerAngles.y.ToString();
+        poiTransformFields[0].text = characterTransform.position.x.ToString();
+		poiTransformFields[1].text = characterTransform.position.y.ToString();
+		poiTransformFields[2].text = characterTransform.position.z.ToString();
+		poiTransformFields[3].text = characterTransform.rotation.eulerAngles.y.ToString();
         
     }
 }
