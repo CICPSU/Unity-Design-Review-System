@@ -10,6 +10,8 @@ public class MiniMapManager : MonoBehaviour {
 	public Text zoomLabel;
 	public Text sizeLabel;
 	public GameObject miniMapCanvas;
+	public RectTransform miniMapRender;
+	public RectTransform miniMapMask;
 
 	public float mapProportionOfScreen = 0.2f;
 	public float maxOrthographicSize = 5;
@@ -20,8 +22,6 @@ public class MiniMapManager : MonoBehaviour {
 	private Vector2 relativeClickPostion = Vector2.zero;
 	private Vector2 miniMapCenter = Vector2.zero;
 	private Vector3 rayStartPostion = Vector2.zero;
-	private int botMiniMapEdge;
-	private int leftMiniMapEdge;
 	private int mapDim;
 	private int compassWidth;
 	private int compassHeight;
@@ -36,23 +36,7 @@ public class MiniMapManager : MonoBehaviour {
 	}
 
 	void Update(){
-		miniMapCenter = new Vector2 (Screen.width - mapDim * 0.5f, Screen.height - 0.5f * mapDim - 30);
-		
-		// teleport to location clicked on minimap
-		if(Input.GetMouseButtonDown(0) && InsideMiniMap()){
-			Debug.Log("minimap center: " + miniMapCenter);
-			Debug.Log("Mouse Position: " + Input.mousePosition);
-			relativeClickPostion.x = (Input.mousePosition.x - miniMapCenter.x) / mapDim;
-			relativeClickPostion.y = (Input.mousePosition.y - miniMapCenter.y) / mapDim;
-			Debug.Log("relative click: " + relativeClickPostion);
-			rayStartPostion = miniMapCam.transform.position + (relativeClickPostion.x*transform.right + relativeClickPostion.y*transform.up) * miniMapCam.orthographicSize;
-			RaycastHit hit = new RaycastHit();
-			Physics.Raycast(rayStartPostion,Vector3.down,out hit, Mathf.Infinity);
-			
-			avatar.transform.position = hit.point;
-			
-		}
-
+		miniMapCenter = new Vector2 (miniMapMask.position.x - 0.5f*miniMapMask.sizeDelta.x, miniMapMask.position.y -0.5f*miniMapMask.sizeDelta.y);
 
 		if(Input.GetKeyDown("m"))
 		{
@@ -63,51 +47,32 @@ public class MiniMapManager : MonoBehaviour {
 
 	}
 
-	public bool InsideMiniMap()
+	public void Teleport()
 	{
-		return((Input.mousePosition.x > leftMiniMapEdge) && (Input.mousePosition.y > botMiniMapEdge) && (Input.mousePosition.y < Screen.height - 30));
-	}
-
-	public void ChangeZoom(bool isIncrease)
-	{
-		if (isIncrease) 
-		{
-			zoomLevel += 10;
-		} 
-		else 
-		{
-			zoomLevel -= 10;
-		}
-
-		if (zoomLevel > 100) 
-		{
-			zoomLevel =  100;
-		}
-
-		// This is where we will reset the zoom of the ortho camera that is used to capture the minimap.
-		float newOrthoSize = maxOrthographicSize - maxOrthographicSize * zoomLevel / 100;
-		if (newOrthoSize <= 0) {
-			newOrthoSize = .01f;
-		}
-		miniMapCam.orthographicSize = newOrthoSize;
-		SetCompassTransform ();
-
-		// set zoom label
-		zoomLabel.text = "Zoom: " + zoomLevel;
+		//Debug.Log("minimap center: " + miniMapCenter);
+		//Debug.Log("Mouse Position: " + Input.mousePosition);
+		relativeClickPostion.x = (Input.mousePosition.x - miniMapCenter.x) / (0.5f*mapDim);
+		relativeClickPostion.y = (Input.mousePosition.y - miniMapCenter.y) / (0.5f*mapDim);
+		//Debug.Log("relative click: " + relativeClickPostion);
+		rayStartPostion = miniMapCam.transform.position + (relativeClickPostion.x*miniMapCam.transform.right + relativeClickPostion.y*miniMapCam.transform.up) * miniMapCam.orthographicSize;
+		RaycastHit hit = new RaycastHit();
+		Physics.Raycast(rayStartPostion,Vector3.down,out hit, Mathf.Infinity);
+		
+		avatar.transform.position = hit.point;
 	}
 
 	void SetCompassTransform()
 	{
 		compassPlane.transform.localScale = new Vector3 (miniMapCam.orthographicSize/20, 1, miniMapCam.orthographicSize/20);
-		compassPlane.transform.localPosition = new Vector3 (.75f*miniMapCam.orthographicSize, 2.2f , .75f*miniMapCam.orthographicSize);
+		compassPlane.transform.localPosition = new Vector3 (.75f*miniMapCam.orthographicSize, .75f*miniMapCam.orthographicSize, 0.4f);
 	}
 
 	void SetMiniMapCam()
 	{
 		mapDim = (int)(Screen.height * mapProportionOfScreen);
-		botMiniMapEdge = Screen.height - mapDim - 30;
-		leftMiniMapEdge = Screen.width - mapDim;
-		miniMapCam.GetComponent<Camera>().pixelRect = new Rect (leftMiniMapEdge, botMiniMapEdge, mapDim, mapDim);
+		miniMapMask.sizeDelta = new Vector2 (mapDim, mapDim);
+		miniMapRender.sizeDelta = new Vector2 (mapDim, mapDim);
+		miniMapCam.orthographicSize = maxOrthographicSize - maxOrthographicSize * zoomLevel / 100;
 	}
 
 	public void ChangeSize(bool isIncrease)
@@ -130,6 +95,34 @@ public class MiniMapManager : MonoBehaviour {
 		SetMiniMapCam ();
 
 		sizeLabel.text = "Size: " + mapProportionOfScreen;
+	}
+
+	public void ChangeZoom(bool isIncrease)
+	{
+		if (isIncrease) 
+		{
+			zoomLevel += 10;
+		} 
+		else 
+		{
+			zoomLevel -= 10;
+		}
+		
+		if (zoomLevel > 100) 
+		{
+			zoomLevel =  100;
+		}
+		
+		// This is where we will reset the zoom of the ortho camera that is used to capture the minimap.
+		float newOrthoSize = maxOrthographicSize - maxOrthographicSize * zoomLevel / 100;
+		if (newOrthoSize <= 0) {
+			newOrthoSize = .01f;
+		}
+		miniMapCam.orthographicSize = newOrthoSize;
+		SetCompassTransform ();
+		
+		// set zoom label
+		zoomLabel.text = "Zoom: " + zoomLevel;
 	}
 
 }
