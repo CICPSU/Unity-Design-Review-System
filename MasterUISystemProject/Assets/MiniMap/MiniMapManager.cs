@@ -5,7 +5,7 @@ using System.Collections;
 public class MiniMapManager : MonoBehaviour {
 	
 	public Camera miniMapCam;
-	//public GameObject compassPlane;
+	public RectTransform compassImage;
 	public Text zoomLabel;
 	public GameObject miniMapCanvas;
 	public RectTransform miniMapRender;
@@ -30,20 +30,27 @@ public class MiniMapManager : MonoBehaviour {
 
 	void Update()
 	{
-		miniMapCam.transform.position = new Vector3(POI_ReferenceHub.Instance.Avatar.transform.position.x, POI_ReferenceHub.Instance.Avatar.transform.position.y + 2.6f, POI_ReferenceHub.Instance.Avatar.transform.position.z);
-		if(Input.GetKeyDown("m"))
+		miniMapCam.transform.position = new Vector3 (POI_ReferenceHub.Instance.Avatar.transform.position.x, POI_ReferenceHub.Instance.Avatar.transform.position.y + 2.6f, POI_ReferenceHub.Instance.Avatar.transform.position.z);
+		if (Input.GetKeyDown ("m")) 
 		{
 			isMiniActive = !isMiniActive;
-			miniMapCanvas.SetActive(isMiniActive);
+			miniMapCanvas.SetActive (isMiniActive);
 		}
-		if(Input.GetKeyDown("r"))
+		if (Input.GetKeyDown ("r")) 
 		{
 			minimapRotate = !minimapRotate;
 		}
-		if (minimapRotate)
+	
+		if (minimapRotate) 
+		{
 			miniMapCam.transform.eulerAngles = new Vector3 (90, POI_ReferenceHub.Instance.Avatar.transform.eulerAngles.y, 0);
+			compassImage.transform.eulerAngles = new Vector3(0,0, POI_ReferenceHub.Instance.Avatar.transform.eulerAngles.y);
+		} 
 		else 
+		{
 			miniMapCam.transform.eulerAngles = new Vector3 (90, 0, 0);
+			compassImage.transform.eulerAngles = Vector3.zero;
+		}
 	}
 
 	public void Teleport()
@@ -55,20 +62,15 @@ public class MiniMapManager : MonoBehaviour {
 		Physics.Raycast(rayStartPostion,Vector3.down,out hit, Mathf.Infinity);
 		POI_ReferenceHub.Instance.Avatar.transform.position = hit.point;
 	}
-
-	/*
-	void SetCompassTransform()
-	{
-		compassPlane.transform.localScale = new Vector3 (miniMapCam.orthographicSize/20, 1, miniMapCam.orthographicSize/20);
-		compassPlane.transform.localPosition = new Vector3 (.75f*miniMapCam.orthographicSize, .75f*miniMapCam.orthographicSize, 0.4f);
-	}
-	*/
+	
 	void SetMiniMapCam()
 	{
 		miniMapCenter = new Vector2 (miniMapMask.position.x - 0.5f*miniMapMask.sizeDelta.x, miniMapMask.position.y -0.5f*miniMapMask.sizeDelta.y);
 		mapDim = (int)(Screen.height * mapProportionOfScreen);
 		miniMapMask.sizeDelta = new Vector2 (mapDim, mapDim);
 		miniMapRender.sizeDelta = new Vector2 (mapDim, mapDim);
+		compassImage.sizeDelta = new Vector2 (mapDim + 10, mapDim + 10);
+		compassImage.localPosition = new Vector3 (miniMapMask.localPosition.x - 0.5f*mapDim, miniMapMask.localPosition.y - 0.5f*mapDim, 0);
 		miniMapCam.orthographicSize = orthoCamRadius;
 	}
 
