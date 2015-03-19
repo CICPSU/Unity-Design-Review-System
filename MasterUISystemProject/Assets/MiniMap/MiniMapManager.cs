@@ -53,14 +53,6 @@ public class MiniMapManager : MonoBehaviour {
 		}
 	}
 
-	public void SetRotateTrue(){
-		minimapRotate = true;
-	}
-
-	public void SetRotatefalse(){
-		minimapRotate = false;
-	}
-
 	public void Teleport()
 	{
 		relativeClickPostion.x = (Input.mousePosition.x - miniMapCenter.x) / (0.5f*mapDim);
