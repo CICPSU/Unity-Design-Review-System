@@ -3,9 +3,9 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class MiniMapManager : MonoBehaviour {
-
+	
 	public Camera miniMapCam;
-	public GameObject compassPlane;
+	//public GameObject compassPlane;
 	public Text zoomLabel;
 	public GameObject miniMapCanvas;
 	public RectTransform miniMapRender;
@@ -14,7 +14,8 @@ public class MiniMapManager : MonoBehaviour {
 	public bool isMiniActive = false;
 	public float orthoCamRadius = 5;
 
-	private float orthoCamIncrement;
+	private bool minimapRotate = false;
+	private float orthoCamIncrement = 0.303f;
 	private Vector2 relativeClickPostion = Vector2.zero;
 	private Vector2 miniMapCenter = Vector2.zero;
 	private Vector3 rayStartPostion = Vector2.zero;
@@ -22,21 +23,27 @@ public class MiniMapManager : MonoBehaviour {
 	
 	void Start()
 	{
-		orthoCamIncrement = 0.1f * (float)orthoCamRadius;
 		SetMiniMapCam ();
-		SetCompassTransform ();
-		zoomLabel.text = "Radius: " + orthoCamRadius + " meters";
+		//SetCompassTransform ();
+		zoomLabel.text = "Diameter: " + (2 * orthoCamRadius * 3.3f).ToString("F1")  + " ft";
 	}
 
 	void Update()
 	{
+		miniMapCam.transform.position = new Vector3(POI_ReferenceHub.Instance.Avatar.transform.position.x, POI_ReferenceHub.Instance.Avatar.transform.position.y + 2.6f, POI_ReferenceHub.Instance.Avatar.transform.position.z);
 		if(Input.GetKeyDown("m"))
 		{
 			isMiniActive = !isMiniActive;
 			miniMapCanvas.SetActive(isMiniActive);
 		}
-
-
+		if(Input.GetKeyDown("r"))
+		{
+			minimapRotate = !minimapRotate;
+		}
+		if (minimapRotate)
+			miniMapCam.transform.eulerAngles = new Vector3 (90, POI_ReferenceHub.Instance.Avatar.transform.eulerAngles.y, 0);
+		else 
+			miniMapCam.transform.eulerAngles = new Vector3 (90, 0, 0);
 	}
 
 	public void Teleport()
@@ -49,12 +56,13 @@ public class MiniMapManager : MonoBehaviour {
 		POI_ReferenceHub.Instance.Avatar.transform.position = hit.point;
 	}
 
+	/*
 	void SetCompassTransform()
 	{
 		compassPlane.transform.localScale = new Vector3 (miniMapCam.orthographicSize/20, 1, miniMapCam.orthographicSize/20);
 		compassPlane.transform.localPosition = new Vector3 (.75f*miniMapCam.orthographicSize, .75f*miniMapCam.orthographicSize, 0.4f);
 	}
-
+	*/
 	void SetMiniMapCam()
 	{
 		miniMapCenter = new Vector2 (miniMapMask.position.x - 0.5f*miniMapMask.sizeDelta.x, miniMapMask.position.y -0.5f*miniMapMask.sizeDelta.y);
@@ -93,10 +101,10 @@ public class MiniMapManager : MonoBehaviour {
 		
 		// This is where we will reset the zoom of the ortho camera that is used to capture the minimap.
 		SetMiniMapCam ();
-		SetCompassTransform ();
+		//SetCompassTransform ();
 		
 		// set zoom label
-		zoomLabel.text = "Radius: " + orthoCamRadius + " meters";
+		zoomLabel.text = "Diameter: " + (2 * orthoCamRadius * 3.3f).ToString("F1")  + " ft";
 	}
 
 }
