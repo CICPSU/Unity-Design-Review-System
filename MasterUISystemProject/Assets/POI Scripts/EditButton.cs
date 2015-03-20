@@ -33,7 +33,8 @@ public class EditButton : MonoBehaviour {
 		Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixed update is 50fps, which is 0.02s when time scale is 1
 
 		// set the hint to the first hint
-		POI_ReferenceHub.Instance.HintText.GetComponent<HintManager> ().ChangeHint (0);
+		POI_ReferenceHub.Instance.HintText.parent.gameObject.SetActive (true);
+		POI_ReferenceHub.Instance.HintText.parent.GetComponent<HintManager> ().ChangeHint (0);
 
 		//hide the edit button
 		gameObject.SetActive(false);

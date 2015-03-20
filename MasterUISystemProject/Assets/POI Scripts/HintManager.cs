@@ -13,7 +13,7 @@ public class HintManager : MonoBehaviour {
 
 	void Start()
 	{
-		hintText = gameObject.GetComponentInChildren<Text> ();
+		hintText = gameObject.transform.FindChild("HintText").GetComponentInChildren<Text> ();
 		hintText.text = hints [0];
 	}
 

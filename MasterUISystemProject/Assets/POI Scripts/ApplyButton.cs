@@ -18,6 +18,7 @@ public class ApplyButton : MonoBehaviour {
 		POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(false);
 		POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(false); 
 		POI_ReferenceHub.Instance.HintText.gameObject.SetActive (true);
+		POI_ReferenceHub.Instance.HintText.parent.gameObject.SetActive (false);
 
 			//don't put code after this line
 	}
