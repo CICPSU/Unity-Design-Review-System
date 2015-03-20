@@ -4,7 +4,7 @@ using System.Collections;
 
 public class MiniMapManager : MonoBehaviour {
 	
-	public Camera miniMapCam;
+	public GameObject miniMapCam;
 	public RectTransform compassImage;
 	public Text zoomLabel;
 	public GameObject miniMapCanvas;
@@ -12,10 +12,11 @@ public class MiniMapManager : MonoBehaviour {
 	public RectTransform miniMapMask;
 	public float mapProportionOfScreen = 0.2f;
 	public bool isMiniActive = false;
-	public float orthoCamRadius = 5;
+	public float orthoCamRadiusFeet = 5;
+	public int mapRadiusIncrementInFeet;
 
 	private bool minimapRotate = false;
-	private float orthoCamIncrement = 0.303f;
+	private float feetToMetersFactor = 0.3048f;
 	private Vector2 relativeClickPostion = Vector2.zero;
 	private Vector2 miniMapCenter = Vector2.zero;
 	private Vector3 rayStartPostion = Vector2.zero;
@@ -24,8 +25,7 @@ public class MiniMapManager : MonoBehaviour {
 	void Start()
 	{
 		SetMiniMapCam ();
-		//SetCompassTransform ();
-		zoomLabel.text = "Diameter: " + (2 * orthoCamRadius * 3.3f).ToString("F1")  + " ft";
+		zoomLabel.text = "Diameter: " + (2 * orthoCamRadiusFeet).ToString("F1")  + " ft";
 	}
 
 	void Update()
@@ -53,19 +53,15 @@ public class MiniMapManager : MonoBehaviour {
 		}
 	}
 
-	public void SetRotateTrue(){
-		minimapRotate = true;
-	}
-
-	public void SetRotatefalse(){
-		minimapRotate = false;
+	public void SetRotate(bool rotateOn){
+		minimapRotate = rotateOn;
 	}
 
 	public void Teleport()
 	{
 		relativeClickPostion.x = (Input.mousePosition.x - miniMapCenter.x) / (0.5f*mapDim);
 		relativeClickPostion.y = (Input.mousePosition.y - miniMapCenter.y) / (0.5f*mapDim);
-		rayStartPostion = miniMapCam.transform.position + (relativeClickPostion.x*miniMapCam.transform.right + relativeClickPostion.y*miniMapCam.transform.up) * miniMapCam.orthographicSize;
+		rayStartPostion = miniMapCam.transform.position + (relativeClickPostion.x*miniMapCam.transform.right + relativeClickPostion.y*miniMapCam.transform.up) * miniMapCam.GetComponent<Camera>().orthographicSize;
 		RaycastHit hit = new RaycastHit();
 		Physics.Raycast(rayStartPostion,Vector3.down,out hit, Mathf.Infinity);
 		POI_ReferenceHub.Instance.Avatar.transform.position = hit.point;
@@ -79,7 +75,7 @@ public class MiniMapManager : MonoBehaviour {
 		miniMapRender.sizeDelta = new Vector2 (mapDim, mapDim);
 		compassImage.sizeDelta = new Vector2 (mapDim + 10, mapDim + 10);
 		compassImage.localPosition = new Vector3 (miniMapMask.localPosition.x - 0.5f*mapDim, miniMapMask.localPosition.y - 0.5f*mapDim, 0);
-		miniMapCam.orthographicSize = orthoCamRadius;
+		miniMapCam.GetComponent<Camera>().orthographicSize = orthoCamRadiusFeet*feetToMetersFactor;
 	}
 
 	public void ChangeSize(bool isIncrease)
@@ -105,16 +101,18 @@ public class MiniMapManager : MonoBehaviour {
 	public void ChangeZoom(bool isIncrease)
 	{
 		if (isIncrease) 
-			orthoCamRadius += orthoCamIncrement;
+			orthoCamRadiusFeet += mapRadiusIncrementInFeet*0.5f;
 		else
-			orthoCamRadius -= orthoCamIncrement;
-		
+			orthoCamRadiusFeet -= mapRadiusIncrementInFeet*0.5f;
+
+
+		if (orthoCamRadiusFeet < 5*feetToMetersFactor)
+			orthoCamRadiusFeet = 5*feetToMetersFactor;
 		// This is where we will reset the zoom of the ortho camera that is used to capture the minimap.
 		SetMiniMapCam ();
-		//SetCompassTransform ();
 		
 		// set zoom label
-		zoomLabel.text = "Diameter: " + (2 * orthoCamRadius * 3.3f).ToString("F1")  + " ft";
+		zoomLabel.text = "Diameter: " + (2 * orthoCamRadiusFeet).ToString("F1")  + " ft";
 	}
 
 }
