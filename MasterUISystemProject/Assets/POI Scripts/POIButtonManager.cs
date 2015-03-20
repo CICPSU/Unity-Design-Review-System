@@ -243,6 +243,7 @@ public class POIButtonManager : MonoBehaviour {
 	//save the buttons in the scene into the XML file and the orginalHandler
 	public void SaveButsToXML(){
 		Debug.Log("generating saved button files based on current project");
+		originalHandler = new POIHandler();
 		foreach (Transform child in POIList.transform)
 		{
 			POI pointToAdd = child.GetComponent<POIInfoRef>().poiInfo.Point;
@@ -277,6 +278,20 @@ public class POIButtonManager : MonoBehaviour {
 				originalHandler.AddPoint (butsInEditor[i]);
 			}
 		}
+	}
+
+	public void ResetPOIMenu()
+	{
+		POIMenuStateManager.EditModeState = false;
+
+		//restoring the original window
+		POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.white;
+		POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
+		POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive (false);
+		POI_ReferenceHub.Instance.EditBut.gameObject.SetActive(true);
+		POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(false);
+		POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(false); 
+		POI_ReferenceHub.Instance.HintText.transform.parent.gameObject.SetActive (false);
 	}
 
 	//compare two POI classes by value
