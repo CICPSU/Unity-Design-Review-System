@@ -6,12 +6,8 @@ public class POIActiveButtonManager : MonoBehaviour {
 
 	public Color defaultColor = Color.white;
 	public Color activeColor = Color.red;
-
-	public InputField xPosField, yPosField, zPosField, yRotField, nameField;
-
+	
 	public GameObject activeButton = null;
-
-	private GameObject avatar;
 
 	void Start()
 	{
@@ -54,10 +50,10 @@ public class POIActiveButtonManager : MonoBehaviour {
 		else
 		{
 			// teleport to the poi
-			avatar = GameObject.FindWithTag("Player");
+			POI_ReferenceHub.Instance.Avatar = GameObject.FindWithTag("Player");
 			//Debug.Log("found gameobject with player tag: " + avatar.name);
-			avatar.transform.position = clicked.GetComponent<POIInfoRef>().poiInfo.position;
-			avatar.transform.eulerAngles = clicked.GetComponent<POIInfoRef>().poiInfo.rotation;
+			POI_ReferenceHub.Instance.Avatar.transform.position = clicked.GetComponent<POIInfoRef>().poiInfo.position;
+			POI_ReferenceHub.Instance.Avatar.transform.eulerAngles = clicked.GetComponent<POIInfoRef>().poiInfo.rotation;
 		}
 	}// poiclicked
 
