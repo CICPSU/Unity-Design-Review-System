@@ -21,5 +21,8 @@ public class EditBookmarkBut : MonoBehaviour {
 
 		//disable the Add bookmark button
 		POI_ReferenceHub.Instance.POIEditWindow.FindChild("AddBookmark").gameObject.SetActive(false);
+
+		//disable the hintpanel
+		POI_ReferenceHub.Instance.HintText.parent.gameObject.SetActive (false);
 	}
 }

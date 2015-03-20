@@ -34,7 +34,7 @@ public class EditButton : MonoBehaviour {
 
 		// set the hint to the first hint
 		POI_ReferenceHub.Instance.HintText.parent.gameObject.SetActive (true);
-		POI_ReferenceHub.Instance.HintText.parent.GetComponent<HintManager> ().ChangeHint (0);
+			
 
 		//hide the edit button
 		gameObject.SetActive(false);
