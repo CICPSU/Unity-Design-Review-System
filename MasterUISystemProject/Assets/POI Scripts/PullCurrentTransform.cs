@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class PullCurrentTransform : MonoBehaviour {
 
-    public Transform characterTransform = null;
+
     public List<InputField> poiTransformFields = new List<InputField>();
 
 	void Start(){
@@ -23,10 +23,10 @@ public class PullCurrentTransform : MonoBehaviour {
     public void GatherCurrentTransform()
     {
 
-        poiTransformFields[0].text = characterTransform.position.x.ToString();
-		poiTransformFields[1].text = characterTransform.position.y.ToString();
-		poiTransformFields[2].text = characterTransform.position.z.ToString();
-		poiTransformFields[3].text = characterTransform.rotation.eulerAngles.y.ToString();
+        poiTransformFields[0].text = POI_ReferenceHub.Instance.Avatar.transform.position.x.ToString();
+		poiTransformFields[1].text = POI_ReferenceHub.Instance.Avatar.transform.position.y.ToString();
+		poiTransformFields[2].text = POI_ReferenceHub.Instance.Avatar.transform.position.z.ToString();
+		poiTransformFields[3].text = POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles.y.ToString();
         
     }
 }

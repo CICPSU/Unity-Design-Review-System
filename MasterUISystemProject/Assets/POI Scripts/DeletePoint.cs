@@ -18,9 +18,6 @@ public class DeletePoint : MonoBehaviour {
 		POIButtonManager.instance.RemoveButton(activePOIButton);
 		//close the edit window
 		POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive (false);
-
-		//disable the hint system
-		POI_ReferenceHub.Instance.HintText.parent.gameObject.SetActive (false);
-
+		
 	}
 }

@@ -19,8 +19,7 @@ public class EditButton : MonoBehaviour {
 		Transform editButText = editBut.FindChild("Text") as Transform;
 		editButText.GetComponent<Text>().color = new Color(0.57f,0.57f,0.57f);
 
-		// show the hint text
-		POI_ReferenceHub.Instance.HintText.gameObject.SetActive (true);
+
 		//change the color of the POImenu
 		POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.black;
 
@@ -30,11 +29,7 @@ public class EditButton : MonoBehaviour {
 
 		//pause the game
 		Time.timeScale = 0;
-		Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixed update is 50fps, which is 0.02s when time scale is 1
-
-		// set the hint to the first hint
-		POI_ReferenceHub.Instance.HintText.parent.gameObject.SetActive (true);
-			
+		Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixed update is 50fps, which is 0.02s when time scale is 1			
 
 		//hide the edit button
 		gameObject.SetActive(false);
