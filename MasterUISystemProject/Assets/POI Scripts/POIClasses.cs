@@ -10,7 +10,7 @@ public class POI
 {
     [XmlArray("SceneFlagList")]
 	[XmlArrayItem("SceneFlag")]
-    public List<string> sceneFlag = new List<string>();
+	public string sceneFlag;
 
     [XmlElement("Name")]
     public string buttonName;
@@ -28,7 +28,7 @@ public class POI
     {
     }
 
-    public POI(List<string> sFlag, string bName, Vector3 pos, Vector3 rot, string marker)
+    public POI(string sFlag, string bName, Vector3 pos, Vector3 rot, string marker)
     {
         sceneFlag = sFlag;
         buttonName = bName;
@@ -37,7 +37,7 @@ public class POI
 		markerModelPrefab = marker;
     }
 
-	public void Update(List<string> sFlag, string bName, Vector3 pos, Vector3 rot, string marker){
+	public void Update(string sFlag, string bName, Vector3 pos, Vector3 rot, string marker){
 		sceneFlag = sFlag;
 		buttonName = bName;
 		position = pos;

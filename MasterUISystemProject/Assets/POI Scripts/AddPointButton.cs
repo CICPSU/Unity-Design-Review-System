@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 
+//this is attached to the custom bookmark button
 public class AddPointButton : MonoBehaviour {
 
 	public void onClicked(){

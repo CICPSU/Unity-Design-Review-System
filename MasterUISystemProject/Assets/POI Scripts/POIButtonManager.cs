@@ -110,14 +110,12 @@ public class POIButtonManager : MonoBehaviour {
 			
 			//generate new buttons
 			foreach(POI point in originalHandler.projectPOIs){
-				foreach(string sFlag in point.sceneFlag){
-					if(sFlag == Application.loadedLevelName)
-					{
+
 						GenerateButMarkerPair(point);
 						POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
 						POIList.localPosition = Vector3.zero;
-					}
-				}
+
+
 			}
 		}
 		else{
@@ -140,14 +138,10 @@ public class POIButtonManager : MonoBehaviour {
 
 		//generate new buttons
 		foreach(POI point in handler.projectPOIs){
-			foreach(string sFlag in point.sceneFlag){
-				if(sFlag == Application.loadedLevelName)
-				{
+
 					GenerateButMarkerPair(point);
 					POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
 					POIList.localPosition = Vector3.zero;
-				}
-			}
 		}
 
 	}
