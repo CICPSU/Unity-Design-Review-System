@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 
 public class MiniMapManager : MonoBehaviour {
-	
+
+	public GameObject avatar;
 	public GameObject miniMapCam;
 	public RectTransform compassImage;
 	public Text zoomLabel;
@@ -30,7 +31,7 @@ public class MiniMapManager : MonoBehaviour {
 
 	void Update()
 	{
-		miniMapCam.transform.position = new Vector3 (POI_ReferenceHub.Instance.Avatar.transform.position.x, POI_ReferenceHub.Instance.Avatar.transform.position.y + 2.6f, POI_ReferenceHub.Instance.Avatar.transform.position.z);
+		miniMapCam.transform.position = new Vector3 (avatar.transform.position.x, avatar.transform.position.y + 2.6f, avatar.transform.position.z);
 		if (Input.GetKeyDown ("m")) 
 		{
 			isMiniActive = !isMiniActive;
@@ -43,8 +44,8 @@ public class MiniMapManager : MonoBehaviour {
 	
 		if (minimapRotate) 
 		{
-			miniMapCam.transform.eulerAngles = new Vector3 (90, POI_ReferenceHub.Instance.Avatar.transform.eulerAngles.y, 0);
-			compassImage.transform.eulerAngles = new Vector3(0,0, POI_ReferenceHub.Instance.Avatar.transform.eulerAngles.y);
+			miniMapCam.transform.eulerAngles = new Vector3 (90, avatar.transform.eulerAngles.y, 0);
+			compassImage.transform.eulerAngles = new Vector3(0,0, avatar.transform.eulerAngles.y);
 		} 
 		else 
 		{
@@ -64,7 +65,7 @@ public class MiniMapManager : MonoBehaviour {
 		rayStartPostion = miniMapCam.transform.position + (relativeClickPostion.x*miniMapCam.transform.right + relativeClickPostion.y*miniMapCam.transform.up) * miniMapCam.GetComponent<Camera>().orthographicSize;
 		RaycastHit hit = new RaycastHit();
 		Physics.Raycast(rayStartPostion,Vector3.down,out hit, Mathf.Infinity);
-		POI_ReferenceHub.Instance.Avatar.transform.position = hit.point;
+		avatar.transform.position = hit.point;
 	}
 	
 	void SetMiniMapCam()
