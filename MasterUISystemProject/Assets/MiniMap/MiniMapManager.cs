@@ -25,6 +25,7 @@ public class MiniMapManager : MonoBehaviour {
 	
 	void Start()
 	{
+		avatar = GameObject.FindWithTag("Player");
 		SetMiniMapCam ();
 		zoomLabel.text = "Diameter: " + (2 * orthoCamRadiusFeet).ToString("F1")  + " ft";
 	}

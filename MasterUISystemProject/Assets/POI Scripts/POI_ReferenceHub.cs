@@ -23,7 +23,7 @@ public class POI_ReferenceHub : MonoBehaviour{
 	public RectTransform BookmarkCurrentLocationNameField;
 	public GameObject markerInfoCanvas;
 
-	public  List<InputField> poiInfoFields;
+	public  List<InputField> poiInfoFields; // the Name, position, and rotation fields in the POIedit window
 	public  UnityEngine.Object defaultMarkerPrefab; //stores the reference to the marker prefab for instantiation
 
 	void Awake(){
