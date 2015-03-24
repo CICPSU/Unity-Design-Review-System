@@ -75,7 +75,7 @@ public class POIButtonManager : MonoBehaviour {
 
 	public void GeneratePairCurrentLocation()
 	{
-		POI newPOI = new POI (new List<string>{Application.loadedLevelName}, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
+		POI newPOI = new POI (Application.loadedLevelName, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
 		GenerateButMarkerPair (newPOI);
 	}
 

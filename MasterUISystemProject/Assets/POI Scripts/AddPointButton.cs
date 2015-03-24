@@ -8,10 +8,7 @@ public class AddPointButton : MonoBehaviour {
 
 	public void onClicked(){
 		//create new Point object
-		List<string> sFlag = POI_ReferenceHub.Instance.SceneFlagList.parent.GetComponent<SceneFlagSelector>().GetSceneFlags(); //!!!! need to be implemented later when sceneflag is set
-		if(sFlag ==null || sFlag.Count == 0){
-			sFlag.Add(Application.loadedLevelName);
-		}
+		string sFlag = Application.loadedLevelName; //!!!! need to be implemented later when sceneflag is set
 		//validate input
 		//validate button name
 		if(checkButtonNameExist()){

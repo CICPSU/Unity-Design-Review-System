@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class POIInfo : MonoBehaviour {
     
-    public List<string> sceneName;
+    public string sceneName;
     public string buttonName;
     public Vector3 position;
     public Vector3 rotation;

@@ -8,8 +8,7 @@ using System.IO;
 
 public class POI
 {
-    [XmlArray("SceneFlagList")]
-	[XmlArrayItem("SceneFlag")]
+	[XmlElement("SceneFlag")]
 	public string sceneFlag;
 
     [XmlElement("Name")]
