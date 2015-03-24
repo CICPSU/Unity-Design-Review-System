@@ -106,13 +106,14 @@ public class MiniMapManager : MonoBehaviour {
 			orthoCamRadiusFeet -= mapRadiusIncrementInFeet*0.5f;
 
 
-		if (orthoCamRadiusFeet < 5*feetToMetersFactor)
-			orthoCamRadiusFeet = 5*feetToMetersFactor;
+		if (orthoCamRadiusFeet < 5)
+			orthoCamRadiusFeet = 5;
 		// This is where we will reset the zoom of the ortho camera that is used to capture the minimap.
 		SetMiniMapCam ();
 		
 		// set zoom label
 		zoomLabel.text = "Diameter: " + (2 * orthoCamRadiusFeet).ToString("F1")  + " ft";
+
 	}
 
 }
