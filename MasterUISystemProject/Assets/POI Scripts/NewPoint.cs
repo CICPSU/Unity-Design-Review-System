@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
+//attached to the custom bookmark but
 public class NewPoint : MonoBehaviour {
 
 	public void clicked(){
@@ -15,5 +16,10 @@ public class NewPoint : MonoBehaviour {
 		Transform deleteButText = deleteBut.FindChild("Text") as Transform;
 		deleteButText.GetComponent<Text>().color = new Color(0.57f,0.57f,0.57f);
 
+		//clear the old value from input fields
+		foreach(InputField input in POI_ReferenceHub.Instance.poiInfoFields){
+			input.transform.FindChild("Text").GetComponent<Text>().text = "";
+			input.text = "";
+		}
 	}
 }

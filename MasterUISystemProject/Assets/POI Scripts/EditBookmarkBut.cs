@@ -18,7 +18,7 @@ public class EditBookmarkBut : MonoBehaviour {
 		POI_ReferenceHub.Instance.poiInfoFields [2].text = clickedPOI.position.y.ToString();
 		POI_ReferenceHub.Instance.poiInfoFields [3].text = clickedPOI.position.z.ToString();
 		POI_ReferenceHub.Instance.poiInfoFields [4].text = clickedPOI.rotation.y.ToString();
-
+		
 		//disable the Add bookmark button
 		POI_ReferenceHub.Instance.POIEditWindow.FindChild("AddBookmark").gameObject.SetActive(false);
 	}

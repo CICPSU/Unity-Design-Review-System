@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.UI;
 
-//this is attached to the custom bookmark button
+//this is attached to the Add bookmark button in POIEdit Window
 public class AddPointButton : MonoBehaviour {
 
 	public void onClicked(){
@@ -19,9 +19,6 @@ public class AddPointButton : MonoBehaviour {
 			POI_ReferenceHub.Instance.InvalidInputWarning.gameObject.SetActive(true);
 		}
 
-		foreach(InputField input in POI_ReferenceHub.Instance.poiInfoFields){
-			input.text = "";
-		}
 
 		Vector3 pos = new Vector3 (float.Parse(POI_ReferenceHub.Instance.poiInfoFields [0].text), float.Parse(POI_ReferenceHub.Instance.poiInfoFields [1].text), float.Parse(POI_ReferenceHub.Instance.poiInfoFields [2].text));
 		Vector3 rot = new Vector3 (0, float.Parse(POI_ReferenceHub.Instance.poiInfoFields [3].text), 0);
