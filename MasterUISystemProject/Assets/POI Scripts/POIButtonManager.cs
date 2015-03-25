@@ -285,6 +285,8 @@ public class POIButtonManager : MonoBehaviour {
 		POI_ReferenceHub.Instance.EditBut.gameObject.SetActive(true);
 		POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(false);
 		POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(false); 
+
+		GenerateButsMarkers (originalHandler);
 	}
 
 	//compare two POI classes by value
