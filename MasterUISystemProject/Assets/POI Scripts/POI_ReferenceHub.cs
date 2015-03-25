@@ -34,7 +34,6 @@ public class POI_ReferenceHub : MonoBehaviour{
 		}
 		//load the Pin prefab
 		defaultMarkerPrefab = Resources.Load ("POIPanel/Pin");
-		Avatar = GameObject.FindGameObjectWithTag ("Player");
 	}
 	
 }

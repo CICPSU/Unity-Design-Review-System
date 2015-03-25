@@ -2262,7 +2262,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2846,7 +2846,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
 --- !u!1 &1009427743
 GameObject:
   m_ObjectHideFlags: 0
@@ -4532,7 +4532,7 @@ Prefab:
       objectReference: {fileID: 1090559547}
     - target: {fileID: 195774, guid: a92849f12a992e346916742188df5978, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a92849f12a992e346916742188df5978, type: 2}
@@ -6756,7 +6756,7 @@ MonoBehaviour:
   EditBut: {fileID: 1129621259}
   InvalidInputWarning: {fileID: 1440642788}
   NameExistedWarning: {fileID: 88949932}
-  SceneFlagList: {fileID: 0}
+  SceneFlagList: {fileID: 877088882}
   BookmarkCurrentLocationNameField: {fileID: 1781136433}
   markerInfoCanvas: {fileID: 1678851451}
   poiInfoFields:
