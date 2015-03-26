@@ -5,37 +5,46 @@ using UnityEngine.UI;
 
 //this is attached to the Add bookmark button in POIEdit Window
 public class AddPointButton : MonoBehaviour {
+	POI point = new POI();
 
 	public void onClicked(){
-		//create new Point object
-		string sFlag = Application.loadedLevelName; //!!!! need to be implemented later when sceneflag is set
-		//validate input
 		//validate button name
-		if(checkButtonNameExist()){
+		if(checkButtonNameExist(ref point)){
 			POI_ReferenceHub.Instance.NameExistedWarning.gameObject.SetActive(true);
-		}
-		
-		if(!validateInput()){
+		}else if(!validateInput()){
+			//validate input
 			POI_ReferenceHub.Instance.InvalidInputWarning.gameObject.SetActive(true);
+		}else{
+			SaveChanges(false);
+			this.transform.parent.gameObject.SetActive(false);
 		}
-
-
-		Vector3 pos = new Vector3 (float.Parse(POI_ReferenceHub.Instance.poiInfoFields [1].text), float.Parse(POI_ReferenceHub.Instance.poiInfoFields [2].text), float.Parse(POI_ReferenceHub.Instance.poiInfoFields [3].text));
-		Vector3 rot = new Vector3 (0, float.Parse(POI_ReferenceHub.Instance.poiInfoFields [4].text), 0);
-		POI point = new POI (sFlag, POI_ReferenceHub.Instance.poiInfoFields [0].text, pos, rot, POI_GlobalVariables.defaultMarker);
-		//generate button and marker pair
-		POIButtonManager.instance.GenerateButMarkerPair (point);
-		//add the point into the orginalHandler
-		POIButtonManager.originalHandler.AddPoint(point);
-
-
-
 	}
 
-	bool checkButtonNameExist(){
+	//create a new location and save to handler, 
+	//overwrite: true is overwrite existing, false will add a new point
+	public void SaveChanges(bool overwrite){
+		//create new Point object
+		string sFlag = Application.loadedLevelName; 
+		Vector3 pos = new Vector3 (float.Parse(POI_ReferenceHub.Instance.poiInfoFields [1].text), float.Parse(POI_ReferenceHub.Instance.poiInfoFields [2].text), float.Parse(POI_ReferenceHub.Instance.poiInfoFields [3].text));
+		Vector3 rot = new Vector3 (0, float.Parse(POI_ReferenceHub.Instance.poiInfoFields [4].text), 0);
+		POI newPoint = new POI (sFlag, POI_ReferenceHub.Instance.poiInfoFields [0].text, pos, rot, POI_GlobalVariables.defaultMarker);
+		if(overwrite){
+			point.UpdateByValue(newPoint);
+			point.marker.transform.position = point.position;
+		}else{
+			//generate button and marker pair
+			POIButtonManager.instance.GenerateButMarkerPair (newPoint);
+			//add the point into the orginalHandler
+			POIButtonManager.originalHandler.AddPoint(newPoint);
+		}
+	}
+
+	// param: returns reference of duplicated point
+	bool checkButtonNameExist(ref POI duplicatedPoint){
 		string butName = POI_ReferenceHub.Instance.poiInfoFields [0].text;
 		foreach (POI point in POIButtonManager.originalHandler.projectPOIs){
 			if(point.buttonName == butName){
+				duplicatedPoint = point;
 				return true; //button name existed
 			}
 		}

@@ -147,7 +147,7 @@ public class POIButtonManager : MonoBehaviour {
 	}
 
 
-
+	//the only function that generates marker
 	//instantiate an instance of marker and return the marker object
 	public GameObject generateMarker(POI point){
 		//load marker prefab by name
@@ -169,6 +169,7 @@ public class POIButtonManager : MonoBehaviour {
 		GameObject markerModel = Instantiate(prefab, point.position, Quaternion.Euler(point.rotation)) as GameObject;
 		markerModel.transform.parent = marker.transform;
 
+		point.marker = marker;
 		return marker;
 	}
 

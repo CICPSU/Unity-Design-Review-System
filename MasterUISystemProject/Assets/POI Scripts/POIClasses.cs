@@ -23,6 +23,9 @@ public class POI
 	[XmlElement("MarkerPrefabName")]
 	public string markerModelPrefab;
 
+	[XmlIgnore]
+	public GameObject marker;
+
     public POI()
     {
     }
