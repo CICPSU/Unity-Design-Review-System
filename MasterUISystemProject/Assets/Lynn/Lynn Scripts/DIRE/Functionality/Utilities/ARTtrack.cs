@@ -147,7 +147,36 @@ public class ARTtrack : MonoBehaviour {
 						//Debug.Log(body_positions_rotations[i] + " i: " + i);
 					}
 
-					DIRE.Instance.Hand.transform.localEulerAngles = new Vector3(-float.Parse(body_positions_rotations[3]), -float.Parse(body_positions_rotations[4]), float.Parse(body_positions_rotations[5]));
+					Matrix4x4 RotationMatrix = new Matrix4x4();
+
+					RotationMatrix.SetColumn(0, new Vector4(Mathf.Cos(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Cos(-float.Parse(body_positions_rotations[4])*Mathf.PI/180), 
+					                                        Mathf.Sin(float.Parse(body_positions_rotations[5])*Mathf.PI/180)* Mathf.Cos(-float.Parse(body_positions_rotations[3])*Mathf.PI/180)+Mathf.Cos(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(-float.Parse(body_positions_rotations[4])*Mathf.PI/180)*Mathf.Sin(-float.Parse(body_positions_rotations[3])*Mathf.PI/180), 
+					                                        Mathf.Sin(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(-float.Parse(body_positions_rotations[3])*Mathf.PI/180)+ Mathf.Cos(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(-float.Parse(body_positions_rotations[4])*Mathf.PI/180)* Mathf.Cos(-float.Parse(body_positions_rotations[3])*Mathf.PI/180), 
+					                                        0));
+					RotationMatrix.SetColumn(1, new Vector4(-Mathf.Sin(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Cos(-float.Parse(body_positions_rotations[4])*Mathf.PI/180), 
+					                                        Mathf.Cos(float.Parse(body_positions_rotations[5])*Mathf.PI/180)* Mathf.Cos(-float.Parse(body_positions_rotations[3])*Mathf.PI/180)- Mathf.Sin(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(-float.Parse(body_positions_rotations[4])*Mathf.PI/180)*Mathf.Sin(-float.Parse(body_positions_rotations[3])*Mathf.PI/180), 
+					                                        Mathf.Cos(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(-float.Parse(body_positions_rotations[3])*Mathf.PI/180)- Mathf.Sin(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(-float.Parse(body_positions_rotations[4])*Mathf.PI/180)* Mathf.Cos(-float.Parse(body_positions_rotations[3])*Mathf.PI/180), 
+					                                        0));
+					RotationMatrix.SetColumn(2, new Vector4(Mathf.Sin(-float.Parse(body_positions_rotations[4])*Mathf.PI/180), 
+					                                        -Mathf.Cos(-float.Parse(body_positions_rotations[4])*Mathf.PI/180)* Mathf.Sin(-float.Parse(body_positions_rotations[3])*Mathf.PI/180), 
+					                                        Mathf.Cos(-float.Parse(body_positions_rotations[4])*Mathf.PI/180)*Mathf.Cos(-float.Parse(body_positions_rotations[3])*Mathf.PI/180),
+					                                        0));
+					RotationMatrix.SetColumn(3, new Vector4(0,0,0,1));
+
+					Vector4 forward4 = RotationMatrix.MultiplyVector(new Vector4 (0,0,1,0));
+					Vector3 pointDirection = new Vector3(forward4.x, forward4.y, forward4.z);
+					/**
+ * 
+					Vector3 pointDirection = DIRE.Instance.Hand.transform.localPosition + new Vector3(Mathf.Sin(float.Parse(body_positions_rotations[4])*Mathf.PI/180), 
+					                                                                                  -Mathf.Cos(float.Parse(body_positions_rotations[4])*Mathf.PI/180)* Mathf.Sin(float.Parse(body_positions_rotations[3])*Mathf.PI/180), 
+					                                                                                  Mathf.Cos(float.Parse(body_positions_rotations[4])*Mathf.PI/180)*Mathf.Cos(float.Parse(body_positions_rotations[3])*Mathf.PI/180));
+					Vector3 upVector = new Vector3(-Mathf.Sin(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Cos(float.Parse(body_positions_rotations[4])*Mathf.PI/180), 
+					                               Mathf.Cos(float.Parse(body_positions_rotations[5])*Mathf.PI/180)* Mathf.Cos(float.Parse(body_positions_rotations[3])*Mathf.PI/180)- Mathf.Sin(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(float.Parse(body_positions_rotations[4])*Mathf.PI/180)*Mathf.Sin(float.Parse(body_positions_rotations[3])*Mathf.PI/180), 
+					                               Mathf.Cos(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(float.Parse(body_positions_rotations[3])*Mathf.PI/180)+ Mathf.Sin(float.Parse(body_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(float.Parse(body_positions_rotations[4])*Mathf.PI/180)* Mathf.Cos(float.Parse(body_positions_rotations[3])*Mathf.PI/180));
+*/
+					Debug.Log("Looking at: " + pointDirection);
+					DIRE.Instance.Hand.transform.LookAt(DIRE.Instance.Hand.transform.position + pointDirection);
+					//DIRE.Instance.Hand.transform.localEulerAngles = new Vector3(-float.Parse(body_positions_rotations[3]), -float.Parse(body_positions_rotations[4]), float.Parse(body_positions_rotations[5]));
 
 				}
 			} // if (numberofbodies==1)
