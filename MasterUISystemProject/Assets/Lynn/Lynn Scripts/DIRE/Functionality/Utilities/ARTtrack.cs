@@ -55,7 +55,7 @@ public class ARTtrack : MonoBehaviour {
 					
 					string text = System.Text.Encoding.ASCII.GetString(data);			
 					parser (text);
-					Debug.Log(text);
+					//Debug.Log(text);
 			}
 
 		}catch(Exception ex){
@@ -136,15 +136,15 @@ public class ARTtrack : MonoBehaviour {
 					space_index = text.IndexOf("]", index);
 					body_positions_rotations[5] = text.Substring(index, space_index - index);
 					
-					body_position_vector = new Vector3(float.Parse(body_positions_rotations[0])/1000,float.Parse(body_positions_rotations[1])/1000, float.Parse(body_positions_rotations[2])/(-1000));
+					//body_position_vector = new Vector3(float.Parse(body_positions_rotations[0])/1000,float.Parse(body_positions_rotations[1])/1000, float.Parse(body_positions_rotations[2])/(-1000));
 					
-					body_rotation_vector = new Vector3(float.Parse(body_positions_rotations[3]), float.Parse(body_positions_rotations[4]), float.Parse(body_positions_rotations[5]));
+					//body_rotation_vector = new Vector3(float.Parse(body_positions_rotations[3]), float.Parse(body_positions_rotations[4]), float.Parse(body_positions_rotations[5]));
 
-					DIRE.Instance.Hand.transform.localPosition = new Vector3(float.Parse(body_positions_rotations[0])/1000,float.Parse(body_positions_rotations[1])/1000, float.Parse(body_positions_rotations[2])/1000);
-					Debug.Log(text);
-					Debug.Log("hand positions: ");
+					DIRE.Instance.Hand.transform.localPosition = new Vector3(float.Parse(body_positions_rotations[0])/1000,float.Parse(body_positions_rotations[1])/1000, -float.Parse(body_positions_rotations[2])/1000);
+					//Debug.Log(text);
+					//Debug.Log("hand positions: ");
 					for(i = 0; i <= 5; i ++){
-						Debug.Log(body_positions_rotations[i] + " i: " + i);
+						//Debug.Log(body_positions_rotations[i] + " i: " + i);
 					}
 
 					DIRE.Instance.Hand.transform.localEulerAngles = new Vector3(-float.Parse(body_positions_rotations[3]), -float.Parse(body_positions_rotations[4]), float.Parse(body_positions_rotations[5]));
