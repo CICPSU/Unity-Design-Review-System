@@ -10,6 +10,7 @@ public class ARTtrack : MonoBehaviour {
 	UdpClient client;
 	IPEndPoint source;
 	public Vector3 body_position_vector, body_rotation_vector;
+	bool isTracking = true;
 
 	public bool checkTracking(){
 		source = new IPEndPoint( IPAddress.Any, 5000);
@@ -33,7 +34,17 @@ public class ARTtrack : MonoBehaviour {
 		//data = client.Receive( ref source );
 	}
 
+	//returns true when succeeded
+	//Param: true to turn on 
+	public void SetTracking (bool turnOn){
+		if(DIRE.Instance.trackingActive){
+			isTracking = turnOn;
+		}
+	}
 	 
+
+
+	//
 	// Update is called once per frame
 	void Update () {
 		try{
@@ -47,15 +58,11 @@ public class ARTtrack : MonoBehaviour {
 					DIRE.Instance.trackingActive = false;
 					throw new Exception("source reference is not set to an instance!");
 				}
-				byte[] data = client.Receive(ref source);
-				//flush the port by reading through all available data till the most recent one
-				while(client.Available > 0){
-					data = client.Receive( ref source );
+
+				if(isTracking){
+					track();
 				}
-					
-					string text = System.Text.Encoding.ASCII.GetString(data);			
-					parser (text);
-					//Debug.Log(text);
+
 			}
 
 		}catch(Exception ex){
@@ -64,6 +71,18 @@ public class ARTtrack : MonoBehaviour {
 	}
 	
 
+	void track(){
+		byte[] data = client.Receive(ref source);
+		//flush the port by reading through all available data till the most recent one
+		while(client.Available > 0){
+			data = client.Receive( ref source );
+		}
+		
+		string text = System.Text.Encoding.ASCII.GetString(data);			
+		parser (text);
+	}
+
+	//parser needs to be broken up into two functions, parsing and settingTransform
 	void parser(string text){
 		int index = 0;
 
@@ -165,6 +184,7 @@ public class ARTtrack : MonoBehaviour {
 
 					Vector4 forward4 = RotationMatrix.MultiplyVector(new Vector4 (0,0,1,0));
 					Vector3 pointDirection = new Vector3(forward4.x, forward4.y, forward4.z);
+					pointDirection = POI_ReferenceHub.Instance.Avatar.transform.TransformDirection(pointDirection);
 					/**
  * 
 					Vector3 pointDirection = DIRE.Instance.Hand.transform.localPosition + new Vector3(Mathf.Sin(float.Parse(body_positions_rotations[4])*Mathf.PI/180), 
