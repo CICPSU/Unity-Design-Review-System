@@ -65,8 +65,8 @@ public class MiniMapManager : MonoBehaviour {
 		relativeClickPostion.y = (Input.mousePosition.y - miniMapCenter.y) / (0.5f*mapDim);
 		rayStartPostion = miniMapCam.transform.position + (relativeClickPostion.x*miniMapCam.transform.right + relativeClickPostion.y*miniMapCam.transform.up) * miniMapCam.GetComponent<Camera>().orthographicSize;
 		RaycastHit hit = new RaycastHit();
-		Physics.Raycast(rayStartPostion,Vector3.down,out hit, Mathf.Infinity);
-		avatar.transform.position = hit.point;
+		if(	Physics.Raycast(rayStartPostion,Vector3.down,out hit, Mathf.Infinity))
+			avatar.transform.position = hit.point;
 	}
 	
 	void SetMiniMapCam()

@@ -39,12 +39,12 @@ public class POIActiveButtonManager : MonoBehaviour {
 				Transform deleteBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("Delete") as Transform;
 				deleteBut.GetComponent<Button>().enabled = true; //enable delete button
 				Transform deleteButText = deleteBut.FindChild("Text") as Transform;
-				deleteButText.GetComponent<Text>().color = Color.black;
+				deleteButText.GetComponent<Text>().color = new Color(50f/255,50f/255,50f/255,1);
 
 				Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
 				editBut.GetComponent<Button>().enabled = true; //enable edit button
 				Transform editButText = editBut.FindChild("Text") as Transform;
-				editButText.GetComponent<Text>().color = Color.black;
+				editButText.GetComponent<Text>().color = new Color(50f/255,50f/255,50f/255,1);
 			}
 		}
 		else
