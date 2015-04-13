@@ -45,6 +45,14 @@ public class POIActiveButtonManager : MonoBehaviour {
 				editBut.GetComponent<Button>().enabled = true; //enable edit button
 				Transform editButText = editBut.FindChild("Text") as Transform;
 				editButText.GetComponent<Text>().color = new Color(50f/255,50f/255,50f/255,1);
+
+				// we also need to fill in the input fields in the edit window when a button is made active
+				POI clickedPOI = activeButton.GetComponent<POIInfoRef>().poiInfo.Point;
+				POI_ReferenceHub.Instance.poiInfoFields [0].text = clickedPOI.buttonName;
+				POI_ReferenceHub.Instance.poiInfoFields [1].text = clickedPOI.position.x.ToString();
+				POI_ReferenceHub.Instance.poiInfoFields [2].text = clickedPOI.position.y.ToString();
+				POI_ReferenceHub.Instance.poiInfoFields [3].text = clickedPOI.position.z.ToString();
+				POI_ReferenceHub.Instance.poiInfoFields [4].text = clickedPOI.rotation.y.ToString();
 			}
 		}
 		else
@@ -63,6 +71,17 @@ public class POIActiveButtonManager : MonoBehaviour {
 		{
 			activeButton.GetComponent<Image>().color = defaultColor;
 			activeButton = null;
+			POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
+
+			Transform deleteBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("Delete") as Transform;
+			deleteBut.GetComponent<Button>().enabled = false; //enable delete button
+			Transform deleteButText = deleteBut.FindChild("Text") as Transform;
+			deleteButText.GetComponent<Text>().color = new Color(145f/255,145f/255,145f/255,1);
+			
+			Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
+			editBut.GetComponent<Button>().enabled = false; //enable edit button
+			Transform editButText = editBut.FindChild("Text") as Transform;
+			editButText.GetComponent<Text>().color = new Color(145f/255,145f/255,145f/255,1);
 		}
 	}
 
