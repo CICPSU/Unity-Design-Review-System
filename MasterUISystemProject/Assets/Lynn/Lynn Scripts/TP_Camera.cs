@@ -215,7 +215,12 @@ public class TP_Camera : MonoBehaviour {
 		Distance = Mathf.SmoothDamp(Distance, desiredDistance, ref velDistance, distanceSmooth); // (video No. 19). Google Mathf.SmoothDamp. VelDistance is the speed along the 
 																									//smoothing curve
 		// Calculate desired position
-		desiredPosition = CalculatePosition(mouseY, mouseX, Distance);
+		//freeze mouseY when tracking is active ==>as we don't want to tilt when tracking is active
+		if(!DIRE.Instance.trackingActive){
+			desiredPosition = CalculatePosition(mouseY, mouseX, Distance);
+		}else{
+			desiredPosition = CalculatePosition(0, mouseX, Distance);
+		}
 	}
 	
 	Vector3 CalculatePosition(float rotationX, float rotationY, float distanceIn){
