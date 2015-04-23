@@ -218,7 +218,8 @@ public class TP_Camera : MonoBehaviour {
 		//freeze mouseY when tracking is active ==>as we don't want to tilt when tracking is active
 		if(!DIRE.Instance.trackingActive){
 			desiredPosition = CalculatePosition(mouseY, mouseX, Distance);
-		}else{
+		}else{ //force camera to look horizontal and prevent it from tilting
+			this.transform.localEulerAngles.x = 0;
 			desiredPosition = CalculatePosition(0, mouseX, Distance);
 		}
 	}
