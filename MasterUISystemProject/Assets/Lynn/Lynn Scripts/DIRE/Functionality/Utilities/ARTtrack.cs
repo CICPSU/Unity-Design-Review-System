@@ -133,7 +133,6 @@ public class ARTtrack : MonoBehaviour {
 				if (current_body_id == 0){// if head tracking only
 
 					DIRE.Instance.Head.transform.localPosition = body_position_vector;
-					;
 					//may need stabalization code
 
 				}else{ // if xbox tracking only
