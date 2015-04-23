@@ -45,7 +45,6 @@ public class DIRE : MonoBehaviour
 		if(settings.screens.Count > 0){
 			//align geometric center with "Virtual Cam for TP_camera" gameobject
 			displayGeometricCenter = displaySystemHander.calculateGeometricCenter();
-			displaySystemHander.offsetDisplayOriginByGeometricCenter();
 
 			//generate walls and eyes based on settings
 			displaySetupOnDisplayOrigin.InitializeDisplay(settings);
@@ -54,9 +53,15 @@ public class DIRE : MonoBehaviour
 			//detect if receiving tracking data, if not, set up the cam to regular cam
 			trackingActive = GetComponent<ARTtrack>().checkTracking();
 
+			//if no tracking, move head to where virtual camera is
 			if(!trackingActive){
 				Debug.Log("tracking inactive!");
 				displaySystemHander.offsetHeadToGeometricCenter();
+				displaySystemHander.offsetDisplayOriginByGeometricCenter();
+			}
+			else //if tracking, set display origin to the same level as Lynn's feet, and shift it so that geometry center is right under virtual camera
+			{
+				DIRE.Instance.DisplayOrigin.transform.localPosition = new Vector3(-displayGeometricCenter.x, -1.7f, -displayGeometricCenter.z);
 			}
 		}else
 		{

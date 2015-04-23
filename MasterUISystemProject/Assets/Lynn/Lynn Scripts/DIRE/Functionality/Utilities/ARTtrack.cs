@@ -5,6 +5,8 @@ using System.Net.Sockets;
 using System.Text;
 using System;
 
+//known limitation with current implementation. When use hand tracking only, your height is going to be 1.4m instead of Lynn's height.
+
 //read and parse the tracking data directly from a network port
 public class ARTtrack : MonoBehaviour {
 	UdpClient client;
@@ -44,12 +46,13 @@ public class ARTtrack : MonoBehaviour {
 		isTracking = turnOn;
 		//reset the head position when turnning tracking off
 		if(!turnOn){
+			transform.localPosition = Vector3.zero;
+			GetComponent<DisplaySystemHandler>().offsetDisplayOriginByGeometricCenter();
 			GetComponent<DisplaySystemHandler>().offsetHeadToGeometricCenter();
 		}
 	}
 
-	//
-	// Update is called once per frame
+
 	void Update () {
 		try{
 			//check if tracking data exist
@@ -90,6 +93,7 @@ public class ARTtrack : MonoBehaviour {
 	//parse needs cleanedup based on the use case in the icon lab.  
 	// this function wont be necessary once cluster input is added to the release of unity 5 and the icon lab can use the input map from the arl
 	void parse(string text){
+
 		int index = 0;
 
 		index = text.IndexOf("6d ");
@@ -109,37 +113,69 @@ public class ARTtrack : MonoBehaviour {
 
 			index = text.IndexOf("[", index) + 1; // update index to the position of the first numerical data for the body
 
-			// this is where we will read in the first body we are tracking
-			int space_index = 0;
+			//when there is only one body visible in tracking
+			if(number_of_bodies == 1){
+				//head visible
+				if(current_body_id == 0)
+				{
+					//read in the first body we are tracking -- head in this case
+					int space_index = 0;
+					int i = 0;
+					for (i = 0; i <5; i++){
+						space_index = text.IndexOf(" ", index);
+						head_positions_rotations[i] = text.Substring(index, space_index - index);
+						index = space_index + 1;
+					}
+					space_index = text.IndexOf("]", index);
+					head_positions_rotations[5] = text.Substring(index, space_index - index);
 
-			int i = 0;
+					head_position_vector = new Vector3(float.Parse(head_positions_rotations[0])/1000,float.Parse(head_positions_rotations[1])/1000, float.Parse(head_positions_rotations[2])/(-1000));
+					head_rotation_vector = new Vector3(-1*float.Parse(head_positions_rotations[3]), -1*float.Parse(head_positions_rotations[4]), 0);
+				}
+				else if (current_body_id == 1) //hand tracking only
+				{
+					//read in the first body we are tracking -- hand in this case
+					int space_index = 0;
+					int i = 0;
+					for (i = 0; i <5; i++){
+						space_index = text.IndexOf(" ", index);
+						hand_positions_rotations[i] = text.Substring(index, space_index - index);
+						index = space_index + 1;
+					}
+					space_index = text.IndexOf("]", index);
+					hand_positions_rotations[5] = text.Substring(index, space_index - index);
 
-			for (i = 0; i <5; i++){
+					head_position_vector = DIRE.Instance.displayGeometricCenter;
+					head_rotation_vector = Vector3.zero;
+					hand_position_vector = new Vector3(float.Parse(hand_positions_rotations[0])/1000,float.Parse(hand_positions_rotations[1])/1000, float.Parse(hand_positions_rotations[2])/(-1000));
+					hand_rotation_vector = new Vector3(float.Parse(hand_positions_rotations[3]), float.Parse(hand_positions_rotations[4]), float.Parse(hand_positions_rotations[5]));
+
+				}
+			}
+
+			//both head and hand are visible in tracking system
+			if(number_of_bodies == 2){
+				//read head data
+				int space_index = 0;
+				int i = 0;
+				for (i = 0; i <5; i++){
 					space_index = text.IndexOf(" ", index);
 					head_positions_rotations[i] = text.Substring(index, space_index - index);
 					index = space_index + 1;
-			}// for
+				}
+				space_index = text.IndexOf("]", index);
+				head_positions_rotations[5] = text.Substring(index, space_index - index);
 
-			space_index = text.IndexOf("]", index);
-			head_positions_rotations[5] = text.Substring(index, space_index - index);
-			if(current_body_id == 0)
-			{
-			head_position_vector = new Vector3(float.Parse(head_positions_rotations[0])/1000,float.Parse(head_positions_rotations[1])/1000, float.Parse(head_positions_rotations[2])/(-1000));
-			head_rotation_vector = new Vector3(-1*float.Parse(head_positions_rotations[3]), -1*float.Parse(head_positions_rotations[4]), 0);
-			}
-			else
-			{
-				head_position_vector = Vector3.zero;
-				head_rotation_vector = Vector3.zero;
-				hand_position_vector = new Vector3(float.Parse(hand_positions_rotations[0])/1000,float.Parse(hand_positions_rotations[1])/1000, float.Parse(hand_positions_rotations[2])/(-1000));
-				hand_rotation_vector = new Vector3(float.Parse(hand_positions_rotations[3]), float.Parse(hand_positions_rotations[4]), float.Parse(hand_positions_rotations[5]));
+				//copy data to head position/rotation vector
+				head_position_vector = new Vector3(float.Parse(head_positions_rotations[0])/1000,float.Parse(head_positions_rotations[1])/1000, float.Parse(head_positions_rotations[2])/(-1000));
+				head_rotation_vector = new Vector3(-1*float.Parse(head_positions_rotations[3]), -1*float.Parse(head_positions_rotations[4]), 0);
 
-			}
-
-			if(number_of_bodies == 2){
+				//skip ahead to hand data session
 				for(i = 0; i < 3; i++){
 					space_index = text.IndexOf("[", space_index + 1);
 				}
+
+				//read hand data
 				index = space_index + 1;
 				for (i = 0; i <5; i++){
 					space_index = text.IndexOf(" ", index);
@@ -155,6 +191,7 @@ public class ARTtrack : MonoBehaviour {
 
 			}
 		} // if (numberofbodies>0)
+		
 	}// parser
 
 	public void setTransforms()
@@ -191,7 +228,7 @@ public class ARTtrack : MonoBehaviour {
 					                               Mathf.Cos(float.Parse(head_positions_rotations[5])*Mathf.PI/180)* Mathf.Cos(float.Parse(head_positions_rotations[3])*Mathf.PI/180)- Mathf.Sin(float.Parse(head_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(float.Parse(head_positions_rotations[4])*Mathf.PI/180)*Mathf.Sin(float.Parse(head_positions_rotations[3])*Mathf.PI/180), 
 					                               Mathf.Cos(float.Parse(head_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(float.Parse(head_positions_rotations[3])*Mathf.PI/180)+ Mathf.Sin(float.Parse(head_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(float.Parse(head_positions_rotations[4])*Mathf.PI/180)* Mathf.Cos(float.Parse(head_positions_rotations[3])*Mathf.PI/180));
 */
-		Debug.Log("Looking at: " + pointDirection);
+		//Debug.Log("Looking at: " + pointDirection);
 		DIRE.Instance.Hand.transform.LookAt(DIRE.Instance.Hand.transform.position + pointDirection);
 		//DIRE.Instance.Hand.transform.localEulerAngles = new Vector3(-float.Parse(head_positions_rotations[3]), -float.Parse(head_positions_rotations[4]), float.Parse(head_positions_rotations[5]));
 
