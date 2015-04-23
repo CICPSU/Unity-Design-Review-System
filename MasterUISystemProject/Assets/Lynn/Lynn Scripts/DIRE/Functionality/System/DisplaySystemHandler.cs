@@ -7,7 +7,7 @@ using System.Linq;
 public class DisplaySystemHandler : MonoBehaviour {
 	public int fieldOfView_oneScreen = 60;
 
-	//called by Artrack start(), when no tracking data coming in, set the head to the geocenter of the projecting system. 
+	//called by DIRE, returns the geometric center of the display relative to display origin
 	//provides generic methods to calculate the geometric center(the point that is equal distance to all screens) of a display system.
 	public Vector3 calculateGeometricCenter(){
 		List<Vector3> listOfIntersections = new List<Vector3>();
@@ -53,7 +53,7 @@ public class DisplaySystemHandler : MonoBehaviour {
 			}
 			averageOfIntersection /= listOfIntersections.Count;
 		}else{ 
-			//****!!!!!! WE ASSUME WHEN NORMAL OF MULTIPLE SCREENS DONT INTERSECT, THE SCREENS ARE PARALLEL AND FORM ONE BIG WALL
+			//****!!!!!! WE ASSUME WHEN THE NORMALS OF MULTIPLE SCREENS DONT INTERSECT, THE SCREENS ARE PARALLEL AND FORM ONE BIG WALL
 			//*****!!!IF YOUR SYSTEM HAS NO PARALLEL SCREENS AND THOSE SCREENS DON'T HAVE INTERSECTIONS, THIS WON'T WORK
 			//calculates physical distance(in meter) corresponding to a pixel
 			float metersByPixel = DIRE.Instance.settings.screens[0].Location.Width/DIRE.Instance.settings.screens[0].Viewport.Width;

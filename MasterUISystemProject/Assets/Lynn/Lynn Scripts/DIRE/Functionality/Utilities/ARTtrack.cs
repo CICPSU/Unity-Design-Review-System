@@ -38,15 +38,15 @@ public class ARTtrack : MonoBehaviour {
 		//data = client.Receive( ref source );
 	}
 
-	//returns true when succeeded
+	//A GUI button calls this
 	//Param: true to turn on 
 	public void SetTracking (bool turnOn){
-		if(DIRE.Instance.trackingActive){
-			isTracking = turnOn;
+		isTracking = turnOn;
+		//reset the head position when turnning tracking off
+		if(!turnOn){
+			GetComponent<DisplaySystemHandler>().offsetHeadToGeometricCenter();
 		}
 	}
-	 
-
 
 	//
 	// Update is called once per frame
