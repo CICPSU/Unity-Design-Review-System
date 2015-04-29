@@ -219,7 +219,7 @@ public class TP_Camera : MonoBehaviour {
 		if(!DIRE.Instance.trackingActive){
 			desiredPosition = CalculatePosition(mouseY, mouseX, Distance);
 		}else{ //force camera to look horizontal and prevent it from tilting
-			this.transform.localEulerAngles.x = 0;
+			this.transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, transform.localEulerAngles.z);
 			desiredPosition = CalculatePosition(0, mouseX, Distance);
 		}
 	}

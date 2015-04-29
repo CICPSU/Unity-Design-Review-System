@@ -25,9 +25,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 480906}
-  - 114: {fileID: 11438222}
   - 114: {fileID: 11471208}
-  - 136: {fileID: 13633250}
+  - 136: {fileID: 13636410}
   m_Layer: 0
   m_Name: Pin
   m_TagString: Untagged
@@ -45,6 +44,8 @@ GameObject:
   - 4: {fileID: 495970}
   - 33: {fileID: 3363042}
   - 23: {fileID: 2314642}
+  - 136: {fileID: 13647720}
+  - 114: {fileID: 11452296}
   m_Layer: 0
   m_Name: Cylinder_1
   m_TagString: Untagged
@@ -71,7 +72,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156556}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: .116999999, y: .0379999988, z: -2.80200005}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 404478}
@@ -152,36 +153,17 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 127718}
   m_Mesh: {fileID: 4300000, guid: 2fdf97db1b1ee004e9b74084497c61ba, type: 3}
---- !u!114 &11438222
+--- !u!114 &11452296
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156556}
+  m_GameObject: {fileID: 169374}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Script: {fileID: 11500000, guid: c1ac51ba8acbaa64fa3fa857ace8e44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delegates:
-  - eventID: 2
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 11471208}
-          m_MethodName: SetupMarkerInfo
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine, Version=0.0.0.0,
-              Culture=neutral, PublicKeyToken=null
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
-        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
 --- !u!114 &11471208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -193,19 +175,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1ac51ba8acbaa64fa3fa857ace8e44e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &13633250
+--- !u!136 &13636410
 CapsuleCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156556}
   m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: .419999987
+  m_Height: 0
+  m_Direction: 1
+  m_Center: {x: .200000003, y: .920000017, z: 0}
+--- !u!136 &13647720
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169374}
+  m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: .400000006
-  m_Height: 1.5
-  m_Direction: 1
-  m_Center: {x: .200000003, y: .600000024, z: 0}
+  m_Radius: .0399999991
+  m_Height: 1.05999994
+  m_Direction: 2
+  m_Center: {x: -3.25706129e-12, y: 2.17137419e-12, z: .000582903624}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
