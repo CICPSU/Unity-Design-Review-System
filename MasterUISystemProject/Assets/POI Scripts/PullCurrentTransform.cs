@@ -12,10 +12,11 @@ public class PullCurrentTransform : MonoBehaviour {
 		if(poiTransformFields.Count != 4 ){
 			poiTransformFields = new List<InputField>();
 			Debug.Log("field count: " + poiTransformFields.Count);
-			poiTransformFields.Add(transform.parent.FindChild("XPosField").GetComponent<InputField>());
-			poiTransformFields.Add(transform.parent.FindChild("YPosField").GetComponent<InputField>());
-			poiTransformFields.Add(transform.parent.FindChild("ZPosField").GetComponent<InputField>());
-			poiTransformFields.Add(transform.parent.FindChild("YRotField").GetComponent<InputField>());
+
+			poiTransformFields.Add(POI_ReferenceHub.Instance.POIEditWindow.FindChild("XPosField").GetComponent<InputField>());
+			poiTransformFields.Add(POI_ReferenceHub.Instance.POIEditWindow.FindChild("YPosField").GetComponent<InputField>());
+			poiTransformFields.Add(POI_ReferenceHub.Instance.POIEditWindow.FindChild("ZPosField").GetComponent<InputField>());
+			poiTransformFields.Add(POI_ReferenceHub.Instance.POIEditWindow.FindChild("YRotField").GetComponent<InputField>());
 		}
 	}
 

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Camera
   - Canvas
+  - KeepOnLoad
   layers:
   - Default
   - TransparentFX

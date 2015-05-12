@@ -36,47 +36,40 @@ public class POIButtonManager : MonoBehaviour {
 		// if we are running in the editor, and we find a poi xml file, we want to merge that file with the poi's that were created in the editor
 		// we then generate buttons for all of the pois that were in either the xml file or in the editor
 		// if we don't find an xml file, we save off the buttons that were in the editor/built into the project
-		if(Application.isEditor){
-			if (File.Exists(POI_GlobalVariables.XMLpath))
+		if (File.Exists (POI_GlobalVariables.XMLpath)) 
+		{
+			if(Application.isEditor)
 			{
 				mergeEditorButsIntoXML(grabButtonsFromEditor(), POI_GlobalVariables.XMLpath);
 				GenerateButsMarkers(originalHandler);
 			}
 			else
 			{
-				SaveButsToXML();
-			}
-		}
-		else{
-		    if (File.Exists(POI_GlobalVariables.XMLpath))
-		    {
 				LoadAndGenerateButs();
-	        }
-			else
-			{
-				SaveButsToXML();
 			}
+		} 
+		else 
+		{
+			SaveButsToXML();
 		}
-	        
 	}// start
+
+	public void OnLevelWasLoaded(int level)
+	{
+		if(File.Exists(POI_GlobalVariables.XMLpath))
+		   LoadAndGenerateButs();
+		else
+		   SaveButsToXML();
+	}
 
 	//load the xml from specified path into the handler
 	public void loadButsFromXML(string XMLpath, ref POIHandler handler){
-		if (File.Exists(XMLpath))
-		{
+		if (File.Exists (XMLpath)) {
 			//load the POIHandler.xml, the saved button files
-			handler = XmlIO.Load(XMLpath, typeof(POIHandler)) as POIHandler;
+			handler = XmlIO.Load (XMLpath, typeof(POIHandler)) as POIHandler;
+		} else {
+			Debug.Log ("saved buttons not found! need to generate saved button files based on current project.");
 		}
-		else
-		{
-			Debug.Log("saved buttons not found! need to generate saved button files based on current project.");
-		}
-	}
-
-	public void GeneratePairCurrentLocation()
-	{
-		POI newPOI = new POI (Application.loadedLevelName, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
-		GenerateButMarkerPair (newPOI);
 	}
 
 	//generate and setup a button marker pair
@@ -168,6 +161,9 @@ public class POIButtonManager : MonoBehaviour {
 
 		GameObject markerModel = Instantiate(prefab, point.position, Quaternion.Euler(point.rotation)) as GameObject;
 		markerModel.transform.parent = marker.transform;
+
+		if (point.sceneFlag != Application.loadedLevelName)
+			markerModel.SetActive (false);
 
 		point.marker = marker;
 		return marker;
@@ -311,5 +307,10 @@ public class POIButtonManager : MonoBehaviour {
 
 		return true;
 	}
-
+	
+	public void GeneratePairCurrentLocation()
+	{
+		POI newPOI = new POI (Application.loadedLevelName, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
+		GenerateButMarkerPair (newPOI);
+	}
 }

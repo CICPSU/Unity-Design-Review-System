@@ -58,8 +58,11 @@ public class POIActiveButtonManager : MonoBehaviour {
 		else
 		{
 			// teleport to the poi
-			POI_ReferenceHub.Instance.Avatar = GameObject.FindWithTag("Player");
+			//POI_ReferenceHub.Instance.Avatar = GameObject.FindWithTag("Player");
 			//Debug.Log("found gameobject with player tag: " + avatar.name);
+			if(clicked.GetComponent<POIInfoRef>().poiInfo.Point.sceneFlag != Application.loadedLevelName)
+				Application.LoadLevel(clicked.GetComponent<POIInfoRef>().poiInfo.Point.sceneFlag);
+
 			POI_ReferenceHub.Instance.Avatar.transform.position = clicked.GetComponent<POIInfoRef>().poiInfo.Point.position;
 			POI_ReferenceHub.Instance.Avatar.transform.eulerAngles = clicked.GetComponent<POIInfoRef>().poiInfo.Point.rotation;
 		}

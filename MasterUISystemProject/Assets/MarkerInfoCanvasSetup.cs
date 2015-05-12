@@ -28,8 +28,8 @@ public class MarkerInfoCanvasSetup : MonoBehaviour {
 			markerInfoCanvasRef.transform.RotateAround (markerInfoCanvasRef.transform.position, markerInfoCanvasRef.transform.up, 180);
 			markerInfoCanvasRef.GetComponent <RectTransform>().position -= markerInfoCanvasRef.GetComponent <RectTransform>().forward*0.5f;
 			
-			markerInfoCanvasRef.GetComponent<MarkerInfoCanvasRefs> ().nameText.GetComponent<Text>().text = transform.parent.parent.GetComponent<POIInfo> ().name;
-			markerInfoCanvasRef.GetComponent<MarkerInfoCanvasRefs> ().positionText.GetComponent<Text>().text = transform.parent.parent.GetComponent<POIInfo> ().position.ToString();
+			markerInfoCanvasRef.GetComponent<MarkerInfoCanvasRefs> ().nameText.GetComponent<Text>().text = transform.parent.GetComponent<POIInfo> ().name;
+			markerInfoCanvasRef.GetComponent<MarkerInfoCanvasRefs> ().positionText.GetComponent<Text>().text = transform.parent.GetComponent<POIInfo> ().position.ToString();
 		}
 	}
 
