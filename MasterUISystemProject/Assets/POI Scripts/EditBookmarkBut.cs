@@ -19,8 +19,14 @@ public class EditBookmarkBut : MonoBehaviour {
 		POI_ReferenceHub.Instance.poiInfoFields [3].text = clickedPOI.position.z.ToString();
 		POI_ReferenceHub.Instance.poiInfoFields [4].text = clickedPOI.rotation.y.ToString();
 		
-		//disable the Add bookmark button
+		//disable the Add bookmark button, enable save changes
 		POI_ReferenceHub.Instance.POIEditWindow.FindChild("AddBookmark").gameObject.SetActive(false);
 		POI_ReferenceHub.Instance.POIEditWindow.FindChild ("SaveChanges").gameObject.SetActive (true);
+
+		//grey out edit bookmark
+		Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
+		editBut.GetComponent<Button>().enabled = false; //disable edit button
+		Transform editButText = editBut.FindChild("Text") as Transform;
+		editButText.GetComponent<Text>().color = new Color(0.57f,0.57f,0.57f);
 	}
 }

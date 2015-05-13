@@ -21,6 +21,7 @@ public class POIActiveButtonManager : MonoBehaviour {
 		if(POIMenuStateManager.EditModeState)
 		{
 		
+			POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive(false);
 			// If there is already an active button, we will need to change its color back to the default before we set the new active button.
 			if(activeButton != null)
 			{
@@ -41,11 +42,21 @@ public class POIActiveButtonManager : MonoBehaviour {
 				Transform deleteButText = deleteBut.FindChild("Text") as Transform;
 				deleteButText.GetComponent<Text>().color = new Color(50f/255,50f/255,50f/255,1);
 
-				Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
-				editBut.GetComponent<Button>().enabled = true; //enable edit button
-				Transform editButText = editBut.FindChild("Text") as Transform;
-				editButText.GetComponent<Text>().color = new Color(50f/255,50f/255,50f/255,1);
-
+				if(POI_ReferenceHub.Instance.POIEditWindow.gameObject.activeSelf)
+				{
+					//grey out edit bookmark
+					Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
+					editBut.GetComponent<Button>().enabled = false; //disable edit button
+					Transform editButText = editBut.FindChild("Text") as Transform;
+					editButText.GetComponent<Text>().color = new Color(0.57f,0.57f,0.57f);
+				}
+				else
+				{
+					Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
+					editBut.GetComponent<Button>().enabled = true; //enable edit button
+					Transform editButText = editBut.FindChild("Text") as Transform;
+					editButText.GetComponent<Text>().color = new Color(50f/255,50f/255,50f/255,1);
+				}
 				// we also need to fill in the input fields in the edit window when a button is made active
 				POI clickedPOI = activeButton.GetComponent<POIInfoRef>().poiInfo.Point;
 				POI_ReferenceHub.Instance.poiInfoFields [0].text = clickedPOI.buttonName;
@@ -55,6 +66,7 @@ public class POIActiveButtonManager : MonoBehaviour {
 				POI_ReferenceHub.Instance.poiInfoFields [4].text = clickedPOI.rotation.y.ToString();
 				POI_ReferenceHub.Instance.POIEditWindow.FindChild("AddBookmark").gameObject.SetActive(false);
 				POI_ReferenceHub.Instance.POIEditWindow.FindChild("SaveChanges").gameObject.SetActive(true);
+
 			}
 		}
 		else
