@@ -10,7 +10,7 @@ public class DeletePoint : MonoBehaviour {
 		if(activePOIButton == null){
 			Debug.LogError("Active button is null");
 		}
-		//remove the point for the original handler
+		//remove the point from the original handler
 		POIButtonManager.originalHandler.RemovePoint(activePOIButton.GetComponent<POIInfoRef>().poiInfo.Point);
 		//remove the marker from the marker root
 		Destroy( activePOIButton.GetComponent<POIInfoRef>().poiInfo.gameObject);

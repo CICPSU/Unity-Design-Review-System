@@ -283,7 +283,7 @@ public class POIButtonManager : MonoBehaviour {
 		POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(false);
 		POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(false); 
 
-		GenerateButsMarkers (originalHandler);
+		LoadAndGenerateButs ();
 	}
 
 	//compare two POI classes by value
