@@ -91,5 +91,20 @@
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>
     </POI>
+    <POI>
+      <SceneFlag>OtherScene</SceneFlag>
+      <Name>OtherThree</Name>
+      <Position>
+        <x>-0.9485745</x>
+        <y>-1.73</y>
+        <z>3.58696532</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>166.725357</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
   </ProjectPOIs>
 </POIHandler>

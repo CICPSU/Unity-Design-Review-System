@@ -54,6 +54,7 @@ public class POIButtonManager : MonoBehaviour {
 		}
 	}// start
 
+	//whenever a new level is loaded, we regenerate the buttons from the xml file so that only the buttons for the current scene are visible
 	public void OnLevelWasLoaded(int level)
 	{
 		if(File.Exists(POI_GlobalVariables.XMLpath))
@@ -78,37 +79,32 @@ public class POIButtonManager : MonoBehaviour {
 		marker = generateMarker(point);
 		CreateNewButton(point, marker);
 	}
-
+	public void ClearButsMarkers()
+	{
+		//clear current buttons in the menu
+		foreach (Transform child in POIList.transform)
+			Destroy(child.gameObject);
+		
+		//clear current markers in marker root
+		foreach(Transform child in markerRoot.transform)
+			Destroy(child.gameObject);
+		
+		NumOfButtons = 0;
+	}
 	//this is the combination of function loadButsFromXML and GenerateButsMarkers
 	public void LoadAndGenerateButs(){
 		if (File.Exists(POI_GlobalVariables.XMLpath))
 		{
-			//clear current buttons in the menu
-			foreach (Transform child in POIList.transform)
-			{
-				Destroy(child.gameObject);
-			}
+			ClearButsMarkers();
 
-			//clear current markers in marker root
-			foreach(Transform child in markerRoot.transform){
-				Destroy(child.gameObject);
-			}
-
-			NumOfButtons = 0;
-
-
-			
 			//load the POIHandler.xml, the saved button files
 			originalHandler = XmlIO.Load(POI_GlobalVariables.XMLpath, typeof(POIHandler)) as POIHandler;
 			
 			//generate new buttons
 			foreach(POI point in originalHandler.projectPOIs){
-
-						GenerateButMarkerPair(point);
-						POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
-						POIList.localPosition = Vector3.zero;
-
-
+				GenerateButMarkerPair(point);
+				POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
+				POIList.localPosition = Vector3.zero;
 			}
 		}
 		else{
@@ -116,27 +112,16 @@ public class POIButtonManager : MonoBehaviour {
 		}
 	}
 
-	//delete all existing scene buttons N markers and generate from the xml file
+	//delete all existing scene buttons and markers and generate from the xml file
 	private void GenerateButsMarkers(POIHandler handler){
-		//clear current buttons in the menu
-		foreach (Transform child in POIList.transform)
-		{
-			Destroy(child.gameObject);
-		}
-
-		foreach (Transform child in markerRoot.transform){
-			Destroy(child.gameObject);
-		}
-		NumOfButtons = 0;
+		ClearButsMarkers ();
 
 		//generate new buttons
 		foreach(POI point in handler.projectPOIs){
-
-					GenerateButMarkerPair(point);
-					POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
-					POIList.localPosition = Vector3.zero;
+			GenerateButMarkerPair(point);
+			POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
+			POIList.localPosition = Vector3.zero;
 		}
-
 	}
 
 
