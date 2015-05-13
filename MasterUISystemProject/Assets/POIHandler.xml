@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <POIHandler xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectPOIs>
-   <POI>
+    <POI>
       <SceneFlag>OtherScene</SceneFlag>
       <Name>OtherScene</Name>
       <Position>
@@ -15,8 +15,8 @@
         <z>0</z>
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>
-    </POI> 
-   <POI>
+    </POI>
+    <POI>
       <SceneFlag>Start</SceneFlag>
       <Name>first</Name>
       <Position>
@@ -87,6 +87,21 @@
       <Rotation>
         <x>0</x>
         <y>4</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
+    <POI>
+      <SceneFlag>OtherScene</SceneFlag>
+      <Name>OtherTwo</Name>
+      <Position>
+        <x>-1.03611743</x>
+        <y>-1.73</y>
+        <z>-3.31055474</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>12.6989555</y>
         <z>0</z>
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>
