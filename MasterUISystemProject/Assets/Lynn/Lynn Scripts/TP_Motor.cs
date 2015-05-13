@@ -26,8 +26,8 @@ public class TP_Motor : MonoBehaviour {
 	public float VerticalVelocity {get; set;}
 		
 	void Awake () {
-			
-		Instance = this;
+		if(Instance == null)
+			Instance = this;
 		gravityOn = true;
 	}
 	

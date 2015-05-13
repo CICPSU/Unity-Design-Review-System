@@ -9,8 +9,10 @@ public class TP_Controller : MonoBehaviour {
 	public static CharacterController characterController;
 	public static TP_Controller Instance;
 	void Awake () {
-		characterController = GetComponent("CharacterController") as CharacterController;
-		Instance = this;
+		if(characterController == null)
+			characterController = GetComponent("CharacterController") as CharacterController;
+		if(Instance == null)
+			Instance = this;
 		
 	//	TP_Camera.UseExistingOrCreateNewMainCamera();
 	}
