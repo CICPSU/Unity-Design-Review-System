@@ -13,11 +13,14 @@ public class POI_ReferenceHub : MonoBehaviour{
 	public  RectTransform POIMenu;
 	public  RectTransform POIEditWindow;
 	public  RectTransform AddDeleteWindow;
+	public RectTransform BookmarkCurrentLocationWindow;
 	public  RectTransform ApplyBut;
 	public  RectTransform CancelBut;
 	public  RectTransform EditBut;
 	public RectTransform InvalidInputWarning;
 	public RectTransform NameExistedWarning;
+	public RectTransform SceneFlagList;
+	public RectTransform BookmarkCurrentLocationNameField;
 	public GameObject markerInfoCanvas;
 
 	public  List<InputField> poiInfoFields; // the Name, position, and rotation fields in the POIedit window

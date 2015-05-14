@@ -267,6 +267,7 @@ public class POIButtonManager : MonoBehaviour {
 		POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive (false);
 		POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(false);
 		POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(false); 
+		POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive (false);
 
 		POI_ReferenceHub.Instance.EditBut.gameObject.SetActive(true);
 
@@ -293,5 +294,11 @@ public class POIButtonManager : MonoBehaviour {
 		}
 
 		return true;
+	}
+	
+	public void GeneratePairCurrentLocation()
+	{
+		POI newPOI = new POI (Application.loadedLevelName, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
+		GenerateButMarkerPair (newPOI);
 	}
 }

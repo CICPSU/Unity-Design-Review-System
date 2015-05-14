@@ -20,6 +20,8 @@ public class POIActiveButtonManager : MonoBehaviour {
 	{
 		if(POIMenuStateManager.EditModeState)
 		{
+		
+			POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive(false);
 			// If there is already an active button, we will need to change its color back to the default before we set the new active button.
 			if(activeButton != null)
 			{
