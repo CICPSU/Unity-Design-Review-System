@@ -190,7 +190,7 @@ public class POIButtonManager : MonoBehaviour {
 		// The EventTriggerType tells the EventTrigger when to send out the message that the event has occured.
 		// We use PointerClick so we know when the used has clicked on a button.
 		EventTrigger.Entry entry = new EventTrigger.Entry(){callback = trigger, eventID = EventTriggerType.PointerClick};
-		eTrigger.delegates.Add(entry);
+		eTrigger.triggers.Add(entry);
 	}
 
 	//remove specified button by reference
