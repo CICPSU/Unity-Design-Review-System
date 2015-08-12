@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09817382bd1978b4ba0d8b0e0f08a5f8, type: 3}
   m_Name: TestSettings
   m_EditorClassIdentifier: 
-  rectTransform: {fileID: 0}
+  widget: {fileID: 0}
   xPos: 0
   yPos: 0
   xSize: 0

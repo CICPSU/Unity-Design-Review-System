@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<WidgetSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <gameobjectName>POIMenu</gameobjectName>
+  <xPos>0</xPos>
+  <yPos>1</yPos>
+  <xSize>100</xSize>
+  <ySize>100</ySize>
+</WidgetSettings>
