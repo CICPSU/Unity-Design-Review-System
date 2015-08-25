@@ -16,6 +16,8 @@ public class WidgetSettingsManager : MonoBehaviour{
 	public RectTransform widgetList;
 	public InputField xmlFileDisplay;
 
+	public string activeSettingsFile;
+
 	private List<string> loadedFiles = new List<string>();
 
 	void Start()
@@ -23,6 +25,18 @@ public class WidgetSettingsManager : MonoBehaviour{
 		LoadSettingsFiles ();
 		GenerateSettingsFileButtons();
 		//XmlIO.Save(new WidgetSettings(), settingsFileFolderPath + "\\test1.sets");
+	}
+
+	public void CreateTempFile()
+	{
+		XmlTextWriter writer = new XmlTextWriter(settingsFileFolderPath + "\\" + activeSettingsFile.Remove(activeSettingsFile.LastIndexOf(".")) + ".tempsets", Encoding.ASCII);
+		writer.WriteString (xmlFileDisplay.GetComponentInChildren<Text>().text);
+		(XmlIO.Load (settingsFileFolderPath + "\\" + activeSettingsFile, typeof(WidgetSettings)) as WidgetSettings).ApplySettings();
+	}
+
+	public void OverwriteFile()
+	{
+
 	}
 
 	public void LoadSettingsFiles()
@@ -68,9 +82,9 @@ public class WidgetSettingsManager : MonoBehaviour{
 	public void DisplaySettingsFile(GameObject clickedButton)
 	{
 		string xmlString = File.ReadAllText(settingsFileFolderPath + "\\" + clickedButton.GetComponentInChildren<Text>().text);
+		activeSettingsFile = clickedButton.GetComponentInChildren<Text> ().text;
 		int count = xmlString.Split(System.Environment.NewLine.ToCharArray()).Length - 1;
 		xmlFileDisplay.text = xmlString;
 		xmlFileDisplay.GetComponent<RectTransform>().sizeDelta = new Vector2(xmlFileDisplay.GetComponent<RectTransform>().sizeDelta.x, count * 15);
-		//xmlFileDisplay.text = XmlIO.Load(settingsFileFolderPath + "\\" + clickedButton.GetComponentInChildren<Text>().text, typeof(WidgetSettings)).ToString();
 	}
 }
