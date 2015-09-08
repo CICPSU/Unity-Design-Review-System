@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
 using System.IO;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.Xml;
 using System.Text;
+using System.Reflection;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -24,7 +26,7 @@ public class WidgetSettingsManager : MonoBehaviour{
 	{
 		LoadSettingsFiles ();
 		GenerateSettingsFileButtons();
-		//XmlIO.Save(new WidgetSettings(), settingsFileFolderPath + "\\test1.sets");
+		//XmlIO.Save(new MiniMapSettings(), settingsFileFolderPath + "\\MiniMapSettings.sets");
 	}
 
 	public void CreateTempFile()
@@ -43,12 +45,18 @@ public class WidgetSettingsManager : MonoBehaviour{
 	{
 		if (string.IsNullOrEmpty (settingsFileFolderPath)) 
 			settingsFileFolderPath = Application.dataPath;	
+
 		List<string> settingsFiles = new List<string>(Directory.GetFiles(settingsFileFolderPath, "*.sets"));
 		foreach(string file in settingsFiles)
 		{
-			WidgetSettings loadedFile = XmlIO.Load(file, typeof(WidgetSettings)) as WidgetSettings;
+			Debug.Log("loading: " + file);
+			string tmpFile = file.Substring(file.LastIndexOf("\\") + 1);
+			Type fileType = System.Type.GetType(tmpFile.Substring(0,tmpFile.Length - 5));
+			Debug.Log("filetype: " + fileType);
+			WidgetSettings loadedFile = XmlIO.Load(file, fileType) as WidgetSettings;
+			Debug.Log("loaded");
 			loadedFile.ApplySettings();
-			loadedFiles.Add(file.Substring(file.LastIndexOf("\\") + 1));
+			loadedFiles.Add(file);
 
 		}
 
