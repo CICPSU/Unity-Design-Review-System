@@ -2,9 +2,9 @@
 <MiniMapSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <gameobjectName>MiniMap</gameobjectName>
   <rectPos>
-    <x>0</x>
-    <y>0</y>
+    <x>1</x>
+    <y>2</y>
   </rectPos>
-  <mapPortionOfScreen>.5</mapPortionOfScreen>
-  <orthoCamRadiusFeet>20</orthoCamRadiusFeet>
+  <mapPortionOfScreen>0.3</mapPortionOfScreen>
+  <orthoCamRadiusFeet>100</orthoCamRadiusFeet>
 </MiniMapSettings>

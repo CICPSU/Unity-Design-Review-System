@@ -12,39 +12,10 @@ public abstract class WidgetSettings {
 
 
 	public string gameobjectName;
-	/*
-	public bool configRectTransform = false;
-	public Vector2 rectPos = Vector2.zero;
-	public Vector2 rectSize = Vector2.zero;
 
-	public bool config3DTransform = false;
-	public Vector3 transformPos = Vector3.zero;
-	public Vector3 transformRot = Vector3.zero;
-	public Vector3 transformScale = Vector3.one;
-	*/
 	public abstract void ApplySettings ();
-	/*
-	{
 
-		GameObject gO = GameObject.Find (gameobjectName);
-
-		if(configRectTransform)
-		{
-			RectTransform rectTrans = gO.GetComponent<RectTransform> ();
-			rectTrans.anchoredPosition = rectPos;
-			rectTrans.sizeDelta = rectSize;
-		}
-
-		if(config3DTransform)
-		{
-			Transform trans = gO.transform;
-			trans.position = transformPos;
-			trans.eulerAngles = transformRot;
-			trans.localScale = transformScale;
-		}
-
-	}
-*/
+	public abstract void SetValues (object[] values);
 
 	public WidgetSettings()
 	{
@@ -68,6 +39,14 @@ public class MiniMapSettings : WidgetSettings {
 
 		gO.GetComponent<MiniMapManager> ().mapProportionOfScreen = mapPortionOfScreen;
 		gO.GetComponent<MiniMapManager> ().orthoCamRadiusFeet = orthoCamRadiusFeet;
+	}
+
+	public override void SetValues(object[] values)
+	{
+		rectPos = (Vector2)values[0];
+		mapPortionOfScreen = (float)values[1];
+		orthoCamRadiusFeet = (float)values[2];
+		gameobjectName = (string)values[3];
 	}
 
 	public MiniMapSettings()

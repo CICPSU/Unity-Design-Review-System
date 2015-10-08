@@ -16,9 +16,9 @@ public class WidgetSettingsManager : MonoBehaviour{
 	public string settingsFileFolderPath;
 
 	public RectTransform widgetList;
-	public InputField xmlFileDisplay;
+	public RectTransform fieldsList;
 
-	public string activeSettingsFile;
+	private Type activeSettingsFileType;
 
 	private List<string> loadedFiles = new List<string>();
 
@@ -29,18 +29,6 @@ public class WidgetSettingsManager : MonoBehaviour{
 		//XmlIO.Save(new MiniMapSettings(), settingsFileFolderPath + "\\MiniMapSettings.sets");
 	}
 
-	public void CreateTempFile()
-	{
-		XmlTextWriter writer = new XmlTextWriter(settingsFileFolderPath + "\\" + activeSettingsFile.Remove(activeSettingsFile.LastIndexOf(".")) + ".tempsets", Encoding.ASCII);
-		writer.WriteString (xmlFileDisplay.GetComponentInChildren<Text>().text);
-		(XmlIO.Load (settingsFileFolderPath + "\\" + activeSettingsFile, typeof(WidgetSettings)) as WidgetSettings).ApplySettings();
-	}
-
-	public void OverwriteFile()
-	{
-
-	}
-
 	public void LoadSettingsFiles()
 	{
 		if (string.IsNullOrEmpty (settingsFileFolderPath)) 
@@ -49,14 +37,11 @@ public class WidgetSettingsManager : MonoBehaviour{
 		List<string> settingsFiles = new List<string>(Directory.GetFiles(settingsFileFolderPath, "*.sets"));
 		foreach(string file in settingsFiles)
 		{
-			Debug.Log("loading: " + file);
 			string tmpFile = file.Substring(file.LastIndexOf("\\") + 1);
 			Type fileType = System.Type.GetType(tmpFile.Substring(0,tmpFile.Length - 5));
-			Debug.Log("filetype: " + fileType);
 			WidgetSettings loadedFile = XmlIO.Load(file, fileType) as WidgetSettings;
-			Debug.Log("loaded");
 			loadedFile.ApplySettings();
-			loadedFiles.Add(file);
+			loadedFiles.Add(tmpFile);
 
 		}
 
@@ -89,10 +74,39 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 	public void DisplaySettingsFile(GameObject clickedButton)
 	{
-		string xmlString = File.ReadAllText(settingsFileFolderPath + "\\" + clickedButton.GetComponentInChildren<Text>().text);
-		activeSettingsFile = clickedButton.GetComponentInChildren<Text> ().text;
-		int count = xmlString.Split(System.Environment.NewLine.ToCharArray()).Length - 1;
-		xmlFileDisplay.text = xmlString;
-		xmlFileDisplay.GetComponent<RectTransform>().sizeDelta = new Vector2(xmlFileDisplay.GetComponent<RectTransform>().sizeDelta.x, count * 15);
+		string file = settingsFileFolderPath + "/" + clickedButton.GetComponentInChildren<Text> ().text;
+
+		string tmpFile = clickedButton.GetComponentInChildren<Text> ().text.Substring(0, clickedButton.GetComponentInChildren<Text> ().text.Length - 5);
+		Type fileType = System.Type.GetType(tmpFile);
+		activeSettingsFileType = fileType;
+
+		FieldInfo[] fieldsArray = fileType.GetFields ();
+
+		for (int i = 0; i < fieldsArray.Length; i++) 
+		{
+			GameObject fieldUI = Instantiate (Resources.Load ("WidgetSettings/" + fieldsArray [i].FieldType.Name + "_UI")) as GameObject;
+			fieldUI.transform.SetParent (fieldsList.transform);
+			fieldUI.transform.FindChild("Title").GetComponent<Text>().text = fieldsArray[i].Name;
+
+		}
+
+	}
+
+	public void SaveSettingsFile()
+	{
+		WidgetSettings objToSave = (WidgetSettings)System.Activator.CreateInstance(activeSettingsFileType);
+
+		object[] valuesToSave = new object[fieldsList.childCount];
+
+		for (int i = 0; i < fieldsList.childCount; i ++)
+		{
+			valuesToSave[i] = fieldsList.GetChild(i).GetComponent<FieldUIs>().GetFieldValue();
+		}
+
+		objToSave.SetValues(valuesToSave);
+
+		string file = settingsFileFolderPath + "/" + activeSettingsFileType.Name + ".sets";
+
+		XmlIO.Save (objToSave, file);
 	}
 }
