@@ -75,6 +75,7 @@ public class MiniMapManager : MonoBehaviour {
 		mapDim = (int)(Screen.height * mapProportionOfScreen);
 		miniMapMask.sizeDelta = new Vector2 (mapDim, mapDim);
 		miniMapRender.sizeDelta = new Vector2 (mapDim, mapDim);
+		//miniMapRender.anchoredPosition = new Vector3 (mapDim, 0 ,0);
 		compassImage.sizeDelta = new Vector2 (mapDim + 10, mapDim + 10);
 		compassImage.localPosition = new Vector3 (miniMapMask.localPosition.x - 0.5f*mapDim, miniMapMask.localPosition.y - 0.5f*mapDim, 0);
 		miniMapCam.GetComponent<Camera>().orthographicSize = orthoCamRadiusFeet*feetToMetersFactor;

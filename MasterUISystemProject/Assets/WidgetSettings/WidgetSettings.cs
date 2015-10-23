@@ -5,21 +5,19 @@ using System.Xml;
 
 
 /// <summary>
-/// This class will end up having members for every kind of configurable field we would need.
-/// Fields can be removed from the xml file for each widget if they aren't being used.
+
 /// </summary>
 public abstract class WidgetSettings {
 
-
-	public string gameobjectName;
-
+	//All implementation of the ApplySettings() should:
+	//reference the widget through FindObjectsWithType([NAME OF WIDGET MANAGER])
+	public bool enabled = true;
 	public abstract void ApplySettings ();
 
 	public abstract void SetValues (object[] values);
 
-	public WidgetSettings()
+	public WidgetSettings ()
 	{
-		gameobjectName = "name";
 	}
 }
 
@@ -32,9 +30,9 @@ public class MiniMapSettings : WidgetSettings {
 	
 	public override void ApplySettings()
 	{
-		GameObject gO = GameObject.Find (gameobjectName);
+		GameObject gO = GameObject.FindObjectOfType<MiniMapManager>().gameObject;
 
-		RectTransform rectTrans = GameObject.Find("MiniMapRoot").GetComponent<RectTransform> ();
+		RectTransform rectTrans = gO.GetComponentInChildren<RectTransform> ();
 		rectTrans.anchoredPosition = rectPos;
 
 		gO.GetComponent<MiniMapManager> ().mapProportionOfScreen = mapPortionOfScreen;
@@ -46,7 +44,7 @@ public class MiniMapSettings : WidgetSettings {
 		rectPos = (Vector2)values[0];
 		mapPortionOfScreen = (float)values[1];
 		orthoCamRadiusFeet = (float)values[2];
-		gameobjectName = (string)values[3];
+		enabled = (bool)values[3];
 	}
 
 	public MiniMapSettings()

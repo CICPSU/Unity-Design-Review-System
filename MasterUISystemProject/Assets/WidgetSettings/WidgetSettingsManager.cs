@@ -25,7 +25,7 @@ public class WidgetSettingsManager : MonoBehaviour{
 	void Start()
 	{
 		LoadSettingsFiles ();
-		GenerateSettingsFileButtons();
+		//GenerateSettingsFileButtons();
 		//XmlIO.Save(new MiniMapSettings(), settingsFileFolderPath + "\\MiniMapSettings.sets");
 	}
 
@@ -49,6 +49,15 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 	public void GenerateSettingsFileButtons()
 	{
+
+		// we need to clear out the children in the list before we generate new ones
+		for (int i = 0; i < widgetList.transform.childCount; i ++)
+		{
+			widgetList.transform.GetChild(i).gameObject.SetActive(false);
+			Destroy(widgetList.transform.GetChild(i).gameObject);
+
+		}
+
 		foreach(string name in loadedFiles)
 		{
 			GameObject newBut = Instantiate(Resources.Load("WidgetSettings/WidgetButton")) as GameObject;
@@ -88,6 +97,7 @@ public class WidgetSettingsManager : MonoBehaviour{
 			fieldUI.transform.SetParent (fieldsList.transform);
 			fieldUI.transform.FindChild("Title").GetComponent<Text>().text = fieldsArray[i].Name;
 
+
 		}
 
 	}
@@ -98,10 +108,20 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 		object[] valuesToSave = new object[fieldsList.childCount];
 
+		bool anyNull = false;
+
 		for (int i = 0; i < fieldsList.childCount; i ++)
 		{
 			valuesToSave[i] = fieldsList.GetChild(i).GetComponent<FieldUIs>().GetFieldValue();
+			if(valuesToSave[i] == null)
+			{
+				Debug.Log("need to decide how to implement the error message that should be displayed here");
+				anyNull = true;
+				break;
+			}
 		}
+		if (anyNull)
+			return;
 
 		objToSave.SetValues(valuesToSave);
 

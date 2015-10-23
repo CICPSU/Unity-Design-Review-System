@@ -37,7 +37,7 @@ public class Preferences
 		get { return DIRE.Instance.DisplayOrigin.GetComponent<MouseNavigator>().translationSpeed; }
 		set { DIRE.Instance.DisplayOrigin.GetComponent<MouseNavigator>().translationSpeed = value; }
 	}
-	
+	/*
 	public float[] PGTranslationSpeeds
 	{
 		get { return DIRE.Instance.DisplayOrigin.GetComponent<PointAndGo>().TranslationSpeeds; }
@@ -73,7 +73,7 @@ public class Preferences
 		get { return DIRE.Instance.Minimap.GetComponent<MiniMapManager>().isControlActive; }
 		set { DIRE.Instance.Minimap.GetComponent<MiniMapManager>().SetMiniMapControls(value); }
 	}
-
+*/
     /// <summary>
     /// Load preferences from a file.
     /// As preferences directly access data members in the DIRE scene and system,

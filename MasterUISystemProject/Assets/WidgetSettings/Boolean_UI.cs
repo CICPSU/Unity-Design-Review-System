@@ -3,21 +3,20 @@ using System.Collections;
 using UnityEngine.UI;
 using System;
 
-public class SingleUI : FieldUIs {
+public class Boolean_UI : FieldUIs {
 
-	public InputField singleInput;
-
+	public Toggle toggleInput;
+	
 	public override object GetFieldValue()
 	{
+		
 		try
 		{
-			float parsed = float.Parse(singleInput.text);
-			return parsed;
+			return toggleInput.isOn;
 		}
 		catch(Exception e)
 		{
 			return null;
 		}
 	}
-
 }

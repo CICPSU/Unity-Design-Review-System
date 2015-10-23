@@ -3777,6 +3777,7 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: .0219999999
+  m_StereoMirrorMode: 0
 --- !u!23 &2300000
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -3927,8 +3928,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ae6cbcfd1ae1da4dbc9d15236740fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  body_position_vector: {x: 0, y: 0, z: 0}
-  body_rotation_vector: {x: 0, y: 0, z: 0}
 --- !u!114 &11400010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4023,6 +4022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8adbc266d642cae46b4378d2b458d1e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avatar: {fileID: 0}
   miniMapCam: {fileID: 0}
   compassImage: {fileID: 0}
   zoomLabel: {fileID: 0}

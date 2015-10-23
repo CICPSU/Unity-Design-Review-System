@@ -47,8 +47,8 @@ public class ARTtrack : MonoBehaviour {
 		//reset the head position when turnning tracking off
 		if(!turnOn){
 			transform.localPosition = Vector3.zero;
-			GetComponent<DisplaySystemHandler>().offsetDisplayOriginByGeometricCenter();
-			GetComponent<DisplaySystemHandler>().offsetHeadToGeometricCenter();
+			GetComponent<DisplaySetup>().offsetDisplayOriginByGeometricCenter();
+			GetComponent<DisplaySetup>().offsetHeadToGeometricCenter();
 		}
 	}
 
@@ -69,9 +69,7 @@ public class ARTtrack : MonoBehaviour {
 				if(isTracking){
 					track();
 				}
-
 			}
-
 		}catch(Exception ex){
 			Debug.Log(ex.Message);
 		}
@@ -85,7 +83,7 @@ public class ARTtrack : MonoBehaviour {
 			data = client.Receive( ref source );
 		}
 		
-		string text = System.Text.Encoding.ASCII.GetString(data);			
+		string text = System.Text.Encoding.ASCII.GetString(data);	
 		parse (text);
 		setTransforms();
 	}
@@ -93,7 +91,6 @@ public class ARTtrack : MonoBehaviour {
 	//parse needs cleanedup based on the use case in the icon lab.  
 	// this function wont be necessary once cluster input is added to the release of unity 5 and the icon lab can use the input map from the arl
 	void parse(string text){
-
 		int index = 0;
 
 		index = text.IndexOf("6d ");
@@ -196,6 +193,7 @@ public class ARTtrack : MonoBehaviour {
 
 	public void setTransforms()
 	{
+
 		// the next two lines set the head and hand positions
 		DIRE.Instance.Head.transform.localPosition = head_position_vector;
 		DIRE.Instance.Hand.transform.localPosition = hand_position_vector;
@@ -218,7 +216,8 @@ public class ARTtrack : MonoBehaviour {
 		
 		Vector4 forward4 = RotationMatrix.MultiplyVector(new Vector4 (0,0,1,0));
 		Vector3 pointDirection = new Vector3(forward4.x, forward4.y, forward4.z);
-		pointDirection = POI_ReferenceHub.Instance.Avatar.transform.TransformDirection(pointDirection);
+		//pointDirection = POI_ReferenceHub.Instance.Avatar.transform.TransformDirection(pointDirection);
+		pointDirection = DIRE.Instance.DisplayOrigin.transform.TransformDirection (pointDirection);
 		/**
  * 
 					Vector3 pointDirection = DIRE.Instance.Hand.transform.localPosition + new Vector3(Mathf.Sin(float.Parse(head_positions_rotations[4])*Mathf.PI/180), 
@@ -228,7 +227,6 @@ public class ARTtrack : MonoBehaviour {
 					                               Mathf.Cos(float.Parse(head_positions_rotations[5])*Mathf.PI/180)* Mathf.Cos(float.Parse(head_positions_rotations[3])*Mathf.PI/180)- Mathf.Sin(float.Parse(head_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(float.Parse(head_positions_rotations[4])*Mathf.PI/180)*Mathf.Sin(float.Parse(head_positions_rotations[3])*Mathf.PI/180), 
 					                               Mathf.Cos(float.Parse(head_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(float.Parse(head_positions_rotations[3])*Mathf.PI/180)+ Mathf.Sin(float.Parse(head_positions_rotations[5])*Mathf.PI/180)*Mathf.Sin(float.Parse(head_positions_rotations[4])*Mathf.PI/180)* Mathf.Cos(float.Parse(head_positions_rotations[3])*Mathf.PI/180));
 */
-		//Debug.Log("Looking at: " + pointDirection);
 		DIRE.Instance.Hand.transform.LookAt(DIRE.Instance.Hand.transform.position + pointDirection);
 		//DIRE.Instance.Hand.transform.localEulerAngles = new Vector3(-float.Parse(head_positions_rotations[3]), -float.Parse(head_positions_rotations[4]), float.Parse(head_positions_rotations[5]));
 

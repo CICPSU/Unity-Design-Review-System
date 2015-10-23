@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
 
 public class StringUI : FieldUIs {
 
@@ -8,6 +9,14 @@ public class StringUI : FieldUIs {
 
 	public override object GetFieldValue()
 	{
-		return stringInput.text;
+
+		try
+		{
+			return stringInput.text;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
 	}
 }

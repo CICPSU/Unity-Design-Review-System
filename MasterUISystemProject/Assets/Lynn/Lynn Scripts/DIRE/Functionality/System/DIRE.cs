@@ -1,73 +1,178 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
-using System.Net;
-using System.Net.Sockets;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 
-//this is the entry class of the DIRE 
+/// <summary>
+/// DIRE system class.  This class contains interfaces and settings reflective of the entire DIRE system.
+/// </summary>
 public class DIRE : MonoBehaviour 
 {
+    /// <summary>
+    /// The GameObject that represents the origin of the display system.
+    /// </summary>
+    public GameObject DisplayOrigin = null;
 
-	public static DIRE Instance { get; set; }
-	public static string WindowName { get { return "DIRE"; } }
+	/// <summary>
+	/// The GameObject that represents the root of the MiniMap in the heirarchy.
+	/// </summary>
+	//public GameObject Minimap = null;
 
-	//public GameObject Controller = null;
-	public GameObject DisplayOrigin = null;
-	public GameObject Head = null;
-	public GameObject Hand = null;
-	public DisplaySettings settings;
+    /// <summary>
+    /// The GameObject that represents the head of virtual player.  It may have a tracking system 
+    /// attached to it.
+    /// </summary>
+    public GameObject Head = null;
+
+    /// <summary>
+    /// The GameObject that represents the hand (right) of the virtual player.  It may have a tracking
+    /// system attached to it.
+    /// </summary>
+    public GameObject Hand = null;
+
 	public Vector3 displayGeometricCenter;
 	public bool trackingActive = false;
 
-	private DisplaySetup displaySetupOnDisplayOrigin;
-	private DisplaySystemHandler displaySystemHander;
+    /// <summary>
+    /// This is the system wide instance of DIRE.  Scripts should access this for DIRE values.
+    /// This reference is initialized by the first DIRE component on the DIRE GameObject.
+    /// </summary>
+	public static DIRE Instance { get; set; }
 
+    /// <summary>
+    /// Name of the window of the DIRE application.  
+    /// NOTE: THIS IS NOT ALWAYS ACCURATE AND WE NEED A BETTER WAY TO FIND THE WINDOW NAME.
+    /// </summary>
+	public static string WindowName 
+    {
+        get 
+        { 
+            return "DIRE"; 
+        }
+    }
+	
+    public static string DisplayOption
+    {
+        get
+        {
+            string retVal = null;
+
+            if ( ArgumentProcessor.CmdLine.ContainsKey("display") &&
+                 ArgumentProcessor.CmdLine["display"].Count > 0 )
+                retVal = ArgumentProcessor.CmdLine["display"][0] + 
+                         DIRE.DisplayExtension;
+            
+            return( retVal );
+        }
+    }
+
+    public static List<string> ContentOption
+    {
+        get
+        {
+            if (ArgumentProcessor.CmdLine.ContainsKey("content"))
+                return (ArgumentProcessor.CmdLine["content"]);
+            else
+                return (new List<string>());
+        }
+    }
+
+    public static FileSearch SetupSearch;
+    public static String DisplayExtension = ".display";
+    public static String InputExtension = ".input";
+    public static String PreferenceExtension = ".pref";
+
+    /// <summary>
+    /// Unity awake function.  Initialize values for the DIRE system,
+    /// </summary>
 	void Awake()
 	{
+        /// See if the DIRE instance has been set.  Only one may be registered.
 		if ( DIRE.Instance != null )
-			Debug.LogError("Multiple instances of DIRE script");
-
+			MessageHandler.Message("Debug", "Multiple instances of DIRE script");
 		else
 		{
+            /// register the DIRE instance.  Set so that it will remain when scenes are loaded.
 			DIRE.Instance = this;
 			DontDestroyOnLoad(this);
-		}
 
-		//grabbing reference scripts
-		displaySetupOnDisplayOrigin = this.GetComponent<DisplaySetup>() as DisplaySetup;
-		displaySystemHander = this.GetComponent<DisplaySystemHandler>() as DisplaySystemHandler;
-
-		//reads display configuration into settings
-		settings = displaySetupOnDisplayOrigin.LoadDisplayDefinition();
-
-		//check existence of the configuration file. 
-		//missing of configuration file results in errors when calculating display geometric center 
-		if(settings.screens.Count > 0){
-			//align geometric center with "Virtual Cam for TP_camera" gameobject
-			displayGeometricCenter = displaySystemHander.calculateGeometricCenter();
-
-			//generate walls and eyes based on settings
-			displaySetupOnDisplayOrigin.InitializeDisplay(settings);
+			string programDir = "/DIRE";
+			string settingsDir = "/Settings";
 			
-			//****!!!Must be checked before other tracking scripts that reference DIRE.Instance.trackingActive
-			//detect if receiving tracking data, if not, set up the cam to regular cam
+			List<string> searchPaths = new List<string>();
+			
+			//searchPaths.Add(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData) + programDir + settingsDir);
+		//	searchPaths.Add(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + programDir + settingsDir);
+		//	searchPaths.Add(Environment.GetFolderPath(Environment.SpecialFolder.Personal) + programDir + settingsDir);
+		//	searchPaths.Add(Directory.GetCurrentDirectory() + "/.." + settingsDir);
+			searchPaths.Add(Application.dataPath + "/.." + settingsDir);
+
+			SetupSearch = new FileSearch();
+			foreach( string path in searchPaths )
+				SetupSearch.Add( Path.GetFullPath( path ) );
+
+			MessageHandler.Message("Debug", "Unified Search Path: " + Environment.NewLine + SetupSearch, null);
+
+			//InitializeInputs();
 			trackingActive = GetComponent<ARTtrack>().checkTracking();
-
-			//if no tracking, move head to where virtual camera is
-			if(!trackingActive){
-				Debug.Log("tracking inactive!");
-				displaySystemHander.offsetHeadToGeometricCenter();
-				displaySystemHander.offsetDisplayOriginByGeometricCenter();
-			}
-			else //if tracking, set display origin to the same level as Lynn's feet, and shift it so that geometry center is right under virtual camera
-			{
-				DIRE.Instance.DisplayOrigin.transform.localPosition = new Vector3(-displayGeometricCenter.x, -1.7f, -displayGeometricCenter.z);
-			}
-		}else
-		{
-			Debug.LogWarning("Warning: no display configuration file!");
+            InitializePreferences();
 		}
-
+	}
+	/*
+	void InitializeInputs()
+	{
+		// Get list of input files.  Only keep one of each file name.
+		IEnumerable<string> inputFiles = (from f in DIRE.SetupSearch.FindFile("*" + DIRE.InputExtension)
+		                                  select Path.GetFileName(f)).Distinct();
+		
+		// try to load each file.
+		foreach (string file in inputFiles)
+		{
+			try
+			{
+				// Get the path to the file to be loaded.  The last in the 
+				// list has the most precedence.  Load through InputManager
+				InputManager.LoadMap ( DIRE.SetupSearch.FindFile(file).Last() );
+			}
+			catch (Exception ex)
+			{
+				// something went wrong.  Log the error.
+				Debug.LogWarning("Error loading: " + file + Environment.NewLine + ex);
+			}
+		}
 	}
 
+*/
+
+    /// <summary>
+    /// Load all preference files found
+    /// </summary>
+    void InitializePreferences()
+    {
+        // XmlIO.Save(new Preferences(), "C:\\users\\mew9\\Desktop\\Default.pref");
+
+		//XmlIO.Save(new Preferences(), "c:/users/kal5544/desktop/minimapintegration/settings/Default.pref");
+
+        // Get list of preference file
+        IEnumerable<string> prefFiles =
+            (from f in DIRE.SetupSearch.FindFile("*" + DIRE.PreferenceExtension)
+             select f);
+
+        // try to load each file.
+        foreach (string path in prefFiles)
+            Preferences.Load(path);
+    }
+
+    /// <summary>
+    /// Unity per frame update method.  Exit application if Escape is pressed.
+    /// </summary>
+    void Update()
+    {
+        // Exit if escape key is pressed
+        if (Input.GetKeyDown(KeyCode.Escape))
+            System.Diagnostics.Process.GetCurrentProcess().Kill();
+    }
 }
