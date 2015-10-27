@@ -20,4 +20,9 @@ public class SingleUI : FieldUIs {
 		}
 	}
 
+	public override void SetFieldValue(object value)
+	{
+		singleInput.text = value.ToString();
+	}
+
 }

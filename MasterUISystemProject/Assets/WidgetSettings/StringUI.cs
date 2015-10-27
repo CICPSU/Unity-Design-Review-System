@@ -19,4 +19,9 @@ public class StringUI : FieldUIs {
 			return null;
 		}
 	}
+
+	public override void SetFieldValue(object value)
+	{
+		stringInput.text = value.ToString();
+	}
 }

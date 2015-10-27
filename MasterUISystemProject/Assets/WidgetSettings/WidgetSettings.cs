@@ -16,6 +16,8 @@ public abstract class WidgetSettings {
 
 	public abstract void SetValues (object[] values);
 
+	public abstract object[] GetValues ();
+
 	public WidgetSettings ()
 	{
 	}
@@ -30,6 +32,8 @@ public class MiniMapSettings : WidgetSettings {
 	
 	public override void ApplySettings()
 	{
+		if (GameObject.FindObjectOfType<MiniMapManager> () == null)
+			return;
 		GameObject gO = GameObject.FindObjectOfType<MiniMapManager>().gameObject;
 
 		RectTransform rectTrans = gO.GetComponentInChildren<RectTransform> ();
@@ -37,6 +41,8 @@ public class MiniMapSettings : WidgetSettings {
 
 		gO.GetComponent<MiniMapManager> ().mapProportionOfScreen = mapPortionOfScreen;
 		gO.GetComponent<MiniMapManager> ().orthoCamRadiusFeet = orthoCamRadiusFeet;
+		gO.GetComponent<MiniMapManager> ().SetMiniMapCam ();
+		gO.SetActive (enabled);
 	}
 
 	public override void SetValues(object[] values)
@@ -45,6 +51,11 @@ public class MiniMapSettings : WidgetSettings {
 		mapPortionOfScreen = (float)values[1];
 		orthoCamRadiusFeet = (float)values[2];
 		enabled = (bool)values[3];
+	}
+
+	public override object[] GetValues()
+	{
+		return new object[]{rectPos, mapPortionOfScreen, orthoCamRadiusFeet, enabled};
 	}
 
 	public MiniMapSettings()

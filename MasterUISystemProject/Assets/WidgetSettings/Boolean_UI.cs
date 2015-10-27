@@ -19,4 +19,10 @@ public class Boolean_UI : FieldUIs {
 			return null;
 		}
 	}
+
+	public override void SetFieldValue(object value)
+	{
+
+		toggleInput.isOn = (value as bool?).Value;
+	}
 }

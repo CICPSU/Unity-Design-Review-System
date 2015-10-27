@@ -21,4 +21,11 @@ public class Vector2UI : FieldUIs {
 		}
 	}
 
+	public override void SetFieldValue(object value)
+	{
+		Vector2 vectorValue = (value as Vector2?).Value;
+		xInput.text = vectorValue.x.ToString ();
+		yInput.text = vectorValue.y.ToString ();
+	}
+
 }

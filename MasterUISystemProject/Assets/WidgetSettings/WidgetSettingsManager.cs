@@ -18,6 +18,8 @@ public class WidgetSettingsManager : MonoBehaviour{
 	public RectTransform widgetList;
 	public RectTransform fieldsList;
 
+	public GameObject displaySettingsPanel;
+
 	private Type activeSettingsFileType;
 
 	private List<string> loadedFiles = new List<string>();
@@ -25,7 +27,6 @@ public class WidgetSettingsManager : MonoBehaviour{
 	void Start()
 	{
 		LoadSettingsFiles ();
-		//GenerateSettingsFileButtons();
 		//XmlIO.Save(new MiniMapSettings(), settingsFileFolderPath + "\\MiniMapSettings.sets");
 	}
 
@@ -33,6 +34,8 @@ public class WidgetSettingsManager : MonoBehaviour{
 	{
 		if (string.IsNullOrEmpty (settingsFileFolderPath)) 
 			settingsFileFolderPath = Application.dataPath;	
+
+		loadedFiles = new List<string> ();
 
 		List<string> settingsFiles = new List<string>(Directory.GetFiles(settingsFileFolderPath, "*.sets"));
 		foreach(string file in settingsFiles)
@@ -42,6 +45,7 @@ public class WidgetSettingsManager : MonoBehaviour{
 			WidgetSettings loadedFile = XmlIO.Load(file, fileType) as WidgetSettings;
 			loadedFile.ApplySettings();
 			loadedFiles.Add(tmpFile);
+			Debug.Log("loading: " + tmpFile);
 
 		}
 
@@ -53,9 +57,19 @@ public class WidgetSettingsManager : MonoBehaviour{
 		// we need to clear out the children in the list before we generate new ones
 		for (int i = 0; i < widgetList.transform.childCount; i ++)
 		{
-			widgetList.transform.GetChild(i).gameObject.SetActive(false);
+			//widgetList.transform.GetChild(i).gameObject.SetActive(false);
+			Debug.Log("destroying: " + widgetList.transform.GetChild(i).name);
 			Destroy(widgetList.transform.GetChild(i).gameObject);
 
+		}
+
+		// we need to clear out the children in the list before we generate new ones
+		for (int i = 0; i < fieldsList.transform.childCount; i ++)
+		{
+			fieldsList.transform.GetChild(i).gameObject.SetActive(false);
+			Debug.Log("destroying: " + fieldsList.transform.GetChild(i).name);
+			Destroy(fieldsList.transform.GetChild(i).gameObject);
+			
 		}
 
 		foreach(string name in loadedFiles)
@@ -69,7 +83,9 @@ public class WidgetSettingsManager : MonoBehaviour{
 			EventTrigger.TriggerEvent trigger = new EventTrigger.TriggerEvent();
 			
 			// The following line adds the DisplaySettingsFile function as a listener to the EventTrigger on the button we instantiated.
+			trigger.AddListener((eventData)=>displaySettingsPanel.SetActive(true));
 			trigger.AddListener((eventData)=>DisplaySettingsFile(newBut));
+
 
 			// The next line adds the entry we created to the Event Trigger of the instantiated button.
 			// The entry consists of two parts, the listener we set up earlier, and the EventTriggerType.
@@ -83,20 +99,34 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 	public void DisplaySettingsFile(GameObject clickedButton)
 	{
+
+		// we need to clear out the children in the list before we generate new ones
+		for (int i = 0; i < fieldsList.transform.childCount; i ++)
+		{
+			fieldsList.transform.GetChild(i).gameObject.SetActive(false);
+			Debug.Log("destroying: " + fieldsList.transform.GetChild(i).name);
+			Destroy(fieldsList.transform.GetChild(i).gameObject);
+			
+		}
+
 		string file = settingsFileFolderPath + "/" + clickedButton.GetComponentInChildren<Text> ().text;
 
 		string tmpFile = clickedButton.GetComponentInChildren<Text> ().text.Substring(0, clickedButton.GetComponentInChildren<Text> ().text.Length - 5);
 		Type fileType = System.Type.GetType(tmpFile);
 		activeSettingsFileType = fileType;
 
+		WidgetSettings displayedFile = XmlIO.Load (file, fileType) as WidgetSettings;
+
+		object[] displayedValues = displayedFile.GetValues ();
+
 		FieldInfo[] fieldsArray = fileType.GetFields ();
 
-		for (int i = 0; i < fieldsArray.Length; i++) 
+		for (int i = 0; i < fieldsArray.Length; i++)
 		{
 			GameObject fieldUI = Instantiate (Resources.Load ("WidgetSettings/" + fieldsArray [i].FieldType.Name + "_UI")) as GameObject;
 			fieldUI.transform.SetParent (fieldsList.transform);
 			fieldUI.transform.FindChild("Title").GetComponent<Text>().text = fieldsArray[i].Name;
-
+			fieldUI.GetComponent<FieldUIs>().SetFieldValue(displayedValues[i]);
 
 		}
 
