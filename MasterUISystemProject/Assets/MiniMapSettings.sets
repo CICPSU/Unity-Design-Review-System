@@ -5,6 +5,6 @@
     <x>11</x>
     <y>33</y>
   </rectPos>
-  <mapPortionOfScreen>30</mapPortionOfScreen>
+  <mapPortionOfScreen>0.2</mapPortionOfScreen>
   <orthoCamRadiusFeet>30</orthoCamRadiusFeet>
 </MiniMapSettings>
