@@ -475,7 +475,7 @@ GameObject:
   - 4: {fileID: 400062}
   m_Layer: 2
   m_Name: targetLookAt
-  m_TagString: Player
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1817,7 +1817,6 @@ GameObject:
   - 143: {fileID: 14300000}
   - 114: {fileID: 11400006}
   - 114: {fileID: 11400016}
-  - 114: {fileID: 11489810}
   m_Layer: 2
   m_Name: Lynn
   m_TagString: Player
@@ -1924,6 +1923,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400254}
   - 120: {fileID: 12000000}
+  - 114: {fileID: 11498244}
   m_Layer: 0
   m_Name: Hand
   m_TagString: Untagged
@@ -1964,7 +1964,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &100260
 GameObject:
   m_ObjectHideFlags: 1
@@ -3582,7 +3582,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100240}
-  m_LocalRotation: {x: 0, y: 0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -3713,7 +3713,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -1.70000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400256}
@@ -3881,8 +3881,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f44e2be7c1c9540a06d631a6eb8285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ForwardSpeed: 2.5
-  BackwardSpeed: 2.5
+  ForwardSpeed: 3
+  BackwardSpeed: 3
   VerticalSpeed: 2
   StrafingSpeed: 3
   SlideSpeed: 1.5
@@ -3936,10 +3936,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 100260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2573c1e6bc9ce2448b91fc4ad1a0ed1c, type: 3}
+  m_Script: {fileID: 11500000, guid: c62df8a208ef4bd438b2cd93eb6d8b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseCam: {fileID: 2000000, guid: 99ba3ff0dd1d4f644aa98bcd91407446, type: 2}
+  LoadPluginsWithContent: 0
+  LoadPreferencesWithContent: 1
+  BundlePath: 
+  SceneName: 
+  LoadTrigger: 0
+  scenes: []
 --- !u!114 &11400012
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3948,7 +3953,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 100260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58775dc95684d6d4c91c40dfefcef813, type: 3}
+  m_Script: {fileID: 11500000, guid: e117b1e0180f0514a876958c720ee95b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DisplayOrigin: {fileID: 100260}
@@ -3969,7 +3974,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetLookAt: {fileID: 400062}
   cameraDistanceCheck: {fileID: 400146}
-  Distance: 0
+  Distance: .300000012
   DistanceMin: .300000012
   DistanceMax: 10
   DistanceSmooth: .0500000007
@@ -4007,32 +4012,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 100260}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1980d3585c5d8034ca29210196fbfcec, type: 3}
+  m_Script: {fileID: 11500000, guid: 76cdcaeac0408b845a41f3cf5cae77df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseCam: {fileID: 2021310, guid: 992b1a2befc98364a9889fc2f8afaa77, type: 2}
   fieldOfView_oneScreen: 60
---- !u!114 &11489810
+--- !u!114 &11498244
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100240}
+  m_GameObject: {fileID: 100254}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8adbc266d642cae46b4378d2b458d1e4, type: 3}
+  m_Script: {fileID: 11500000, guid: 8b0ec7e36c020a5418e1c7475f14ac55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  avatar: {fileID: 0}
-  miniMapCam: {fileID: 0}
-  compassImage: {fileID: 0}
-  zoomLabel: {fileID: 0}
-  miniMapCanvas: {fileID: 0}
-  miniMapRender: {fileID: 0}
-  miniMapMask: {fileID: 0}
-  mapProportionOfScreen: .349999994
-  isMiniActive: 0
-  orthoCamRadiusFeet: 5
-  mapRadiusIncrementInFeet: 0
 --- !u!120 &12000000
 LineRenderer:
   m_ObjectHideFlags: 1
