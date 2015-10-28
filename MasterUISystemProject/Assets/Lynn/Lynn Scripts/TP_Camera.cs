@@ -277,11 +277,13 @@ public class TP_Camera : MonoBehaviour {
 //		Debug.Log("lynn camera vector" + lynnCameraVector);
 		if(lynnCameraVector.magnitude < 0.8f)
 		{
-			cameraDistanceCheck.parent.Find("f020_hipoly_81_bones_opacity_C").GetComponent<Renderer>().enabled = false;
+			cameraDistanceCheck.parent.FindChild("Avatar").gameObject.SetActive(false);
+			//cameraDistanceCheck.parent.Find("f020_hipoly_81_bones_opacity_C").GetComponent<Renderer>().enabled = false;
 		}
 		else
 		{
-			cameraDistanceCheck.parent.Find("f020_hipoly_81_bones_opacity_C").GetComponent<Renderer>().enabled = true;
+			cameraDistanceCheck.parent.FindChild("Avatar").gameObject.SetActive(true);
+			//cameraDistanceCheck.parent.Find("f020_hipoly_81_bones_opacity_C").GetComponent<Renderer>().enabled = true;
 		}
 
 	}	

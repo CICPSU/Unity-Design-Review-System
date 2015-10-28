@@ -51,7 +51,7 @@ public class TP_Motor : MonoBehaviour {
 		ApplySlide();
 		
 		//play animation
-		playAnimation();
+		//playAnimation();
 		
 		// Multiply MoveVector by MoveSpeed;
 		MoveVector = MoveVector * MoveSpeed();

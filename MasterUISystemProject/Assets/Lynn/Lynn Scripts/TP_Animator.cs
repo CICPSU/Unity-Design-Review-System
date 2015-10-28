@@ -14,9 +14,12 @@ public class TP_Animator: MonoBehaviour
 	
 	
 	public Direction MoveDirection {get; set;}
+
+	private Animator avatarAnimator;
 	
 	void Awake(){						//   so when calling the variables or methods of this class from other script,
 	Instance = this;					//    we can refer to this instance.
+		avatarAnimator = GetComponentInChildren<Animator> ();
 	}
 	void Start(){
 		
@@ -45,6 +48,7 @@ public class TP_Animator: MonoBehaviour
 			vertical = true;
 		
 		if(forward){
+			avatarAnimator.SetInteger("Direction",0);
 			if (left)
 				MoveDirection = Direction.LeftForward;
 			else if (right)
@@ -56,22 +60,26 @@ public class TP_Animator: MonoBehaviour
 		else 
 		if (backward)	
 		{
+			avatarAnimator.SetInteger("Direction",180);
 			if (left)
 				MoveDirection = Direction.LeftBackward;
 			else if (right)
-				MoveDirection = Direction.Backward;
+				MoveDirection = Direction.RightBackward;
 			else {
 				MoveDirection = Direction.Backward;	
 			}
 		}
 		else if(left){
 			MoveDirection = Direction.Left;
+			avatarAnimator.SetInteger("Direction",270);
 		}
 		else if(right){
 			MoveDirection = Direction.Right;
+			avatarAnimator.SetInteger("Direction",90);
 		}
 		else{
-		MoveDirection = Direction.Stationary;	
+		MoveDirection = Direction.Stationary;
+			avatarAnimator.SetInteger("Direction",-1);
 		}
 		if(vertical){
 			MoveDirection = Direction.Vertical;
