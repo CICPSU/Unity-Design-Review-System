@@ -33,7 +33,7 @@ public class WidgetSettingsManager : MonoBehaviour{
 	public void LoadSettingsFiles()
 	{
 		if (string.IsNullOrEmpty (settingsFileFolderPath)) 
-			settingsFileFolderPath = Application.dataPath;	
+			settingsFileFolderPath = Application.dataPath + "/FullPackage/Settings";	
 
 		loadedFiles = new List<string> ();
 

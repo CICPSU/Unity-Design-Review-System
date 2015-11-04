@@ -1,0 +1,11 @@
+SSAO settings: tested for ICon Lab
+
+Downsampling: 1
+Intesity: 3.9
+Radius: 0.09
+Distance: 1
+Bias: 0.1
+Lighting Contribution: 0.7
+Blur Type: Gaussian
+Blur Passes: 2
+Distance Cutoff settings left to default

@@ -61,5 +61,4 @@ public class MiniMapSettings : WidgetSettings {
 	public MiniMapSettings()
 	{
 	}
-
 }
