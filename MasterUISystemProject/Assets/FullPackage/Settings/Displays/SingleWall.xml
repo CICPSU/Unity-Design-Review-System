@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<DisplaySettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Screens>
+    <ScreenInfo>
+      <Name>Front</Name>
+      <Location>
+        <Position>
+          <x>-1</x>
+          <y>0</y>
+          <z>1</z>
+        </Position>
+        <Orientation>
+          <x>0</x>
+          <y>0</y>
+          <z>0</z>
+        </Orientation>
+        <Width>2</Width>
+        <Height>2</Height>
+      </Location>
+      <Viewport>
+        <X>0</X>
+        <Y>0</Y>
+        <Width>1920</Width>
+        <Height>1080</Height>
+      </Viewport>
+    </ScreenInfo>
+  </Screens>
+</DisplaySettings>
