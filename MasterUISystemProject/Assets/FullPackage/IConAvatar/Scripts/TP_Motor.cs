@@ -17,7 +17,6 @@ public class TP_Motor : MonoBehaviour {
 	public float MaxControllableSlideMagnitude = 0.4f;
 	public bool gravityOn; 
 	public Transform virtualCamera;
-	private Vector3 slideDirection;
 
 	
 	
@@ -47,11 +46,6 @@ public class TP_Motor : MonoBehaviour {
 		// Normalize MoveVector if Magnitude > 1;
 		if (MoveVector.magnitude > 1)
 			MoveVector = Vector3.Normalize(MoveVector);
-		//Apply sliding if applicable
-		ApplySlide();
-		
-		//play animation
-		//playAnimation();
 		
 		// Multiply MoveVector by MoveSpeed;
 		MoveVector = MoveVector * MoveSpeed();
@@ -67,29 +61,8 @@ public class TP_Motor : MonoBehaviour {
 		// Move the character in world space
 		TP_Controller.characterController.Move (MoveVector * Time.deltaTime);
 	}
-	
 
-	//this method plays walk/ idle animation 
-	void playAnimation(){
-		if(MoveVector.magnitude > 0.1f){
-			if(!GetComponent<Animation>().IsPlaying("f_walk_neutral_04_inplace")){
-			GetComponent<Animation>().Play("f_walk_neutral_04_inplace");	
-			}
-		}
-		if(MoveVector.magnitude == 0){
-			if(!GetComponent<Animation>().IsPlaying("f_idle_neutral_04") && !GetComponent<Animation>().IsPlaying("f_gestic_talk_neutral_02")){
-			GetComponent<Animation>().Play("f_idle_neutral_04");	
-			}
-		}
-		if(Input.GetKeyUp(KeyCode.T)){
-			if(!GetComponent<Animation>().IsPlaying("f_gestic_talk_neutral_02")){
-			GetComponent<Animation>().Play("f_gestic_talk_neutral_02");	
-			
-			}
-		}
-	}
-	
-	
+
 	void ApplyGravity(){
 		if(MoveVector.y > - TerminalVelocity)
 			MoveVector = new Vector3(MoveVector.x,MoveVector.y - Gravity * Time.deltaTime, MoveVector.z);
@@ -98,24 +71,7 @@ public class TP_Motor : MonoBehaviour {
 			MoveVector = new Vector3(MoveVector.x,-1, MoveVector.z);
 	}
 	
-	void ApplySlide(){
-		if(!TP_Controller.characterController.isGrounded)	
-			return;
-		slideDirection = new Vector3(0, 0, 0); // in tutorial it is = Vector3.zero    ***********************************!!!!!!!!***********
-		
-		RaycastHit hitInfo; // RaycastHit is a struct that holds all the information that ray casting returns
-		
-		if(Physics.Raycast(transform.position + Vector3.up, Vector3.down, out hitInfo)){
-			if (hitInfo.normal.y < SlideThreshold)
-				slideDirection = new Vector3(hitInfo.normal.x, -hitInfo.normal.y, hitInfo.normal.z); 
-		}
-		
-		if(slideDirection.magnitude < MaxControllableSlideMagnitude)
-			MoveVector +=slideDirection;  // the input still has control on the movement
-		else{
-			MoveVector = slideDirection; // player input is overwirted by the slideDirection, player loses control	
-		}
-	}
+
 	
 	public void Jump(){
 		if(TP_Controller.characterController.isGrounded)	
@@ -131,15 +87,7 @@ public class TP_Motor : MonoBehaviour {
 		transform.rotation = Quaternion.Euler(transform.eulerAngles.x,
 				virtualCamera.eulerAngles.y, transform.eulerAngles.z);
 		}
-/*		
-		//This is to check if joystick right trigger is pressed or not
-		if(Input.GetAxis("JoystickTrigger") < 0 ){  
-//		This line is added by me
-//			TP_Camera.Instance.SnapCamera();   // this allows the camera to smooth back to the back of the character
-		transform.rotation = Quaternion.Euler(transform.eulerAngles.x,
-		Camera.mainCamera.transform.eulerAngles.y, transform.eulerAngles.z);
-		}
-		*/
+
 		
 	}
 	

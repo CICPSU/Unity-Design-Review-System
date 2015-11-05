@@ -64,7 +64,7 @@ public class TP_Camera : MonoBehaviour {
 	}
 	
 	void Start(){
-		showSpeedRect= new Rect (Screen.width - 130, 6, 120, 20);
+		showSpeedRect= new Rect (Screen.width/2, Screen.height - 20, 120, 20);
 		style = new GUIStyle();
 		style.fontSize = 15;
 		Distance = Mathf.Clamp (Distance, DistanceMin, DistanceMax);
@@ -303,7 +303,7 @@ public class TP_Camera : MonoBehaviour {
 		}
 	}
 
-
+#region obselete code
 
 
 	/*
@@ -464,4 +464,5 @@ public class TP_Camera : MonoBehaviour {
 		return nearestDistance;
 	}
 	*/
+#endregion
 }
