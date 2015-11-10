@@ -17,6 +17,7 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 	public RectTransform widgetList;
 	public RectTransform fieldsList;
+    public RectTransform errorWindow;
 
 	public GameObject displaySettingsPanel;
 
@@ -27,7 +28,7 @@ public class WidgetSettingsManager : MonoBehaviour{
 	void Start()
 	{
 		LoadSettingsFiles ();
-		//XmlIO.Save(new MiniMapSettings(), settingsFileFolderPath + "\\MiniMapSettings.sets");
+		XmlIO.Save(new AvatarSettings(), settingsFileFolderPath + "\\AvatarSettings.sets");
 	}
 
 	public void LoadSettingsFiles()
@@ -145,7 +146,9 @@ public class WidgetSettingsManager : MonoBehaviour{
 			valuesToSave[i] = fieldsList.GetChild(i).GetComponent<FieldUIs>().GetFieldValue();
 			if(valuesToSave[i] == null)
 			{
-				Debug.Log("need to decide how to implement the error message that should be displayed here");
+                //Debug.Log("need to decide how to implement the error message that should be displayed here");
+                errorWindow.gameObject.SetActive(true);
+                errorWindow.GetChild(1).GetComponentInChildren<Text>().text = "Error: Inalid input, please correct settings.";
 				anyNull = true;
 				break;
 			}
@@ -159,5 +162,6 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 		Debug.Log(file);
 		XmlIO.Save (objToSave, file);
+        LoadSettingsFiles();
 	}
 }

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Xml.Serialization;
 using System.Xml;
-
+using System;
 
 /// <summary>
 
@@ -23,6 +23,40 @@ public abstract class WidgetSettings {
 	}
 }
 
+public class AvatarSettings : WidgetSettings
+{
+
+    public bool trackingEnabled;
+    public int avatarForwardSpeed;
+    public int avatarBackwardSpeed;
+    public int avatarStrafeSpeed;
+
+    public override void ApplySettings()
+    {
+        DIRE.Instance.DisplayOrigin.GetComponent<ARTtrack>().SetTracking(trackingEnabled);
+        TP_Motor tpMotorScript = GameObject.FindObjectOfType<TP_Motor>();
+        tpMotorScript.ForwardSpeed = avatarForwardSpeed;
+        tpMotorScript.BackwardSpeed = avatarBackwardSpeed;
+        tpMotorScript.StrafingSpeed = avatarStrafeSpeed;
+
+    }
+
+    public override void SetValues(object[] values)
+    {
+        return;
+    }
+
+    public override object[] GetValues()
+    {
+        return null;
+    }
+
+    public AvatarSettings()
+    {
+    }
+
+}
+
 public class MiniMapSettings : WidgetSettings {
 
 	public Vector2 rectPos = Vector2.zero;
@@ -36,13 +70,18 @@ public class MiniMapSettings : WidgetSettings {
 			return;
 		GameObject gO = GameObject.FindObjectOfType<MiniMapManager>().gameObject;
 
-		RectTransform rectTrans = gO.GetComponentInChildren<RectTransform> ();
+        gO.transform.GetChild(0).gameObject.SetActive(enabled);
+        gO.transform.GetChild(1).gameObject.SetActive(enabled);
+        if (!enabled)
+            return;
+        RectTransform rectTrans = gO.GetComponentInChildren<RectTransform> ();
 		rectTrans.anchoredPosition = rectPos;
 
 		gO.GetComponent<MiniMapManager> ().mapProportionOfScreen = mapPortionOfScreen;
 		gO.GetComponent<MiniMapManager> ().orthoCamRadiusFeet = orthoCamRadiusFeet;
 		gO.GetComponent<MiniMapManager> ().SetMiniMapCam ();
-		gO.SetActive (enabled);
+        
+		//gO.SetActive (enabled);
 	}
 
 	public override void SetValues(object[] values)
