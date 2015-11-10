@@ -37,7 +37,7 @@ namespace UnityStandardAssets.CrossPlatformInput
 
                     o.AddComponent<UnityEngine.EventSystems.EventSystem>();
                     o.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();
-                    o.AddComponent<UnityEngine.EventSystems.TouchInputModule>();
+                    //o.AddComponent<UnityEngine.EventSystems.TouchInputModule>();
                 }
             }
         }
