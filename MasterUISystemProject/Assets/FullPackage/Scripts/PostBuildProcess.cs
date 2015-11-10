@@ -19,6 +19,9 @@ public static class PostBuildProcess {
 			desFolderPath = pathToBuiltProject + @"/Settings";
 		}else{
 			forBuildFolderPath = Application.dataPath + @"\FullPackage\Settings\For Build";
+			pathToBuiltProject = Path.GetDirectoryName(pathToBuiltProject) + @"\"
+				+ Path.GetFileNameWithoutExtension(pathToBuiltProject) + "_Data";
+
 			desFolderPath = pathToBuiltProject + @"\Settings";
 		}
 		 
