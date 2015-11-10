@@ -72,9 +72,9 @@ public class ContentManager : MonoBehaviour
 
         /// Load asset bundle
 		MessageHandler.Message("System", "Loading asset bundle: " + path);
-        AssetBundle bundle = AssetBundle.LoadFromFile(path);
+//!!TODO:it is not in the current API        AssetBundle bundle = AssetBundle.LoadFromFile(path);
 
-		scenes = bundle.GetAllScenePaths();
+		//TODO: uncomment scenes = bundle.GetAllScenePaths();
 		if ( scenes != null && scenes.Length > 0 )
 		{
 			string sceneList = "";
