@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <AvatarSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <enabled>true</enabled>
-  <trackingEnabled>false</trackingEnabled>
-  <avatarForwardSpeed>0</avatarForwardSpeed>
-  <avatarBackwardSpeed>0</avatarBackwardSpeed>
-  <avatarStrafeSpeed>0</avatarStrafeSpeed>
+  <trackingEnabled>true</trackingEnabled>
+  <avatarForwardSpeed>3</avatarForwardSpeed>
+  <avatarBackwardSpeed>3</avatarBackwardSpeed>
+  <avatarStrafeSpeed>3</avatarStrafeSpeed>
 </AvatarSettings>

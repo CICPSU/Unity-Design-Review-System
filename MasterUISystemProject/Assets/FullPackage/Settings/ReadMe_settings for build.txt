@@ -1,3 +1,3 @@
-All the settings and configuration files that need to be used by the build executable will need to be in the "for Build"
+All the settings and configuration files that is directly under this setting folder are active setting files,
+which means scripts won't search inside the folders in settings folder
 
-Do not move the "for Build" folder outside of the Settings folder

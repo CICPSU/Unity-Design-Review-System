@@ -27,9 +27,9 @@ public class AvatarSettings : WidgetSettings
 {
 
     public bool trackingEnabled;
-    public int avatarForwardSpeed;
-    public int avatarBackwardSpeed;
-    public int avatarStrafeSpeed;
+    public float avatarForwardSpeed;
+    public float avatarBackwardSpeed;
+    public float avatarStrafeSpeed;
 
     public override void ApplySettings()
     {
@@ -43,12 +43,15 @@ public class AvatarSettings : WidgetSettings
 
     public override void SetValues(object[] values)
     {
-        return;
+		trackingEnabled = (bool)values [0];
+		avatarForwardSpeed = (float)values [1];
+		avatarBackwardSpeed = (float)values [2];
+		avatarStrafeSpeed = (float)values [3];
     }
 
     public override object[] GetValues()
     {
-        return null;
+		return (new object[]{trackingEnabled, avatarForwardSpeed, avatarBackwardSpeed, avatarStrafeSpeed, enabled});
     }
 
     public AvatarSettings()

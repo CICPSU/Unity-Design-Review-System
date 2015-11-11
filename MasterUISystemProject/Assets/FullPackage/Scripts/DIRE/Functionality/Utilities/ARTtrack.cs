@@ -13,16 +13,20 @@ public class ARTtrack : MonoBehaviour {
 	IPEndPoint source;
 
 	private Vector3 head_position_vector, head_rotation_vector, hand_position_vector, hand_rotation_vector;
-	bool isTracking = true;
 
 	private string[] head_positions_rotations = new string[6];
 	private string[] hand_positions_rotations = new string[6];
 
-	public bool checkTracking(){
+	public void InitializeTracking()
+	{
 		source = new IPEndPoint( IPAddress.Any, 5000);
 		client = new UdpClient();
 		client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true);
 		client.Client.Bind(source);
+	}
+
+	public bool CheckTracking(){
+
 
 		float timeThresold =  Time.realtimeSinceStartup + .1f;
 		while(Time.realtimeSinceStartup < timeThresold){
@@ -43,9 +47,9 @@ public class ARTtrack : MonoBehaviour {
 	//A GUI button calls this
 	//Param: true to turn on 
 	public void SetTracking (bool turnOn){
-		isTracking = turnOn;
+		DIRE.Instance.trackingActive = turnOn && CheckTracking ();
 		//reset the head position when turnning tracking off
-		if(!turnOn){
+		if(!DIRE.Instance.trackingActive){
 			transform.localPosition = Vector3.zero;
             //GetComponent<DisplaySetup>().offsetDisplayOriginByGeometricCenter();
             //GetComponent<DisplaySetup>().offsetHeadToGeometricCenter();
@@ -68,9 +72,7 @@ public class ARTtrack : MonoBehaviour {
 					throw new Exception("source reference is not set to an instance!");
 				}
 
-				if(isTracking){
-					track();
-				}
+				track();
 			}
 		}catch(Exception ex){
 			Debug.Log(ex.Message);

@@ -28,7 +28,7 @@ public class WidgetSettingsManager : MonoBehaviour{
 	void Start()
 	{
 		LoadSettingsFiles ();
-		XmlIO.Save(new AvatarSettings(), settingsFileFolderPath + "\\AvatarSettings.sets");
+		//XmlIO.Save(new AvatarSettings(), settingsFileFolderPath + "\\AvatarSettings.sets");
 	}
 
 	public void LoadSettingsFiles()
@@ -139,8 +139,6 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 		object[] valuesToSave = new object[fieldsList.childCount];
 
-		bool anyNull = false;
-
 		for (int i = 0; i < fieldsList.childCount; i ++)
 		{
 			valuesToSave[i] = fieldsList.GetChild(i).GetComponent<FieldUIs>().GetFieldValue();
@@ -149,12 +147,9 @@ public class WidgetSettingsManager : MonoBehaviour{
                 //Debug.Log("need to decide how to implement the error message that should be displayed here");
                 errorWindow.gameObject.SetActive(true);
                 errorWindow.GetChild(1).GetComponentInChildren<Text>().text = "Error: Inalid input, please correct settings.";
-				anyNull = true;
-				break;
+				return;
 			}
 		}
-		if (anyNull)
-			return;
 
 		objToSave.SetValues(valuesToSave);
 
