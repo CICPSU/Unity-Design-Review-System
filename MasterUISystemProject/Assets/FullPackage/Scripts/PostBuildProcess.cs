@@ -11,21 +11,24 @@ public static class PostBuildProcess {
 	[PostProcessBuildAttribute(1)]
 	public static void OnPostprocessBuild(BuildTarget target, string pathToBuiltProject) {
 
-		string forBuildFolderPath;
+		string settingsFolderPath;
 		string desFolderPath;
 		if(System.Environment.OSVersion.Platform == System.PlatformID.MacOSX 
 		   || System.Environment.OSVersion.Platform == System.PlatformID.Unix){
-		    forBuildFolderPath = Application.dataPath + @"/FullPackage/Settings/For Build";
-			desFolderPath = pathToBuiltProject + @"/Settings";
+			settingsFolderPath = Application.dataPath + @"/FullPackage/Settings";
+			desFolderPath = pathToBuiltProject + @"/FullPackage/Settings";
 		}else{
-			forBuildFolderPath = Application.dataPath + @"\FullPackage\Settings\For Build";
-			desFolderPath = pathToBuiltProject + @"\Settings";
+			settingsFolderPath = Application.dataPath + @"\FullPackage\Settings";
+			pathToBuiltProject = Path.GetDirectoryName(pathToBuiltProject) + @"\"
+				+ Path.GetFileNameWithoutExtension(pathToBuiltProject) + "_Data";
+
+			desFolderPath = pathToBuiltProject + @"\FullPackage\Settings";
 		}
 		 
-		if(Directory.Exists(forBuildFolderPath)){
-			CopyDirectory(forBuildFolderPath, desFolderPath, true);
+		if(Directory.Exists(settingsFolderPath)){
+			CopyDirectory(settingsFolderPath, desFolderPath, true);
 		}else{
-			Debug.LogError(forBuildFolderPath + " does not exist! settings are note copied to executable!");
+			Debug.LogError(settingsFolderPath + " does not exist! settings are not copied to executable!");
 			return;
 		}
 	}

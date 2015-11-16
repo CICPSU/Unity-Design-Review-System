@@ -22,7 +22,7 @@ public class DIRE : MonoBehaviour
     public GameObject defaultCam;
 
     /// <summary>
-    /// The GameObject that represents the origin of the display system.
+    /// The GameObject that represents the origin of the tracking system
     /// </summary>
     public GameObject DisplayOrigin = null;
 
@@ -142,8 +142,8 @@ public class DIRE : MonoBehaviour
 				//this.GetComponent<DisplaySetup>().calculateGeometricCenter (settings);
 			
 			//InitializeInputs();
-			trackingActive = GetComponent<ARTtrack>().checkTracking();
-			this.GetComponent<ARTtrack>().SetTracking(trackingActive);
+			GetComponent<ARTtrack>().InitializeTracking();
+			GetComponent<ARTtrack>().SetTracking(GetComponent<ARTtrack>().CheckTracking());
             InitializePreferences();
 		}
 	}
