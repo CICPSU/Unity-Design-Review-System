@@ -1,0 +1,152 @@
+-debug
+-target:library
+-nowarn:0169
+-out:'Temp/Assembly-CSharp.dll'
+-r:'/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll'
+-r:'Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll'
+-r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll'
+-r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll'
+-r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll'
+-r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll'
+-r:'/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll'
+-r:'/Applications/Unity/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll'
+-define:UNITY_5_2_2
+-define:UNITY_5_2
+-define:UNITY_5
+-define:ENABLE_NEW_BUGREPORTER
+-define:ENABLE_2D_PHYSICS
+-define:ENABLE_4_6_FEATURES
+-define:ENABLE_AUDIO
+-define:ENABLE_CACHING
+-define:ENABLE_CLOTH
+-define:ENABLE_DUCK_TYPING
+-define:ENABLE_FRAME_DEBUGGER
+-define:ENABLE_GENERICS
+-define:ENABLE_HOME_SCREEN
+-define:ENABLE_IMAGEEFFECTS
+-define:ENABLE_LIGHT_PROBES_LEGACY
+-define:ENABLE_MICROPHONE
+-define:ENABLE_MULTIPLE_DISPLAYS
+-define:ENABLE_PHYSICS
+-define:ENABLE_PLUGIN_INSPECTOR
+-define:ENABLE_SHADOWS
+-define:ENABLE_SINGLE_INSTANCE_BUILD_SETTING
+-define:ENABLE_SPRITES
+-define:ENABLE_TERRAIN
+-define:ENABLE_RAKNET
+-define:ENABLE_UNET
+-define:ENABLE_UNITYEVENTS
+-define:ENABLE_VR
+-define:ENABLE_WEBCAM
+-define:ENABLE_WWW
+-define:ENABLE_CLOUD_SERVICES
+-define:ENABLE_CLOUD_SERVICES_ADS
+-define:ENABLE_CLOUD_HUB
+-define:ENABLE_CLOUD_PROJECT_ID
+-define:ENABLE_CLOUD_SERVICES_ANALYTICS
+-define:ENABLE_CLOUD_SERVICES_UNET
+-define:ENABLE_CLOUD_SERVICES_BUILD
+-define:ENABLE_CLOUD_LICENSE
+-define:ENABLE_EDITOR_METRICS
+-define:ENABLE_REFLECTION_BUFFERS
+-define:INCLUDE_DYNAMIC_GI
+-define:INCLUDE_GI
+-define:INCLUDE_IL2CPP
+-define:INCLUDE_DIRECTX12
+-define:PLATFORM_SUPPORTS_MONO
+-define:RENDER_SOFTWARE_CURSOR
+-define:ENABLE_LOCALIZATION
+-define:ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION
+-define:UNITY_STANDALONE_OSX
+-define:UNITY_STANDALONE
+-define:ENABLE_SUBSTANCE
+-define:ENABLE_GAMECENTER
+-define:ENABLE_TEXTUREID_MAP
+-define:ENABLE_RUNTIME_GI
+-define:ENABLE_MOVIES
+-define:ENABLE_NETWORK
+-define:ENABLE_CRUNCH_TEXTURE_COMPRESSION
+-define:ENABLE_LOG_MIXED_STACKTRACE
+-define:ENABLE_UNITYWEBREQUEST
+-define:ENABLE_WEBSOCKET_HOST
+-define:ENABLE_MONO
+-define:ENABLE_PROFILER
+-define:DEBUG
+-define:TRACE
+-define:UNITY_ASSERTIONS
+-define:UNITY_EDITOR
+-define:UNITY_EDITOR_64
+-define:UNITY_EDITOR_OSX
+-define:CROSS_PLATFORM_INPUT
+'Assets/Archive/Lynn/DoNotOpen/IKnowYouWillOpenItAnyway.cs'
+'Assets/Archive/Lynn/ReadMe_Camera Instruction.cs'
+'Assets/Archive/MiniMap/MiniMap_Pro/GUIManager_Pro.cs'
+'Assets/Archive/ScriptableObjectSettingsStuff/SettingsMenuGenerator.cs'
+'Assets/Archive/ScriptableObjectSettingsStuff/TestSettings.cs'
+'Assets/Archive/ScriptableObjectSettingsStuff/WidgetSettingsBase.cs'
+'Assets/FullPackage/Scripts/ControlInstruction.cs'
+'Assets/FullPackage/Scripts/DIRE/Camera/FixedDisplay.cs'
+'Assets/FullPackage/Scripts/DIRE/Camera/WallDefinition.cs'
+'Assets/FullPackage/Scripts/DIRE/Content/ContentManager.cs'
+'Assets/FullPackage/Scripts/DIRE/Functionality/Navigation/MouseNavigator.cs'
+'Assets/FullPackage/Scripts/DIRE/Functionality/System/DIRE.cs'
+'Assets/FullPackage/Scripts/DIRE/Functionality/Utilities/ARTtrack.cs'
+'Assets/FullPackage/Scripts/DIRE/Functionality/Utilities/ArgumentProcessor.cs'
+'Assets/FullPackage/Scripts/DIRE/Functionality/Utilities/FileSearch.cs'
+'Assets/FullPackage/Scripts/DIRE/Loaders/DisplaySetup.cs'
+'Assets/FullPackage/Scripts/DIRE/MessageSystem/MessageHandler.cs'
+'Assets/FullPackage/Scripts/DIRE/MessageSystem/MessageListManager.cs'
+'Assets/FullPackage/Scripts/DIRE/MessageSystem/MessageTimer.cs'
+'Assets/FullPackage/Scripts/DIRE/Preferences/LinearUnits.cs'
+'Assets/FullPackage/Scripts/DIRE/Preferences/Preferences.cs'
+'Assets/FullPackage/Scripts/DIRE/Tools/IntersectionQuery.cs'
+'Assets/FullPackage/Scripts/Helper.cs'
+'Assets/FullPackage/Scripts/KeepOnLoad.cs'
+'Assets/FullPackage/Scripts/PostBuildProcess.cs'
+'Assets/FullPackage/Scripts/TP_Animator.cs'
+'Assets/FullPackage/Scripts/TP_Camera.cs'
+'Assets/FullPackage/Scripts/TP_Controller.cs'
+'Assets/FullPackage/Scripts/TP_InputManager.cs'
+'Assets/FullPackage/Scripts/TP_Motor.cs'
+'Assets/FullPackage/Scripts/XMLClasses/ChangesXML.cs'
+'Assets/FullPackage/Scripts/XMLClasses/DisplayXML.cs'
+'Assets/FullPackage/Scripts/XMLClasses/XmlIO.cs'
+'Assets/FullPackage/Widgets/MiniMap/MiniMapManager.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/AddPointButton.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/BookmarkCurrLocButton.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/CancelChangesButton.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/DeletePoint.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/EditBookmarkBut.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/EditButton.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/NewPoint.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIActiveButtonManager.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIButtonManager.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIClasses.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIInfo.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIInfoRef.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIMenuStateManager.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POI_GlobalVariables.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POI_ReferenceHub.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/PullCurrentTransform.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/SaveChangesButton.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/Teleport.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/CloseMarkerInfoCanvas.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/DetectMouseClick.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/MarkerInfoCanvasRefs.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/MarkerInfoCanvasSetup.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/ReadMe.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/ShowNameOnClick.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/Boolean_UI.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/FieldUIs.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/SingleUI.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/StringUI.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/Vector2UI.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/WidgetSettings.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/WidgetSettingsManager.cs'
+'Assets/SSAO Pro/Demo/Scripts/DemoUI.cs'
+'Assets/SSAO Pro/Demo/Scripts/RotateAround.cs'
+'Assets/SSAO Pro/Scripts/Attributes/ColorUsageAttribute.cs'
+'Assets/SSAO Pro/Scripts/Attributes/HelpURLAttribute.cs'
+'Assets/SSAO Pro/Scripts/SSAOPro.cs'
+-r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
+-r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Xml.Linq.dll'

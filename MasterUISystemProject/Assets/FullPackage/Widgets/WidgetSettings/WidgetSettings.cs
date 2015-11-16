@@ -101,3 +101,20 @@ public class MiniMapSettings : WidgetSettings {
 	{
 	}
 }
+
+public class POISettings : WidgetSettings {
+
+	public override void ApplySettings(){
+
+	}
+
+	public override void SetValues(object[] values){
+	
+	}
+
+	public override object[] GetValues()
+	{
+		return new object[]{};
+	}
+
+}
