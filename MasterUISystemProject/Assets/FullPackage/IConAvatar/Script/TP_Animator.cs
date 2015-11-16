@@ -11,8 +11,9 @@ public class TP_Animator: MonoBehaviour
 	
 	
 	public static TP_Animator Instance;  // This is just to create a reference to this class
-	
-	
+
+    public float avatarRotation;
+
 	public Direction MoveDirection {get; set;}
 
 	private Animator avatarAnimator;
@@ -30,6 +31,10 @@ public class TP_Animator: MonoBehaviour
 	}
 	
 	public void DetermineCurrentMoveDirection(){
+
+        //x is rotation right, y is rotation left
+        avatarAnimator.SetFloat("Direction", avatarRotation);
+
 		var forward = false;
 		var backward = false;
 		var left = false;
@@ -48,8 +53,9 @@ public class TP_Animator: MonoBehaviour
 			vertical = true;
 		
 		if(forward){
-			avatarAnimator.SetInteger("Direction", 0);
-			if (left)
+			//avatarAnimator.SetFloat("Direction", 0.0f);
+            avatarAnimator.SetFloat("Speed", TP_Motor.Instance.ForwardSpeed);
+            if (left)
 				MoveDirection = Direction.LeftForward;
 			else if (right)
 				MoveDirection = Direction.RightForward;
@@ -60,7 +66,8 @@ public class TP_Animator: MonoBehaviour
 		else 
 		if (backward)	
 		{
-			avatarAnimator.SetInteger("Direction", 180);
+			//avatarAnimator.SetFloat("Direction", 180.0f);
+            avatarAnimator.SetFloat("Speed", TP_Motor.Instance.BackwardSpeed);
 			if (left)
 				MoveDirection = Direction.LeftBackward;
 			else if (right)
@@ -71,15 +78,16 @@ public class TP_Animator: MonoBehaviour
 		}
 		else if(left){
 			MoveDirection = Direction.Left;
-			avatarAnimator.SetInteger("Direction", 270);
+			//avatarAnimator.SetFloat("Direction", 270.0f);
 		}
 		else if(right){
 			MoveDirection = Direction.Right;
-			avatarAnimator.SetInteger("Direction", 90);
+			//avatarAnimator.SetFloat("Direction", 90.0f);
 		}
 		else{
-		MoveDirection = Direction.Stationary;	
-			avatarAnimator.SetInteger("Direction", -1);
+    		MoveDirection = Direction.Stationary;
+            avatarAnimator.SetFloat("Speed", 0.0f);
+            //avatarAnimator.SetFloat("Direction", -1.0f);
 		}
 		if(vertical){
 			MoveDirection = Direction.Vertical;

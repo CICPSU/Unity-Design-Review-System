@@ -98,14 +98,18 @@ public class TP_Camera : MonoBehaviour {
 			mouseY -= Input.GetAxis("Mouse Y") * Y_MouseSensitivity;
 //			Debug.Log("mouse move" + Input.GetAxis("Mouse X") * X_MouseSensitivity);
 		}
-		
-//*******!!!!!!!!*********** allow pressing a,d to rotate the charater.		
+
+        //*******!!!!!!!!*********** allow pressing a,d to rotate the charater.	
+        /// avatarRotation less than 0 rotate left, greater than 0 rotate right
+        TP_Animator.Instance.avatarRotation = 0f;	
 		if(Input.GetKey(TP_InputManager.instance.rotateRight) || Input.GetKey(TP_InputManager.instance.rotateLeft)){	
 			if(Input.GetKey (TP_InputManager.instance.rotateRight)){
+                TP_Animator.Instance.avatarRotation = 90f;
 				mouseX += TP_InputManager.instance.roateKeySensitivity;
 			}
 			if(Input.GetKey (TP_InputManager.instance.rotateLeft)){
 				mouseX -= TP_InputManager.instance.roateKeySensitivity;
+                TP_Animator.Instance.avatarRotation = -90f;
 			}
 	//		Debug.Log ("Rotate: " + Input.GetAxis ("Rotate"));
 			TP_Motor.Instance.SnapCharaterWithCamera_Key();

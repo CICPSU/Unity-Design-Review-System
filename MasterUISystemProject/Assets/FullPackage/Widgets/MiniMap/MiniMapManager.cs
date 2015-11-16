@@ -7,7 +7,7 @@ public class MiniMapManager : MonoBehaviour {
 	public GameObject avatar;
 	public GameObject miniMapCam;
 	public RectTransform compassImage;
-	public Text zoomLabel;
+	public GUIText zoomLabel;
 	public GameObject miniMapCanvas;
 	public RectTransform miniMapRender;
 	public RectTransform miniMapMask;
