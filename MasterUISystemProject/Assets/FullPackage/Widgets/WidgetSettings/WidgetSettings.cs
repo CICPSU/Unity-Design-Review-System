@@ -108,16 +108,19 @@ public class MiniMapSettings : WidgetSettings {
 public class POISettings : WidgetSettings {
 
 	public override void ApplySettings(){
+        GameObject gO = GameObject.FindObjectOfType<POI_ReferenceHub>().gameObject;
 
-	}
+        gO.transform.GetChild(0).gameObject.SetActive(enabled);
+        gO.transform.GetChild(1).gameObject.SetActive(enabled);
+    }
 
 	public override void SetValues(object[] values){
-	
+        enabled = (bool)values[0];
 	}
 
 	public override object[] GetValues()
 	{
-		return new object[]{};
+		return new object[]{enabled};
 	}
 
 }

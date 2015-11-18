@@ -158,6 +158,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1 &871067847 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 143022, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+  m_PrefabInternal: {fileID: 1879848502}
+--- !u!114 &871067852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 871067847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0419e4103d4ca4692429ca478861f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterToDrop: {fileID: 0}
 --- !u!1 &1009427743
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,46 +354,6 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: .918693721
       objectReference: {fileID: 0}
-    - target: {fileID: 11408396, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
-      propertyPath: zoomLabel
-      value: 
-      objectReference: {fileID: 1879848504}
-    - target: {fileID: 9523812, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 347bfa3d559b66149b4aa4ad5308a855, type: 2}
-    - target: {fileID: 9523812, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
-      propertyPath: m_Avatar
-      value: 
-      objectReference: {fileID: 9000000, guid: 45aa3478c463b944fbd0991725e8c3eb, type: 3}
-    m_RemovedComponents:
-    - {fileID: 11456990, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1879848503 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 134082, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
-  m_PrefabInternal: {fileID: 1879848502}
---- !u!132 &1879848504
-GUIText:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1879848503}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Text: 
-  m_Anchor: 0
-  m_Alignment: 0
-  m_PixelOffset: {x: 0, y: 0}
-  m_LineSpacing: 1
-  m_TabSize: 4
-  m_Font: {fileID: 0}
-  m_Material: {fileID: 0}
-  m_FontSize: 0
-  m_FontStyle: 0
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
-  m_PixelCorrect: 1
-  m_RichText: 1
