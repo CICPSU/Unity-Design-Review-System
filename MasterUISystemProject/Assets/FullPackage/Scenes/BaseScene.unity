@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0419e4103d4ca4692429ca478861f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterToDrop: {fileID: 0}
+  characterToDrop: {fileID: 126960, guid: 5e506e65601e99f4bb6beeb6cb95d55f, type: 2}
 --- !u!1 &1009427743
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,6 +314,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 11410458, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 482954, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -353,6 +357,26 @@ Prefab:
     - target: {fileID: 22496680, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchorMax.y
       value: .918693721
+      objectReference: {fileID: 0}
+    - target: {fileID: 11410458, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11410458, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 11410458, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 871067852}
+    - target: {fileID: 11410458, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ToggleMode
+      objectReference: {fileID: 0}
+    - target: {fileID: 11410458, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}

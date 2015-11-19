@@ -25,15 +25,15 @@ public class ContentManager : MonoBehaviour
     void Awake()
     {
         if (DIRE.ContentOption.Count() >= 1)
-		{
-			BundlePath = DIRE.ContentOption[0];
-			LoadTrigger = true;
+        {
+            BundlePath = DIRE.ContentOption[0];
+            LoadTrigger = true;
 
-			if (DIRE.ContentOption.Count() >= 2)
-				SceneName = DIRE.ContentOption[1];
-		}
+            if (DIRE.ContentOption.Count() >= 2)
+                SceneName = DIRE.ContentOption[1];
+        }
         else
-            MessageHandler.Message("System", "No dynamic content requested");
+            Debug.Log("No dynamic content requested");
     }
 
     void Update()
@@ -63,40 +63,40 @@ public class ContentManager : MonoBehaviour
             /// Load plugins
             foreach (string plugin in Directory.GetFiles(directory, "*.dll"))
             {
-				MessageHandler.Message("System", "Attempting to load: " + plugin );
+                Debug.Log("Attempting to load: " + plugin);
                 System.Reflection.Assembly assembly =
                         System.Reflection.Assembly.LoadFrom(plugin);
-				MessageHandler.Message("System", "Assembly loaded: " + assembly.FullName );
+                Debug.Log("Assembly loaded: " + assembly.FullName);
 			}
         }
 
         /// Load asset bundle
-		MessageHandler.Message("System", "Loading asset bundle: " + path);
+		Debug.Log("Loading asset bundle: " + path);
         //TODO: change to 5.2 api AssetBundle bundle = AssetBundle.LoadFromFile(path);
 
-		//TODO: uncomment scenes = bundle.GetAllScenePaths();
-		if ( scenes != null && scenes.Length > 0 )
-		{
-			string sceneList = "";
-			foreach( string s in scenes )
-				sceneList += s + Environment.NewLine;
+        //TODO: uncomment scenes = bundle.GetAllScenePaths();
+        if (scenes != null && scenes.Length > 0)
+        {
+            string sceneList = "";
+            foreach (string s in scenes)
+                sceneList += s + Environment.NewLine;
 
-			MessageHandler.Message ("System", "Scenes: " + Environment.NewLine + sceneList );
+            Debug.Log("Scenes: " + Environment.NewLine + sceneList);
 
-	    	if ( scene == null )
-				scene = Path.GetFileNameWithoutExtension( scenes[0] );
-		}
-		else
-			MessageHandler.Message("System", "Asset bundle contains no scenes");
+            if (scene == null)
+                scene = Path.GetFileNameWithoutExtension(scenes[0]);
+        }
+        else
+            Debug.Log("Asset bundle contains no scenes");
 
-		/// Load scene
-		if ( scene == null )
-			MessageHandler.Message("System", "No scene to load.");
-		else
-		{
-			MessageHandler.Message ("System", "Loading scene: " + scene );
-	        Application.LoadLevel(scene);
-		}
+        /// Load scene
+        if (scene == null)
+            Debug.Log("No scene to load.");
+        else
+        {
+            Debug.Log("Loading scene: " + scene);
+            Application.LoadLevel(scene);
+        }
 
         if (LoadPreferencesWithContent)
         {

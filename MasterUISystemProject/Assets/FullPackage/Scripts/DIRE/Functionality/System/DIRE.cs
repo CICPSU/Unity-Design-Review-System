@@ -102,7 +102,7 @@ public class DIRE : MonoBehaviour
 	{
         /// See if the DIRE instance has been set.  Only one may be registered.
 		if (DIRE.Instance != null)
-            MessageHandler.Message("Debug", "Multiple instances of DIRE script");
+            Debug.Log("Multiple instances of DIRE script");
         else
         {
             /// register the DIRE instance.  Set so that it will remain when scenes are loaded.
@@ -124,28 +124,25 @@ public class DIRE : MonoBehaviour
             foreach (string path in searchPaths)
                 SetupSearch.Add(Path.GetFullPath(path));
 
-            MessageHandler.Message("Debug", "Unified Search Path: " + Environment.NewLine + SetupSearch, null);
+            Debug.Log("Unified Search Path: " + Environment.NewLine + SetupSearch);
 
             /// Load display settings from definition file
-            //DisplaySettings settings = this.GetComponent<DisplaySetup>().LoadDisplayDefinition();
             DisplaySettings settings = LoadDisplayDefinition();
 
             /// Initialize DIRE display system.
-            //this.GetComponent<DisplaySetup>().InitializeDisplay(settings);
             InitializeDisplay(settings);
             if (!(settings == null || settings.screens.Count <= 0))
-            { 
+            {
                 calculateGeometricCenter(settings);
                 if (defaultCam != null)
                     defaultCam.SetActive(false);
             }
-				//this.GetComponent<DisplaySetup>().calculateGeometricCenter (settings);
-			
-			//InitializeInputs();
-			GetComponent<ARTtrack>().InitializeTracking();
-			GetComponent<ARTtrack>().SetTracking(GetComponent<ARTtrack>().CheckTracking());
+
+            //InitializeInputs();
+            GetComponent<ARTtrack>().InitializeTracking();
+            GetComponent<ARTtrack>().SetTracking(GetComponent<ARTtrack>().CheckTracking());
             InitializePreferences();
-		}
+        }
 	}
 	/*
 	void InitializeInputs()
@@ -178,8 +175,6 @@ public class DIRE : MonoBehaviour
     /// </summary>
     void InitializePreferences()
     {
-        // XmlIO.Save(new Preferences(), "C:\\users\\mew9\\Desktop\\Default.pref");
-
 		//XmlIO.Save(new Preferences(), "c:/users/kal5544/desktop/minimapintegration/settings/Default.pref");
 
         // Get list of preference file
@@ -227,7 +222,7 @@ public class DIRE : MonoBehaviour
 		try
         {
             /// Use FileSearch to display path list for the requested display file.
-			MessageHandler.Message("Debug", "Searching for " + displayToLoad);
+			Debug.Log("Searching for " + displayToLoad);
 
             List<string> displayPaths = DIRE.SetupSearch.FindFile(displayToLoad);
 
@@ -238,15 +233,15 @@ public class DIRE : MonoBehaviour
             /// load the file on the last path found.  (Highest order of precedence.)
 			string loadPath = displayPaths.Last();
 
-            MessageHandler.Message("Debug", "Loading: " + loadPath);
+            Debug.Log("Loading: " + loadPath);
             settings = XmlIO.Load(loadPath, typeof(DisplaySettings)) as DisplaySettings;
         }
         catch (Exception ex)
         {
             /// Print debug if an exception is thrown.
-			MessageHandler.Message("Debug", ex.Message, null, Color.red, null);
-            MessageHandler.Message("Debug", "Unable to load display: " + displayToLoad);
-            MessageHandler.Message("Debug", "Using internal defaults");
+			Debug.Log(ex.Message);
+            Debug.Log("Unable to load display: " + displayToLoad);
+            Debug.Log("Using internal defaults");
         }
 
         return (settings);
@@ -283,8 +278,7 @@ public class DIRE : MonoBehaviour
         /// Abort if null settings were passed in.  Just use the cameras defined in the project.
 		if (settings == null || settings.screens.Count <= 0)
         {
-            //Debug.LogWarning( "No screens defined, reverting to default display mode" );
-            MessageHandler.Message("Debug", "No screens defined, reverting to default display mode");
+            Debug.LogWarning( "No screens defined, reverting to default display mode" );
             return;
         }
 
@@ -292,37 +286,19 @@ public class DIRE : MonoBehaviour
         /// replaced by cameras defined in the display file.
 		Camera[] camsToDestroy = GameObject.FindObjectsOfType(typeof(Camera)) as Camera[];
 
-        /// Set screen position and size
-		MessageHandler.Message("Debug", "Screens: " + settings.screens.Count);
-        MessageHandler.Message("Debug", "Setting Window Position: " +
-                            "(" + settings.X + ", " + settings.Y + ") " +
-                            settings.Width + "x" + settings.Height);
-        //SetPosition( settings.X, settings.Y, settings.Width, settings.Height );
-
         /// Find the GameObject that will act as the local origin for Walls
         /// This assumes a fixed position display (projection screen, monitor, etc.) in which the 
         /// users head position will change with regard to the walls.  For something like a HMD,
         /// the head itself would be the display origin.
         GameObject wallsParent = DIRE.Instance.DisplayOrigin;
-        MessageHandler.Message("Debug", "Wall Parent: " + wallsParent);
+        Debug.Log("Wall parent: " + wallsParent);
 
         /// Create and initialize game objects to represent each eye.
         GameObject leftEyeObj = null;
         GameObject rightEyeObj = null;
 
-       /* if (IsStereoMode)
-        {
-            Transform eyeParent = DIRE.Instance.Head.transform;
-            float eyeOffset = baseCam.stereoSeparation / 2.0f;
-
-            leftEyeObj = CreateEyeObject(eyeParent, new Vector3(-eyeOffset, 0, 0), "Left Eye");
-            rightEyeObj = CreateEyeObject(eyeParent, new Vector3(eyeOffset, 0, 0), "Right Eye");
-        }
-        else
-        {*/
-            leftEyeObj = DIRE.Instance.Head;
-            rightEyeObj = DIRE.Instance.Head;
-        //}
+        leftEyeObj = DIRE.Instance.Head;
+        rightEyeObj = DIRE.Instance.Head;
 
         // Instantiate a camera for every screen from the display settings file.  
         for (int i = 0; i < settings.screens.Count; i++)
@@ -365,14 +341,6 @@ public class DIRE : MonoBehaviour
             //fdScript.rightEyeObj = (sInfo.SwapEyes ? leftEyeObj : rightEyeObj );
             fdScript.WallObject = wallObject;
         }
-
-        // This foreach destroys all of the non-DIRE cameras in the scene. 
-        // This is performed after the new cameras are set up to prevent a blank screen while the new cameras are set up.
-        /*foreach(Camera obj in camsToDestroy)
-		{
-			if (obj.gameObject.tag != "DIRE")
-				Destroy(obj.gameObject);
-		}*/
     }
 
 
