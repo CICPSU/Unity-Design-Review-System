@@ -54,7 +54,7 @@ public class IntersectionQuery : MonoBehaviour {
 		else
 		*/
 		lineRenderer.SetPosition(0, transform.position);
-		lineRenderer.SetPosition (1, transform.forward*100);
+		lineRenderer.SetPosition (1, transform.position + transform.forward*100);
 
 	}
 }

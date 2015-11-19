@@ -18,7 +18,9 @@ public class CharacterDropper : MonoBehaviour {
     {
         dropModeOn = !dropModeOn;
         if (dropModeOn)
-            tmpChar = Instantiate(characterToDrop,dropLocation, Quaternion.identity) as GameObject;
+			tmpChar = Instantiate (characterToDrop, dropLocation, Quaternion.identity) as GameObject;
+		else
+			Destroy (tmpChar);
     }
 
     void Update()
@@ -26,16 +28,16 @@ public class CharacterDropper : MonoBehaviour {
         /// here is where we will do the raycast and show a temporary character where it will be dropped
         /// we will have a reference to the temporary character and update its position to wherever the raycast from the mouse is pointing
         /// when "dropping" we will just stop updating the position
-        /// need to make sure the temporary character is deleted/removed whenever the dropcharacter button is disabled (this script)
-        mouseCam = FindMouseCamera();
-        if (mouseCam != null)
-        {
-            Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit);
-            dropLocation = hit.point;
-        }
-            
+        /// need to make sure the temporary character is deleted/removed whenever the dropcharacter button is disabled (this script)   
         if (dropModeOn)
         {
+			mouseCam = FindMouseCamera();
+			if (mouseCam != null)
+			{
+				Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit);
+				dropLocation = hit.point;
+			}
+
             tmpChar.transform.position = dropLocation;
             if (Input.GetKeyDown(KeyCode.KeypadEnter))
             {

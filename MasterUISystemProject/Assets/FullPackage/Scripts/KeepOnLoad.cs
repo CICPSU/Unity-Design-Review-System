@@ -7,7 +7,7 @@ public class KeepOnLoad : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		firstCreated = GameObject.FindGameObjectsWithTag ("KeepOnLoad").Length == 1;
+		firstCreated = (GameObject.FindGameObjectsWithTag ("KeepOnLoad").Length == 1);
 		if (!firstCreated)
 			Destroy (gameObject);
 		gameObject.SetActive (firstCreated);
