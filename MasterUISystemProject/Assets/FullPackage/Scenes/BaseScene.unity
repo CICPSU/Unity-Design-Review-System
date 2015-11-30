@@ -353,6 +353,10 @@ Prefab:
         'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'mixamo.com'\n\tFrom
         animation clip 'mixamo.com'"
       objectReference: {fileID: 0}
+    - target: {fileID: 11498930, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
   m_IsPrefabParent: 0
