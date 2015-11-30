@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using System.Xml;
 using System.Text;
 using System.Reflection;
+using System.Linq;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -24,6 +25,8 @@ public class WidgetSettingsManager : MonoBehaviour{
 	private Type activeSettingsFileType;
 
 	private List<string> loadedFiles = new List<string>();
+    private List<Type> settingsTypes = new List<Type>();
+    private List<Type> loadedTypes = new List<Type>();
 
 	void Start()
 	{
@@ -33,6 +36,11 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 	public void LoadSettingsFiles()
 	{
+        settingsTypes = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
+                         from type in assembly.GetTypes()
+                         where type.IsSubclassOf(typeof(WidgetSettings))
+                         select type).ToList<Type>();
+
 		if (string.IsNullOrEmpty (settingsFileFolderPath)) 
 			settingsFileFolderPath = Application.dataPath + "/FullPackage/Settings";	
 
@@ -43,12 +51,17 @@ public class WidgetSettingsManager : MonoBehaviour{
 		{
 			string tmpFile = file.Substring(file.LastIndexOf("\\") + 1);
 			Type fileType = System.Type.GetType(tmpFile.Substring(0,tmpFile.Length - 5));
+            loadedTypes.Add(fileType);
 			WidgetSettings loadedFile = XmlIO.Load(file, fileType) as WidgetSettings;
 			loadedFile.ApplySettings();
 			loadedFiles.Add(tmpFile);
 			Debug.Log("loading: " + tmpFile);
-
 		}
+        foreach(Type missingType in (settingsTypes.Except(loadedTypes)))
+        {
+            WidgetSettings settingObj = Activator.CreateInstance(missingType) as WidgetSettings;
+            XmlIO.Save(settingObj, settingsFileFolderPath + "\\" + missingType.Name + ".sets");
+        }
 
 	}
 

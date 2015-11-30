@@ -8,25 +8,36 @@ public class WidgetCanvasManager : MonoBehaviour {
     public GameObject chooseWidgetPanel;
     public GameObject displaySettingsPanel;
     public GameObject errorWindow;
-    public GameObject openMenu;
-    public GameObject closeMenu;
 
-    public void CloseAll()
+    private bool menuOpen = false;
+
+    void Start()
+    {
+        CloseAll();
+    }
+
+    public void ToggleMenu()
+    {
+        if (menuOpen)
+            CloseAll();
+        else
+            OpenMenu();
+    }
+
+    private void CloseAll()
     {
         toggleSettingsMenu.SetActive(false);
         dropCharacter.SetActive(false);
         chooseWidgetPanel.SetActive(false);
         displaySettingsPanel.SetActive(false);
         errorWindow.SetActive(false);
-        closeMenu.SetActive(false);
-        openMenu.SetActive(true);
+        menuOpen = false;
     }
 
-    public void OpenMenu()
+    private void OpenMenu()
     {
         toggleSettingsMenu.SetActive(true);
         dropCharacter.SetActive(true);
-        closeMenu.SetActive(true);
-        openMenu.SetActive(false);
+        menuOpen = true;
     }
 }

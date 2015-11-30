@@ -93,7 +93,6 @@ public class DIRE : MonoBehaviour
     public static FileSearch SetupSearch;
     public static String DisplayExtension = ".display";
     public static String InputExtension = ".input";
-    public static String PreferenceExtension = ".pref";
 
     /// <summary>
     /// Unity awake function.  Initialize values for the DIRE system,
@@ -141,7 +140,6 @@ public class DIRE : MonoBehaviour
             //InitializeInputs();
             GetComponent<ARTtrack>().InitializeTracking();
             GetComponent<ARTtrack>().SetTracking(GetComponent<ARTtrack>().CheckTracking());
-            InitializePreferences();
         }
 	}
 	/*
@@ -169,23 +167,6 @@ public class DIRE : MonoBehaviour
 	}
 
 */
-
-    /// <summary>
-    /// Load all preference files found
-    /// </summary>
-    void InitializePreferences()
-    {
-		//XmlIO.Save(new Preferences(), "c:/users/kal5544/desktop/minimapintegration/settings/Default.pref");
-
-        // Get list of preference file
-        IEnumerable<string> prefFiles =
-            (from f in DIRE.SetupSearch.FindFile("*" + DIRE.PreferenceExtension)
-             select f);
-
-        // try to load each file.
-        foreach (string path in prefFiles)
-            Preferences.Load(path);
-    }
 
     /// <summary>
     /// Unity per frame update method.  Exit application if Escape is pressed.

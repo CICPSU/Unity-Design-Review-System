@@ -13,7 +13,6 @@ using System.IO;
 public class ContentManager : MonoBehaviour
 {
     public bool LoadPluginsWithContent = false;
-    public bool LoadPreferencesWithContent = true;
 
 	public string BundlePath = null;
 	public string SceneName = null;
@@ -96,14 +95,6 @@ public class ContentManager : MonoBehaviour
         {
             Debug.Log("Loading scene: " + scene);
             Application.LoadLevel(scene);
-        }
-
-        if (LoadPreferencesWithContent)
-        {
-            /// Load all preference files in content directory
-            /// No guarentee on load order, so conflicting preferences are bad
-            foreach (string pref in Directory.GetFiles(directory, "*" + DIRE.PreferenceExtension))
-                Preferences.Load(pref);
         }
 	}
 }

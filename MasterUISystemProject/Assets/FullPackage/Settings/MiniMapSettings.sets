@@ -2,8 +2,8 @@
 <MiniMapSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <enabled>true</enabled>
   <rectPos>
-    <x>11</x>
-    <y>33</y>
+    <x>0</x>
+    <y>0</y>
   </rectPos>
   <mapPortionOfScreen>0.2</mapPortionOfScreen>
   <orthoCamRadiusFeet>30</orthoCamRadiusFeet>
