@@ -66,8 +66,7 @@ public class TP_Animator: MonoBehaviour
 		else 
 		if (backward)	
 		{
-			//avatarAnimator.SetFloat("Direction", 180.0f);
-            avatarAnimator.SetFloat("Speed", TP_Motor.Instance.BackwardSpeed);
+            avatarAnimator.SetFloat("Speed", -1f * TP_Motor.Instance.BackwardSpeed);
 			if (left)
 				MoveDirection = Direction.LeftBackward;
 			else if (right)
@@ -78,16 +77,15 @@ public class TP_Animator: MonoBehaviour
 		}
 		else if(left){
 			MoveDirection = Direction.Left;
-			//avatarAnimator.SetFloat("Direction", 270.0f);
+			avatarAnimator.SetFloat("Strafe", -1.0f);
 		}
 		else if(right){
 			MoveDirection = Direction.Right;
-			//avatarAnimator.SetFloat("Direction", 90.0f);
+			avatarAnimator.SetFloat("Strafe", 1.0f);
 		}
 		else{
     		MoveDirection = Direction.Stationary;
             avatarAnimator.SetFloat("Speed", 0.0f);
-            //avatarAnimator.SetFloat("Direction", -1.0f);
 		}
 		if(vertical){
 			MoveDirection = Direction.Vertical;
