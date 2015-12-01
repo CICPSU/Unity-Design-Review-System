@@ -291,6 +291,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1 &1369085307 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 153356, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+  m_PrefabInternal: {fileID: 1861601496}
+--- !u!95 &1369085309
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1369085307}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8b6431b04604ccd4d910c9509d9c7433, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1001 &1861601496
 Prefab:
   m_ObjectHideFlags: 0
@@ -344,18 +365,27 @@ Prefab:
       objectReference: {fileID: 9100000, guid: 943b051420a155940ac9795098734ad3, type: 2}
     - target: {fileID: 9523812, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_WarningMessage
-      value: "\nBinding warning: Some transforms are animated by both a Humanoid animation
-        clip and a Generic animation clip. Only the Humanoid clip will be applied
-        on those transforms.\n\tTransform 'mixamorig:Hips'\n\tTransform 'mixamorig:LeftFoot'\n\tTransform
-        'mixamorig:LeftHandThumb2'\n\tTransform 'mixamorig:LeftHandIndex1'\n\tTransform
-        'mixamorig:LeftHandPinky2'\n\tTransform 'mixamorig:RightHandRing2'\n\tTransform
-        'mixamorig:Spine1'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:LeftHandThumb3'\n\tTransform
-        'mixamorig:RightArm'\n\tand more ...\n\tFrom animation clip 'mixamo.com'\n\tFrom
-        animation clip 'mixamo.com'"
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 11498930, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11411534, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_Transition
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 22451020, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 22451020, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 22451020, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
