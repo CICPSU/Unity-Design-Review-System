@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
 public class CharacterDropper : MonoBehaviour {
 
-    public GameObject characterToDrop;
-
+    private List<GameObject> loadedCharacters = new List<GameObject>();
     private GameObject tmpChar;
 
     private bool dropModeOn;
@@ -18,9 +18,28 @@ public class CharacterDropper : MonoBehaviour {
     {
         dropModeOn = !dropModeOn;
         if (dropModeOn)
-			tmpChar = Instantiate (characterToDrop, dropLocation, Quaternion.identity) as GameObject;
-		else
-			Destroy (tmpChar);
+        {
+            tmpChar = CreateRandomChar();
+            GetComponent<Image>().color = Color.red;
+        }
+        else
+        {
+            Destroy(tmpChar);
+            GetComponent<Image>().color = Color.white;
+        }
+    }
+
+    private GameObject CreateRandomChar()
+    {
+        return Instantiate(loadedCharacters[(int)Random.Range(0, loadedCharacters.Count - 1)], dropLocation, Quaternion.identity) as GameObject;
+       
+    }
+
+    void Start()
+    {
+        Object[] tmpArray = Resources.LoadAll("Characters/");
+        foreach(Object obj in tmpArray)
+            loadedCharacters.Add(obj as GameObject);
     }
 
     void Update()
@@ -38,17 +57,16 @@ public class CharacterDropper : MonoBehaviour {
 				dropLocation = hit.point;
 			}
 
-            tmpChar.transform.position = dropLocation;
-            if (Input.GetKeyDown(KeyCode.KeypadEnter))
-            {
-                tmpChar = null;
-            }
+            if(tmpChar != null)
+                tmpChar.transform.position = dropLocation;
+
+            if (Input.GetMouseButtonDown(1))
+                tmpChar = CreateRandomChar();
         }
     }
 
     private Camera FindMouseCamera()
     {
-        Camera returnCam = null;
         List<Camera> camList = (from cam in GameObject.FindObjectsOfType<Camera>() where cam.targetTexture == null select cam).ToList();
         foreach(Camera cam in camList)
         {
