@@ -376,14 +376,6 @@ Prefab:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 22451020, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 22451020, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 22451020, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_SizeDelta.y
       value: 50
       objectReference: {fileID: 0}
