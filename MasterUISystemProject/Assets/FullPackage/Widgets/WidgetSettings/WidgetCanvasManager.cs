@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class WidgetCanvasManager : MonoBehaviour {
@@ -8,6 +9,7 @@ public class WidgetCanvasManager : MonoBehaviour {
     public GameObject chooseWidgetPanel;
     public GameObject displaySettingsPanel;
     public GameObject errorWindow;
+    public GameObject toggleMenuButton;
 
     private bool menuOpen = false;
 
@@ -26,6 +28,8 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     private void CloseAll()
     {
+        toggleMenuButton.GetComponent<Animator>().SetBool("Open", false);
+        toggleMenuButton.GetComponent<Animator>().SetTrigger("Normal");
         toggleSettingsMenu.SetActive(false);
         dropCharacter.SetActive(false);
         chooseWidgetPanel.SetActive(false);
@@ -36,6 +40,7 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     private void OpenMenu()
     {
+        toggleMenuButton.GetComponent<Animator>().SetBool("Open", true);
         toggleSettingsMenu.SetActive(true);
         dropCharacter.SetActive(true);
         menuOpen = true;
