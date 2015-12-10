@@ -135,6 +135,12 @@ public class CharacterDropper : MonoBehaviour {
 
             if (Input.GetMouseButtonDown(1))
                 selectedChar = GetCharacter();
+
+            if (Input.GetMouseButtonDown(2))
+            {
+                Destroy(selectedChar);
+                selectedChar = GetCharacter();
+            }
         }
     }
 
