@@ -8,8 +8,7 @@ public class TP_Animator: MonoBehaviour
 		Stationary, Forward, Backward, Left, Right, 
 		LeftForward, RightForward, LeftBackward, RightBackward, Vertical
 	}
-	
-	
+
 	public static TP_Animator Instance;  // This is just to create a reference to this class
 
     public float avatarRotation;
@@ -27,7 +26,8 @@ public class TP_Animator: MonoBehaviour
 	}
 	
 	void Update(){
-		
+        if (Input.GetKeyDown(KeyCode.Z))
+            avatarAnimator.SetBool("Sitting", !avatarAnimator.GetBool("Sitting"));
 	}
 	
 	public void DetermineCurrentMoveDirection(){
