@@ -53,8 +53,8 @@ public class TP_Animator: MonoBehaviour
 			vertical = true;
 		
 		if(forward){
-			//avatarAnimator.SetFloat("Direction", 0.0f);
             avatarAnimator.SetFloat("Speed", TP_Motor.Instance.ForwardSpeed);
+            avatarAnimator.SetBool("Strafe", false);
             if (left)
 				MoveDirection = Direction.LeftForward;
 			else if (right)
@@ -67,7 +67,8 @@ public class TP_Animator: MonoBehaviour
 		if (backward)	
 		{
             avatarAnimator.SetFloat("Speed", -1f * TP_Motor.Instance.BackwardSpeed);
-			if (left)
+            avatarAnimator.SetBool("Strafe", false);
+            if (left)
 				MoveDirection = Direction.LeftBackward;
 			else if (right)
 				MoveDirection = Direction.RightBackward;
@@ -77,16 +78,19 @@ public class TP_Animator: MonoBehaviour
 		}
 		else if(left){
 			MoveDirection = Direction.Left;
-			avatarAnimator.SetFloat("Strafe", -1.0f);
+			avatarAnimator.SetBool("Strafe", true);
+            avatarAnimator.SetFloat("Direction", -1f);
 		}
 		else if(right){
 			MoveDirection = Direction.Right;
-			avatarAnimator.SetFloat("Strafe", 1.0f);
-		}
+            avatarAnimator.SetBool("Strafe", true);
+            avatarAnimator.SetFloat("Direction", 1f);
+        }
 		else{
     		MoveDirection = Direction.Stationary;
             avatarAnimator.SetFloat("Speed", 0.0f);
-		}
+            avatarAnimator.SetBool("Strafe", false);
+        }
 		if(vertical){
 			MoveDirection = Direction.Vertical;
 		}
