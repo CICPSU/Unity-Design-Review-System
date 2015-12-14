@@ -33,7 +33,8 @@ public class AvatarSettings : WidgetSettings
 
     public override void ApplySettings()
     {
-        DIRE.Instance.DisplayOrigin.GetComponent<ARTtrack>().SetTracking(trackingEnabled);
+		if(DIRE.Instance.DisplayOrigin.activeSelf)
+			DIRE.Instance.DisplayOrigin.GetComponent<ARTtrack>().SetTracking(trackingEnabled);
         TP_Motor tpMotorScript = GameObject.FindObjectOfType<TP_Motor>();
         tpMotorScript.ForwardSpeed = avatarForwardSpeed;
         tpMotorScript.BackwardSpeed = avatarBackwardSpeed;
