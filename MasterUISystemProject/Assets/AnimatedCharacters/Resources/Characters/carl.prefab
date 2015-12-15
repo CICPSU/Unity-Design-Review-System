@@ -144,7 +144,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 482756}
   - 95: {fileID: 9504540}
-  - 136: {fileID: 13638586}
   - 195: {fileID: 19571540}
   - 114: {fileID: 11417492}
   - 114: {fileID: 11426038}
@@ -2626,19 +2625,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navAgent: {fileID: 19571540}
   animController: {fileID: 9504540}
---- !u!136 &13638586
-CapsuleCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115254}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  m_Radius: 0.3
-  m_Height: 1.8
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!137 &13797708
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

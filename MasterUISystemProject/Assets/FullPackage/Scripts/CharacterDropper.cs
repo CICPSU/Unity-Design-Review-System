@@ -115,7 +115,7 @@ public class CharacterDropper : MonoBehaviour {
             if (selectedChar == null)
                 selectedChar = GetCharacter();
 
-            if (selectedChar.name != modelToggleGroup.ActiveToggles().ToList()[0].name && !randomToggle.isOn)
+            if (selectedChar.name != modelToggleGroup.ActiveToggles().ToList()[0].name + "(Clone)" && !randomToggle.isOn)
             {
                 Destroy(selectedChar);
                 selectedChar = GetCharacter();
