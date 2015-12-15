@@ -279,6 +279,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 493700}
   - 95: {fileID: 9588960}
+  - 136: {fileID: 13615316}
   m_Layer: 0
   m_Name: Michael
   m_TagString: Untagged
@@ -2310,7 +2311,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 118770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.991621, y: -9.110395e-17, z: 4.1029572}
+  m_LocalPosition: {x: 3.5145118, y: 4.7739325, z: -4.393844}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 456470}
@@ -2372,6 +2373,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!136 &13615316
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118770}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!137 &13765196
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2502,6 +2516,10 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 943b051420a155940ac9795098734ad3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 118770}

@@ -144,6 +144,10 @@ GameObject:
   m_Component:
   - 4: {fileID: 482756}
   - 95: {fileID: 9504540}
+  - 136: {fileID: 13638586}
+  - 195: {fileID: 19571540}
+  - 114: {fileID: 11417492}
+  - 114: {fileID: 11426038}
   m_Layer: 0
   m_Name: carl
   m_TagString: Untagged
@@ -2349,7 +2353,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.040035423, y: -8.4497386e-17, z: 3.8054237}
+  m_LocalPosition: {x: -2.0541468, y: 2.748849, z: 1.285305}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 463704}
@@ -2594,6 +2598,47 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11417492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b22b66311811ea04cb8f8f0190b3f4a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  localWanderRadius: 10
+  localWanderCenter: {x: 0, y: 0, z: 0}
+  localWanderCenterRef: {fileID: 0}
+  mode: 1
+--- !u!114 &11426038
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7e6711f04645f84090374594e9f5ed5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navAgent: {fileID: 19571540}
+  animController: {fileID: 9504540}
+--- !u!136 &13638586
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  m_Radius: 0.3
+  m_Height: 1.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.9, z: 0}
 --- !u!137 &13797708
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2708,6 +2753,26 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: -0.06647861, z: 0.020409875}
     m_Extent: {x: 0.9590517, y: 0.8973211, z: 0.17968577}
   m_DirtyAABB: 0
+--- !u!195 &19571540
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115254}
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Speed: 2
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 0
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -2719,6 +2784,30 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 943b051420a155940ac9795098734ad3, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_AutoBraking
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: navAgent
+      value: 
+      objectReference: {fileID: 19571540}
+    - target: {fileID: 0}
+      propertyPath: animController
+      value: 
+      objectReference: {fileID: 9504540}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 115254}
