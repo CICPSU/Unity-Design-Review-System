@@ -1168,7 +1168,7 @@ MonoBehaviour:
   localWanderRadius: 10
   localWanderCenter: {x: 0, y: 0, z: 0}
   localWanderCenterRef: {fileID: 0}
-  mode: 1
+  mode: 2
 --- !u!137 &13701486
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1280,6 +1280,10 @@ Prefab:
       propertyPath: animController
       value: 
       objectReference: {fileID: 9534152}
+    - target: {fileID: 0}
+      propertyPath: mode
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 153870}
