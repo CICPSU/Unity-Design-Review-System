@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<InputMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <Devices xsi:type="Key">
+    <Name>Forward</Name>
+    <KeyCode>W</KeyCode>
+    <Trigger>Value</Trigger>
+    <Sequence>
+      <Transform>AsFloat</Transform>
+    </Sequence>
+  </Devices>
+
+  <Devices xsi:type="Key">
+    <Name>Forward</Name>
+    <KeyCode>S</KeyCode>
+    <Trigger>Value</Trigger>
+    <Sequence>
+      <Transform>AsFloat</Transform>     
+      <Transform>Scale -1</Transform>
+    </Sequence>
+  </Devices>
+
+  <Devices xsi:type="Key">
+    <Name>Right</Name>
+    <KeyCode>D</KeyCode>
+    <Trigger>Value</Trigger>
+    <Sequence>
+      <Transform>AsFloat</Transform>
+    </Sequence>
+  </Devices>
+
+  <Devices xsi:type="Key">
+    <Name>Right</Name>
+    <KeyCode>A</KeyCode>
+    <Trigger>Value</Trigger>
+    <Sequence>
+      <Transform>AsFloat</Transform>     
+      <Transform>Scale -1</Transform>
+    </Sequence>
+  </Devices>
+
+  <Devices xsi:type="Key">
+    <Name>ToolNext</Name>
+    <KeyCode>N</KeyCode>
+    <Trigger>Press</Trigger>
+  </Devices>
+
+  <Devices xsi:type="Key">
+    <Name>ToolTrigger0</Name>
+    <KeyCode>Return</KeyCode>
+    <Trigger>Press</Trigger>
+  </Devices>
+
+  <Devices xsi:type="Key">
+    <Name>ToolTrigger1</Name>
+    <KeyCode>Backslash</KeyCode>
+    <Trigger>Press</Trigger>
+  </Devices>
+
+  <Devices xsi:type="Key">
+    <Name>NextBookmark</Name>
+    <KeyCode>B</KeyCode>
+    <Trigger>Press</Trigger>
+  </Devices>
+
+</InputMap>

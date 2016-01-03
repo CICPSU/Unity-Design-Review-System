@@ -33,8 +33,17 @@ public class InputManager : MonoBehaviour
 	
 	void Start()
 	{
+
+        InputFiles = (from f in Directory.GetFiles(Application.dataPath + "/FullPackage/Settings").ToList<string>()
+                      where f.Substring(f.Length - 6) == ".input"
+                      select f).ToList<string>();
+        Debug.Log(InputFiles);
+        foreach (string path in InputFiles)
+            LoadMap(path);
+        /*
 		if ( LoadDefinitionFiles )
 			foreach( string path in InputFiles )
 				LoadMap( path );
-	}
+                */
+    }
 }

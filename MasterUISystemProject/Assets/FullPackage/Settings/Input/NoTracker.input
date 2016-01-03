@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<InputMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <Devices xsi:type="StaticTracker">
+    <Sequence />
+    <Name>Head Tracker</Name>
+    <Position>
+      <x>0</x>
+      <y>1.7</y>
+      <z>0</z>
+    </Position>
+    <Rotation>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </Rotation>
+  </Devices>
+
+  <Devices xsi:type="StaticTracker">
+    <Sequence />
+    <Name>Hand Tracker</Name>
+    <Position>
+      <x>.5</x>
+      <y>1.2</y>
+      <z>.5</z>
+    </Position>
+    <Rotation>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </Rotation>
+  </Devices>
+
+</InputMap>

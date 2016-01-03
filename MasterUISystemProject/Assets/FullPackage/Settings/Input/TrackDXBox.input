@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<InputMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <Devices xsi:type="TrackDAxis">
+    <Name>Forward</Name>    
+    <Key>4127</Key>
+    <Index>1</Index>
+    <Sequence>
+      <Transform>DeadZone .225</Transform>
+    </Sequence>
+  </Devices>
+
+  <Devices xsi:type="TrackDAxis">
+    <Name>Heading</Name>
+    <Key>4127</Key>
+    <Index>0</Index>
+    <Sequence>
+      <Transform>DeadZone .225</Transform>
+    </Sequence>
+  </Devices>
+
+  <Devices xsi:type="TrackDButton">
+    <Name>ToolNext</Name>
+    <Key>4127</Key>
+    <Index>1</Index>
+    <Trigger>Press</Trigger>
+  </Devices>
+
+  <Devices xsi:type="TrackDButton">
+    <Name>ToolTrigger0</Name>
+    <Key>4127</Key>
+    <Index>0</Index>
+    <Trigger>Press</Trigger>
+  </Devices>
+
+  <Devices xsi:type="TrackDButton">
+    <Name>ToolTrigger1</Name>
+    <Key>4127</Key>
+    <Index>5</Index>
+    <Trigger>Press</Trigger>
+  </Devices>
+
+<Devices xsi:type="TrackDButton">
+    <Name>NextBookmark</Name>
+    <Key>4127</Key>
+    <Index>2</Index>
+    <Trigger>Press</Trigger>
+  </Devices>
+
+</InputMap>

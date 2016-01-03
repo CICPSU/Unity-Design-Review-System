@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<InputMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <Devices xsi:type="VRPNTracker">
+    <Name>Head Tracker</Name>
+    <Device>Tracker</Device>
+    <Server>localhost</Server>
+    <Index>0</Index>
+    <Sequence>
+	<Transform>ScalePosition 1.0 1.0 -1.0</Transform>
+	<Transform>ScaleRotation -1.0 -1.0 1.0</Transform>
+    </Sequence>
+  </Devices>
+
+  <Devices xsi:type="VRPNTracker">
+    <Name>Hand Tracker</Name>
+    <Device>Tracker</Device>
+    <Server>localhost</Server>
+    <Index>1</Index>
+    <Sequence>
+	<Transform>ScalePosition 1.0 1.0 -1.0</Transform>
+	<Transform>ScaleRotation -1.0 -1.0 1.0</Transform>
+    </Sequence>
+  </Devices>
+
+</InputMap>

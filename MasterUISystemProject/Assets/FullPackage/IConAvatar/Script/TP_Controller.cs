@@ -31,9 +31,20 @@ public class TP_Controller : MonoBehaviour {
 		TP_Motor.Instance.VerticalVelocity = TP_Motor.Instance.MoveVector.y;
 		
 		TP_Motor.Instance.MoveVector = Vector3.zero; // zero out move vector
-		
-		//		if(Input.GetAxis("Vertical") > deadZone|| Input.GetAxis("Vertical") < -deadZone )
-		if(Input.GetKey (TP_InputManager.instance.forward))
+
+        // get values from the new input system for movement
+        if ((float)InputManager.map.GetValue("Forward") > 0)
+            TP_Motor.Instance.MoveVector += new Vector3(0,0,1);
+        if ((float)InputManager.map.GetValue("Forward") < 0)
+            TP_Motor.Instance.MoveVector += new Vector3(0, 0, -1);
+
+        if ((float)InputManager.map.GetValue("Right") > 0)
+            TP_Motor.Instance.MoveVector += new Vector3(1, 0, 0);
+        if ((float)InputManager.map.GetValue("Right") < 0)
+            TP_Motor.Instance.MoveVector += new Vector3(-1, 0, 0);
+
+        //		if(Input.GetAxis("Vertical") > deadZone|| Input.GetAxis("Vertical") < -deadZone )
+        if (Input.GetKey (TP_InputManager.instance.forward))
 			TP_Motor.Instance.MoveVector += new Vector3 (0, 0, 1);
 		if(Input.GetKey (TP_InputManager.instance.backward))
 			TP_Motor.Instance.MoveVector += new Vector3(0,0,-1);

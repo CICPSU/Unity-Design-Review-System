@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<InputMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ 
+  <Devices xsi:type="TrackDTracker">
+    <Name>Head Tracker</Name>
+    <Key>4126</Key>
+    <Sensor>0</Sensor>
+    <Sequence>
+	<Transform>ScalePosition .3048 .3048 -.3048</Transform>
+	<Transform>ScaleRotation -1.0 -1.0 1.0</Transform>
+    </Sequence>
+  </Devices>
+
+  <Devices xsi:type="TrackDTracker">
+    <Name>Hand Tracker</Name>
+    <Key>4126</Key>
+    <Sensor>1</Sensor>
+    <Sequence>
+	<Transform>ScalePosition .3048 .3048 -.3048</Transform>
+	<Transform>ScaleRotation -1.0 -1.0 1.0</Transform>
+    </Sequence>
+  </Devices>
+
+</InputMap>

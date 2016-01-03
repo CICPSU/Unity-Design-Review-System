@@ -102,7 +102,10 @@ public class TP_Camera : MonoBehaviour {
         //*******!!!!!!!!*********** allow pressing a,d to rotate the charater.	
         /// avatarRotation less than 0 rotate left, greater than 0 rotate right
         TP_Animator.Instance.avatarRotation = 0f;	
-		if(Input.GetKey(TP_InputManager.instance.rotateRight) || Input.GetKey(TP_InputManager.instance.rotateLeft)){	
+		if(Input.GetKey(TP_InputManager.instance.rotateRight) 
+            || Input.GetKey(TP_InputManager.instance.rotateLeft) 
+            || (float)InputManager.map.GetValue("TurnHorizontal") != 0){
+            	
 			if(Input.GetKey (TP_InputManager.instance.rotateRight)){
                 TP_Animator.Instance.avatarRotation = 90f;
 				mouseX += TP_InputManager.instance.roateKeySensitivity;
@@ -111,9 +114,24 @@ public class TP_Camera : MonoBehaviour {
 				mouseX -= TP_InputManager.instance.roateKeySensitivity;
                 TP_Animator.Instance.avatarRotation = -90f;
 			}
-	//		Debug.Log ("Rotate: " + Input.GetAxis ("Rotate"));
-			TP_Motor.Instance.SnapCharaterWithCamera_Key();
+
+            // get values from the new input system for rotation
+            if ((float)InputManager.map.GetValue("TurnHorizontal") > 0)
+            {
+                TP_Animator.Instance.avatarRotation = 90f;
+                mouseX += TP_InputManager.instance.roateKeySensitivity;
+            }
+            // get values from the new input system for rotation
+            if ((float)InputManager.map.GetValue("TurnHorizontal") < 0)
+            {
+                TP_Animator.Instance.avatarRotation = -90f;
+                mouseX -= TP_InputManager.instance.roateKeySensitivity;
+            }
+            //		Debug.Log ("Rotate: " + Input.GetAxis ("Rotate"));
+            TP_Motor.Instance.SnapCharaterWithCamera_Key();
 		}
+
+        
 
 		if(Input.GetMouseButton(0)){
 			mouseX += Input.GetAxis("Mouse X") * X_MouseSensitivity;
