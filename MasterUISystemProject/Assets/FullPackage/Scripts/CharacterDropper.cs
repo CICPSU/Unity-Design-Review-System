@@ -12,26 +12,36 @@ public class CharacterDropper : MonoBehaviour {
     public ToggleGroup modelToggleGroup;
     public RectTransform dropCharacterSelectPanel;
     public GameObject avatar;
+    public Dropdown newCharWanderSelect;
+    public RectTransform worldCharOptionsCanvas;
+    public Dropdown charOptionsWanderSelect;
 
     private List<GameObject> loadedCharacters = new List<GameObject>();
     private List<Toggle> toggleList = new List<Toggle>();
-    private GameObject selectedChar;
+    private GameObject charToDrop;
+    private GameObject charToEdit;
+    private NavMeshWander navMeshWanderToEdit;
     private bool dropModeOn;
+    private bool charEditModeOn;
     private Vector3 dropLocation = Vector3.zero;
     private Camera mouseCam;
     private RaycastHit hit;
 
     void OnDisable()
     {
-        Destroy(selectedChar);
+        Destroy(charToDrop);
         ToggleMode(false);
         dropModeOn = false;
+        charEditModeOn = false;
+        CloseCharacterOptions();
     }
 
     void OnEnable()
     {
         ToggleMode(false);
         dropModeOn = false;
+        charEditModeOn = false;
+        CloseCharacterOptions();
     }
 
     public void ToggleMode()
@@ -45,16 +55,18 @@ public class CharacterDropper : MonoBehaviour {
         if (mode)
         {
             dropCharacterSelectPanel.gameObject.SetActive(true);
+            CloseCharacterOptions();
             modelToggleGroup.SetAllTogglesOff();
             randomToggle.isOn = true;
             modelToggleGroup.NotifyToggleOn(randomToggle);
-            selectedChar = CreateRandomChar();
+            charToDrop = CreateRandomChar();
             GetComponent<Image>().color = Color.red;
         }
         else
         {
             dropCharacterSelectPanel.gameObject.SetActive(false);
-            Destroy(selectedChar);
+            CloseCharacterOptions();
+            Destroy(charToDrop);
             GetComponent<Image>().color = Color.white;
         }
     }
@@ -76,7 +88,8 @@ public class CharacterDropper : MonoBehaviour {
                 }
             }
         }
-
+        returnChar.GetComponent<CapsuleCollider>().enabled = false;
+        returnChar.GetComponent<NavMeshAgent>().enabled = false;
         return returnChar;
     }
 
@@ -112,36 +125,85 @@ public class CharacterDropper : MonoBehaviour {
   
         if (dropModeOn)
         {
-            if (selectedChar == null)
-                selectedChar = GetCharacter();
-
-            if (selectedChar.name != modelToggleGroup.ActiveToggles().ToList()[0].name + "(Clone)" && !randomToggle.isOn)
+            if (!charEditModeOn)
             {
-                Destroy(selectedChar);
-                selectedChar = GetCharacter();
-            }
+                if (charToDrop == null)
+                    charToDrop = GetCharacter();
 
-			mouseCam = FindMouseCamera();
-			if (mouseCam != null)
-			{
-                if (Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit))
-                    dropLocation = hit.point;
+                if (charToDrop.name != modelToggleGroup.ActiveToggles().ToList()[0].name + "(Clone)" && !randomToggle.isOn)
+                {
+                    Destroy(charToDrop);
+                    charToDrop = GetCharacter();
+                }
+
+                mouseCam = FindMouseCamera();
+                if (mouseCam != null)
+                {
+                    if (Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit))
+                        dropLocation = hit.point;
+                    else
+                        dropLocation = avatar.transform.position + avatar.transform.forward * 2f;
+                }
+
+                if (charToDrop != null)
+                    charToDrop.transform.position = dropLocation;
+
+                if (hit.transform.GetComponent<NavMeshAgent>() != null)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                        OpenCharacterOptions();
+                    charToDrop.SetActive(false);
+                }
                 else
-                    dropLocation = avatar.transform.position + avatar.transform.forward * 2f;
-			}
+                {
+                    if (!charToDrop.activeSelf)
+                        charToDrop.SetActive(true);
+                }
 
-            if(selectedChar != null)
-                selectedChar.transform.position = dropLocation;
+                if (Input.GetMouseButtonDown(1))
+                {
+                    charToDrop.GetComponent<CapsuleCollider>().enabled = true;
+                    charToDrop.GetComponent<NavMeshAgent>().enabled = true;
+                    charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
+                    //need to implement the expanding circle to show/select local wander radius
+                    charToDrop = GetCharacter();
+                }
 
-            if (Input.GetMouseButtonDown(1))
-                selectedChar = GetCharacter();
 
-            if (Input.GetMouseButtonDown(2))
+                if (Input.GetMouseButtonDown(2))
+                {
+                    Destroy(charToDrop);
+                    charToDrop = GetCharacter();
+                }
+            }
+            else
             {
-                Destroy(selectedChar);
-                selectedChar = GetCharacter();
+                navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)charOptionsWanderSelect.value;
             }
         }
+    }
+
+    public void OpenCharacterOptions()
+    {
+        Destroy(charToDrop);
+        charEditModeOn = true;
+        charToEdit = hit.transform.gameObject;
+        navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
+        worldCharOptionsCanvas.gameObject.SetActive(true);
+        worldCharOptionsCanvas.transform.position = hit.point;
+        charOptionsWanderSelect.value = (int)navMeshWanderToEdit.mode;
+
+    }
+
+    public void CloseCharacterOptions()
+    {
+        charEditModeOn = false;
+        worldCharOptionsCanvas.gameObject.SetActive(false);
+    }
+
+    public void DeleteCharacter()
+    {
+
     }
 
     private Camera FindMouseCamera()

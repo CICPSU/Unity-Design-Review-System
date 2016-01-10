@@ -357,6 +357,7 @@ GameObject:
   - 195: {fileID: 19576948}
   - 114: {fileID: 11456780}
   - 114: {fileID: 11413014}
+  - 136: {fileID: 13605238}
   m_Layer: 0
   m_Name: vincent
   m_TagString: Untagged
@@ -1169,6 +1170,19 @@ MonoBehaviour:
   localWanderCenter: {x: 0, y: 0, z: 0}
   localWanderCenterRef: {fileID: 0}
   mode: 2
+--- !u!136 &13605238
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153870}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!137 &13701486
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -1270,7 +1284,7 @@ Prefab:
       objectReference: {fileID: 9100000, guid: 943b051420a155940ac9795098734ad3, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: navAgent
@@ -1283,6 +1297,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: mode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Center.y
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class NavMeshWander : MonoBehaviour {
 
-    public enum WanderMode { World, Local, Idle}
+    public enum WanderMode { Idle, Local, World}
 
     public float localWanderRadius = 10;
 

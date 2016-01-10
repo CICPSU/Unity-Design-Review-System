@@ -282,6 +282,7 @@ GameObject:
   - 195: {fileID: 19585416}
   - 114: {fileID: 11404208}
   - 114: {fileID: 11478284}
+  - 136: {fileID: 13640152}
   m_Layer: 0
   m_Name: Michael
   m_TagString: Untagged
@@ -2403,6 +2404,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   navAgent: {fileID: 19585416}
   animController: {fileID: 9588960}
+--- !u!136 &13640152
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 118770}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!137 &13765196
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -2555,7 +2569,7 @@ Prefab:
       objectReference: {fileID: 9100000, guid: 943b051420a155940ac9795098734ad3, type: 2}
     - target: {fileID: 0}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: animController
@@ -2568,6 +2582,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: mode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Center.y
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
