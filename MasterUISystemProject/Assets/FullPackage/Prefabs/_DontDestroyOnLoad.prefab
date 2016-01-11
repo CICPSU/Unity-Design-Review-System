@@ -802,7 +802,6 @@ GameObject:
   - 223: {fileID: 22394922}
   - 114: {fileID: 11461050}
   - 114: {fileID: 11446662}
-  - 114: {fileID: 11452840}
   m_Layer: 5
   m_Name: CharacterOptionsWorld
   m_TagString: Untagged
@@ -6015,8 +6014,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 395, y: 75, z: 1}
-  m_Center: {x: -1, y: 0, z: 0}
+  m_Size: {x: 400, y: 100, z: 1}
+  m_Center: {x: 200, y: 50, z: 0}
 --- !u!65 &6597154
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -6027,8 +6026,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 395, y: 75, z: 1}
-  m_Center: {x: -1, y: 0, z: 0}
+  m_Size: {x: 400, y: 100, z: 1}
+  m_Center: {x: -200, y: 50, z: 0}
 --- !u!81 &8169858
 AudioListener:
   m_ObjectHideFlags: 1
@@ -10809,19 +10808,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Option A
---- !u!114 &11452840
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 120184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7e94f467e7abfe47806e9e0705fb0e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nameText: {fileID: 0}
-  positionText: {fileID: 0}
 --- !u!114 &11454882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -12272,8 +12258,9 @@ MonoBehaviour:
   modelToggleGroup: {fileID: 11424246}
   dropCharacterSelectPanel: {fileID: 22440434}
   avatar: {fileID: 160550}
-  wanderSelect: {fileID: 11431246}
-  worldCharOptionsCanvas: {fileID: 0}
+  newCharWanderSelect: {fileID: 11431246}
+  worldCharOptionsCanvas: {fileID: 22454256}
+  charOptionsWanderSelect: {fileID: 11437676}
 --- !u!114 &11470396
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -16818,11 +16805,11 @@ RectTransform:
   - {fileID: 22410928}
   m_Father: {fileID: 22447172}
   m_RootOrder: 2
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 657.52454, y: -188.66081}
-  m_SizeDelta: {x: 395, y: 75.000015}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -50, y: 50}
+  m_SizeDelta: {x: 400, y: 100}
+  m_Pivot: {x: 1, y: 0}
 --- !u!224 &22403776
 RectTransform:
   m_ObjectHideFlags: 1
@@ -18615,8 +18602,8 @@ RectTransform:
   m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 518.0197, y: 382.752}
-  m_SizeDelta: {x: 860, y: 250}
+  m_AnchoredPosition: {x: 517.9648, y: 382.6953}
+  m_SizeDelta: {x: 1000, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22455162
 RectTransform:
@@ -18776,11 +18763,11 @@ RectTransform:
   - {fileID: 22415222}
   m_Father: {fileID: 22447172}
   m_RootOrder: 1
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 214.43451, y: -188.67793}
-  m_SizeDelta: {x: 395, y: 75.000015}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50, y: 50}
+  m_SizeDelta: {x: 400, y: 100}
+  m_Pivot: {x: 0, y: 0}
 --- !u!224 &22459606
 RectTransform:
   m_ObjectHideFlags: 1

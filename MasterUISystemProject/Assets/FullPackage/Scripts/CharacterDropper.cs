@@ -197,13 +197,16 @@ public class CharacterDropper : MonoBehaviour {
 
     public void CloseCharacterOptions()
     {
+        charToEdit = null;
         charEditModeOn = false;
         worldCharOptionsCanvas.gameObject.SetActive(false);
     }
 
     public void DeleteCharacter()
     {
-
+        Destroy(charToEdit);
+        charToEdit = null;
+        CloseCharacterOptions();
     }
 
     private Camera FindMouseCamera()
