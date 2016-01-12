@@ -94,6 +94,8 @@ public class DIRE : MonoBehaviour
     public static String DisplayExtension = ".display";
     public static String InputExtension = ".input";
 
+    public Canvas[] worldCanvasArray;
+
     /// <summary>
     /// Unity awake function.  Initialize values for the DIRE system,
     /// </summary>
@@ -142,7 +144,7 @@ public class DIRE : MonoBehaviour
             GetComponent<ARTtrack>().SetTracking(GetComponent<ARTtrack>().CheckTracking());
         }
 	}
-	/*
+    /*
 	void InitializeInputs()
 	{
 		// Get list of input files.  Only keep one of each file name.
@@ -168,11 +170,31 @@ public class DIRE : MonoBehaviour
 
 */
 
+    private Camera FindMouseCamera()
+    {
+        List<Camera> camList = (from cam in GameObject.FindObjectsOfType<Camera>() where cam.targetTexture == null select cam).ToList();
+        foreach (Camera cam in camList)
+        {
+            if (Input.mousePosition.x > cam.pixelRect.xMin && Input.mousePosition.x < cam.pixelRect.xMax
+                && Input.mousePosition.y > cam.pixelRect.yMin && Input.mousePosition.y < cam.pixelRect.yMax)
+            {
+                return cam;
+            }
+        }
+        return null;
+    }
+
     /// <summary>
     /// Unity per frame update method.  Exit application if Escape is pressed.
     /// </summary>
     void Update()
     {
+        Camera mouseCam = FindMouseCamera();
+        foreach(Canvas worldCanvas in worldCanvasArray)
+        {
+            worldCanvas.worldCamera = mouseCam;
+        }
+
         // Exit if escape key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
             System.Diagnostics.Process.GetCurrentProcess().Kill();
