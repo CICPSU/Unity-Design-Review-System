@@ -22,7 +22,7 @@
 
   <Devices xsi:type="Key">
     <Name>Right</Name>
-    <KeyCode>D</KeyCode>
+    <KeyCode>E</KeyCode>
     <Trigger>Value</Trigger>
     <Sequence>
       <Transform>AsFloat</Transform>
@@ -31,16 +31,6 @@
 
   <Devices xsi:type="Key">
     <Name>Right</Name>
-    <KeyCode>A</KeyCode>
-    <Trigger>Value</Trigger>
-    <Sequence>
-      <Transform>AsFloat</Transform>     
-      <Transform>Scale -1</Transform>
-    </Sequence>
-  </Devices>
-
-  <Devices xsi:type="Key">
-    <Name>TurnHorizontal</Name>
     <KeyCode>Q</KeyCode>
     <Trigger>Value</Trigger>
     <Sequence>
@@ -51,7 +41,17 @@
 
   <Devices xsi:type="Key">
     <Name>TurnHorizontal</Name>
-    <KeyCode>E</KeyCode>
+    <KeyCode>A</KeyCode>
+    <Trigger>Value</Trigger>
+    <Sequence>
+      <Transform>AsFloat</Transform>     
+      <Transform>Scale -1</Transform>
+    </Sequence>
+  </Devices>
+
+  <Devices xsi:type="Key">
+    <Name>TurnHorizontal</Name>
+    <KeyCode>D</KeyCode>
     <Trigger>Value</Trigger>
     <Sequence>
       <Transform>AsFloat</Transform>
