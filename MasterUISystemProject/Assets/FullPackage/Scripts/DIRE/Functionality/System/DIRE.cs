@@ -120,6 +120,7 @@ public class DIRE : MonoBehaviour
             //	searchPaths.Add(Environment.GetFolderPath(Environment.SpecialFolder.Personal) + programDir + settingsDir);
             //	searchPaths.Add(Directory.GetCurrentDirectory() + "/.." + settingsDir);
             searchPaths.Add(Application.dataPath + "/.." + settingsDir);
+            searchPaths.Add(Application.dataPath + "/FullPackage/Settings");
             searchPaths.Add(@"C:\DIRE\");
             SetupSearch = new FileSearch();
             foreach (string path in searchPaths)
