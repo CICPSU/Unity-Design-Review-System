@@ -148,7 +148,7 @@ public class CharacterDropper : MonoBehaviour {
                 if (charToDrop != null)
                     charToDrop.transform.position = dropLocation;
 
-                if (hit.transform.GetComponent<NavMeshAgent>() != null)
+                if (hit.transform != null && hit.transform.GetComponent<NavMeshAgent>() != null)
                 {
                     if (Input.GetMouseButtonDown(0))
                         OpenCharacterOptions();

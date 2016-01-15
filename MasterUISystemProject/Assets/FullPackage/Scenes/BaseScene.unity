@@ -813,6 +813,22 @@ Prefab:
       propertyPath: m_Name
       value: ModelNamePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 11466456, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 151670, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22496680, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22496680, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0.9186937
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11419194, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}

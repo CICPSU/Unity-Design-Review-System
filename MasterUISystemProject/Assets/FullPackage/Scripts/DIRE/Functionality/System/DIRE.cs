@@ -108,7 +108,7 @@ public class DIRE : MonoBehaviour
         {
             /// register the DIRE instance.  Set so that it will remain when scenes are loaded.
 			DIRE.Instance = this;
-            DontDestroyOnLoad(this);
+            //DontDestroyOnLoad(this);
 
             string programDir = "/DIRE";
             string settingsDir = "/Settings";
