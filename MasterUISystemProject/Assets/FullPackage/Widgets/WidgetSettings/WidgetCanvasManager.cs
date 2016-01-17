@@ -28,8 +28,8 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     private void CloseAll()
     {
-        toggleMenuButton.GetComponent<Animator>().SetBool("Open", false);
-        toggleMenuButton.GetComponent<Animator>().SetTrigger("Normal");
+        //toggleMenuButton.GetComponent<Animator>().SetBool("Open", false);
+        //toggleMenuButton.GetComponent<Animator>().SetTrigger("Normal");
         toggleSettingsMenu.SetActive(false);
         dropCharacter.SetActive(false);
         chooseWidgetPanel.SetActive(false);
@@ -40,7 +40,7 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     private void OpenMenu()
     {
-        toggleMenuButton.GetComponent<Animator>().SetBool("Open", true);
+        //toggleMenuButton.GetComponent<Animator>().SetBool("Open", true);
         toggleSettingsMenu.SetActive(true);
         dropCharacter.SetActive(true);
         menuOpen = true;
