@@ -15,6 +15,7 @@ public class CharacterDropper : MonoBehaviour {
     public Dropdown newCharWanderSelect;
     public RectTransform worldCharOptionsCanvas;
     public Dropdown charOptionsWanderSelect;
+    public Image buttonImage;
 
     private List<GameObject> loadedCharacters = new List<GameObject>();
     private List<Toggle> toggleList = new List<Toggle>();
@@ -60,14 +61,14 @@ public class CharacterDropper : MonoBehaviour {
             randomToggle.isOn = true;
             modelToggleGroup.NotifyToggleOn(randomToggle);
             charToDrop = CreateRandomChar();
-            GetComponent<Image>().color = Color.red;
+            buttonImage.color = Color.red;
         }
         else
         {
             dropCharacterSelectPanel.gameObject.SetActive(false);
             CloseCharacterOptions();
             Destroy(charToDrop);
-            GetComponent<Image>().color = Color.white;
+            buttonImage.color = Color.white;
         }
     }
 
