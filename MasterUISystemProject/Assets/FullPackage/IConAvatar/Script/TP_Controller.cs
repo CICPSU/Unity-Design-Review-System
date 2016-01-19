@@ -17,10 +17,13 @@ public class TP_Controller : MonoBehaviour {
 	//	TP_Camera.UseExistingOrCreateNewMainCamera();
 	}
 
-	void Update () {		
-		GetLocomontionInput();
-		HandleActionInput();
-		TP_Motor.Instance.UpdateMotor();
+	void Update () {
+        if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
+        {
+            GetLocomontionInput();
+            HandleActionInput();
+            TP_Motor.Instance.UpdateMotor();
+        }
 	}
 	
 	void GetLocomontionInput(){

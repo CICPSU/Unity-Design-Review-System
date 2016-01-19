@@ -32,8 +32,10 @@ public class TP_Motor : MonoBehaviour {
 	
 
 	public void UpdateMotor () {
-		SnapAlignCharacterWithCamera();
-		ProcessMotion();
+        
+        SnapAlignCharacterWithCamera();
+        ProcessMotion();
+        
 	}
 	
 	
@@ -59,7 +61,7 @@ public class TP_Motor : MonoBehaviour {
 		}
 		
 		// Move the character in world space
-		TP_Controller.characterController.Move (MoveVector * Time.deltaTime);
+        TP_Controller.characterController.Move (MoveVector * Time.deltaTime);
 	}
 
 

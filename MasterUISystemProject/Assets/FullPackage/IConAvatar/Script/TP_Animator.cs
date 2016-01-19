@@ -17,7 +17,7 @@ public class TP_Animator: MonoBehaviour
 
     public GameObject targetLookAt;
 
-	private Animator avatarAnimator;
+	public Animator avatarAnimator;
 
 	void Awake(){						//   so when calling the variables or methods of this class from other script,
 	Instance = this;					//    we can refer to this instance.
@@ -32,9 +32,9 @@ public class TP_Animator: MonoBehaviour
         {
             avatarAnimator.SetBool("Sitting", !avatarAnimator.GetBool("Sitting"));
             if (avatarAnimator.GetBool("Sitting"))
-                targetLookAt.transform.position = new Vector3(0, 1.2f, 0);
+                targetLookAt.transform.localPosition = new Vector3(0, 1.2f, 0);
             else
-                targetLookAt.transform.position = new Vector3(0, 1.6f, 0);
+                targetLookAt.transform.localPosition = new Vector3(0, 1.6f, 0);
         }
 	}
 	

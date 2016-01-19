@@ -76,12 +76,15 @@ public class TP_Camera : MonoBehaviour {
 	void LateUpdate () {
 		if (TargetLookAt == null)
 			return;
-		
-		HandlePlayerInput();
-		checkCameraCharacterDistance(desiredPosition, cameraDistanceCheck.position);					
 
-		CalculateDesiredPosition();
-		UpdatePosition();
+        if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
+            HandlePlayerInput();
+        checkCameraCharacterDistance(desiredPosition, cameraDistanceCheck.position);
+
+        CalculateDesiredPosition();
+        
+        UpdatePosition();
+        
 	}
 	
 	void HandlePlayerInput(){

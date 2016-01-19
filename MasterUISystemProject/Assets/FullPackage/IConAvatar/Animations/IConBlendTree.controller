@@ -199,6 +199,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Strafe
     m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: Sitting
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 110255784}
   m_Solo: 0
