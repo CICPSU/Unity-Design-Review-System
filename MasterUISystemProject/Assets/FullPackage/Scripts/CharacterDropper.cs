@@ -13,7 +13,7 @@ public class CharacterDropper : MonoBehaviour {
     public RectTransform dropCharacterSelectPanel;
     public GameObject avatar;
     public Dropdown newCharWanderSelect;
-    public RectTransform worldCharOptionsCanvas;
+    public RectTransform charOptionsPanel;
     public Dropdown charOptionsWanderSelect;
     public Image buttonImage;
 
@@ -103,6 +103,7 @@ public class CharacterDropper : MonoBehaviour {
 
     void Start()
     {
+        charOptionsPanel.gameObject.SetActive(false);
         Object[] tmpArray = Resources.LoadAll("Characters/");
         foreach (Object obj in tmpArray)
         { 
@@ -190,8 +191,8 @@ public class CharacterDropper : MonoBehaviour {
         charEditModeOn = true;
         charToEdit = hit.transform.gameObject;
         navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
-        worldCharOptionsCanvas.gameObject.SetActive(true);
-        worldCharOptionsCanvas.transform.position = hit.point;
+        charOptionsPanel.gameObject.SetActive(true);
+        charOptionsPanel.transform.position = Input.mousePosition;
         charOptionsWanderSelect.value = (int)navMeshWanderToEdit.mode;
 
     }
@@ -200,7 +201,7 @@ public class CharacterDropper : MonoBehaviour {
     {
         charToEdit = null;
         charEditModeOn = false;
-        worldCharOptionsCanvas.gameObject.SetActive(false);
+        charOptionsPanel.gameObject.SetActive(false);
     }
 
     public void DeleteCharacter()
