@@ -28,6 +28,8 @@ public class CharacterDropper : MonoBehaviour {
     private Camera mouseCam;
     private RaycastHit hit;
 
+    private NavMeshWander.WanderMode prevWanderMode = NavMeshWander.WanderMode.Idle;
+
     void OnDisable()
     {
         Destroy(charToDrop);
@@ -59,7 +61,6 @@ public class CharacterDropper : MonoBehaviour {
             CloseCharacterOptions();
             modelToggleGroup.SetAllTogglesOff();
             randomToggle.isOn = true;
-            modelToggleGroup.NotifyToggleOn(randomToggle);
             charToDrop = CreateRandomChar();
             buttonImage.color = Color.red;
         }
@@ -132,7 +133,9 @@ public class CharacterDropper : MonoBehaviour {
                 if (charToDrop == null)
                     charToDrop = GetCharacter();
 
-                if (charToDrop.name != modelToggleGroup.ActiveToggles().ToList()[0].name + "(Clone)" && !randomToggle.isOn)
+                if (modelToggleGroup.ActiveToggles().Count() > 0 
+                    && charToDrop.name != modelToggleGroup.ActiveToggles().ToList()[0].name + "(Clone)" 
+                    && !randomToggle.isOn)
                 {
                     Destroy(charToDrop);
                     charToDrop = GetCharacter();
@@ -177,11 +180,7 @@ public class CharacterDropper : MonoBehaviour {
                     Destroy(charToDrop);
                     charToDrop = GetCharacter();
                 }
-            }
-            else
-            {
-                navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)charOptionsWanderSelect.value;
-            }
+            }// chareditmode
         }
     }
 
@@ -191,16 +190,26 @@ public class CharacterDropper : MonoBehaviour {
         charEditModeOn = true;
         charToEdit = hit.transform.gameObject;
         navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
+        prevWanderMode = navMeshWanderToEdit.mode;
+        navMeshWanderToEdit.mode = NavMeshWander.WanderMode.Idle;
         charOptionsPanel.gameObject.SetActive(true);
         charOptionsPanel.transform.position = Input.mousePosition;
         charOptionsWanderSelect.value = (int)navMeshWanderToEdit.mode;
 
     }
 
+    public void ApplyOptions()
+    {
+        prevWanderMode = (NavMeshWander.WanderMode)charOptionsWanderSelect.value;
+        CloseCharacterOptions();
+    }
+
     public void CloseCharacterOptions()
     {
         charToEdit = null;
         charEditModeOn = false;
+        if(navMeshWanderToEdit != null)
+        navMeshWanderToEdit.mode = prevWanderMode;
         charOptionsPanel.gameObject.SetActive(false);
     }
 
