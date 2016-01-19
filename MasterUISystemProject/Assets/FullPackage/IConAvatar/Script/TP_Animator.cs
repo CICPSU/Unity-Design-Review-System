@@ -15,6 +15,8 @@ public class TP_Animator: MonoBehaviour
 
 	public Direction MoveDirection {get; set;}
 
+    public GameObject targetLookAt;
+
 	private Animator avatarAnimator;
 
 	void Awake(){						//   so when calling the variables or methods of this class from other script,
@@ -27,7 +29,13 @@ public class TP_Animator: MonoBehaviour
 	
 	void Update(){
         if (Input.GetKeyDown(KeyCode.Z))
+        {
             avatarAnimator.SetBool("Sitting", !avatarAnimator.GetBool("Sitting"));
+            if (avatarAnimator.GetBool("Sitting"))
+                targetLookAt.transform.position = new Vector3(0, 1.2f, 0);
+            else
+                targetLookAt.transform.position = new Vector3(0, 1.6f, 0);
+        }
 	}
 	
 	public void DetermineCurrentMoveDirection(){
