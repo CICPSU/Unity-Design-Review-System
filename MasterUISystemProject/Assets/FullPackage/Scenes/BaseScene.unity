@@ -1221,6 +1221,7 @@ MonoBehaviour:
   charOptionsPanel: {fileID: 132859734}
   charOptionsWanderSelect: {fileID: 2143476915}
   buttonImage: {fileID: 269414066}
+  radiusProjector: {fileID: 219450892}
 --- !u!1 &151859041
 GameObject:
   m_ObjectHideFlags: 0
@@ -1558,6 +1559,52 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 215122860}
+--- !u!1 &219450890
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 219450891}
+  - 119: {fileID: 219450892}
+  m_Layer: 0
+  m_Name: RadiusProjector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &219450891
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 219450890}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1043618892}
+  m_RootOrder: 5
+--- !u!119 &219450892
+Projector:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 219450890}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_NearClipPlane: 1.9
+  m_FarClipPlane: 2
+  m_FieldOfView: 60
+  m_AspectRatio: 1
+  m_Orthographic: 1
+  m_OrthographicSize: 1
+  m_Material: {fileID: 2100000, guid: e4ae2f3e23008be4197f1931203b589d, type: 2}
+  m_IgnoreLayers:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &221815327
 GameObject:
   m_ObjectHideFlags: 0
@@ -9195,6 +9242,7 @@ Transform:
   - {fileID: 1115280521}
   - {fileID: 1550817299}
   - {fileID: 905168304}
+  - {fileID: 219450891}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1 &1053819128

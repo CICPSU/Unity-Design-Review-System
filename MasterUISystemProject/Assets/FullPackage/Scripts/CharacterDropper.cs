@@ -16,6 +16,7 @@ public class CharacterDropper : MonoBehaviour {
     public RectTransform charOptionsPanel;
     public Dropdown charOptionsWanderSelect;
     public Image buttonImage;
+    public Projector radiusProjector;
 
     private List<GameObject> loadedCharacters = new List<GameObject>();
     private List<Toggle> toggleList = new List<Toggle>();
@@ -24,6 +25,7 @@ public class CharacterDropper : MonoBehaviour {
     private NavMeshWander navMeshWanderToEdit;
     private bool dropModeOn;
     private bool charEditModeOn;
+    private bool radiusSelectMode;
     private Vector3 dropLocation = Vector3.zero;
     private Camera mouseCam;
     private RaycastHit hit;
@@ -36,6 +38,8 @@ public class CharacterDropper : MonoBehaviour {
         ToggleMode(false);
         dropModeOn = false;
         charEditModeOn = false;
+        radiusSelectMode = false;
+        radiusProjector.gameObject.SetActive(false);
         CloseCharacterOptions();
     }
 
@@ -44,6 +48,8 @@ public class CharacterDropper : MonoBehaviour {
         ToggleMode(false);
         dropModeOn = false;
         charEditModeOn = false;
+        radiusSelectMode = false;
+        radiusProjector.gameObject.SetActive(false);
         CloseCharacterOptions();
     }
 
@@ -150,7 +156,7 @@ public class CharacterDropper : MonoBehaviour {
                         dropLocation = avatar.transform.position + avatar.transform.forward * 2f;
                 }
 
-                if (charToDrop != null)
+                if (charToDrop != null && !radiusSelectMode)
                     charToDrop.transform.position = dropLocation;
 
                 if (hit.transform != null && hit.transform.GetComponent<NavMeshAgent>() != null)
@@ -167,11 +173,37 @@ public class CharacterDropper : MonoBehaviour {
 
                 if (Input.GetMouseButtonDown(1))
                 {
-                    charToDrop.GetComponent<CapsuleCollider>().enabled = true;
-                    charToDrop.GetComponent<NavMeshAgent>().enabled = true;
-                    charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
-                    //need to implement the expanding circle to show/select local wander radius
-                    charToDrop = GetCharacter();
+                    if (!radiusSelectMode)
+                    {
+                        charToDrop.GetComponent<CapsuleCollider>().enabled = true;
+                        charToDrop.GetComponent<NavMeshAgent>().enabled = true;
+                        
+                        //need to implement the expanding circle to show/select local wander radius
+                        if ((NavMeshWander.WanderMode)newCharWanderSelect.value == NavMeshWander.WanderMode.Local)
+                        {
+                            charToDrop.GetComponent<NavMeshWander>().localWanderCenter = hit.point;
+                            radiusProjector.gameObject.SetActive(true);
+                            radiusProjector.transform.position = charToDrop.transform.position + new Vector3(0, 2, 0);
+                            radiusSelectMode = true;
+                        }
+                        else
+                        {
+                            
+                            charToDrop = GetCharacter();
+                        }
+                    }
+                    else
+                    {
+                        charToDrop.GetComponent<NavMeshWander>().localWanderRadius = radiusProjector.orthographicSize;
+                        charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
+                        radiusProjector.gameObject.SetActive(false);
+                        radiusSelectMode = false;
+                        charToDrop = GetCharacter();
+                    }
+                }
+                if (radiusSelectMode)
+                {
+                    radiusProjector.orthographicSize = (charToDrop.transform.position - hit.point).magnitude;
                 }
 
 

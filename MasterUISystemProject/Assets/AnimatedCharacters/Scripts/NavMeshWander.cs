@@ -9,8 +9,6 @@ public class NavMeshWander : MonoBehaviour {
 
     public Vector3 localWanderCenter = Vector3.zero;
 
-    public GameObject localWanderCenterRef;
-
     public WanderMode mode = WanderMode.Local;
 
     private NavMeshAgent navAgent;
@@ -21,8 +19,6 @@ public class NavMeshWander : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        if (localWanderCenterRef != null)
-            localWanderCenter = localWanderCenterRef.transform.position;
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         ConfigureDestination();
