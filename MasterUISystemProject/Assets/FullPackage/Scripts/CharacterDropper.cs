@@ -26,6 +26,7 @@ public class CharacterDropper : MonoBehaviour {
     private bool dropModeOn;
     private bool charEditModeOn;
     private bool radiusSelectMode;
+    private bool modelOptionsGreyed;
     private Vector3 dropLocation = Vector3.zero;
     private Camera mouseCam;
     private RaycastHit hit;
@@ -39,6 +40,7 @@ public class CharacterDropper : MonoBehaviour {
         dropModeOn = false;
         charEditModeOn = false;
         radiusSelectMode = false;
+        modelOptionsGreyed = false;
         radiusProjector.gameObject.SetActive(false);
         CloseCharacterOptions();
     }
@@ -49,6 +51,7 @@ public class CharacterDropper : MonoBehaviour {
         dropModeOn = false;
         charEditModeOn = false;
         radiusSelectMode = false;
+        modelOptionsGreyed = false;
         radiusProjector.gameObject.SetActive(false);
         CloseCharacterOptions();
     }
@@ -131,7 +134,40 @@ public class CharacterDropper : MonoBehaviour {
         /// we will have a reference to the temporary character and update its position to wherever the raycast from the mouse is pointing
         /// when "dropping" we will just stop updating the position
         /// need to make sure the temporary character is deleted/removed whenever the dropcharacter button is disabled (this script)   
-  
+
+        if (randomToggle.isOn)
+        {
+            if(modelToggleGroup.AnyTogglesOn())
+            {
+                modelToggleGroup.SetAllTogglesOff();
+            }
+
+            if (!modelOptionsGreyed)
+            {
+                foreach (Toggle tog in modelToggleGroup.GetComponentsInChildren<Toggle>())
+                {
+                    tog.GetComponentInChildren<Text>().color = Color.grey;
+                }
+                modelOptionsGreyed = true;
+            }
+        }
+        else
+        {
+            if (modelOptionsGreyed)
+            {
+                foreach (Toggle tog in modelToggleGroup.GetComponentsInChildren<Toggle>())
+                {
+                    tog.GetComponentInChildren<Text>().color = Color.black;
+                }
+                modelOptionsGreyed = false;
+            }
+        }
+        if (!modelToggleGroup.AnyTogglesOn() && !randomToggle.isOn)
+        {
+            modelToggleGroup.GetComponentInChildren<Toggle>().isOn = true;
+            modelToggleGroup.NotifyToggleOn(modelToggleGroup.GetComponentInChildren<Toggle>());
+        }
+
         if (dropModeOn)
         {
             if (!charEditModeOn)
@@ -188,7 +224,7 @@ public class CharacterDropper : MonoBehaviour {
                         }
                         else
                         {
-                            
+                            charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
                             charToDrop = GetCharacter();
                         }
                     }

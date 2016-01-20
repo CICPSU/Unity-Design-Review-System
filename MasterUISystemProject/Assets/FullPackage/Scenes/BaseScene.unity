@@ -381,6 +381,14 @@ Prefab:
       propertyPath: tpAnimator
       value: 
       objectReference: {fileID: 576364665}
+    - target: {fileID: 20876584, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_Carve
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 20876584, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+      propertyPath: m_CarveOnlyStationary
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
   m_IsPrefabParent: 0
