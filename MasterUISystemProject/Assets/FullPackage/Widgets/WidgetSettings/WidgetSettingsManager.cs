@@ -49,8 +49,15 @@ public class WidgetSettingsManager : MonoBehaviour{
 		List<string> settingsFiles = new List<string>(Directory.GetFiles(settingsFileFolderPath, "*.sets"));
 		foreach(string file in settingsFiles)
 		{
-			string tmpFile = file.Substring(file.LastIndexOf("\\") + 1);
-			Type fileType = System.Type.GetType(tmpFile.Substring(0,tmpFile.Length - 5));
+			OperatingSystem systemInfo = Environment.OSVersion;
+			string tmpFile = string.Empty;
+			if(System.PlatformID.Unix == systemInfo.Platform){
+				tmpFile = file.Substring(file.LastIndexOf("/") + 1);
+			}else{
+				tmpFile = file.Substring(file.LastIndexOf("\\") + 1);
+			}
+			string typeName = tmpFile.Substring(0,tmpFile.Length - 5);
+			Type fileType = System.Type.GetType(typeName);
             loadedTypes.Add(fileType);
 			WidgetSettings loadedFile = XmlIO.Load(file, fileType) as WidgetSettings;
 			loadedFile.ApplySettings();
