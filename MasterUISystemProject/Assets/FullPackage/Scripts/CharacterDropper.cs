@@ -211,8 +211,7 @@ public class CharacterDropper : MonoBehaviour {
                 {
                     if (!radiusSelectMode)
                     {
-                        charToDrop.GetComponent<CapsuleCollider>().enabled = true;
-                        charToDrop.GetComponent<NavMeshAgent>().enabled = true;
+                        
                         
                         //need to implement the expanding circle to show/select local wander radius
                         if ((NavMeshWander.WanderMode)newCharWanderSelect.value == NavMeshWander.WanderMode.Local)
@@ -224,12 +223,16 @@ public class CharacterDropper : MonoBehaviour {
                         }
                         else
                         {
+                            charToDrop.GetComponent<CapsuleCollider>().enabled = true;
+                            charToDrop.GetComponent<NavMeshAgent>().enabled = true;
                             charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
                             charToDrop = GetCharacter();
                         }
                     }
                     else
                     {
+                        charToDrop.GetComponent<CapsuleCollider>().enabled = true;
+                        charToDrop.GetComponent<NavMeshAgent>().enabled = true;
                         charToDrop.GetComponent<NavMeshWander>().localWanderRadius = radiusProjector.orthographicSize;
                         charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
                         radiusProjector.gameObject.SetActive(false);
