@@ -177,6 +177,53 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LoadDefinitionFiles: 0
   InputFiles: []
+--- !u!1 &257312529
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 257312531}
+  - 114: {fileID: 257312530}
+  m_Layer: 0
+  m_Name: FlystickTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &257312530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 257312529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0db8e8b8bd87e204eb5ec69b4fcaab17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  axisZero: 0
+  axisOne: 0
+  buttonZero: 0
+  buttonOne: 0
+  buttonTwo: 0
+  buttonThree: 0
+  buttonFour: 0
+  buttonFive: 0
+--- !u!4 &257312531
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 257312529}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 240.63411, y: 149.69887, z: 110.0625}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
 --- !u!1 &1009427743
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,27 +409,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22453440, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22453440, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22453440, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 22453440, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     - target: {fileID: 22453440, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 165
       objectReference: {fileID: 0}
     - target: {fileID: 22453440, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
