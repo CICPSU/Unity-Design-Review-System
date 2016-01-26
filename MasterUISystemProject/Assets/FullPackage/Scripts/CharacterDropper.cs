@@ -261,6 +261,8 @@ public class CharacterDropper : MonoBehaviour {
         Destroy(charToDrop);
         charEditModeOn = true;
         charToEdit = hit.transform.gameObject;
+        if(charToEdit.GetComponent<NavMeshAgent>() != null)
+            charToEdit.GetComponent<NavMeshAgent>().Stop();
         navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
         prevWanderMode = navMeshWanderToEdit.mode;
         navMeshWanderToEdit.mode = NavMeshWander.WanderMode.Idle;
