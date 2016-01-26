@@ -179,6 +179,7 @@ public class CharacterDropper : WidgetMenu {
         {
             if (!charEditModeOn)
             {
+
                 #region makes sure the displayed char is correct
                 if (charToDrop == null)
                     charToDrop = GetCharacter();
@@ -191,8 +192,15 @@ public class CharacterDropper : WidgetMenu {
                     charToDrop = GetCharacter();
                 }
                 #endregion
+
+                // this finds the camera whose viewport contains the mouse cursor
                 mouseCam = FindMouseCamera();
-                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 8) );
+
+                // GENERAL RAYCAST INTO THE VIRTUAL WORLD
+                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9));
+
+                /// CODE FOR MANAGING AND POSITIONING A TEMPORARY AVATAR FOR DROPPING
+                //sets the position of the temp avatar
                 if (mouseCam != null && !radiusSelectMode)
                 {
                     if (hit.point != null)
@@ -204,6 +212,8 @@ public class CharacterDropper : WidgetMenu {
                 if (charToDrop != null && !radiusSelectMode)
                     charToDrop.transform.position = dropLocation;
 
+
+                //if we are pointing at an existing avatar
                 if (hit.transform != null && hit.transform.GetComponent<NavMeshWander>() != null)
                 {
                     if (Input.GetMouseButtonDown(0))
@@ -213,10 +223,18 @@ public class CharacterDropper : WidgetMenu {
                 }
                 else
                 {
-                    if (!charToDrop.activeSelf)
+                    if (!charToDrop.activeSelf && hit.transform != null)
                         charToDrop.SetActive(true);
                 }
 
+                //if we are in radius select mode, set the size of the projector
+                if (radiusSelectMode)
+                {
+                    if (Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(3 << 8)))
+                        radiusProjector.orthographicSize = (charToDrop.transform.position - hit.point).magnitude;
+                }
+
+                //if we right click while hover over something that isnt an existing avatar
                 if (Input.GetMouseButtonDown(1) && hit.transform != null && hit.transform.GetComponent<NavMeshWander>() == null)
                 {
                     if (!radiusSelectMode)
@@ -248,12 +266,7 @@ public class CharacterDropper : WidgetMenu {
                     }
                 }
 
-                if (radiusSelectMode)
-                {
-                    radiusProjector.orthographicSize = (charToDrop.transform.position - hit.point).magnitude;
-                }
-
-
+                //drop the temp avatar
                 if (Input.GetMouseButtonDown(2))
                 {
                     Destroy(charToDrop);
