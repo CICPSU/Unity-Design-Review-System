@@ -135,6 +135,7 @@ public class CharacterDropper : MonoBehaviour {
         /// when "dropping" we will just stop updating the position
         /// need to make sure the temporary character is deleted/removed whenever the dropcharacter button is disabled (this script)   
 
+        // this if statement is to make control the toggle group and random toggle
         if (randomToggle.isOn)
         {
             if(modelToggleGroup.AnyTogglesOn())
@@ -162,6 +163,8 @@ public class CharacterDropper : MonoBehaviour {
                 modelOptionsGreyed = false;
             }
         }
+
+        // this if is to make sure that a toggle in the toggle group is on if the random toggle is off
         if (!modelToggleGroup.AnyTogglesOn() && !randomToggle.isOn)
         {
             modelToggleGroup.GetComponentInChildren<Toggle>().isOn = true;
@@ -195,7 +198,7 @@ public class CharacterDropper : MonoBehaviour {
                 if (charToDrop != null && !radiusSelectMode)
                     charToDrop.transform.position = dropLocation;
 
-                if (hit.transform != null && hit.transform.GetComponent<NavMeshAgent>() != null)
+                if (hit.transform != null && hit.transform.GetComponent<NavMeshWander>() != null)
                 {
                     if (Input.GetMouseButtonDown(0))
                         OpenCharacterOptions();
@@ -207,13 +210,10 @@ public class CharacterDropper : MonoBehaviour {
                         charToDrop.SetActive(true);
                 }
 
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(1) && hit.transform != null && hit.transform.GetComponent<NavMeshWander>() == null)
                 {
                     if (!radiusSelectMode)
-                    {
-                        
-                        
-                        //need to implement the expanding circle to show/select local wander radius
+                    {        
                         if ((NavMeshWander.WanderMode)newCharWanderSelect.value == NavMeshWander.WanderMode.Local)
                         {
                             charToDrop.GetComponent<NavMeshWander>().localWanderCenter = hit.point;
@@ -240,6 +240,7 @@ public class CharacterDropper : MonoBehaviour {
                         charToDrop = GetCharacter();
                     }
                 }
+
                 if (radiusSelectMode)
                 {
                     radiusProjector.orthographicSize = (charToDrop.transform.position - hit.point).magnitude;
