@@ -77,7 +77,7 @@ public class TP_Camera : MonoBehaviour {
 		if (TargetLookAt == null)
 			return;
 
-        if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
+        //if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
             HandlePlayerInput();
         checkCameraCharacterDistance(desiredPosition, cameraDistanceCheck.position);
 
@@ -114,8 +114,9 @@ public class TP_Camera : MonoBehaviour {
 				mouseX -= TP_InputManager.instance.roateKeySensitivity;
                 TP_Animator.Instance.avatarRotation = -90f;
 			}
-	//		Debug.Log ("Rotate: " + Input.GetAxis ("Rotate"));
-			TP_Motor.Instance.SnapCharaterWithCamera_Key();
+            //		Debug.Log ("Rotate: " + Input.GetAxis ("Rotate"));
+            if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
+                TP_Motor.Instance.SnapCharaterWithCamera_Key();
 		}
 
 		if(Input.GetMouseButton(0)){

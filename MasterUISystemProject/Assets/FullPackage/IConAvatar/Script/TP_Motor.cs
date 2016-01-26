@@ -32,8 +32,8 @@ public class TP_Motor : MonoBehaviour {
 	
 
 	public void UpdateMotor () {
-        
-        SnapAlignCharacterWithCamera();
+        if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
+            SnapAlignCharacterWithCamera();
         ProcessMotion();
         
 	}
