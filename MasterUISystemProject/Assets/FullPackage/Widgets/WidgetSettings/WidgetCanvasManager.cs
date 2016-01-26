@@ -5,17 +5,39 @@ using System.Collections;
 public class WidgetCanvasManager : MonoBehaviour {
 
     public GameObject toggleSettingsMenu;
-    public GameObject dropCharacter;
+    public GameObject dropCharacterButton;
     public GameObject chooseWidgetPanel;
     public GameObject displaySettingsPanel;
     public GameObject errorWindow;
-    public GameObject toggleMenuButton;
 
-    private bool menuOpen = false;
+    public WidgetMenu openMenu = null;
+
+    public bool menuOpen = false;
 
     void Start()
     {
         CloseAll();
+    }
+
+    public void OpenMenu(WidgetMenu menuToOpen)
+    {
+        if (openMenu == null)
+        {
+            menuToOpen.ToggleMenu();
+            openMenu = menuToOpen;
+        }
+        else if(openMenu == menuToOpen)
+        {
+            openMenu.ToggleMenu();
+            openMenu = null;
+        }
+        else
+        {
+            openMenu.ToggleMenu();
+            menuToOpen.ToggleMenu();
+            openMenu = menuToOpen;
+        }
+
     }
 
     public void ToggleMenu()
@@ -28,10 +50,8 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     private void CloseAll()
     {
-        //toggleMenuButton.GetComponent<Animator>().SetBool("Open", false);
-        //toggleMenuButton.GetComponent<Animator>().SetTrigger("Normal");
         toggleSettingsMenu.SetActive(false);
-        dropCharacter.SetActive(false);
+        dropCharacterButton.SetActive(false);
         chooseWidgetPanel.SetActive(false);
         displaySettingsPanel.SetActive(false);
         errorWindow.SetActive(false);
@@ -40,9 +60,19 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     private void OpenMenu()
     {
-        //toggleMenuButton.GetComponent<Animator>().SetBool("Open", true);
         toggleSettingsMenu.SetActive(true);
-        dropCharacter.SetActive(true);
+        dropCharacterButton.SetActive(true);
         menuOpen = true;
     }
+}
+
+public abstract class WidgetMenu : MonoBehaviour
+{
+    public WidgetMenu()
+    {
+
+    }
+
+    public abstract void ToggleMenu();
+
 }

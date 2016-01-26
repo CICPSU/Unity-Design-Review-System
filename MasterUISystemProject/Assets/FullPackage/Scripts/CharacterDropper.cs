@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class CharacterDropper : MonoBehaviour {
+public class CharacterDropper : WidgetMenu {
 
     public Toggle randomToggle;
     public Text modelLabel;
@@ -17,6 +17,7 @@ public class CharacterDropper : MonoBehaviour {
     public Dropdown charOptionsWanderSelect;
     public Image buttonImage;
     public Projector radiusProjector;
+    public WidgetCanvasManager canvasManager;
 
     private List<GameObject> loadedCharacters = new List<GameObject>();
     private List<Toggle> toggleList = new List<Toggle>();
@@ -56,7 +57,7 @@ public class CharacterDropper : MonoBehaviour {
         CloseCharacterOptions();
     }
 
-    public void ToggleMode()
+    public override void ToggleMenu()
     {
         dropModeOn = !dropModeOn;
         ToggleMode(dropModeOn);

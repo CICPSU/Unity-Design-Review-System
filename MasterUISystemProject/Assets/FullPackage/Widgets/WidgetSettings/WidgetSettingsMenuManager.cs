@@ -2,15 +2,16 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class WidgetSettingsMenuManager : MonoBehaviour {
+public class WidgetSettingsMenuManager : WidgetMenu {
 
     public Image buttonImage;
     public GameObject chooseWidgetPanel;
     public WidgetSettingsManager settingsManager;
+    public WidgetCanvasManager canvasManager;
 
     private bool shouldOpen = false;
 
-    public void ToggleWidgetPanel()
+    public override void ToggleMenu()
     {
         shouldOpen = !shouldOpen;
         if (shouldOpen)

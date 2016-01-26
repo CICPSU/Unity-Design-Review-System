@@ -83,7 +83,7 @@ public class ARTtrack : MonoBehaviour {
 	void track(){
 		byte[] data = client.Receive(ref source);
 		//flush the port by reading through all available data till the most recent one
-		while(client.Available > 0){
+		while(client != null && client.Available > 0){
 			data = client.Receive( ref source );
 		}
 		
