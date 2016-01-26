@@ -64,10 +64,12 @@ public class CharacterDropper : MonoBehaviour {
 
     private void ToggleMode(bool mode)
     {
+        CloseCharacterOptions();
+        radiusProjector.gameObject.SetActive(false);
+
         if (mode)
         {
             dropCharacterSelectPanel.gameObject.SetActive(true);
-            CloseCharacterOptions();
             modelToggleGroup.SetAllTogglesOff();
             randomToggle.isOn = true;
             charToDrop = CreateRandomChar();
@@ -76,7 +78,6 @@ public class CharacterDropper : MonoBehaviour {
         else
         {
             dropCharacterSelectPanel.gameObject.SetActive(false);
-            CloseCharacterOptions();
             Destroy(charToDrop);
             buttonImage.color = Color.white;
         }
