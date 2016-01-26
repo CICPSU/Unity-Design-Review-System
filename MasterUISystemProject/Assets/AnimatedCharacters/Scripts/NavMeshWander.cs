@@ -26,7 +26,7 @@ public class NavMeshWander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (navAgent.isOnNavMesh && navAgent.remainingDistance < 1)
+        if (navAgent.isOnNavMesh && (navAgent.remainingDistance < 1 || mode == WanderMode.Idle))
             ConfigureDestination();
 	}
 

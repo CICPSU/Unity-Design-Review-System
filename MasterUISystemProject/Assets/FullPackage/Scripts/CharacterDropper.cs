@@ -138,6 +138,7 @@ public class CharacterDropper : WidgetMenu {
         /// need to make sure the temporary character is deleted/removed whenever the dropcharacter button is disabled (this script)   
 
         // this if statement is to make control the toggle group and random toggle
+        #region toggles
         if (randomToggle.isOn)
         {
             if(modelToggleGroup.AnyTogglesOn())
@@ -172,11 +173,13 @@ public class CharacterDropper : WidgetMenu {
             modelToggleGroup.GetComponentInChildren<Toggle>().isOn = true;
             modelToggleGroup.NotifyToggleOn(modelToggleGroup.GetComponentInChildren<Toggle>());
         }
+        #endregion
 
         if (dropModeOn)
         {
             if (!charEditModeOn)
             {
+                #region makes sure the displayed char is correct
                 if (charToDrop == null)
                     charToDrop = GetCharacter();
 
@@ -187,11 +190,12 @@ public class CharacterDropper : WidgetMenu {
                     Destroy(charToDrop);
                     charToDrop = GetCharacter();
                 }
-
+                #endregion
                 mouseCam = FindMouseCamera();
-                if (mouseCam != null)
+                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 8);
+                if (mouseCam != null && !radiusSelectMode)
                 {
-                    if (Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit))
+                    if (hit.point != null)
                         dropLocation = hit.point;
                     else
                         dropLocation = avatar.transform.position + avatar.transform.forward * 2f;
@@ -204,7 +208,8 @@ public class CharacterDropper : WidgetMenu {
                 {
                     if (Input.GetMouseButtonDown(0))
                         OpenCharacterOptions();
-                    charToDrop.SetActive(false);
+                    if(!radiusSelectMode)
+                        charToDrop.SetActive(false);
                 }
                 else
                 {
@@ -263,8 +268,6 @@ public class CharacterDropper : WidgetMenu {
         Destroy(charToDrop);
         charEditModeOn = true;
         charToEdit = hit.transform.gameObject;
-        if(charToEdit.GetComponent<NavMeshAgent>() != null)
-            charToEdit.GetComponent<NavMeshAgent>().Stop();
         navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
         prevWanderMode = navMeshWanderToEdit.mode;
         navMeshWanderToEdit.mode = NavMeshWander.WanderMode.Idle;
