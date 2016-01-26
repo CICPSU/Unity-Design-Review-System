@@ -192,7 +192,7 @@ public class CharacterDropper : WidgetMenu {
                 }
                 #endregion
                 mouseCam = FindMouseCamera();
-                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 8);
+                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 8) );
                 if (mouseCam != null && !radiusSelectMode)
                 {
                     if (hit.point != null)
