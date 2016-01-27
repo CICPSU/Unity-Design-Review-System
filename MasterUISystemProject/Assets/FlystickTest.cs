@@ -3,6 +3,8 @@ using System.Collections;
 
 public class FlystickTest : MonoBehaviour {
 
+    public GameObject flystickTracker;
+    private TrackerData data;
     public float axisZero;
     public float axisOne;
 
@@ -21,6 +23,9 @@ public class FlystickTest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        data = (TrackerData)InputManager.map.GetDevices("Tracker");
+        flystickTracker.transform.position = data.Position;
+        flystickTracker.transform.rotation = data.Rotation;
         axisZero = (float)InputManager.map.GetValue("Axis0");
         axisOne = (float)InputManager.map.GetValue("Axis1");
 
