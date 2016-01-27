@@ -204,6 +204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0db8e8b8bd87e204eb5ec69b4fcaab17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flystickTracker: {fileID: 377179511}
   axisZero: 0
   axisOne: 0
   buttonZero: 0
@@ -480,7 +481,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22453262, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0.5630631
       objectReference: {fileID: 0}
     - target: {fileID: 22453440, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchorMin.y
@@ -508,11 +509,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22424956, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 97
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22453262, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchorMin.y
-      value: 0.43693691
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}

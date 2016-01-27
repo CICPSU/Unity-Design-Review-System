@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <InputMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-  <Devices xsi:type="Tracker">
+  <Devices xsi:type="VRPNTracker">
     <Name>Tracker</Name>
     <Device>Tracker</Device>
     <Server>localhost</Server>
