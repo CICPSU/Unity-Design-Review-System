@@ -109,8 +109,8 @@ public class POISettings : WidgetSettings {
 	public override void ApplySettings(){
         GameObject gO = GameObject.FindObjectOfType<POI_ReferenceHub>().gameObject;
 
-        gO.transform.GetChild(0).gameObject.SetActive(enabled);
-        gO.transform.GetChild(1).gameObject.SetActive(enabled);
+        gO.GetComponent<POI_ReferenceHub>().poiCanvas.gameObject.SetActive(enabled);
+        gO.GetComponent<POI_ReferenceHub>().markerRoot.gameObject.SetActive(enabled);
     }
 
 	public override void SetValues(object[] values){

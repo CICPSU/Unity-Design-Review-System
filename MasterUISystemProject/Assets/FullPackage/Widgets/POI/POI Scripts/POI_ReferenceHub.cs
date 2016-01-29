@@ -19,9 +19,10 @@ public class POI_ReferenceHub : MonoBehaviour{
 	public  RectTransform EditBut;
 	public RectTransform InvalidInputWarning;
 	public RectTransform NameExistedWarning;
-	public RectTransform SceneFlagList;
 	public RectTransform BookmarkCurrentLocationNameField;
 	public GameObject markerInfoCanvas;
+    public GameObject poiCanvas;
+    public GameObject markerRoot;
 
 	public  List<InputField> poiInfoFields; // the Name, position, and rotation fields in the POIedit window
 	public  UnityEngine.Object defaultMarkerPrefab; //stores the reference to the marker prefab for instantiation

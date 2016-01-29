@@ -40,7 +40,7 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     }
 
-    public void ToggleMenu()
+    private void ToggleMenu()
     {
         if (menuOpen)
             CloseAll();
