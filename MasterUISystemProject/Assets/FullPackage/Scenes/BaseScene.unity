@@ -1148,7 +1148,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!1 &154289722
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,48 +2663,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 281845040}
---- !u!1001 &299652423
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 482756, guid: 709edced3982ee847ae05deb30d7a5dd, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0.7583063
-      objectReference: {fileID: 0}
-    - target: {fileID: 482756, guid: 709edced3982ee847ae05deb30d7a5dd, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 1.487852e-17
-      objectReference: {fileID: 0}
-    - target: {fileID: 482756, guid: 709edced3982ee847ae05deb30d7a5dd, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: -0.6700689
-      objectReference: {fileID: 0}
-    - target: {fileID: 482756, guid: 709edced3982ee847ae05deb30d7a5dd, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 482756, guid: 709edced3982ee847ae05deb30d7a5dd, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 482756, guid: 709edced3982ee847ae05deb30d7a5dd, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 482756, guid: 709edced3982ee847ae05deb30d7a5dd, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 482756, guid: 709edced3982ee847ae05deb30d7a5dd, type: 2}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: 709edced3982ee847ae05deb30d7a5dd, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &306202731
 GameObject:
   m_ObjectHideFlags: 0
@@ -7866,7 +7824,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1684285879}
-        m_MethodName: ToggleMenu
+        m_MethodName: ToggleMenuButtons
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7981,7 +7939,7 @@ MonoBehaviour:
   buttonImage: {fileID: 830942786}
   chooseWidgetPanel: {fileID: 869487289}
   settingsManager: {fileID: 1663130606}
-  canvasManager: {fileID: 0}
+  canvasManager: {fileID: 1684285879}
 --- !u!114 &830942785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9972,7 +9930,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!1 &1016115984
 GameObject:
   m_ObjectHideFlags: 0
@@ -15989,7 +15947,7 @@ RectTransform:
   - {fileID: 362407715}
   - {fileID: 538169897}
   m_Father: {fileID: 1936125370}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -16110,7 +16068,7 @@ RectTransform:
   - {fileID: 878370716}
   - {fileID: 1212091181}
   m_Father: {fileID: 1936125370}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -16133,8 +16091,9 @@ MonoBehaviour:
   chooseWidgetPanel: {fileID: 869487289}
   displaySettingsPanel: {fileID: 1597850608}
   errorWindow: {fileID: 2078126958}
+  widgetRoot: {fileID: 1663130605}
   openMenu: {fileID: 0}
-  menuOpen: 0
+  menuButtonsOpen: 0
 --- !u!114 &1684285880
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16191,7 +16150,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &1691039442
 GameObject:
@@ -18922,8 +18881,8 @@ Transform:
   m_Children:
   - {fileID: 1754773497}
   - {fileID: 1477121841}
-  - {fileID: 1663130609}
   - {fileID: 1684285878}
+  - {fileID: 1663130609}
   - {fileID: 2058893471}
   - {fileID: 934108277}
   m_Father: {fileID: 0}

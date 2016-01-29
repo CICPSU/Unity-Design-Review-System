@@ -177,6 +177,6 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 		Debug.Log(file);
 		XmlIO.Save (objToSave, file);
-        LoadSettingsFiles();
+        //LoadSettingsFiles();
 	}
 }

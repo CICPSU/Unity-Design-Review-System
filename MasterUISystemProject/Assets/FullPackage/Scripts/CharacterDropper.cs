@@ -73,7 +73,7 @@ public class CharacterDropper : WidgetMenu {
             dropCharacterSelectPanel.gameObject.SetActive(true);
             modelToggleGroup.SetAllTogglesOff();
             randomToggle.isOn = true;
-            charToDrop = CreateRandomChar();
+            charToDrop = GetCharacter();
             buttonImage.color = Color.red;
         }
         else
@@ -101,8 +101,10 @@ public class CharacterDropper : WidgetMenu {
                 }
             }
         }
+        
         returnChar.GetComponent<CapsuleCollider>().enabled = false;
         returnChar.GetComponent<NavMeshAgent>().enabled = false;
+        returnChar.GetComponent<NavMeshWander>().enabled = false;
         return returnChar;
     }
 
@@ -197,7 +199,7 @@ public class CharacterDropper : WidgetMenu {
                 mouseCam = FindMouseCamera();
 
                 // GENERAL RAYCAST INTO THE VIRTUAL WORLD
-                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9));
+                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9 & 1 << 8));
 
                 /// CODE FOR MANAGING AND POSITIONING A TEMPORARY AVATAR FOR DROPPING
                 //sets the position of the temp avatar
@@ -218,7 +220,7 @@ public class CharacterDropper : WidgetMenu {
                 {
                     if (Input.GetMouseButtonDown(0))
                         OpenCharacterOptions();
-                    if(!radiusSelectMode)
+                    if(!radiusSelectMode && hit.transform != charToDrop.transform)
                         charToDrop.SetActive(false);
                 }
                 else
@@ -250,6 +252,7 @@ public class CharacterDropper : WidgetMenu {
                         {
                             charToDrop.GetComponent<CapsuleCollider>().enabled = true;
                             charToDrop.GetComponent<NavMeshAgent>().enabled = true;
+                            charToDrop.GetComponent<NavMeshWander>().enabled = true;
                             charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
                             charToDrop = GetCharacter();
                         }
@@ -258,6 +261,7 @@ public class CharacterDropper : WidgetMenu {
                     {
                         charToDrop.GetComponent<CapsuleCollider>().enabled = true;
                         charToDrop.GetComponent<NavMeshAgent>().enabled = true;
+                        charToDrop.GetComponent<NavMeshWander>().enabled = false;
                         charToDrop.GetComponent<NavMeshWander>().localWanderRadius = radiusProjector.orthographicSize;
                         charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
                         radiusProjector.gameObject.SetActive(false);
