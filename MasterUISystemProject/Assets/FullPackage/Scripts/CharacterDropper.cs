@@ -177,8 +177,17 @@ public class CharacterDropper : WidgetMenu {
         }
         #endregion
 
+        // this finds the camera whose viewport contains the mouse cursor
+        mouseCam = FindMouseCamera();
+
+        
+
         if (dropModeOn)
         {
+            // GENERAL RAYCAST INTO THE VIRTUAL WORLD
+            if(mouseCam != null)
+                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9 | 1 << 8));
+
             if (!charEditModeOn)
             {
 
@@ -186,20 +195,14 @@ public class CharacterDropper : WidgetMenu {
                 if (charToDrop == null)
                     charToDrop = GetCharacter();
 
-                if (modelToggleGroup.ActiveToggles().Count() > 0 
-                    && charToDrop.name != modelToggleGroup.ActiveToggles().ToList()[0].name + "(Clone)" 
+                if (modelToggleGroup.ActiveToggles().Count() > 0
+                    && charToDrop.name != modelToggleGroup.ActiveToggles().ToList()[0].name + "(Clone)"
                     && !randomToggle.isOn)
                 {
                     Destroy(charToDrop);
                     charToDrop = GetCharacter();
                 }
                 #endregion
-
-                // this finds the camera whose viewport contains the mouse cursor
-                mouseCam = FindMouseCamera();
-
-                // GENERAL RAYCAST INTO THE VIRTUAL WORLD
-                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9 & 1 << 8));
 
                 /// CODE FOR MANAGING AND POSITIONING A TEMPORARY AVATAR FOR DROPPING
                 //sets the position of the temp avatar
@@ -220,7 +223,7 @@ public class CharacterDropper : WidgetMenu {
                 {
                     if (Input.GetMouseButtonDown(0))
                         OpenCharacterOptions();
-                    if(!radiusSelectMode && hit.transform != charToDrop.transform)
+                    if (!radiusSelectMode && hit.transform != charToDrop.transform)
                         charToDrop.SetActive(false);
                 }
                 else
@@ -232,7 +235,7 @@ public class CharacterDropper : WidgetMenu {
                 //if we are in radius select mode, set the size of the projector
                 if (radiusSelectMode)
                 {
-                    if (Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(3 << 8)))
+                    if ( mouseCam != null && Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(3 << 8)))
                         radiusProjector.orthographicSize = (charToDrop.transform.position - hit.point).magnitude;
                 }
 
@@ -240,7 +243,7 @@ public class CharacterDropper : WidgetMenu {
                 if (Input.GetMouseButtonDown(1) && hit.transform != null && hit.transform.GetComponent<NavMeshWander>() == null)
                 {
                     if (!radiusSelectMode)
-                    {        
+                    {
                         if ((NavMeshWander.WanderMode)newCharWanderSelect.value == NavMeshWander.WanderMode.Local)
                         {
                             charToDrop.GetComponent<NavMeshWander>().localWanderCenter = hit.point;
@@ -277,6 +280,17 @@ public class CharacterDropper : WidgetMenu {
                     charToDrop = GetCharacter();
                 }
             }// chareditmode
+        }
+        else // not in drop mode
+        {
+            // GENERAL RAYCAST INTO THE VIRTUAL WORLD
+            if (mouseCam != null)
+                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9));
+
+            //if we are pointing at an existing avatar
+            if (hit.transform != null && hit.transform.GetComponent<NavMeshWander>() != null)
+                if (Input.GetMouseButtonDown(0) && !charEditModeOn)
+                    OpenCharacterOptions();
         }
     }
 

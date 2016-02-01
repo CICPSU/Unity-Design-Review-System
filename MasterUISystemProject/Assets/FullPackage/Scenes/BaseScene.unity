@@ -2378,7 +2378,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 599010385}
+      - m_Target: {fileID: 1663130610}
         m_MethodName: ApplyOptions
         m_Mode: 1
         m_Arguments:
@@ -4815,7 +4815,6 @@ GameObject:
   - 222: {fileID: 599010388}
   - 114: {fileID: 599010386}
   - 114: {fileID: 599010387}
-  - 114: {fileID: 599010385}
   m_Layer: 5
   m_Name: DropCharacter
   m_TagString: Untagged
@@ -4823,30 +4822,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &599010385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11470296, guid: b1aa694318b253d4c82556250dc69bf4,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 599010384}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f0419e4103d4ca4692429ca478861f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  randomToggle: {fileID: 1386142544}
-  modelLabel: {fileID: 1079732128}
-  modelList: {fileID: 1059975045}
-  modelToggleGroup: {fileID: 1059975040}
-  dropCharacterSelectPanel: {fileID: 1849076563}
-  avatar: {fileID: 2058893470}
-  newCharWanderSelect: {fileID: 2033346517}
-  charOptionsPanel: {fileID: 1212091181}
-  charOptionsWanderSelect: {fileID: 1919120065}
-  buttonImage: {fileID: 599010386}
-  radiusProjector: {fileID: 934108278}
-  canvasManager: {fileID: 0}
 --- !u!114 &599010386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4919,7 +4894,7 @@ MonoBehaviour:
         m_MethodName: OpenMenu
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 599010385}
+          m_ObjectArgument: {fileID: 1663130610}
           m_ObjectArgumentAssemblyTypeName: WidgetMenu, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -14942,7 +14917,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 599010385}
+      - m_Target: {fileID: 1663130610}
         m_MethodName: DeleteCharacter
         m_Mode: 1
         m_Arguments:
@@ -15859,6 +15834,7 @@ GameObject:
   - 114: {fileID: 1663130606}
   - 114: {fileID: 1663130608}
   - 114: {fileID: 1663130607}
+  - 114: {fileID: 1663130610}
   m_Layer: 5
   m_Name: WidgetRoot
   m_TagString: Untagged
@@ -15953,6 +15929,29 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0, y: 1}
+--- !u!114 &1663130610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1663130605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f0419e4103d4ca4692429ca478861f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  randomToggle: {fileID: 1386142544}
+  modelLabel: {fileID: 1079732128}
+  modelList: {fileID: 1059975045}
+  modelToggleGroup: {fileID: 1059975040}
+  dropCharacterSelectPanel: {fileID: 1849076563}
+  avatar: {fileID: 2058893470}
+  newCharWanderSelect: {fileID: 2033346517}
+  charOptionsPanel: {fileID: 1212091181}
+  charOptionsWanderSelect: {fileID: 1919120065}
+  buttonImage: {fileID: 599010386}
+  radiusProjector: {fileID: 934108278}
+  canvasManager: {fileID: 1684285879}
 --- !u!1 &1682953132
 GameObject:
   m_ObjectHideFlags: 0
