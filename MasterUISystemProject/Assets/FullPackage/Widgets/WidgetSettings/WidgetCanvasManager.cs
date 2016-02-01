@@ -79,6 +79,7 @@ public class WidgetCanvasManager : MonoBehaviour {
         displaySettingsPanel.SetActive(false);
         errorWindow.SetActive(false);
         menuButtonsOpen = false;
+        Time.timeScale = 1f;
     }
 
     private void OpenMenu()
@@ -98,6 +99,7 @@ public class WidgetCanvasManager : MonoBehaviour {
         toggleSettingsMenu.SetActive(true);
         dropCharacterButton.SetActive(true);
         menuButtonsOpen = true;
+        Time.timeScale = .01f;
     }
 }
 
