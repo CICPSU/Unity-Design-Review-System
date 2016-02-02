@@ -246,7 +246,9 @@ public class CharacterDropper : WidgetMenu {
                     {
                         if ((NavMeshWander.WanderMode)newCharWanderSelect.value == NavMeshWander.WanderMode.Local)
                         {
+                            Debug.Log("dropping character in local wander");
                             charToDrop.GetComponent<NavMeshWander>().localWanderCenter = hit.point;
+                            charToDrop.GetComponent<NavMeshWander>().enabled = true;
                             radiusProjector.gameObject.SetActive(true);
                             radiusProjector.transform.position = charToDrop.transform.position + new Vector3(0, 2, 0);
                             radiusSelectMode = true;
@@ -262,9 +264,10 @@ public class CharacterDropper : WidgetMenu {
                     }
                     else
                     {
+                        
                         charToDrop.GetComponent<CapsuleCollider>().enabled = true;
                         charToDrop.GetComponent<NavMeshAgent>().enabled = true;
-                        charToDrop.GetComponent<NavMeshWander>().enabled = false;
+                        charToDrop.GetComponent<NavMeshWander>().enabled = true;
                         charToDrop.GetComponent<NavMeshWander>().localWanderRadius = radiusProjector.orthographicSize;
                         charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
                         radiusProjector.gameObject.SetActive(false);
