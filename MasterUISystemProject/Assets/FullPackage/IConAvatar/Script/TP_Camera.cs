@@ -151,15 +151,15 @@ public class TP_Camera : MonoBehaviour {
 			if(iconLabCam){
 				iconLabCam = false;
 				//GameObject[] children = new GameObject[2];
-				transform.Find("LeftCamera(Clone)").gameObject.SetActive(false);
-				transform.Find("RightCamera(Clone)").gameObject.SetActive(false);
+				transform.Find("Left Camera").gameObject.SetActive(false);
+				transform.Find("Right Camera").gameObject.SetActive(false);
 				gameObject.GetComponent<Camera>().rect = new Rect (0,0,1,1);
 				gameObject.GetComponent<Camera>().fieldOfView = 60;
 			}
 			else{
 				iconLabCam = true;
-				transform.Find("LeftCamera(Clone)").gameObject.SetActive(true);
-				transform.Find("RightCamera(Clone)").gameObject.SetActive(true);
+				transform.Find("Left Camera").gameObject.SetActive(true);
+				transform.Find("Right Camera").gameObject.SetActive(true);
 				gameObject.GetComponent<Camera>().rect = new Rect(0.3333334f, 0,0.3333334f, 1);
 				gameObject.GetComponent<Camera>().fieldOfView = 34;
 			}
