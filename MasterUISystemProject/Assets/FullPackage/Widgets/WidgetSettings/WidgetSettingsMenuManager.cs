@@ -2,16 +2,17 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class WidgetSettingsMenuManager : WidgetMenu {
+public class WidgetSettingsMenuManager : MonoBehaviour {
 
     public Image buttonImage;
     public GameObject chooseWidgetPanel;
+    public GameObject displaySettingsPanel;
     public WidgetSettingsManager settingsManager;
     public WidgetCanvasManager canvasManager;
 
     private bool shouldOpen = false;
 
-    public override void ToggleMenu()
+    public void ToggleMenu()
     {
         shouldOpen = !shouldOpen;
         if (shouldOpen)
@@ -23,6 +24,7 @@ public class WidgetSettingsMenuManager : WidgetMenu {
         else
         {
             chooseWidgetPanel.SetActive(false);
+            displaySettingsPanel.SetActive(false);
             buttonImage.color = Color.white;
         }
     }
