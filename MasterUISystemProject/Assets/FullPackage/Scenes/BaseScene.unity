@@ -16280,6 +16280,7 @@ MonoBehaviour:
   dropCharacterSelectPanel: {fileID: 1849076563}
   avatar: {fileID: 2058893470}
   newCharWanderSelect: {fileID: 2033346517}
+  charEditWanderSelect: {fileID: 1919120065}
   charOptionsPanel: {fileID: 1212091181}
   charOptionsWanderSelect: {fileID: 1919120065}
   buttonImage: {fileID: 599010386}

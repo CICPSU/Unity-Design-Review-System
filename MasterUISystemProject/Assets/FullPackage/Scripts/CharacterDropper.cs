@@ -13,6 +13,7 @@ public class CharacterDropper : WidgetMenu {
     public RectTransform dropCharacterSelectPanel;
     public GameObject avatar;
     public Dropdown newCharWanderSelect;
+    public Dropdown charEditWanderSelect;
     public RectTransform charOptionsPanel;
     public Dropdown charOptionsWanderSelect;
     public Image buttonImage;
@@ -28,6 +29,7 @@ public class CharacterDropper : WidgetMenu {
     private bool charEditModeOn;
     private bool radiusSelectMode;
     private bool modelOptionsGreyed;
+    private bool setCharLocalRadius = false;
     private Vector3 dropLocation = Vector3.zero;
     private Camera mouseCam;
     private RaycastHit hit;
@@ -182,6 +184,7 @@ public class CharacterDropper : WidgetMenu {
 
         
 
+
         if (dropModeOn)
         {
             // GENERAL RAYCAST INTO THE VIRTUAL WORLD
@@ -238,6 +241,7 @@ public class CharacterDropper : WidgetMenu {
                     if ( mouseCam != null && Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(3 << 8)))
                         radiusProjector.orthographicSize = (charToDrop.transform.position - hit.point).magnitude;
                 }
+                
 
                 //if we right click while hover over something that isnt an existing avatar
                 if (Input.GetMouseButtonDown(1) && hit.transform != null && hit.transform.GetComponent<NavMeshWander>() == null)
@@ -290,10 +294,36 @@ public class CharacterDropper : WidgetMenu {
             if (mouseCam != null)
                 Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9));
 
+            //if we are in radius select mode, set the size of the projector
+            if (radiusSelectMode)
+            {
+                if (mouseCam != null && Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(3 << 8)))
+                    radiusProjector.orthographicSize = (charToEdit.transform.position - hit.point).magnitude;
+            }
+
             //if we are pointing at an existing avatar
             if (hit.transform != null && hit.transform.GetComponent<NavMeshWander>() != null)
                 if (Input.GetMouseButtonDown(0) && !charEditModeOn)
                     OpenCharacterOptions();
+
+            if (charEditModeOn)
+            {
+                
+                if ((NavMeshWander.WanderMode)charEditWanderSelect.value == NavMeshWander.WanderMode.Local && !radiusSelectMode && !setCharLocalRadius)
+                {
+                    Debug.Log("char edit wander is local");
+                    radiusProjector.gameObject.SetActive(true);
+                    radiusProjector.transform.position = charToEdit.transform.position + new Vector3(0, 2, 0);
+                    radiusSelectMode = true;
+                }
+            }
+
+            if (radiusSelectMode && Input.GetMouseButtonUp(1))
+            {
+                radiusSelectMode = false;
+                setCharLocalRadius = true;
+                radiusProjector.gameObject.SetActive(false);
+            }
         }
     }
 
@@ -301,6 +331,7 @@ public class CharacterDropper : WidgetMenu {
     {
         Destroy(charToDrop);
         charEditModeOn = true;
+        setCharLocalRadius = false;
         charToEdit = hit.transform.gameObject;
         navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
         prevWanderMode = navMeshWanderToEdit.mode;
@@ -314,6 +345,14 @@ public class CharacterDropper : WidgetMenu {
     public void ApplyOptions()
     {
         prevWanderMode = (NavMeshWander.WanderMode)charOptionsWanderSelect.value;
+
+        if (prevWanderMode == NavMeshWander.WanderMode.Local)
+        {
+            navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
+            navMeshWanderToEdit.localWanderRadius = radiusProjector.orthographicSize;
+        }
+       
+
         CloseCharacterOptions();
     }
 
@@ -321,8 +360,9 @@ public class CharacterDropper : WidgetMenu {
     {
         charToEdit = null;
         charEditModeOn = false;
-        if(navMeshWanderToEdit != null)
-        navMeshWanderToEdit.mode = prevWanderMode;
+        radiusSelectMode = false;
+        if (navMeshWanderToEdit != null)
+            navMeshWanderToEdit.mode = prevWanderMode;
         charOptionsPanel.gameObject.SetActive(false);
     }
 

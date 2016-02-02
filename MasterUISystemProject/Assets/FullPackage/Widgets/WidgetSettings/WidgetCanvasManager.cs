@@ -58,7 +58,11 @@ public class WidgetCanvasManager : MonoBehaviour {
     public void ToggleMenuButtons()
     {
         if (menuButtonsOpen)
+        {
+            if (openMenu != null)
+                OpenMenu(openMenu);
             CloseAll();
+        }
         else
             OpenMenu();
 
