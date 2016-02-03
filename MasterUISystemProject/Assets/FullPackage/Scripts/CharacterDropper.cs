@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public class CharacterDropper : WidgetMenu {
+public class CharacterDropper : MonoBehaviour {
 
     public Toggle randomToggle;
     public Text modelLabel;
@@ -59,7 +59,7 @@ public class CharacterDropper : WidgetMenu {
         CloseCharacterOptions();
     }
 
-    public override void ToggleMenu()
+    public void ToggleMenu()
     {
         dropModeOn = !dropModeOn;
         ToggleMode(dropModeOn);

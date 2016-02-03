@@ -31,38 +31,10 @@ public class WidgetCanvasManager : MonoBehaviour {
         }
     }
 
-    public void OpenMenu(WidgetMenu menuToOpen)
-    {
-        if (openMenu == null)
-        {
-            //this opens the menu
-            menuToOpen.ToggleMenu();
-            openMenu = menuToOpen;
-        }
-        else if(openMenu == menuToOpen)
-        {
-            //this will close the menu
-            openMenu.ToggleMenu();
-            openMenu = null;
-        }
-        else
-        {
-            //this closes the currently open menu and opens the new one
-            openMenu.ToggleMenu();
-            menuToOpen.ToggleMenu();
-            openMenu = menuToOpen;
-        }
-
-    }
-
     public void ToggleMenuButtons()
     {
         if (menuButtonsOpen)
-        {
-            if (openMenu != null)
-                OpenMenu(openMenu);
             CloseAll();
-        }
         else
             OpenMenu();
 
@@ -77,15 +49,14 @@ public class WidgetCanvasManager : MonoBehaviour {
         widgetRoot.GetComponent<WidgetSettingsManager>().LoadSettingsFiles();
 
         //this closes all menu buttons along with any other panels that were opened
+        GetComponent<ToggleGroup>().SetAllTogglesOff();
         toggleSettingsMenu.SetActive(false);
         dropCharacterButton.SetActive(false);
-        chooseWidgetPanel.SetActive(false);
-        displaySettingsPanel.SetActive(false);
         errorWindow.SetActive(false);
         menuButtonsOpen = false;
         Time.timeScale = 1f;
     }
-
+    
     private void OpenMenu()
     {
         //this goes through and deactivates all the open widgets
