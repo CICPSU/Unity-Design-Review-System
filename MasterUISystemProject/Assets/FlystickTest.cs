@@ -23,7 +23,7 @@ public class FlystickTest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        data = (TrackerData)InputManager.map.GetDevices("Tracker");
+		data = (TrackerData)InputManager.map.GetValue("Tracker");
         flystickTracker.transform.position = data.Position;
         flystickTracker.transform.rotation = data.Rotation;
         axisZero = (float)InputManager.map.GetValue("Axis0");
