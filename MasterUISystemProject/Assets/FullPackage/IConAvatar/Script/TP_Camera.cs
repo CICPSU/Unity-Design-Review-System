@@ -145,7 +145,7 @@ public class TP_Camera : MonoBehaviour {
 			distanceSmooth = DistanceSmooth;
 		}
 		
-		
+/*		legacy code before DIRE
 		//Toggle camera between ICon lab camera and single camera
 		if(Input.GetKeyUp(TP_InputManager.instance.toggleCamera)){
 			if(iconLabCam){
@@ -164,6 +164,7 @@ public class TP_Camera : MonoBehaviour {
 				gameObject.GetComponent<Camera>().fieldOfView = 34;
 			}
 		}
+		*/
 		
 		//Toggle gravity with G
 		if(Input.GetKeyUp(TP_InputManager.instance.gravity)){
