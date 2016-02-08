@@ -17,10 +17,12 @@ public class TP_Camera : MonoBehaviour {
 	
 	public float X_MouseSensitivity = 5f;
 	public float Y_MouseSensitivity = 5f;
-	
-//****!!!!!!!! control the Q,E sensitivity NOTE: has been moved to TP_InputManager
-//	public float RotateKeySensitivity = 0.8f;
-	
+
+    //****!!!!!!!! control the Q,E sensitivity NOTE: has been moved to TP_InputManager
+    //	public float RotateKeySensitivity = 0.8f;
+
+    public bool allowPlayerInput = true;
+
 	public float MouseWheelSensitivity = 2.5f;	
 	public float X_Smooth = 0.05f;
 	public float Y_Smooth = 0.1f;
@@ -28,7 +30,7 @@ public class TP_Camera : MonoBehaviour {
 	public float Y_MaxLimit = 80f;
 	public float OcclusionDistanceStep = 0.5f;
 	public int MaxOcclusionChecks = 1;
-	public bool iconLabCam = false;
+    public bool iconLabCam = false;
 //used to control the smoothDamn of camera snap
 	public float XSnapSmooth = 100f;
 	public float YSnapSmooth = 1.5f;
@@ -78,6 +80,7 @@ public class TP_Camera : MonoBehaviour {
 			return;
 
         //if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
+        if(allowPlayerInput)
             HandlePlayerInput();
         checkCameraCharacterDistance(desiredPosition, cameraDistanceCheck.position);
 

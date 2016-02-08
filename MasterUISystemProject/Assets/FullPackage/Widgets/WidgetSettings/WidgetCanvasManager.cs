@@ -12,7 +12,7 @@ public class WidgetCanvasManager : MonoBehaviour {
     public GameObject errorWindow;
     public GameObject widgetRoot;
 
-    public WidgetMenu openMenu = null;
+    public TP_Camera tpCamRef;
 
     public bool menuButtonsOpen = false;
 
@@ -25,10 +25,7 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     void Update()
     {
-        if(openMenu != null)
-        {
-            
-        }
+       
     }
 
     public void ToggleMenuButtons()
@@ -54,6 +51,7 @@ public class WidgetCanvasManager : MonoBehaviour {
         dropCharacterButton.SetActive(false);
         errorWindow.SetActive(false);
         menuButtonsOpen = false;
+        tpCamRef.allowPlayerInput = true;
         Time.timeScale = 1f;
     }
     
@@ -74,6 +72,7 @@ public class WidgetCanvasManager : MonoBehaviour {
         toggleSettingsMenu.SetActive(true);
         dropCharacterButton.SetActive(true);
         menuButtonsOpen = true;
+        tpCamRef.allowPlayerInput = false;
         Time.timeScale = .01f;
     }
 }

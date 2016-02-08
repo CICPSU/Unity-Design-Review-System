@@ -7760,7 +7760,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 30.652496}
+  m_AnchoredPosition: {x: 0, y: 14.480011}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &783624485
@@ -8524,6 +8524,7 @@ MonoBehaviour:
   DistanceResumeSmooth: 1
   X_MouseSensitivity: 5
   Y_MouseSensitivity: 5
+  allowPlayerInput: 1
   MouseWheelSensitivity: 2.5
   X_Smooth: 0.05
   Y_Smooth: 0.1
@@ -14688,7 +14689,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 704488460}
   m_HandleRect: {fileID: 704488459}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 0.52760744
   m_Size: 0.91869366
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -16433,7 +16434,7 @@ MonoBehaviour:
   displaySettingsPanel: {fileID: 1597850608}
   errorWindow: {fileID: 2078126958}
   widgetRoot: {fileID: 1663130605}
-  openMenu: {fileID: 0}
+  tpCamRef: {fileID: 858128022}
   menuButtonsOpen: 0
 --- !u!114 &1684285880
 MonoBehaviour:
@@ -21491,16 +21492,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1684285879}
-        m_MethodName: OpenMenu
-        m_Mode: 2
+      - m_Target: {fileID: 830942785}
+        m_MethodName: set_isOn
+        m_Mode: 6
         m_Arguments:
-          m_ObjectArgument: {fileID: 830942784}
-          m_ObjectArgumentAssemblyTypeName: WidgetMenu, Assembly-CSharp
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 1
+          m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
