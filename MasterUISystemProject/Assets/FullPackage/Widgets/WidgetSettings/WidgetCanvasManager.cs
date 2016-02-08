@@ -13,6 +13,7 @@ public class WidgetCanvasManager : MonoBehaviour {
     public GameObject widgetRoot;
 
     public TP_Camera tpCamRef;
+    public TP_Controller tpControlRef;
 
     public bool menuButtonsOpen = false;
 
@@ -52,6 +53,7 @@ public class WidgetCanvasManager : MonoBehaviour {
         errorWindow.SetActive(false);
         menuButtonsOpen = false;
         tpCamRef.allowPlayerInput = true;
+        tpControlRef.allowPlayerInput = true;
         Time.timeScale = 1f;
     }
     
@@ -73,6 +75,7 @@ public class WidgetCanvasManager : MonoBehaviour {
         dropCharacterButton.SetActive(true);
         menuButtonsOpen = true;
         tpCamRef.allowPlayerInput = false;
+        tpControlRef.allowPlayerInput = false;
         Time.timeScale = .01f;
     }
 }

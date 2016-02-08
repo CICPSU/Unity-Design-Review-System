@@ -33,6 +33,7 @@ public class CharacterDropper : MonoBehaviour {
     private Vector3 dropLocation = Vector3.zero;
     private Camera mouseCam;
     private RaycastHit hit;
+    private int randomCharIndex = -1;
 
     private NavMeshWander.WanderMode prevWanderMode = NavMeshWander.WanderMode.Idle;
 
@@ -112,9 +113,15 @@ public class CharacterDropper : MonoBehaviour {
 
     private GameObject CreateRandomChar()
     {
+        /*
         int randomIndex = (int)Random.Range(0, loadedCharacters.Count - 1);
         modelLabel.text = "Model: " + loadedCharacters[randomIndex].name;
-        return Instantiate(loadedCharacters[randomIndex], dropLocation, Quaternion.identity) as GameObject;
+        */
+        randomCharIndex++;
+        if (randomCharIndex >= loadedCharacters.Count)
+            randomCharIndex = 0;
+        modelLabel.text = "Model: " + loadedCharacters[randomCharIndex].name;   
+        return Instantiate(loadedCharacters[randomCharIndex], dropLocation, Quaternion.identity) as GameObject;
     }
 
     void Start()

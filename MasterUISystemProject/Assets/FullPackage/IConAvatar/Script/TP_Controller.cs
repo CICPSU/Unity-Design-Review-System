@@ -8,6 +8,7 @@ public class TP_Controller : MonoBehaviour {
 
 	public static CharacterController characterController;
 	public static TP_Controller Instance;
+    public bool allowPlayerInput = true;
 	void Awake () {
 		if(characterController == null)
 			characterController = GetComponent("CharacterController") as CharacterController;
@@ -18,7 +19,7 @@ public class TP_Controller : MonoBehaviour {
 	}
 
 	void Update () {
-        if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
+        if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting") && allowPlayerInput)
         {
             GetLocomontionInput();
             HandleActionInput();

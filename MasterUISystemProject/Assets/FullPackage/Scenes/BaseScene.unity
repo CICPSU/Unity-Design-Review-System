@@ -7760,7 +7760,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 14.480011}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &783624485
@@ -14689,7 +14689,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 704488460}
   m_HandleRect: {fileID: 704488459}
   m_Direction: 2
-  m_Value: 0.52760744
+  m_Value: 1
   m_Size: 0.91869366
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -16435,6 +16435,7 @@ MonoBehaviour:
   errorWindow: {fileID: 2078126958}
   widgetRoot: {fileID: 1663130605}
   tpCamRef: {fileID: 858128022}
+  tpControlRef: {fileID: 2058893473}
   menuButtonsOpen: 0
 --- !u!114 &1684285880
 MonoBehaviour:
@@ -20723,6 +20724,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb0dc004b49228142b4bef9cf7c37944, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allowPlayerInput: 1
 --- !u!114 &2058893474
 MonoBehaviour:
   m_ObjectHideFlags: 0
