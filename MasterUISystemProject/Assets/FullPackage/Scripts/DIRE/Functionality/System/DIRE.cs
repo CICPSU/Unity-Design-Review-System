@@ -190,12 +190,13 @@ public class DIRE : MonoBehaviour
     /// </summary>
     void Update()
     {
+        /*
         Camera mouseCam = FindMouseCamera();
         foreach(Canvas worldCanvas in worldCanvasArray)
         {
             worldCanvas.worldCamera = mouseCam;
         }
-
+        */
         // Exit if escape key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
             System.Diagnostics.Process.GetCurrentProcess().Kill();

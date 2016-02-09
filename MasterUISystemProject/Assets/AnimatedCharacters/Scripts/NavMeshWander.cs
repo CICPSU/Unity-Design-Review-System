@@ -5,11 +5,17 @@ public class NavMeshWander : MonoBehaviour {
 
     public enum WanderMode { Idle, Local, World}
 
-    public float localWanderRadius = 10;
+    public float localWanderRadius = 3;
 
     public Vector3 localWanderCenter = Vector3.zero;
 
     public WanderMode mode = WanderMode.Local;
+
+    public float defaultSpeed = 1.5f;
+
+    public float normalSpeedRadius = 3f;
+
+    public float navAgentSpeed;
 
     private NavMeshAgent navAgent;
 
@@ -21,6 +27,7 @@ public class NavMeshWander : MonoBehaviour {
 	void Start () {
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        navAgentSpeed = defaultSpeed;
         ConfigureDestination();
 	}
 	
@@ -32,6 +39,18 @@ public class NavMeshWander : MonoBehaviour {
 
     public void ConfigureDestination()
     {
+       
+        if (localWanderRadius < normalSpeedRadius && navAgentSpeed != defaultSpeed * localWanderRadius / normalSpeedRadius)
+        {
+            navAgentSpeed = defaultSpeed * localWanderRadius / normalSpeedRadius;
+            animator.speed = localWanderRadius / normalSpeedRadius;
+        }
+        else
+            GetComponent<Animator>().speed = 1;
+        navAgent.speed = navAgentSpeed;
+
+        
+
         if (mode == WanderMode.Idle)
         {
             if(navAgent.isOnNavMesh)
