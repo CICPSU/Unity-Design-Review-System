@@ -278,7 +278,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 19820360}
+      - m_Target: {fileID: 0}
         m_MethodName: ChangeSize
         m_Mode: 6
         m_Arguments:
@@ -362,7 +362,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 19820359}
-  - 114: {fileID: 19820360}
   m_Layer: 0
   m_Name: MiniMap
   m_TagString: Untagged
@@ -389,29 +388,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &19820360
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11414764, guid: b1aa694318b253d4c82556250dc69bf4,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 19820358}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8adbc266d642cae46b4378d2b458d1e4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  avatar: {fileID: 2058893470}
-  miniMapCam: {fileID: 1426714105}
-  compassImage: {fileID: 492659166}
-  zoomLabel: {fileID: 275077058}
-  miniMapPanel: {fileID: 2080516028}
-  miniMapRender: {fileID: 179120012}
-  miniMapMask: {fileID: 996576241}
-  mapProportionOfScreen: 0.2
-  isMiniActive: 1
-  orthoCamRadiusFeet: 5
-  mapRadiusIncrementInFeet: 5
 --- !u!1 &29829954
 GameObject:
   m_ObjectHideFlags: 0
@@ -1446,7 +1422,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 19820360}
+      - m_Target: {fileID: 0}
         m_MethodName: Teleport
         m_Mode: 1
         m_Arguments:
@@ -4905,7 +4881,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 19820360}
+      - m_Target: {fileID: 0}
         m_MethodName: SetRotate
         m_Mode: 6
         m_Arguments:
@@ -6153,7 +6129,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 19820360}
+      - m_Target: {fileID: 0}
         m_MethodName: ChangeZoom
         m_Mode: 6
         m_Arguments:
@@ -6514,7 +6490,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 19820360}
+      - m_Target: {fileID: 0}
         m_MethodName: SetRotate
         m_Mode: 6
         m_Arguments:
@@ -7687,7 +7663,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 30.652496}
+  m_AnchoredPosition: {x: 0, y: 30.652527}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &783624485
@@ -8451,7 +8427,6 @@ MonoBehaviour:
   DistanceResumeSmooth: 1
   X_MouseSensitivity: 5
   Y_MouseSensitivity: 5
-  allowPlayerInput: 1
   MouseWheelSensitivity: 2.5
   X_Smooth: 0.05
   Y_Smooth: 0.1
@@ -9442,7 +9417,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 19820360}
+      - m_Target: {fileID: 0}
         m_MethodName: ChangeSize
         m_Mode: 6
         m_Arguments:
@@ -16157,6 +16132,7 @@ GameObject:
   - 114: {fileID: 1663130608}
   - 114: {fileID: 1663130607}
   - 114: {fileID: 1663130610}
+  - 114: {fileID: 1663130611}
   m_Layer: 5
   m_Name: WidgetRoot
   m_TagString: Untagged
@@ -16274,6 +16250,28 @@ MonoBehaviour:
   buttonImage: {fileID: 599010386}
   radiusProjector: {fileID: 934108278}
   canvasManager: {fileID: 1684285879}
+--- !u!114 &1663130611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1663130605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adbc266d642cae46b4378d2b458d1e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 2058893470}
+  miniMapCam: {fileID: 1426714105}
+  compassImage: {fileID: 492659166}
+  zoomLabel: {fileID: 275077058}
+  miniMapPanel: {fileID: 2080516028}
+  miniMapRender: {fileID: 179120012}
+  miniMapMask: {fileID: 996576241}
+  mapProportionOfScreen: 0.2
+  isMiniActive: 1
+  orthoCamRadiusFeet: 5
+  mapRadiusIncrementInFeet: 5
 --- !u!1 &1682953132
 GameObject:
   m_ObjectHideFlags: 0
@@ -17916,7 +17914,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 19820360}
+      - m_Target: {fileID: 0}
         m_MethodName: ChangeZoom
         m_Mode: 6
         m_Arguments:
@@ -20718,7 +20716,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   avatarRotation: 0
   targetLookAt: {fileID: 908977624}
-  avatarAnimator: {fileID: 0}
+  avatarAnimator: {fileID: 879605448}
 --- !u!1 &2061679520
 GameObject:
   m_ObjectHideFlags: 0

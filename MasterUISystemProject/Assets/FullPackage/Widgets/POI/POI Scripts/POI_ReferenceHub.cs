@@ -28,6 +28,19 @@ public class POI_ReferenceHub : MonoBehaviour{
 	public  UnityEngine.Object defaultMarkerPrefab; //stores the reference to the marker prefab for instantiation
 
 	void Awake(){
+        if (Avatar == null)
+        {
+            Debug.Log("POI_ReferenceHub.Avatar was null! Searching for tag: Player");
+            if (GameObject.FindGameObjectWithTag("Player") != null)
+            {
+                Debug.Log("Found object tagged: Player");
+                Avatar = GameObject.FindGameObjectWithTag("Player");
+            }
+            else
+            {
+                Debug.Log("POI_ReferenceHub.Avatar was null and no object tagged: Player");
+            }
+        }
 		if (POI_ReferenceHub.Instance == null) {
 			POI_ReferenceHub.Instance = this;
 		} else {

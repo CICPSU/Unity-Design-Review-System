@@ -126,6 +126,21 @@ public class CharacterDropper : MonoBehaviour {
 
     void Start()
     {
+
+        if (avatar == null)
+        {
+            Debug.Log("CharacterDropper.Avatar was null! Searching for tag: Player");
+            if (GameObject.FindGameObjectWithTag("Player") != null)
+            {
+                Debug.Log("Found object tagged: Player");
+                avatar = GameObject.FindGameObjectWithTag("Player");
+            }
+            else
+            {
+                Debug.Log("CharacterDropper.Avatar was null and no object tagged: Player");
+            }
+        }
+
         charOptionsPanel.gameObject.SetActive(false);
         Object[] tmpArray = Resources.LoadAll("Characters/");
         foreach (Object obj in tmpArray)

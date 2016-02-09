@@ -25,8 +25,20 @@ public class MiniMapManager : MonoBehaviour {
 	
 	void Start()
 	{
-		avatar = GameObject.FindWithTag("Player");
-		SetMiniMapCam ();
+        if (avatar == null)
+        {
+            Debug.Log("MiniMapManager.Avatar was null! Searching for tag: Player");
+            if (GameObject.FindGameObjectWithTag("Player") != null)
+            {
+                Debug.Log("Found object tagged: Player");
+                avatar = GameObject.FindGameObjectWithTag("Player");
+            }
+            else
+            {
+                Debug.Log("MiniMapManager.Avatar was null and no object tagged: Player");
+            }
+        }
+        SetMiniMapCam ();
 		zoomLabel.text = "Diameter: " + (2 * orthoCamRadiusFeet).ToString("F1")  + " ft";
 	}
 
