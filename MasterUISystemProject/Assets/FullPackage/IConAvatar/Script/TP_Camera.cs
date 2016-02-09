@@ -21,7 +21,7 @@ public class TP_Camera : MonoBehaviour {
     //****!!!!!!!! control the Q,E sensitivity NOTE: has been moved to TP_InputManager
     //	public float RotateKeySensitivity = 0.8f;
 
-    public bool allowPlayerInput = true;
+    //public bool allowPlayerInput = true;
 
 	public float MouseWheelSensitivity = 2.5f;	
 	public float X_Smooth = 0.05f;
@@ -80,7 +80,7 @@ public class TP_Camera : MonoBehaviour {
 			return;
 
         //if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
-        if(allowPlayerInput)
+        //if(allowPlayerInput)
             HandlePlayerInput();
         checkCameraCharacterDistance(desiredPosition, cameraDistanceCheck.position);
 
@@ -246,9 +246,9 @@ public class TP_Camera : MonoBehaviour {
 	}
 	
 	void UpdatePosition(){
-		var posX = Mathf.SmoothDamp(position.x, desiredPosition.x, ref velX, X_Smooth);
-		var posY = Mathf.SmoothDamp(position.y, desiredPosition.y, ref velY, Y_Smooth);
-		var posZ = Mathf.SmoothDamp(position.z, desiredPosition.z, ref velZ, X_Smooth);
+		var posX = Mathf.SmoothDamp(position.x, desiredPosition.x, ref velX, X_Smooth * Time.timeScale);
+		var posY = Mathf.SmoothDamp(position.y, desiredPosition.y, ref velY, Y_Smooth * Time.timeScale);
+		var posZ = Mathf.SmoothDamp(position.z, desiredPosition.z, ref velZ, X_Smooth * Time.timeScale);
 		position = new Vector3(posX, posY, posZ);
 		transform.position = position;
 		transform.LookAt(TargetLookAt);

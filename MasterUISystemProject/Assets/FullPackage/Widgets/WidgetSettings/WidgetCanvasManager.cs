@@ -52,7 +52,7 @@ public class WidgetCanvasManager : MonoBehaviour {
         dropCharacterButton.SetActive(false);
         errorWindow.SetActive(false);
         menuButtonsOpen = false;
-        tpCamRef.allowPlayerInput = true;
+        //tpCamRef.allowPlayerInput = true;
         tpControlRef.allowPlayerInput = true;
         Time.timeScale = 1f;
     }
@@ -74,7 +74,7 @@ public class WidgetCanvasManager : MonoBehaviour {
         toggleSettingsMenu.SetActive(true);
         dropCharacterButton.SetActive(true);
         menuButtonsOpen = true;
-        tpCamRef.allowPlayerInput = false;
+        //tpCamRef.allowPlayerInput = false;
         tpControlRef.allowPlayerInput = false;
         Time.timeScale = .01f;
     }
