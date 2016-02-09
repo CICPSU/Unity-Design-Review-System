@@ -361,7 +361,7 @@ GameObject:
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 19820359}
+  - 224: {fileID: 19820359}
   - 114: {fileID: 19820360}
   m_Layer: 0
   m_Name: MiniMap
@@ -370,10 +370,10 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &19820359
-Transform:
+--- !u!224 &19820359
+RectTransform:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 462114, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 19820358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -384,6 +384,11 @@ Transform:
   - {fileID: 2080516029}
   m_Father: {fileID: 1663130609}
   m_RootOrder: 0
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &19820360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +405,7 @@ MonoBehaviour:
   miniMapCam: {fileID: 1426714105}
   compassImage: {fileID: 492659166}
   zoomLabel: {fileID: 275077058}
-  miniMapCanvas: {fileID: 0}
+  miniMapPanel: {fileID: 2080516028}
   miniMapRender: {fileID: 179120012}
   miniMapMask: {fileID: 996576241}
   mapProportionOfScreen: 0.2
@@ -7682,7 +7687,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 30.652496}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &783624485
@@ -14665,7 +14670,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 704488460}
   m_HandleRect: {fileID: 704488459}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 0.91869366
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -21035,11 +21040,11 @@ RectTransform:
   - {fileID: 1234907477}
   m_Father: {fileID: 19820359}
   m_RootOrder: 1
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 837, y: 438}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 200, y: 200}
-  m_Pivot: {x: 1, y: 1}
+  m_Pivot: {x: 0, y: 0}
 --- !u!114 &2080516030
 MonoBehaviour:
   m_ObjectHideFlags: 0

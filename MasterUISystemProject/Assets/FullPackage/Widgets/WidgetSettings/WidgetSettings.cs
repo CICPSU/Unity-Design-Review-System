@@ -78,12 +78,13 @@ public class MiniMapSettings : WidgetSettings {
         gO.transform.GetChild(1).gameObject.SetActive(enabled);
         if (!enabled)
             return;
-        RectTransform rectTrans = gO.transform.GetChild(1).GetChild(0).GetComponentInChildren<RectTransform> ();
+        MiniMapManager miniMapManagerRef = gO.GetComponent<MiniMapManager>();
+        RectTransform rectTrans = miniMapManagerRef.miniMapPanel.GetComponent<RectTransform> ();
 		rectTrans.anchoredPosition = rectPos;
 
-		gO.GetComponent<MiniMapManager> ().mapProportionOfScreen = mapPortionOfScreen;
-		gO.GetComponent<MiniMapManager> ().orthoCamRadiusFeet = orthoCamRadiusFeet;
-		gO.GetComponent<MiniMapManager> ().SetMiniMapCam ();
+        miniMapManagerRef.mapProportionOfScreen = mapPortionOfScreen;
+        miniMapManagerRef.orthoCamRadiusFeet = orthoCamRadiusFeet;
+        miniMapManagerRef.SetMiniMapCam ();
 	}
 
 	public override void SetValues(object[] values)

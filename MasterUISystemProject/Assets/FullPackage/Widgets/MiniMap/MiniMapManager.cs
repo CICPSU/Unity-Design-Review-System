@@ -8,7 +8,7 @@ public class MiniMapManager : MonoBehaviour {
 	public GameObject miniMapCam;
 	public RectTransform compassImage;
 	public Text zoomLabel;
-	public GameObject miniMapCanvas;
+	public GameObject miniMapPanel;
 	public RectTransform miniMapRender;
 	public RectTransform miniMapMask;
 	public float mapProportionOfScreen = 0.2f;
@@ -36,7 +36,7 @@ public class MiniMapManager : MonoBehaviour {
 		if (Input.GetKeyDown ("m")) 
 		{
 			isMiniActive = !isMiniActive;
-			miniMapCanvas.SetActive (isMiniActive);
+			miniMapPanel.SetActive (isMiniActive);
 		}
 		if (Input.GetKeyDown ("r")) 
 		{
