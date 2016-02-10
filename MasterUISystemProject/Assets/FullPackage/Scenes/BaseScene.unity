@@ -13430,7 +13430,7 @@ GameObject:
   - 222: {fileID: 1212091183}
   - 114: {fileID: 1212091182}
   m_Layer: 5
-  m_Name: CharacterOptionsPanel
+  m_Name: CharacterInfoPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18202,19 +18202,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f0419e4103d4ca4692429ca478861f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  avatar: {fileID: 2058893470}
   randomToggle: {fileID: 1386142544}
   modelLabel: {fileID: 1079732128}
   modelList: {fileID: 1059975045}
   modelToggleGroup: {fileID: 1059975040}
   dropCharacterSelectPanel: {fileID: 1849076563}
-  avatar: {fileID: 2058893470}
   newCharWanderSelect: {fileID: 2033346517}
-  charEditWanderSelect: {fileID: 0}
-  charOptionsPanel: {fileID: 1212091181}
-  charOptionsWanderSelect: {fileID: 0}
   buttonImage: {fileID: 599010386}
+  charInfoPanel: {fileID: 1212091181}
   radiusProjector: {fileID: 934108278}
-  canvasManager: {fileID: 1684285879}
 --- !u!114 &1663130611
 MonoBehaviour:
   m_ObjectHideFlags: 0
