@@ -902,7 +902,7 @@ GameObject:
   - 114: {fileID: 11459012}
   - 136: {fileID: 13606328}
   m_Layer: 8
-  m_Name: Mia_Business
+  m_Name: Natasha
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2740,6 +2740,9 @@ MonoBehaviour:
   localWanderRadius: 10
   localWanderCenter: {x: 0, y: 0, z: 0}
   mode: 0
+  defaultSpeed: 1.5
+  normalSpeedRadius: 3
+  navAgentSpeed: 0
 --- !u!136 &13606328
 CapsuleCollider:
   m_ObjectHideFlags: 1
