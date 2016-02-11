@@ -13,6 +13,7 @@ public class WidgetCanvasManager : MonoBehaviour {
     public GameObject widgetRoot;
     public float timeScale = 1f;
 
+
     public TP_Camera tpCamRef;
     public TP_Controller tpControlRef;
 
@@ -78,6 +79,7 @@ public class WidgetCanvasManager : MonoBehaviour {
         menuButtonsOpen = true;
         //tpCamRef.allowPlayerInput = false;
         tpControlRef.allowPlayerInput = false;
+
         timeScale = 0.05f;
         Time.timeScale = timeScale;
     }
