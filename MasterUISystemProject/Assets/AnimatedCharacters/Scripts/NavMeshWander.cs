@@ -3,13 +3,13 @@ using System.Collections;
 
 public class NavMeshWander : MonoBehaviour {
 
-    public enum WanderMode { Idle, Local, World}
+    public enum WanderMode { Idle, Patrol, Explore}
 
     public float localWanderRadius = 3;
 
     public Vector3 localWanderCenter = Vector3.zero;
 
-    public WanderMode mode = WanderMode.Local;
+    public WanderMode mode = WanderMode.Patrol;
 
     public float defaultSpeed = 1.5f;
 
@@ -57,7 +57,7 @@ public class NavMeshWander : MonoBehaviour {
                 navAgent.Stop();
             animator.SetFloat("Speed", 0f);
         }
-        else if (mode == WanderMode.Local)
+        else if (mode == WanderMode.Patrol)
         {
             NavMesh.SamplePosition(localWanderCenter + new Vector3(Random.Range(-localWanderRadius, localWanderRadius), 0, Random.Range(-localWanderRadius, localWanderRadius)), out hit, 10, -1);
             navAgent.SetDestination(hit.position);
