@@ -1934,7 +1934,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -74.71094, y: 65.649994}
+  m_AnchoredPosition: {x: -77.1, y: 65.9}
   m_SizeDelta: {x: 45, y: 20}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &196271562
@@ -18592,6 +18592,7 @@ MonoBehaviour:
   displaySettingsPanel: {fileID: 1597850608}
   errorWindow: {fileID: 2078126958}
   widgetRoot: {fileID: 1663130605}
+  timeScale: 1
   tpCamRef: {fileID: 858128022}
   tpControlRef: {fileID: 2058893473}
   menuButtonsOpen: 0
@@ -19219,7 +19220,7 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -74.71094, y: 48.149994}
+  m_AnchoredPosition: {x: -75.2, y: 46.2}
   m_SizeDelta: {x: 100.7, y: 20}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1742961016
@@ -22663,7 +22664,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 60.5, y: -5}
+  m_AnchoredPosition: {x: 60.5, y: -3.9}
   m_SizeDelta: {x: 145, y: 20}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &2011570829
