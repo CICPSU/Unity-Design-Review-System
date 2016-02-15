@@ -441,6 +441,7 @@ public class CharacterDropper : MonoBehaviour {
         charToEdit.GetComponent<NavMeshAgent>().Stop();
         charToEdit.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
+        if(Input.mousePosition.x < Screen.width - 100 && Input.mousePosition.y < Screen.height - 100)
         charInfoPanel.transform.position = Input.mousePosition;
 
         UpdateCharInfoLabels();
