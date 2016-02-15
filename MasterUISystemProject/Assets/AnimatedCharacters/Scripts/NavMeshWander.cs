@@ -58,10 +58,7 @@ public class NavMeshWander : MonoBehaviour {
         }
         else
             GetComponent<Animator>().speed = 1;
-
-
         
-
         if (mode == WanderMode.Idle)
         {
             if(navAgent.isOnNavMesh)
@@ -82,6 +79,15 @@ public class NavMeshWander : MonoBehaviour {
             navAgent.Resume();
             animator.SetFloat("Speed", 1f);
         }
+    }
+
+    public void ConfigureDestination(Vector3 position)
+    {
+        
+        NavMesh.SamplePosition(position, out hit, 10, -1);
+        navAgent.SetDestination(hit.position);
+        navAgent.Resume();
+        animator.SetFloat("Speed", 1f);
     }
 
     void OnAnimatorMove()

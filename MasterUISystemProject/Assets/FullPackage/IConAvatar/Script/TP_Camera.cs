@@ -225,7 +225,7 @@ public class TP_Camera : MonoBehaviour {
 	void CalculateDesiredPosition(){
 		//Evaluate distance
 		//ResetDesiredDistance(); // check if it is still occluded or not.
-		Distance = Mathf.SmoothDamp(Distance, desiredDistance, ref velDistance, distanceSmooth); // (video No. 19). Google Mathf.SmoothDamp. VelDistance is the speed along the 
+		Distance = Mathf.SmoothDamp(Distance, desiredDistance, ref velDistance, distanceSmooth * Time.timeScale); // (video No. 19). Google Mathf.SmoothDamp. VelDistance is the speed along the 
 																									//smoothing curve
 		// Calculate desired position
 		//freeze mouseY when tracking is active ==>as we don't want to tilt when tracking is active

@@ -38,6 +38,7 @@ public class CharacterDropper : MonoBehaviour {
     public Text modelNameLabel;
     public Text wanderModeLabel;
     public Text wanderRangeLabel;
+    public Dropdown destinationDropDown;
 
     /// <summary>
     /// CHAR EDIT VARS
@@ -229,7 +230,7 @@ public class CharacterDropper : MonoBehaviour {
                 Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9));
 
             //if we are pointing at an existing avatar and left click, open char info
-            if (hit.transform != null && hit.transform.GetComponent<NavMeshWander>() != null && Input.GetMouseButton(0))
+            if (hit.transform != null && hit.transform.GetComponent<NavMeshWander>() != null && Input.GetMouseButton(0) && !charInfoOpen)
                 OpenCharacterInfo();
         }
 
@@ -441,18 +442,30 @@ public class CharacterDropper : MonoBehaviour {
         charToEdit.GetComponent<NavMeshAgent>().Stop();
         charToEdit.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
-        if(Input.mousePosition.x < Screen.width - 100 && Input.mousePosition.y < Screen.height - 100)
-        charInfoPanel.transform.position = Input.mousePosition;
+
+        if (Input.mousePosition.x < Screen.width - 100 && Input.mousePosition.y < Screen.height - 100)
+            charInfoPanel.transform.position = Input.mousePosition;
+        else
+            charInfoPanel.transform.position = new Vector3(Screen.width/2, Screen.height/2, 0);
 
         UpdateCharInfoLabels();
 
+        destinationDropDown.ClearOptions();
+        destinationDropDown.AddOptions(new List<string>() { "None" });
 
+        destinationDropDown.AddOptions(new List<string>( POIButtonManager.originalHandler.projectPOIs.Select(e => e.buttonName).ToList()));
     }
 
     public void CloseCharacterInfo()
     {
         if (navMeshWanderToEdit != null)
-            navMeshWanderToEdit.ConfigureDestination();
+        {
+            if(destinationDropDown.value == 0)
+                navMeshWanderToEdit.ConfigureDestination();
+            else
+                navMeshWanderToEdit.ConfigureDestination(POIButtonManager.originalHandler.projectPOIs[destinationDropDown.value - 1].position);
+        }
+
 
         charToEdit = null;
         navMeshWanderToEdit = null;
