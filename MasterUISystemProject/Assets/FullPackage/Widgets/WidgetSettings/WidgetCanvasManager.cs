@@ -11,7 +11,8 @@ public class WidgetCanvasManager : MonoBehaviour {
     public GameObject displaySettingsPanel;
     public GameObject errorWindow;
     public GameObject widgetRoot;
-    public float menuTimeScale = .01f;
+    public float timeScale = 1f;
+
 
     public TP_Camera tpCamRef;
     public TP_Controller tpControlRef;
@@ -55,7 +56,8 @@ public class WidgetCanvasManager : MonoBehaviour {
         menuButtonsOpen = false;
         //tpCamRef.allowPlayerInput = true;
         tpControlRef.allowPlayerInput = true;
-        Time.timeScale = 1f;
+        timeScale = 1f;
+        Time.timeScale = timeScale;
     }
     
     private void OpenMenu()
@@ -77,7 +79,9 @@ public class WidgetCanvasManager : MonoBehaviour {
         menuButtonsOpen = true;
         //tpCamRef.allowPlayerInput = false;
         tpControlRef.allowPlayerInput = false;
-        Time.timeScale = menuTimeScale;
+
+        timeScale = 0.05f;
+        Time.timeScale = timeScale;
     }
 }
 
