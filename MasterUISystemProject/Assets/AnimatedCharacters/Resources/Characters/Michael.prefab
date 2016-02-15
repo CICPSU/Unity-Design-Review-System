@@ -281,7 +281,6 @@ GameObject:
   - 95: {fileID: 9588960}
   - 195: {fileID: 19585416}
   - 114: {fileID: 11404208}
-  - 114: {fileID: 11478284}
   - 136: {fileID: 13640152}
   m_Layer: 8
   m_Name: Michael
@@ -2390,19 +2389,9 @@ MonoBehaviour:
   localWanderRadius: 10
   localWanderCenter: {x: 0, y: 0, z: 0}
   mode: 0
---- !u!114 &11478284
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 118770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7e6711f04645f84090374594e9f5ed5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navAgent: {fileID: 19585416}
-  animController: {fileID: 9588960}
+  defaultSpeed: 1.5
+  normalSpeedRadius: 3
+  navSpeedRatio: 0
 --- !u!136 &13640152
 CapsuleCollider:
   m_ObjectHideFlags: 1

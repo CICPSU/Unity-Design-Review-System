@@ -356,7 +356,6 @@ GameObject:
   - 95: {fileID: 9534152}
   - 195: {fileID: 19576948}
   - 114: {fileID: 11456780}
-  - 114: {fileID: 11413014}
   - 136: {fileID: 13605238}
   m_Layer: 8
   m_Name: vincent
@@ -1142,19 +1141,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11413014
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 153870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7e6711f04645f84090374594e9f5ed5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  navAgent: {fileID: 19576948}
-  animController: {fileID: 9534152}
 --- !u!114 &11456780
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1169,6 +1155,9 @@ MonoBehaviour:
   localWanderRadius: 10
   localWanderCenter: {x: 0, y: 0, z: 0}
   mode: 0
+  defaultSpeed: 1.5
+  normalSpeedRadius: 3
+  navSpeedRatio: 0
 --- !u!136 &13605238
 CapsuleCollider:
   m_ObjectHideFlags: 1

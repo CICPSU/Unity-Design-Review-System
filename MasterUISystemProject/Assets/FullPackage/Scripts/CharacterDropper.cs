@@ -98,6 +98,25 @@ public class CharacterDropper : MonoBehaviour {
         // this finds the camera whose viewport contains the mouse cursor
         mouseCam = FindMouseCamera();
 
+        // if the char edit group is set to patrol, disable the mask
+        if ( charEditOpen  && charEditWanderToggleGroup.ActiveToggles().ToArray().Count() != 0 
+            && charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
+        {
+            radiusProjector.transform.position = navMeshWanderToEdit.localWanderCenter + new Vector3(0, 2, 0);
+            if (userSetRadius)
+                radiusProjector.orthographicSize = float.Parse(radiusInput.text);
+            else
+                radiusProjector.orthographicSize = navMeshWanderToEdit.localWanderRadius;
+
+            radiusSelectMask.enabled = false;
+        }
+        else
+        {
+            radiusSelectMask.enabled = true;
+        }
+
+
+
         if (charRadiusSelect || charInfoOpen)
         {
             radiusProjector.gameObject.SetActive(true);
@@ -106,18 +125,6 @@ public class CharacterDropper : MonoBehaviour {
         else
             radiusProjector.gameObject.SetActive(false);
 
-        if (navMeshWanderToEdit != null && charEditOpen)
-        {
-            if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Idle")
-                navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)0;
-            else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Explore")
-                navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)2;
-            else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
-                navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)1;
-
-            UpdateCharInfoLabels();
-            
-        }
         //radius select mode
         if (charRadiusSelect)
         {
@@ -389,9 +396,13 @@ public class CharacterDropper : MonoBehaviour {
 
     public void StopCharRadiusSelect()
     {
-        if(navMeshWanderToEdit != null)
+        if (navMeshWanderToEdit != null)
+        {
             navMeshWanderToEdit.localWanderRadius = radiusProjector.orthographicSize;
+            navMeshWanderToEdit.ConfigureDestination();
+        }
         
+
         charToEdit = null;
         navMeshWanderToEdit = null;
         charRadiusSelect = false;
@@ -404,6 +415,7 @@ public class CharacterDropper : MonoBehaviour {
         charEditPanel.gameObject.SetActive(true);
         charEditWanderToggleGroup.SetAllTogglesOff();
         radiusInput.text = navMeshWanderToEdit.localWanderRadius.ToString();
+        navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
         Toggle toggleToActivate = charEditWanderToggleGroup.transform.GetChild((int)navMeshWanderToEdit.mode).GetComponent<Toggle>();
         toggleToActivate.isOn = true;
         charEditWanderToggleGroup.NotifyToggleOn(toggleToActivate);
@@ -411,6 +423,8 @@ public class CharacterDropper : MonoBehaviour {
 
     public void CloseCharacterEdit()
     {
+        if (charToEdit != null)
+            charToEdit.GetComponent<Animator>().enabled = true;
         if (navMeshWanderToEdit != null)
             navMeshWanderToEdit.ConfigureDestination();
         charEditOpen = false;
@@ -438,8 +452,7 @@ public class CharacterDropper : MonoBehaviour {
     {
         if (navMeshWanderToEdit != null)
             navMeshWanderToEdit.ConfigureDestination();
-        if(charToEdit != null)
-            charToEdit.GetComponent<Animator>().enabled = true;
+
         charToEdit = null;
         navMeshWanderToEdit = null;
         charInfoOpen = false;
@@ -473,7 +486,20 @@ public class CharacterDropper : MonoBehaviour {
 
     public void ApplyOptions()
     {
+        if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Idle")
+            navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)0;
+        else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Explore")
+            navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)2;
+        else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
+        {
+            navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)1;
+            navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
+            navMeshWanderToEdit.localWanderRadius = float.Parse(radiusInput.text);
+
+        }
         
+
+        UpdateCharInfoLabels();
     }
 
 }

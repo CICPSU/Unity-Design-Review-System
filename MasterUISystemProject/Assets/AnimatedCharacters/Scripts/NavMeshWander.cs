@@ -15,7 +15,7 @@ public class NavMeshWander : MonoBehaviour {
 
     public float normalSpeedRadius = 3f;
 
-    public float navAgentSpeed;
+    public float navSpeedRatio;
 
     private NavMeshAgent navAgent;
 
@@ -27,7 +27,7 @@ public class NavMeshWander : MonoBehaviour {
 	void Start () {
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        navAgentSpeed = defaultSpeed;
+        navSpeedRatio = 1;
         ConfigureDestination();
 	}
 	
@@ -40,14 +40,14 @@ public class NavMeshWander : MonoBehaviour {
     public void ConfigureDestination()
     {
        
-        if (localWanderRadius < normalSpeedRadius && navAgentSpeed != defaultSpeed * localWanderRadius / normalSpeedRadius)
+        if (localWanderRadius < normalSpeedRadius && navSpeedRatio != localWanderRadius / normalSpeedRadius)
         {
-            navAgentSpeed = defaultSpeed * localWanderRadius / normalSpeedRadius;
-            animator.speed = localWanderRadius / normalSpeedRadius;
+            navSpeedRatio = localWanderRadius / normalSpeedRadius;
+            
         }
         else
             GetComponent<Animator>().speed = 1;
-        navAgent.speed = navAgentSpeed;
+
 
         
 
@@ -70,6 +70,24 @@ public class NavMeshWander : MonoBehaviour {
             navAgent.SetDestination(hit.position);
             navAgent.Resume();
             animator.SetFloat("Speed", 1f);
+        }
+    }
+
+    void OnAnimatorMove()
+    {
+        //only perform if moving
+        if (!navAgent.pathPending)
+        {
+            animator.speed = navSpeedRatio;
+            navAgent.velocity = animator.deltaPosition / Time.deltaTime * navSpeedRatio;
+            navAgent.speed = navAgent.velocity.magnitude;
+
+            //smoothly rotate the character in the desired direction of motion
+            if (navAgent.desiredVelocity != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(navAgent.desiredVelocity);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, lookRotation, navAgent.angularSpeed * Time.deltaTime);
+            }
         }
     }
 }
