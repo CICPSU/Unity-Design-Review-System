@@ -23,6 +23,8 @@ public class NavMeshWander : MonoBehaviour {
 
     private NavMeshHit hit;
 
+    private float idleTimer = 0;
+
 	// Use this for initialization
 	void Start () {
         navAgent = GetComponent<NavMeshAgent>();
@@ -33,7 +35,16 @@ public class NavMeshWander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (navAgent.isOnNavMesh && (navAgent.remainingDistance < 1 || mode == WanderMode.Idle))
+        if (navAgent.remainingDistance < 1)
+        {
+            if (navAgent.isOnNavMesh)
+                navAgent.Stop();
+            animator.SetFloat("Speed", 0f);
+        }
+        else
+            idleTimer = Time.time;
+
+        if (navAgent.isOnNavMesh && (Time.time - idleTimer > 3 || mode == WanderMode.Idle) )
             ConfigureDestination();
 	}
 
