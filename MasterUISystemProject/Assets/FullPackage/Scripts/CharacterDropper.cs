@@ -407,8 +407,8 @@ public class CharacterDropper : MonoBehaviour {
         }
         
 
-        charToEdit = null;
-        navMeshWanderToEdit = null;
+        //charToEdit = null;
+        //navMeshWanderToEdit = null;
         charRadiusSelect = false;
         
     }
