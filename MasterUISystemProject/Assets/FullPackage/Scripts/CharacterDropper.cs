@@ -111,8 +111,11 @@ public class CharacterDropper : MonoBehaviour {
 
             radiusSelectMask.enabled = false;
         }
-        else
+        else if (charEditOpen)
         {
+
+            radiusProjector.orthographicSize = 0;
+
             radiusSelectMask.enabled = true;
         }
 
@@ -424,10 +427,6 @@ public class CharacterDropper : MonoBehaviour {
 
     public void CloseCharacterEdit()
     {
-        if (charToEdit != null)
-            charToEdit.GetComponent<Animator>().enabled = true;
-        if (navMeshWanderToEdit != null)
-            navMeshWanderToEdit.ConfigureDestination();
         charEditOpen = false;
         charEditPanel.gameObject.SetActive(false);
     }
@@ -458,12 +457,15 @@ public class CharacterDropper : MonoBehaviour {
 
     public void CloseCharacterInfo()
     {
+        CloseCharacterEdit();
+        if (charToEdit != null)
+            charToEdit.GetComponent<Animator>().enabled = true;
         if (navMeshWanderToEdit != null)
         {
             if(destinationDropDown.value == 0)
                 navMeshWanderToEdit.ConfigureDestination();
             else
-                navMeshWanderToEdit.ConfigureDestination(POIButtonManager.originalHandler.projectPOIs[destinationDropDown.value - 1].position);
+                navMeshWanderToEdit.ConfigureDestination(destinationDropDown.value - 1);
         }
 
 
@@ -471,7 +473,7 @@ public class CharacterDropper : MonoBehaviour {
         navMeshWanderToEdit = null;
         charInfoOpen = false;
         charInfoPanel.gameObject.SetActive(false);
-        CloseCharacterEdit();
+        
         
     }
 
@@ -496,6 +498,8 @@ public class CharacterDropper : MonoBehaviour {
             radiusProjector.orthographicSize = 0;
             wanderRangeLabel.text = "Infinite";
         }
+
+        destinationDropDown.value = navMeshWanderToEdit.poiDestination;
     }
 
     public void ApplyOptions()

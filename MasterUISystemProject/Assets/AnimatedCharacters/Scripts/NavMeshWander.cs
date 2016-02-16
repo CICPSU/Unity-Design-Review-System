@@ -15,7 +15,9 @@ public class NavMeshWander : MonoBehaviour {
 
     public float normalSpeedRadius = 3f;
 
-    public float navSpeedRatio;
+    public float navSpeedRatio = 1;
+
+    public int poiDestination = 0;
 
     private NavMeshAgent navAgent;
 
@@ -24,6 +26,8 @@ public class NavMeshWander : MonoBehaviour {
     private NavMeshHit hit;
 
     private float idleTimer = 0;
+
+    public bool userDestination = false;
 
 	// Use this for initialization
 	void Start () {
@@ -35,22 +39,24 @@ public class NavMeshWander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (navAgent.remainingDistance < 1)
+        if (navAgent.remainingDistance < .5f && !navAgent.pathPending)
         {
+            Debug.Log("reached destination");
             if (navAgent.isOnNavMesh)
                 navAgent.Stop();
             animator.SetFloat("Speed", 0f);
+            userDestination = false;
         }
         else
             idleTimer = Time.time;
 
-        if (navAgent.isOnNavMesh && (Time.time - idleTimer > 3 || mode == WanderMode.Idle) )
+        if (navAgent.isOnNavMesh && Time.time - idleTimer > 3 && mode != WanderMode.Idle && !userDestination)
             ConfigureDestination();
 	}
 
     public void ConfigureDestination()
     {
-       
+        Debug.Log("auto configure dest");
         if (localWanderRadius < normalSpeedRadius && navSpeedRatio != localWanderRadius / normalSpeedRadius)
         {
             navSpeedRatio = localWanderRadius / normalSpeedRadius;
@@ -81,13 +87,15 @@ public class NavMeshWander : MonoBehaviour {
         }
     }
 
-    public void ConfigureDestination(Vector3 position)
+    public void ConfigureDestination(int poiIndex)
     {
-        
-        NavMesh.SamplePosition(position, out hit, 10, -1);
+        NavMesh.SamplePosition(POIButtonManager.originalHandler.projectPOIs[poiIndex].position, out hit, 10, -1);
         navAgent.SetDestination(hit.position);
+        localWanderCenter = hit.position;
         navAgent.Resume();
         animator.SetFloat("Speed", 1f);
+        userDestination = true;
+        poiDestination = poiIndex + 1;
     }
 
     void OnAnimatorMove()
