@@ -443,7 +443,7 @@ public class CharacterDropper : MonoBehaviour {
         charToEdit.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
 
-        if (Input.mousePosition.x < Screen.width - 100 && Input.mousePosition.y < Screen.height - 100)
+        if (Input.mousePosition.x < Screen.width - 210 && Input.mousePosition.y < Screen.height - 145 && Input.mousePosition.y > 200)
             charInfoPanel.transform.position = Input.mousePosition;
         else
             charInfoPanel.transform.position = new Vector3(Screen.width/2, Screen.height/2, 0);
