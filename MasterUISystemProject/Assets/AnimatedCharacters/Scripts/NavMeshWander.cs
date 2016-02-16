@@ -41,7 +41,7 @@ public class NavMeshWander : MonoBehaviour {
 	void Update () {
         if (navAgent.remainingDistance < .5f && !navAgent.pathPending)
         {
-            Debug.Log("reached destination");
+            //Debug.Log("reached destination");
             if (navAgent.isOnNavMesh)
                 navAgent.Stop();
             animator.SetFloat("Speed", 0f);
@@ -56,7 +56,7 @@ public class NavMeshWander : MonoBehaviour {
 
     public void ConfigureDestination()
     {
-        Debug.Log("auto configure dest");
+        //Debug.Log("auto configure dest");
         if (localWanderRadius < normalSpeedRadius && navSpeedRatio != localWanderRadius / normalSpeedRadius)
         {
             navSpeedRatio = localWanderRadius / normalSpeedRadius;
@@ -103,10 +103,20 @@ public class NavMeshWander : MonoBehaviour {
         //only perform if moving
         if (!navAgent.pathPending)
         {
+            if (animator.GetFloat("Speed") == 1)
+            {
+                if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) > 45)
+                    animator.SetFloat("Direction", 1f);
+                else if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) < -45)
+                    animator.SetFloat("Direction", -1f);
+                else
+                    animator.SetFloat("Direction", 0f);
+            }
+
             animator.speed = navSpeedRatio;
             navAgent.velocity = animator.deltaPosition / Time.deltaTime * navSpeedRatio;
             navAgent.speed = navAgent.velocity.magnitude;
-
+           
             //smoothly rotate the character in the desired direction of motion
             if (navAgent.desiredVelocity != Vector3.zero)
             {
