@@ -11,7 +11,7 @@ public class CharacterDropper : MonoBehaviour {
     /// </summary>
     public GameObject avatar;
     private Camera mouseCam;
-    private RaycastHit hit;
+    public bool hasRaycastLock = false;
     
     
     /// <summary>
@@ -119,6 +119,17 @@ public class CharacterDropper : MonoBehaviour {
             radiusSelectMask.enabled = true;
         }
 
+        //manage raycast lock
+        if (charRadiusSelect || newCharDrop || charInfoOpen)
+        {
+            if (!hasRaycastLock && RaycastLock.GetLock())
+                hasRaycastLock = true;
+        }
+        else if (hasRaycastLock)
+        {
+            RaycastLock.GiveLock();
+            hasRaycastLock = false;
+        }
 
 
         if (charRadiusSelect || charInfoOpen)
@@ -127,8 +138,10 @@ public class CharacterDropper : MonoBehaviour {
             radiusProjector.transform.position = navMeshWanderToEdit.localWanderCenter + new Vector3(0, 2, 0);
         }
         else
-            radiusProjector.gameObject.SetActive(false);
+        {
 
+            radiusProjector.gameObject.SetActive(false);
+        }
         //radius select mode
         if (charRadiusSelect)
         {
@@ -136,8 +149,12 @@ public class CharacterDropper : MonoBehaviour {
             if (!userSetRadius)
             {
                 //set size of the projector to the distance between the character being editted and the raycast hit at the mouse location
-                if (mouseCam != null && Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9 | 1 << 8)))
-                    radiusProjector.orthographicSize = (charToEdit.transform.position - hit.point).magnitude;
+                if (mouseCam != null && hasRaycastLock)
+                {
+                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
+                    radiusProjector.orthographicSize = (charToEdit.transform.position - RaycastLock.hit.point).magnitude;
+                }
+
                 else
                     radiusProjector.orthographicSize = navMeshWanderToEdit.localWanderRadius;
             }
@@ -192,8 +209,8 @@ public class CharacterDropper : MonoBehaviour {
             #endregion
 
             //raycast that ignores characters in the scene
-            if (mouseCam != null)
-                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9 | 1 << 8));
+            if (mouseCam != null && hasRaycastLock)
+                RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
 
             #region makes sure the displayed char is correct
             if (charToDrop == null)
@@ -211,17 +228,19 @@ public class CharacterDropper : MonoBehaviour {
             //sets the position of the temp avatar
             if (mouseCam != null)
             {
-                if (hit.point != null)
-                    dropLocation = hit.point;
+                if (RaycastLock.hit.point != null)
+                    dropLocation = RaycastLock.hit.point;
                 else
                     dropLocation = avatar.transform.position + avatar.transform.forward * 2f;
+
+                Debug.Log("drop location: " + dropLocation + " haslock: " + hasRaycastLock);
             }
 
             if (charToDrop != null)
                 charToDrop.transform.position = dropLocation;
 
             //if we right click at a valid location, drop the character
-            if (Input.GetMouseButtonDown(1) && hit.transform != null)
+            if (Input.GetMouseButtonDown(1) && RaycastLock.hit.transform != null)
                 DropCharacter();
 
             #endregion
@@ -229,12 +248,27 @@ public class CharacterDropper : MonoBehaviour {
         else // this is when we are not dropping a new character
         {
             //raycast that ignores the user avatar
-            if (mouseCam != null)
-                Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9));
+            if (mouseCam != null && Input.GetMouseButtonDown(0))
+            {
+                if (!hasRaycastLock && RaycastLock.GetLock())
+                {
+                    hasRaycastLock = true;
+                }
 
-            //if we are pointing at an existing avatar and left click, open char info
-            if (hit.transform != null && hit.transform.GetComponent<NavMeshWander>() != null && Input.GetMouseButton(0) && !charInfoOpen)
-                OpenCharacterInfo();
+                if (hasRaycastLock)
+                {
+                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
+                    //if we are pointing at an existing avatar and left click, open char info
+                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<NavMeshWander>() != null && !charInfoOpen)
+                        OpenCharacterInfo();
+                    else
+                    {
+                        RaycastLock.GiveLock();
+                        hasRaycastLock = false;
+                    }
+                }
+            }
+            
         }
 
 
@@ -381,7 +415,6 @@ public class CharacterDropper : MonoBehaviour {
 
     public void StartCharRadiusSelect()
     {
-
         if (charToEdit == null && charToDrop != null)
         {
             charToEdit = charToDrop;
@@ -436,7 +469,7 @@ public class CharacterDropper : MonoBehaviour {
         Destroy(charToDrop);
         charInfoOpen = true;
         charRadiusSelect = false;
-        charToEdit = hit.transform.gameObject;
+        charToEdit = RaycastLock.hit.transform.gameObject;
         navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
         charToEdit.GetComponent<NavMeshAgent>().Stop();
         charToEdit.GetComponent<Animator>().enabled = false;
@@ -457,6 +490,12 @@ public class CharacterDropper : MonoBehaviour {
 
     public void CloseCharacterInfo()
     {
+        if (hasRaycastLock)
+        {
+            RaycastLock.GiveLock();
+            hasRaycastLock = false;
+        }
+
         CloseCharacterEdit();
         if (charToEdit != null)
             charToEdit.GetComponent<Animator>().enabled = true;
