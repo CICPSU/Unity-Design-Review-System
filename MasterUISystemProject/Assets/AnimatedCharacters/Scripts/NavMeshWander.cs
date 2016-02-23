@@ -39,16 +39,18 @@ public class NavMeshWander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (navAgent.remainingDistance < .5f && !navAgent.pathPending)
+        if (navAgent.remainingDistance < .5f)
         {
             //Debug.Log("reached destination");
             if (navAgent.isOnNavMesh)
                 navAgent.Stop();
             animator.SetFloat("Speed", 0f);
+            animator.SetFloat("Direction", 0f);
             userDestination = false;
         }
         else
             idleTimer = Time.time;
+        Debug.Log(Time.time - idleTimer);
 
         if (navAgent.isOnNavMesh && Time.time - idleTimer > 3 && mode != WanderMode.Idle && !userDestination)
             ConfigureDestination();
@@ -103,16 +105,18 @@ public class NavMeshWander : MonoBehaviour {
         //only perform if moving
         if (!navAgent.pathPending)
         {
+            animator.SetFloat("Direction", Vector3.Angle(transform.forward, navAgent.desiredVelocity));
+            /*
             if (animator.GetFloat("Speed") == 1)
             {
                 if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) > 45)
-                    animator.SetFloat("Direction", 1f);
+                    animator.SetFloat("Direction", 90f);
                 else if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) < -45)
-                    animator.SetFloat("Direction", -1f);
+                    animator.SetFloat("Direction", -90f);
                 else
-                    animator.SetFloat("Direction", 0f);
+                    animator.SetFloat("Direction", 0f);    
             }
-
+            */
             animator.speed = navSpeedRatio;
             navAgent.velocity = animator.deltaPosition / Time.deltaTime * navSpeedRatio;
             navAgent.speed = navAgent.velocity.magnitude;
