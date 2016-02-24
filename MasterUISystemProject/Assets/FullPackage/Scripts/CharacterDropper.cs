@@ -233,7 +233,7 @@ public class CharacterDropper : MonoBehaviour {
                 else
                     dropLocation = avatar.transform.position + avatar.transform.forward * 2f;
 
-                Debug.Log("drop location: " + dropLocation + " haslock: " + hasRaycastLock);
+                //Debug.Log("drop location: " + dropLocation + " haslock: " + hasRaycastLock);
             }
 
             if (charToDrop != null)

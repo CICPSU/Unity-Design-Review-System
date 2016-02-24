@@ -105,7 +105,10 @@ public class NavMeshWander : MonoBehaviour {
         //only perform if moving
         if (!navAgent.pathPending)
         {
-            animator.SetFloat("Direction", Vector3.Angle(transform.forward, navAgent.desiredVelocity));
+            if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) > 5)
+                animator.SetFloat("Direction", Vector3.Angle(transform.forward, navAgent.destination - transform.position));
+            else
+                animator.SetFloat("Direction", 0);
             /*
             if (animator.GetFloat("Speed") == 1)
             {
