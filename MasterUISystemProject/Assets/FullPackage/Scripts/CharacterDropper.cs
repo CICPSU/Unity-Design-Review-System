@@ -475,10 +475,25 @@ public class CharacterDropper : MonoBehaviour {
         charToEdit.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
 
-        if (Input.mousePosition.x < Screen.width - 210 && Input.mousePosition.y < Screen.height - 145 && Input.mousePosition.y > 200)
-            charInfoPanel.transform.position = Input.mousePosition;
+        if (Input.mousePosition.x > Screen.width - charInfoPanel.sizeDelta.x)
+        {
+            if (Input.mousePosition.y > Screen.height - charInfoPanel.sizeDelta.y)
+            {
+                charInfoPanel.transform.position = new Vector3(Screen.width - charInfoPanel.sizeDelta.x, Screen.height - charInfoPanel.sizeDelta.y, 0);
+            }
+            else if (Input.mousePosition.y < charEditPanel.sizeDelta.y)
+            {
+                charInfoPanel.transform.position = new Vector3(Screen.width - charInfoPanel.sizeDelta.x, charEditPanel.sizeDelta.y, 0);
+            }
+            else
+                charInfoPanel.transform.position = new Vector3(Screen.width - charInfoPanel.sizeDelta.x, Input.mousePosition.y, 0);
+        }
+        else if (Input.mousePosition.y > Screen.height - charInfoPanel.sizeDelta.y)
+            charInfoPanel.transform.position = new Vector3(Input.mousePosition.x, Screen.height - charInfoPanel.sizeDelta.y, 0);
+        else if (Input.mousePosition.y < charEditPanel.sizeDelta.y)
+            charInfoPanel.transform.position = new Vector3(Input.mousePosition.x, charEditPanel.sizeDelta.y, 0);
         else
-            charInfoPanel.transform.position = new Vector3(Screen.width/2, Screen.height/2, 0);
+            charInfoPanel.transform.position = Input.mousePosition;
 
         UpdateCharInfoLabels();
 

@@ -50,7 +50,7 @@ public class NavMeshWander : MonoBehaviour {
         }
         else
             idleTimer = Time.time;
-        Debug.Log(Time.time - idleTimer);
+        //Debug.Log(Time.time - idleTimer);
 
         if (navAgent.isOnNavMesh && Time.time - idleTimer > 3 && mode != WanderMode.Idle && !userDestination)
             ConfigureDestination();
