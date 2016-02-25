@@ -39,17 +39,21 @@ public class NavMeshWander : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (navAgent.remainingDistance < .5f)
+        if (navAgent.remainingDistance < .5f && !navAgent.pathPending)
         {
             //Debug.Log("reached destination");
             if (navAgent.isOnNavMesh)
                 navAgent.Stop();
             animator.SetFloat("Speed", 0f);
             animator.SetFloat("Direction", 0f);
+
             userDestination = false;
         }
         else
+        {
             idleTimer = Time.time;
+            animator.SetFloat("Speed", 1f);
+        }
         //Debug.Log(Time.time - idleTimer);
 
         if (navAgent.isOnNavMesh && Time.time - idleTimer > 3 && mode != WanderMode.Idle && !userDestination)
@@ -59,13 +63,13 @@ public class NavMeshWander : MonoBehaviour {
     public void ConfigureDestination()
     {
         //Debug.Log("auto configure dest");
-        if (localWanderRadius < normalSpeedRadius && navSpeedRatio != localWanderRadius / normalSpeedRadius)
+        if (localWanderRadius < normalSpeedRadius && navSpeedRatio != localWanderRadius / normalSpeedRadius && mode == WanderMode.Patrol)
         {
             navSpeedRatio = localWanderRadius / normalSpeedRadius;
             
         }
         else
-            GetComponent<Animator>().speed = 1;
+            navSpeedRatio = 1;
         
         if (mode == WanderMode.Idle)
         {
@@ -92,6 +96,7 @@ public class NavMeshWander : MonoBehaviour {
     public void ConfigureDestination(int poiIndex)
     {
         NavMesh.SamplePosition(POIButtonManager.originalHandler.projectPOIs[poiIndex].position, out hit, 10, -1);
+        Debug.Log(POIButtonManager.originalHandler.projectPOIs[poiIndex].position + " " + hit.position);
         navAgent.SetDestination(hit.position);
         localWanderCenter = hit.position;
         navAgent.Resume();
@@ -103,7 +108,7 @@ public class NavMeshWander : MonoBehaviour {
     void OnAnimatorMove()
     {
         //only perform if moving
-        if (!navAgent.pathPending)
+        if (!(navAgent.remainingDistance < .5f) && !navAgent.pathPending)
         {
             if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) > 5)
                 animator.SetFloat("Direction", Vector3.Angle(transform.forward, navAgent.destination - transform.position));
