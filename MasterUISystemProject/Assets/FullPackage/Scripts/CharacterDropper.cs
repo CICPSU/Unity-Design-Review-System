@@ -162,7 +162,7 @@ public class CharacterDropper : MonoBehaviour {
 
             radiusInput.text = radiusProjector.orthographicSize.ToString();
 
-            if (Input.GetMouseButtonUp(1))
+            if (Input.GetMouseButtonDown(0))
             {
                 StopCharRadiusSelect();
             }
@@ -249,7 +249,7 @@ public class CharacterDropper : MonoBehaviour {
         else // this is when we are not dropping a new character
         {
             //raycast that ignores the user avatar
-            if (mouseCam != null && Input.GetMouseButtonUp(0))
+            if (mouseCam != null && Input.GetMouseButtonDown(0))
             {
                 if (!hasRaycastLock && RaycastLock.GetLock())
                 {
@@ -490,6 +490,7 @@ public class CharacterDropper : MonoBehaviour {
         charToEdit.GetComponent<NavMeshAgent>().Stop();
         charToEdit.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
+        selectedMode = navMeshWanderToEdit.mode;
 
         if (Input.mousePosition.x > Screen.width - charInfoPanel.sizeDelta.x)
         {

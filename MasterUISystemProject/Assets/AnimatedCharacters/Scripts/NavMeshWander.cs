@@ -96,7 +96,7 @@ public class NavMeshWander : MonoBehaviour {
     public void ConfigureDestination(int poiIndex)
     {
         NavMesh.SamplePosition(POIButtonManager.originalHandler.projectPOIs[poiIndex].position, out hit, 10, -1);
-        Debug.Log(POIButtonManager.originalHandler.projectPOIs[poiIndex].position + " " + hit.position);
+        //Debug.Log(POIButtonManager.originalHandler.projectPOIs[poiIndex].position + " " + hit.position);
         navAgent.SetDestination(hit.position);
         localWanderCenter = hit.position;
         navAgent.Resume();
