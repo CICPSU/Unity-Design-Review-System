@@ -48,6 +48,7 @@ public class CharacterDropper : MonoBehaviour {
     public InputField radiusInput;
     public ToggleGroup charEditWanderToggleGroup;
     public Image radiusSelectMask;
+    public NavMeshWander.WanderMode selectedMode;
 
     private GameObject charToEdit;
     private NavMeshWander navMeshWanderToEdit;
@@ -161,7 +162,7 @@ public class CharacterDropper : MonoBehaviour {
 
             radiusInput.text = radiusProjector.orthographicSize.ToString();
 
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonUp(1))
             {
                 StopCharRadiusSelect();
             }
@@ -240,7 +241,7 @@ public class CharacterDropper : MonoBehaviour {
                 charToDrop.transform.position = dropLocation;
 
             //if we right click at a valid location, drop the character
-            if (Input.GetMouseButtonDown(1) && RaycastLock.hit.transform != null)
+            if (Input.GetMouseButtonUp(1) && RaycastLock.hit.transform != null)
                 DropCharacter();
 
             #endregion
@@ -248,7 +249,7 @@ public class CharacterDropper : MonoBehaviour {
         else // this is when we are not dropping a new character
         {
             //raycast that ignores the user avatar
-            if (mouseCam != null && Input.GetMouseButtonDown(0))
+            if (mouseCam != null && Input.GetMouseButtonUp(0))
             {
                 if (!hasRaycastLock && RaycastLock.GetLock())
                 {
@@ -460,6 +461,21 @@ public class CharacterDropper : MonoBehaviour {
 
     public void CloseCharacterEdit()
     {
+        if (navMeshWanderToEdit != null && charEditOpen)
+        {
+            if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Idle")
+                selectedMode = (NavMeshWander.WanderMode)0;
+            else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Explore")
+                selectedMode = (NavMeshWander.WanderMode)2;
+            else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
+            {
+                selectedMode = (NavMeshWander.WanderMode)1;
+                navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
+                navMeshWanderToEdit.localWanderRadius = float.Parse(radiusInput.text);
+
+            }
+        }
+
         charEditOpen = false;
         charEditPanel.gameObject.SetActive(false);
     }
@@ -521,7 +537,7 @@ public class CharacterDropper : MonoBehaviour {
             else
                 navMeshWanderToEdit.ConfigureDestination(destinationDropDown.value - 1);
         }
-
+        ApplyOptions();
 
         charToEdit = null;
         navMeshWanderToEdit = null;
@@ -558,20 +574,13 @@ public class CharacterDropper : MonoBehaviour {
 
     public void ApplyOptions()
     {
-        if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Idle")
-            navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)0;
-        else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Explore")
-            navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)2;
-        else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
+        if (charToEdit != null)
         {
-            navMeshWanderToEdit.mode = (NavMeshWander.WanderMode)1;
-            navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
-            navMeshWanderToEdit.localWanderRadius = float.Parse(radiusInput.text);
+            navMeshWanderToEdit.mode = selectedMode;
 
+
+            UpdateCharInfoLabels();
         }
-        
-
-        UpdateCharInfoLabels();
     }
 
 }
