@@ -160,11 +160,11 @@ public class CharacterDropper : MonoBehaviour {
                     radiusProjector.orthographicSize = navMeshWanderToEdit.localWanderRadius;
             }
 
-            radiusInput.text = radiusProjector.orthographicSize.ToString();
+            radiusInput.text = radiusProjector.orthographicSize.ToString("F2");
 
             if (Input.GetMouseButtonDown(0))
             {
-                StopCharRadiusSelect();
+                StopCharRadiusSelect(!charEditOpen);
             }
 
         }
@@ -294,7 +294,7 @@ public class CharacterDropper : MonoBehaviour {
         charEditOpen = false;
         charRadiusSelect = false;
         modelOptionsGreyed = false;
-        StopCharRadiusSelect();
+        StopCharRadiusSelect(false);
         CloseCharacterDrop();
         CloseCharacterInfo();
         CloseCharacterEdit();
@@ -432,12 +432,13 @@ public class CharacterDropper : MonoBehaviour {
         
     }
 
-    public void StopCharRadiusSelect()
+    public void StopCharRadiusSelect(bool startMotion)
     {
         if (navMeshWanderToEdit != null)
         {
             navMeshWanderToEdit.localWanderRadius = radiusProjector.orthographicSize;
-            navMeshWanderToEdit.ConfigureDestination();
+            if(startMotion)
+                navMeshWanderToEdit.ConfigureDestination();
         }
         
 
