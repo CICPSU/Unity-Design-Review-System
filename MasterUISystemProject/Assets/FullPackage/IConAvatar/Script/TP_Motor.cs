@@ -18,6 +18,7 @@ public class TP_Motor : MonoBehaviour {
 	public bool gravityOn; 
 	public Transform virtualCamera;
 
+    public Animator avatarAnimator;
 	
 	
 	public Vector3 MoveVector {get; set; }
@@ -48,9 +49,11 @@ public class TP_Motor : MonoBehaviour {
 		// Normalize MoveVector if Magnitude > 1;
 		if (MoveVector.magnitude > 1)
 			MoveVector = Vector3.Normalize(MoveVector);
-		
-		// Multiply MoveVector by MoveSpeed;
-		MoveVector = MoveVector * MoveSpeed();
+
+        // Multiply MoveVector by MoveSpeed;
+        //MoveVector = MoveVector * MoveSpeed();
+        MoveVector = MoveVector * avatarAnimator.deltaPosition.magnitude/Time.deltaTime;
+        Debug.Log(avatarAnimator.deltaPosition.magnitude/Time.deltaTime);
 
 		if(gravityOn){
 			// Reapply VerticalVelocity MoveVector, as it should continue from previous frame but is erased by

@@ -23573,6 +23573,7 @@ MonoBehaviour:
   MaxControllableSlideMagnitude: 0.4
   gravityOn: 0
   virtualCamera: {fileID: 858128021}
+  avatarAnimator: {fileID: 879605448}
 --- !u!114 &2058893477
 MonoBehaviour:
   m_ObjectHideFlags: 0
