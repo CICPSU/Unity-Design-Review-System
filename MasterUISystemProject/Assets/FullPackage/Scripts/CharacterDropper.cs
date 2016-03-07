@@ -61,6 +61,7 @@ public class CharacterDropper : MonoBehaviour {
     private bool charEditOpen = false;
     private bool charRadiusSelect = false;
     private bool userSetRadius = false;
+    private bool firstFrameOpen = false;
 
 
     void Start()
@@ -241,7 +242,7 @@ public class CharacterDropper : MonoBehaviour {
                 charToDrop.transform.position = dropLocation;
 
             //if we right click at a valid location, drop the character
-            if (Input.GetMouseButtonUp(1) && RaycastLock.hit.transform != null)
+            if (Input.GetMouseButtonUp(0) && RaycastLock.hit.transform != null && !firstFrameOpen)
                 DropCharacter();
 
             #endregion
@@ -272,7 +273,8 @@ public class CharacterDropper : MonoBehaviour {
             
         }
 
-
+        if (firstFrameOpen && Input.GetMouseButtonUp(0))
+            firstFrameOpen = false;
     }
 
 
@@ -351,6 +353,7 @@ public class CharacterDropper : MonoBehaviour {
         randomToggle.isOn = true;
         charToDrop = GetCharacter();
         buttonImage.color = Color.red;
+        firstFrameOpen = true;
     }
 
     public void CloseCharacterDrop()
@@ -596,100 +599,3 @@ public class CharacterDropper : MonoBehaviour {
     }
 
 }
-
-
-/// old code from Update
-/// 
-/*
-
-//if we are in radius select mode, set the size of the projector
-if (radiusSelectMode)
-{
-    if ( mouseCam != null && Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(3 << 8)))
-        radiusProjector.orthographicSize = (charToDrop.transform.position - hit.point).magnitude;
-}
-
-
-//if we right click while hover over something that isnt an existing avatar
-if (Input.GetMouseButtonDown(1) && hit.transform != null && hit.transform.GetComponent<NavMeshWander>() == null)
-{
-    if (!radiusSelectMode)
-    {
-        if ((NavMeshWander.WanderMode)newCharWanderSelect.value == NavMeshWander.WanderMode.Local)
-        {
-            Debug.Log("dropping character in local wander");
-            charToDrop.GetComponent<NavMeshWander>().localWanderCenter = hit.point;
-            charToDrop.GetComponent<NavMeshWander>().enabled = true;
-            radiusProjector.gameObject.SetActive(true);
-            radiusProjector.transform.position = charToDrop.transform.position + new Vector3(0, 2, 0);
-            radiusSelectMode = true;
-        }
-        else
-        {
-            charToDrop.GetComponent<CapsuleCollider>().enabled = true;
-            charToDrop.GetComponent<NavMeshAgent>().enabled = true;
-            charToDrop.GetComponent<NavMeshWander>().enabled = true;
-            charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
-            charToDrop = GetCharacter();
-        }
-    }
-    else
-    {
-
-        charToDrop.GetComponent<CapsuleCollider>().enabled = true;
-        charToDrop.GetComponent<NavMeshAgent>().enabled = true;
-        charToDrop.GetComponent<NavMeshWander>().enabled = true;
-        charToDrop.GetComponent<NavMeshWander>().localWanderRadius = radiusProjector.orthographicSize;
-        charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
-        radiusProjector.gameObject.SetActive(false);
-        radiusSelectMode = false;
-        charToDrop = GetCharacter();
-    }
-}
-
-//drop the temp avatar
-if (Input.GetMouseButtonDown(2))
-{
-    Destroy(charToDrop);
-    charToDrop = GetCharacter();
-}
-}// chareditmode
-}
-else // not in drop mode
-{
-// GENERAL RAYCAST INTO THE VIRTUAL WORLD
-if (mouseCam != null)
-Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(1 << 9));
-
-//if we are in radius select mode, set the size of the projector
-if (radiusSelectMode)
-{
-if (mouseCam != null && Physics.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), out hit, 1000, ~(3 << 8)))
-    radiusProjector.orthographicSize = (charToEdit.transform.position - hit.point).magnitude;
-}
-
-//if we are pointing at an existing avatar
-if (hit.transform != null && hit.transform.GetComponent<NavMeshWander>() != null)
-if (Input.GetMouseButtonDown(0) && !charEditModeOn)
-    OpenCharacterInfo();
-
-if (charEditModeOn)
-{
-
-if ((NavMeshWander.WanderMode)charEditWanderSelect.value == NavMeshWander.WanderMode.Local && !radiusSelectMode && !setCharLocalRadius)
-{
-    Debug.Log("char edit wander is local");
-    radiusProjector.gameObject.SetActive(true);
-    radiusProjector.transform.position = charToEdit.transform.position + new Vector3(0, 2, 0);
-    radiusSelectMode = true;
-}
-}
-
-if (radiusSelectMode && Input.GetMouseButtonUp(1))
-{
-radiusSelectMode = false;
-setCharLocalRadius = true;
-radiusProjector.gameObject.SetActive(false);
-}
-}
-*/
