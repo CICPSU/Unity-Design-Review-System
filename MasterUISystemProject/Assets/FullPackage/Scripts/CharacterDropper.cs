@@ -65,7 +65,7 @@ public class CharacterDropper : MonoBehaviour {
 
     void Start()
     {
-
+        radiusInput.onValueChanged.AddListener(SetRadiusProjectorFromInputValueChanged);
         ResetMenu();
         if (avatar == null)
         {
@@ -313,6 +313,15 @@ public class CharacterDropper : MonoBehaviour {
         }
     }
 
+    public void SetRadiusProjectorFromInputValueChanged(string value)
+    {
+        if (radiusInput.isFocused)
+        {
+            userSetRadius = true;
+            radiusProjector.orthographicSize = float.Parse(value);
+        }
+    }
+
     public void SetWanderRadiusFromInput()
     {
         userSetRadius = true;
@@ -450,6 +459,7 @@ public class CharacterDropper : MonoBehaviour {
 
     public void OpenCharacterEdit()
     {
+        userSetRadius = false;
         charEditOpen = true;
         charEditPanel.gameObject.SetActive(true);
         charEditWanderToggleGroup.SetAllTogglesOff();

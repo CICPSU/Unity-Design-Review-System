@@ -17,7 +17,7 @@ public class MarkerInfoCanvasSetup : MonoBehaviour {
         if (!hasRaycastLock && RaycastLock.GetLock())
         {
             hasRaycastLock = true;
-            MarkerInfoCanvasRefs.activeMarker = gameObject;
+            MarkerInfoCanvasRefs.activeMarker = gameObject.transform.parent.gameObject;
             markerInfoCanvasRef.SetActive(true);
             markerInfoCanvasRef.transform.GetChild(0).GetComponent<RectTransform>().anchoredPosition = Input.mousePosition;
             markerInfoCanvasRef.GetComponent<MarkerInfoCanvasRefs>().nameText.GetComponent<Text>().text = transform.parent.GetComponent<POIInfo>().name;
