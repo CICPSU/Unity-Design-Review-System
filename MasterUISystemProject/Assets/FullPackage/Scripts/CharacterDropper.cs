@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 
 public class CharacterDropper : MonoBehaviour {
 
@@ -13,6 +14,9 @@ public class CharacterDropper : MonoBehaviour {
     public GameObject avatar;
     private Camera mouseCam;
     public bool hasRaycastLock = false;
+
+    private List<DroppedCharacter> droppedCharacters = new List<DroppedCharacter>();
+    private string characterFilePath;
     
     
     /// <summary>
@@ -64,10 +68,14 @@ public class CharacterDropper : MonoBehaviour {
     private bool charRadiusSelect = false;
     private bool userSetRadius = false;
     private bool firstFrameOpen = false;
+    private bool firstFrameRadiusSelect = false;
 
 
     void Start()
     {
+        characterFilePath = Application.dataPath + "/FullPackage/Settings/SavedChars.characters";
+        LoadCharacters();
+
         radiusInput.onValueChanged.AddListener(SetRadiusProjectorFromInputValueChanged);
         ResetMenu();
         if (avatar == null)
@@ -163,7 +171,7 @@ public class CharacterDropper : MonoBehaviour {
 
             radiusInput.text = radiusProjector.orthographicSize.ToString("F2");
 
-            if (Input.GetMouseButtonUp(0))
+            if (Input.GetMouseButtonUp(0) && !firstFrameRadiusSelect)
             {
                 StopCharRadiusSelect(!charEditOpen);
             }
@@ -273,6 +281,9 @@ public class CharacterDropper : MonoBehaviour {
             
         }
 
+        if (firstFrameRadiusSelect && Input.GetMouseButtonUp(0))
+            firstFrameRadiusSelect = false;
+
         if (firstFrameOpen && Input.GetMouseButtonUp(0))
             firstFrameOpen = false;
     }
@@ -341,7 +352,8 @@ public class CharacterDropper : MonoBehaviour {
         charToDrop.GetComponent<NavMeshAgent>().enabled = true;
         charToDrop.GetComponent<NavMeshWander>().enabled = true;
         charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
-
+        charToDrop.GetComponent<NavMeshWander>().dropPoint = charToDrop.transform.position;
+       
         charToDrop.transform.parent = charRoot.transform;
 
         if ((NavMeshWander.WanderMode)newCharWanderSelect.value == NavMeshWander.WanderMode.Patrol)
@@ -350,6 +362,9 @@ public class CharacterDropper : MonoBehaviour {
             navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
             StartCharRadiusSelect();
         }
+
+        droppedCharacters.Add(new DroppedCharacter(charToDrop.GetComponent<NavMeshWander>()));
+        SaveCharacters();
         charToDrop = null;
     }
 
@@ -414,6 +429,8 @@ public class CharacterDropper : MonoBehaviour {
 
     public void DeleteCharacter()
     {
+        droppedCharacters.Remove(new DroppedCharacter(charToEdit.GetComponent<NavMeshWander>()));
+        SaveCharacters();
         Destroy(charToEdit);
         charToEdit = null;
         CloseCharacterInfo();
@@ -448,6 +465,7 @@ public class CharacterDropper : MonoBehaviour {
             navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
 
         charRadiusSelect = true;
+        firstFrameRadiusSelect = true;
         
     }
 
@@ -560,12 +578,11 @@ public class CharacterDropper : MonoBehaviour {
                 navMeshWanderToEdit.ConfigureDestination(destinationDropDown.value - 1);
         }
         ApplyOptions();
-
+        SaveCharacters();
         charToEdit = null;
         navMeshWanderToEdit = null;
         charInfoOpen = false;
         charInfoPanel.gameObject.SetActive(false);
-        
         
     }
 
@@ -607,17 +624,49 @@ public class CharacterDropper : MonoBehaviour {
 
     public void LoadCharacters()
     {
+        if (!File.Exists(characterFilePath))
+            XmlIO.Save(droppedCharacters, characterFilePath);
+        droppedCharacters = XmlIO.Load(characterFilePath, typeof(List<DroppedCharacter>)) as List<DroppedCharacter>;
 
+        foreach (DroppedCharacter character in droppedCharacters)
+        {
+            GameObject newChar = GameObject.Instantiate(Resources.Load("Characters/" + character.modelName)) as GameObject;
+            newChar.transform.parent = charRoot.transform;
+            newChar.transform.position = character.dropPoint;
+            NavMeshWander newWander = newChar.GetComponent<NavMeshWander>();
+            newWander.dropPoint = character.dropPoint;
+            newWander.localWanderCenter = character.localWanderCenter;
+            newWander.localWanderRadius = character.localWanderRadius;
+            newWander.mode = character.mode;
+            newWander.normalSpeedRadius = character.normalSpeedRadius;
+            newWander.defaultSpeed = character.defaultSpeed;
+        }
     }
 
     public void SaveCharacters()
     {
+        droppedCharacters = new List<DroppedCharacter>();
+        for (int i = 0; i < charRoot.transform.childCount; i++)
+        {
+            droppedCharacters.Add(new DroppedCharacter(charRoot.transform.GetChild(i).GetComponent<NavMeshWander>()));
+        }
+        XmlIO.Save(droppedCharacters, characterFilePath);
+
+    }
+
+    public void DeleteCharacters()
+    {
+        List<GameObject> children = new List<GameObject>();
+        foreach (Transform child in charRoot.transform) children.Add(child.gameObject);
+        children.ForEach(child => Destroy(child));
+        SaveCharacters();
     }
 }
 
 public class DroppedCharacter
 {
     public string modelName;
+    public Vector3 dropPoint;
     public Vector3 localWanderCenter;
     public float localWanderRadius;
     public NavMeshWander.WanderMode mode;
@@ -628,14 +677,16 @@ public class DroppedCharacter
     {
 
     }
+
     public DroppedCharacter(NavMeshWander wanderScript)
     {
-        modelName = wanderScript.gameObject.name.Substring(0, wanderScript.gameObject.name.IndexOf("(") + 1);
+        modelName = wanderScript.gameObject.name.Substring(0, wanderScript.gameObject.name.IndexOf("("));
         localWanderCenter = wanderScript.localWanderCenter;
         localWanderRadius = wanderScript.localWanderRadius;
         mode = wanderScript.mode;
         defaultSpeed = wanderScript.defaultSpeed;
         normalSpeedRadius = wanderScript.normalSpeedRadius;
+        dropPoint = wanderScript.dropPoint;
     }
 
 }

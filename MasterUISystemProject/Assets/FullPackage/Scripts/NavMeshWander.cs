@@ -3,6 +3,8 @@ using System.Collections;
 
 public class NavMeshWander : MonoBehaviour {
 
+    public Vector3 dropPoint;
+
     public enum WanderMode { Idle, Patrol, Explore}
 
     public float localWanderRadius = 3;
