@@ -106,9 +106,7 @@ public class CharacterDropper : MonoBehaviour {
             && charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
         {
             radiusProjector.transform.position = navMeshWanderToEdit.localWanderCenter + new Vector3(0, 2, 0);
-            if (userSetRadius)
-                radiusProjector.orthographicSize = float.Parse(radiusInput.text);
-            else
+            if (!userSetRadius)
                 radiusProjector.orthographicSize = navMeshWanderToEdit.localWanderRadius;
 
             radiusSelectMask.enabled = false;
@@ -320,6 +318,11 @@ public class CharacterDropper : MonoBehaviour {
         if (radiusInput.isFocused)
         {
             userSetRadius = true;
+            if (value == null || value == "")
+            {
+                value = radiusProjector.orthographicSize.ToString();
+                radiusInput.text = value;
+            }
             radiusProjector.orthographicSize = float.Parse(value);
         }
     }
