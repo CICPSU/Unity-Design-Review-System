@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ public class CharacterDropper : MonoBehaviour {
     public RectTransform dropCharacterSelectPanel;
     public Dropdown newCharWanderSelect;
     public Image buttonImage;
+    public GameObject charRoot;
     private List<GameObject> loadedCharacters = new List<GameObject>();
     private List<Toggle> toggleList = new List<Toggle>();
     private GameObject charToDrop;
@@ -161,7 +163,7 @@ public class CharacterDropper : MonoBehaviour {
 
             radiusInput.text = radiusProjector.orthographicSize.ToString("F2");
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonUp(0))
             {
                 StopCharRadiusSelect(!charEditOpen);
             }
@@ -239,8 +241,8 @@ public class CharacterDropper : MonoBehaviour {
             if (charToDrop != null)
                 charToDrop.transform.position = dropLocation;
 
-            //if we right click at a valid location, drop the character
-            if (Input.GetMouseButtonUp(0) && RaycastLock.hit.transform != null && !firstFrameOpen)
+            //if we left click at a valid location, drop the character
+            if (Input.GetMouseButtonUp(0) && RaycastLock.hit.transform != null && !firstFrameOpen && !EventSystem.current.IsPointerOverGameObject())
                 DropCharacter();
 
             #endregion
@@ -339,6 +341,8 @@ public class CharacterDropper : MonoBehaviour {
         charToDrop.GetComponent<NavMeshAgent>().enabled = true;
         charToDrop.GetComponent<NavMeshWander>().enabled = true;
         charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
+
+        charToDrop.transform.parent = charRoot.transform;
 
         if ((NavMeshWander.WanderMode)newCharWanderSelect.value == NavMeshWander.WanderMode.Patrol)
         {
@@ -599,6 +603,39 @@ public class CharacterDropper : MonoBehaviour {
 
             UpdateCharInfoLabels();
         }
+    }
+
+    public void LoadCharacters()
+    {
+
+    }
+
+    public void SaveCharacters()
+    {
+    }
+}
+
+public class DroppedCharacter
+{
+    public string modelName;
+    public Vector3 localWanderCenter;
+    public float localWanderRadius;
+    public NavMeshWander.WanderMode mode;
+    public float defaultSpeed;
+    public float normalSpeedRadius;
+
+    public DroppedCharacter()
+    {
+
+    }
+    public DroppedCharacter(NavMeshWander wanderScript)
+    {
+        modelName = wanderScript.gameObject.name.Substring(0, wanderScript.gameObject.name.IndexOf("(") + 1);
+        localWanderCenter = wanderScript.localWanderCenter;
+        localWanderRadius = wanderScript.localWanderRadius;
+        mode = wanderScript.mode;
+        defaultSpeed = wanderScript.defaultSpeed;
+        normalSpeedRadius = wanderScript.normalSpeedRadius;
     }
 
 }

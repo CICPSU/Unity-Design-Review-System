@@ -1155,7 +1155,7 @@ GameObject:
   - 114: {fileID: 137632409}
   m_Layer: 5
   m_Name: Panel
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2008,7 +2008,7 @@ GameObject:
   - 114: {fileID: 199047393}
   m_Layer: 5
   m_Name: InvalidInputWarning
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3176,7 +3176,7 @@ GameObject:
   - 114: {fileID: 281845042}
   m_Layer: 5
   m_Name: POIEditWindow
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3293,7 +3293,7 @@ GameObject:
   - 224: {fileID: 307732409}
   m_Layer: 0
   m_Name: CharacterDropTool
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3311,12 +3311,13 @@ RectTransform:
   - {fileID: 599010389}
   - {fileID: 1849076563}
   - {fileID: 1212091181}
+  - {fileID: 444046104}
   m_Father: {fileID: 2130711393}
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -540, y: -343}
   m_Pivot: {x: 0, y: 0}
 --- !u!1 &318925038
 GameObject:
@@ -4318,6 +4319,33 @@ Transform:
   - {fileID: 511413215}
   m_Father: {fileID: 114261577}
   m_RootOrder: 0
+--- !u!1 &444046103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 444046104}
+  m_Layer: 0
+  m_Name: CharacterRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &444046104
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 444046103}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 68.98529, y: 94.41412, z: 84.001205}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 307732409}
+  m_RootOrder: 3
 --- !u!1 &453131276
 GameObject:
   m_ObjectHideFlags: 0
@@ -5247,7 +5275,7 @@ GameObject:
   - 114: {fileID: 552241488}
   m_Layer: 5
   m_Name: AddDeleteWindow
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5771,7 +5799,7 @@ GameObject:
   - 114: {fileID: 603907804}
   m_Layer: 5
   m_Name: BookmarkCurrentPanel
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7827,7 +7855,7 @@ GameObject:
   - 114: {fileID: 747512139}
   m_Layer: 5
   m_Name: NameExistedWarning
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9068,7 +9096,7 @@ GameObject:
   - 114: {fileID: 830942785}
   m_Layer: 5
   m_Name: ToggleSettingsMenu
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9710,7 +9738,7 @@ GameObject:
   - 114: {fileID: 869487290}
   m_Layer: 5
   m_Name: ChooseWidgetPanel
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9859,7 +9887,7 @@ GameObject:
   - 114: {fileID: 878370717}
   m_Layer: 5
   m_Name: ToggleButtonMouseArea
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12340,7 +12368,7 @@ GameObject:
   - 114: {fileID: 1131938837}
   m_Layer: 5
   m_Name: POIMenu
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17728,7 +17756,7 @@ GameObject:
   - 114: {fileID: 1597850609}
   m_Layer: 5
   m_Name: DisplaySettingsPanel
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18511,6 +18539,7 @@ MonoBehaviour:
   dropCharacterSelectPanel: {fileID: 1849076563}
   newCharWanderSelect: {fileID: 2033346517}
   buttonImage: {fileID: 599010386}
+  charRoot: {fileID: 444046103}
   charInfoPanel: {fileID: 1212091181}
   modelNameLabel: {fileID: 2011570829}
   wanderModeLabel: {fileID: 1092369658}
@@ -23803,7 +23832,7 @@ GameObject:
   - 114: {fileID: 2078126959}
   m_Layer: 5
   m_Name: ErrorWindow
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23875,7 +23904,7 @@ GameObject:
   - 114: {fileID: 2080516030}
   m_Layer: 5
   m_Name: MiniMapPanel
-  m_TagString: Untagged
+  m_TagString: Menu
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
