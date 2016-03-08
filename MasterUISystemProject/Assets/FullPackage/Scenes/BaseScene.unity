@@ -18544,6 +18544,7 @@ MonoBehaviour:
   isMiniActive: 1
   orthoCamRadiusFeet: 5
   mapRadiusIncrementInFeet: 5
+  widgetSetManager: {fileID: 1663130606}
 --- !u!1 &1674766572
 GameObject:
   m_ObjectHideFlags: 0

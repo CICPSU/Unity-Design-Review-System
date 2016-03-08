@@ -15,6 +15,7 @@ public class MiniMapManager : MonoBehaviour {
 	public bool isMiniActive = false;
 	public float orthoCamRadiusFeet = 5;
 	public int mapRadiusIncrementInFeet;
+    public WidgetSettingsManager widgetSetManager;
 
 	private bool minimapRotate = false;
 	private float feetToMetersFactor = 0.3048f;
@@ -22,6 +23,8 @@ public class MiniMapManager : MonoBehaviour {
 	private Vector2 miniMapCenter = Vector2.zero;
 	private Vector3 rayStartPostion = Vector2.zero;
 	private int mapDim;
+
+    private MiniMapSettings currentSettings;
 	
 	void Start()
 	{
@@ -40,6 +43,8 @@ public class MiniMapManager : MonoBehaviour {
         }
         SetMiniMapCam ();
 		zoomLabel.text = "Diameter: " + (2 * orthoCamRadiusFeet).ToString("F1")  + " ft";
+
+        currentSettings = widgetSetManager.GetSettingsFile("MiniMapSettings", typeof(MiniMapSettings)) as MiniMapSettings;
 	}
 
 	void Update()
@@ -94,7 +99,8 @@ public class MiniMapManager : MonoBehaviour {
 
 	public void ChangeSize(bool isIncrease)
 	{
-		if (isIncrease) 
+        currentSettings = widgetSetManager.GetSettingsFile("MiniMapSettings", typeof(MiniMapSettings)) as MiniMapSettings;
+        if (isIncrease) 
 		{
 			mapProportionOfScreen += 0.05f;
 		} 
@@ -110,11 +116,14 @@ public class MiniMapManager : MonoBehaviour {
 						mapProportionOfScreen = .9f;
 
 		SetMiniMapCam ();
+        currentSettings.mapPortionOfScreen = mapProportionOfScreen;
+        widgetSetManager.SaveSettingsFile(currentSettings, typeof(MiniMapSettings));
 	}
 
 	public void ChangeZoom(bool isIncrease)
 	{
-		if (isIncrease) 
+        currentSettings = widgetSetManager.GetSettingsFile("MiniMapSettings", typeof(MiniMapSettings)) as MiniMapSettings;
+        if (isIncrease) 
 			orthoCamRadiusFeet += mapRadiusIncrementInFeet*0.5f;
 		else
 			orthoCamRadiusFeet -= mapRadiusIncrementInFeet*0.5f;
@@ -127,6 +136,9 @@ public class MiniMapManager : MonoBehaviour {
 		
 		// set zoom label
 		zoomLabel.text = "Diameter: " + (2 * orthoCamRadiusFeet).ToString("F1")  + " ft";
+
+        currentSettings.orthoCamRadiusFeet = orthoCamRadiusFeet;
+        widgetSetManager.SaveSettingsFile(currentSettings, typeof(MiniMapSettings));
 
 	}
 

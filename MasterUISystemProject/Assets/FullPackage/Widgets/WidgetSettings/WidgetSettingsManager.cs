@@ -180,8 +180,17 @@ public class WidgetSettingsManager : MonoBehaviour{
         //LoadSettingsFiles();
 	}
 
+    public WidgetSettings GetSettingsFile(string fileName, Type settingsType)
+    {
+        return XmlIO.Load(settingsFileFolderPath + "/" + fileName + ".sets", settingsType) as WidgetSettings;
+    }
+
     // need to make an overload of the savesettingsfile function that takes in an widgetsettings object
     // that contains all of the settings that need saved
     // this can be used to save off the minimap settings whenever a size or zoom button is clicked by passing in 
     // an object that contains the new minimap settings
+    public void SaveSettingsFile(WidgetSettings objToSave, Type settingsType)
+    {
+        XmlIO.Save(objToSave, settingsFileFolderPath + "/" + settingsType.Name + ".sets");
+    }
 }

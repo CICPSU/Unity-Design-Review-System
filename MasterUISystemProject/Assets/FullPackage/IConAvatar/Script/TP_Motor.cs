@@ -53,7 +53,7 @@ public class TP_Motor : MonoBehaviour {
         // Multiply MoveVector by MoveSpeed;
         //MoveVector = MoveVector * MoveSpeed();
         MoveVector = MoveVector * avatarAnimator.deltaPosition.magnitude/Time.deltaTime;
-        Debug.Log(avatarAnimator.deltaPosition.magnitude/Time.deltaTime);
+       
 
 		if(gravityOn){
 			// Reapply VerticalVelocity MoveVector, as it should continue from previous frame but is erased by
