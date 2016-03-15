@@ -28,7 +28,7 @@ public class WidgetSettingsManager : MonoBehaviour{
     private List<Type> settingsTypes = new List<Type>();
     private List<Type> loadedTypes = new List<Type>();
 
-	void Start()
+	void Awake()
 	{
 		LoadSettingsFiles ();
 		//XmlIO.Save(new AvatarSettings(), settingsFileFolderPath + "\\AvatarSettings.sets");
