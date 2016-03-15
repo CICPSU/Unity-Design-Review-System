@@ -12,6 +12,7 @@ public abstract class WidgetSettings {
 	//All implementation of the ApplySettings() should:
 	//reference the widget through FindObjectsWithType([NAME OF WIDGET MANAGER])
 	public bool enabled = true;
+    public string enabledDescription = "Bool that is true when the widget should be active.";
 	public abstract void ApplySettings ();
 
 	public abstract void SetValues (object[] values);
@@ -64,10 +65,14 @@ public class AvatarSettings : WidgetSettings
 public class MiniMapSettings : WidgetSettings {
 
 	public Vector2 rectPos = Vector2.zero;
+    public string rectPosDescription;
 
 	public float mapPortionOfScreen;
+    public string mapPortionDescription;
+
 	public float orthoCamRadiusFeet;
-	
+    public string orthoCamRadiusDescription;
+
 	public override void ApplySettings()
 	{
 		if (GameObject.FindObjectOfType<MiniMapManager> () == null)
@@ -97,7 +102,10 @@ public class MiniMapSettings : WidgetSettings {
 
 	public override object[] GetValues()
 	{
-		return new object[]{rectPos, mapPortionOfScreen, orthoCamRadiusFeet, enabled};
+		return new object[]{rectPos, rectPosDescription,
+            mapPortionOfScreen, mapPortionDescription,
+            orthoCamRadiusFeet, orthoCamRadiusDescription,
+            enabled, enabledDescription};
 	}
 
 	public MiniMapSettings()

@@ -142,11 +142,12 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 		FieldInfo[] fieldsArray = fileType.GetFields ();
 
-		for (int i = 0; i < fieldsArray.Length; i++)
+		for (int i = 0; i < fieldsArray.Length - 1; i+=2)
 		{
 			GameObject fieldUI = Instantiate (Resources.Load ("WidgetSettings/" + fieldsArray [i].FieldType.Name + "_UI")) as GameObject;
 			fieldUI.transform.SetParent (fieldsList.transform);
 			fieldUI.transform.FindChild("Title").GetComponent<Text>().text = fieldsArray[i].Name;
+            fieldUI.GetComponent<FieldUIs>().description = displayedValues[i + 1].ToString();
 			fieldUI.GetComponent<FieldUIs>().SetFieldValue(displayedValues[i]);
 
 		}

@@ -22,6 +22,7 @@ public class StringUI : FieldUIs {
 
 	public override void SetFieldValue(object value)
 	{
-		stringInput.text = value.ToString();
+        descriptionText.text = description;
+        stringInput.text = value.ToString();
 	}
 }

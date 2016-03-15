@@ -55,7 +55,7 @@ public class TP_Controller : MonoBehaviour {
 		if(Input.GetAxis("XboxPointGo") == 1){
 			Vector3 moveDirection = transform.InverseTransformDirection(DIRE.Instance.Hand.transform.forward);
 			//moveDirection = moveDirection.normalized;
-			Debug.Log("Move Direction: " + moveDirection);
+			//Debug.Log("Move Direction: " + moveDirection);
 			TP_Motor.Instance.MoveVector += moveDirection;
 			
 		}

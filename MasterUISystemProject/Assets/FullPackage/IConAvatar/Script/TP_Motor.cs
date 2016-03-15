@@ -24,13 +24,21 @@ public class TP_Motor : MonoBehaviour {
 	public Vector3 MoveVector {get; set; }
 	
 	public float VerticalVelocity {get; set;}
-		
+
+    private float jumpStartTime = 0;
+
 	void Awake () {
 		if(Instance == null)
 			Instance = this;
 		gravityOn = true;
 	}
 	
+    void Update()
+    {
+        if (avatarAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && Time.time > jumpStartTime + 0.25f)
+            avatarAnimator.SetBool("Jump", false);
+        
+    }
 
 	public void UpdateMotor () {
         if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
@@ -52,7 +60,7 @@ public class TP_Motor : MonoBehaviour {
 
         // Multiply MoveVector by MoveSpeed;
         //MoveVector = MoveVector * MoveSpeed();
-        MoveVector = MoveVector * avatarAnimator.deltaPosition.magnitude/Time.deltaTime;
+        MoveVector = MoveVector * MoveSpeed() * avatarAnimator.deltaPosition.magnitude/Time.deltaTime;
        
 
 		if(gravityOn){
@@ -79,8 +87,12 @@ public class TP_Motor : MonoBehaviour {
 
 	
 	public void Jump(){
-		if(TP_Controller.characterController.isGrounded)	
-			VerticalVelocity = JumpSpeed;
+        if (TP_Controller.characterController.isGrounded)
+        {
+            VerticalVelocity = JumpSpeed;
+            avatarAnimator.SetBool("Jump", true);
+            jumpStartTime = Time.time;
+        }
 	}
 	
 	void SnapAlignCharacterWithCamera(){
