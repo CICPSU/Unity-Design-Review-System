@@ -59,8 +59,8 @@ public class TP_Motor : MonoBehaviour {
 			MoveVector = Vector3.Normalize(MoveVector);
 
         // Multiply MoveVector by MoveSpeed;
-        //MoveVector = MoveVector * MoveSpeed();
-        MoveVector = MoveVector * MoveSpeed() * avatarAnimator.deltaPosition.magnitude/Time.deltaTime;
+        MoveVector = MoveVector * MoveSpeed();
+       // MoveVector = MoveVector * MoveSpeed() * avatarAnimator.deltaPosition.magnitude/Time.deltaTime;
        
 
 		if(gravityOn){
