@@ -7,7 +7,7 @@
     <y>0</y>
   </rectPos>
   <rectPosDescription>Position left and down from the top right hand corner of the screen for the minimap.</rectPosDescription>
-  <mapPortionOfScreen>0.350000024</mapPortionOfScreen>
+  <mapPortionOfScreen>0.2</mapPortionOfScreen>
   <mapPortionDescription>This is the portion of the screen that the minimap will take up, between 0 and 1.</mapPortionDescription>
   <orthoCamRadiusFeet>57.5</orthoCamRadiusFeet>
   <orthoCamRadiusDescription>This is the radius, in feet, that the minimap camera will show.</orthoCamRadiusDescription>
