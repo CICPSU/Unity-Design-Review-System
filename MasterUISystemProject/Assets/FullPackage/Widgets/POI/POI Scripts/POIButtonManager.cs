@@ -18,6 +18,8 @@ public class POIButtonManager : MonoBehaviour {
     public float POIlistHeight = 7.0f;
 	public GameObject markerRoot; //empty obj, root of all markers. assigned through inspector
 
+    public bool hasRaycastLock = false;
+
 	// Use this for initialization
 	void Start () {
 
@@ -54,6 +56,17 @@ public class POIButtonManager : MonoBehaviour {
 		}
 	}// start
 
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0) && !hasRaycastLock && RaycastLock.GetLock())
+        {
+            hasRaycastLock = true;
+            RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
+            if (RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null)
+                RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>().SetupCanvas();
+            
+        }
+    }
 	//whenever a new level is loaded, we regenerate the buttons from the xml file so that only the buttons for the current scene are visible
 	public void OnLevelWasLoaded(int level)
 	{
@@ -301,4 +314,18 @@ public class POIButtonManager : MonoBehaviour {
 		POI newPOI = new POI (Application.loadedLevelName, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
 		GenerateButMarkerPair (newPOI);
 	}
+
+    private Camera FindMouseCamera()
+    {
+        List<Camera> camList = (from cam in GameObject.FindObjectsOfType<Camera>() where cam.targetTexture == null select cam).ToList();
+        foreach (Camera cam in camList)
+        {
+            if (Input.mousePosition.x > cam.pixelRect.xMin && Input.mousePosition.x < cam.pixelRect.xMax
+                && Input.mousePosition.y > cam.pixelRect.yMin && Input.mousePosition.y < cam.pixelRect.yMax)
+            {
+                return cam;
+            }
+        }
+        return null;
+    }
 }

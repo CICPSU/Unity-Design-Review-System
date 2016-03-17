@@ -10,7 +10,7 @@ public class MarkerInfoCanvasRefs : MonoBehaviour {
 
     public void CloseMarkerInfo()
     {
-        activeMarker.transform.GetChild(0).GetComponent<MarkerInfoCanvasSetup>().hasRaycastLock = false;
+        POIButtonManager.instance.hasRaycastLock = false;
         RaycastLock.GiveLock();
         activeMarker = null;
         gameObject.SetActive(false);
