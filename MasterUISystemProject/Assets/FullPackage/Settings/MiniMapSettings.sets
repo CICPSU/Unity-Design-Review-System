@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <MiniMapSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <enabled>true</enabled>
-  <enabledDescription>Bool that is true when the widget is enabled.</enabledDescription>
+  <enabledDescription> Checked to enable widget.</enabledDescription>
   <rectPos>
     <x>0</x>
     <y>0</y>
   </rectPos>
-  <rectPosDescription>Position left and down from the top right hand corner of the screen for the minimap.</rectPosDescription>
-  <mapPortionOfScreen>0.2</mapPortionOfScreen>
-  <mapPortionDescription>This is the portion of the screen that the minimap will take up, between 0 and 1.</mapPortionDescription>
+  <rectPosDescription>Offset of the map position from the top right corner of the screen.</rectPosDescription>
+  <mapPortionOfScreen>0.400000036</mapPortionOfScreen>
+  <mapPortionDescription>Portion of the screen taken by the minimap, between 0 and 1.</mapPortionDescription>
   <orthoCamRadiusFeet>57.5</orthoCamRadiusFeet>
-  <orthoCamRadiusDescription>This is the radius, in feet, that the minimap camera will show.</orthoCamRadiusDescription>
+  <orthoCamRadiusDescription>This is the radius of the range of minimap in feet</orthoCamRadiusDescription>
 </MiniMapSettings>
