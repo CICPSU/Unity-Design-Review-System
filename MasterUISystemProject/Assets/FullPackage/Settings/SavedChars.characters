@@ -8,12 +8,12 @@
       <z>2.60400534</z>
     </dropPoint>
     <localWanderCenter>
-      <x>0</x>
+      <x>-1.16098022</x>
       <y>0</y>
-      <z>0</z>
+      <z>2.60400534</z>
     </localWanderCenter>
-    <localWanderRadius>10</localWanderRadius>
-    <mode>Idle</mode>
+    <localWanderRadius>2.96</localWanderRadius>
+    <mode>Patrol</mode>
     <defaultSpeed>1.5</defaultSpeed>
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>

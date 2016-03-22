@@ -469,6 +469,7 @@ public class CharacterDropper : MonoBehaviour {
 
     public void StartCharRadiusSelect()
     {
+        userSetRadius = false;
         if (charToEdit == null && charToDrop != null)
         {
             charToEdit = charToDrop;
