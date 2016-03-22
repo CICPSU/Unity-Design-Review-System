@@ -108,6 +108,13 @@ public class CharacterDropper : MonoBehaviour {
 
     void Update()
     {
+
+        if (firstFrameRadiusSelect && Input.GetMouseButtonDown(0))
+            firstFrameRadiusSelect = false;
+
+        if (firstFrameOpen && Input.GetMouseButtonDown(0))
+            firstFrameOpen = false;
+
         // this finds the camera whose viewport contains the mouse cursor
         mouseCam = FindMouseCamera();
 
@@ -251,7 +258,10 @@ public class CharacterDropper : MonoBehaviour {
 
             //if we left click at a valid location, drop the character
             if (Input.GetMouseButtonUp(0) && RaycastLock.hit.transform != null && !firstFrameOpen && !EventSystem.current.IsPointerOverGameObject())
+            {
                 DropCharacter();
+                Debug.Log("dropping character");
+            }
 
             #endregion
         }
@@ -280,12 +290,6 @@ public class CharacterDropper : MonoBehaviour {
             }
             
         }
-
-        if (firstFrameRadiusSelect && Input.GetMouseButtonUp(0))
-            firstFrameRadiusSelect = false;
-
-        if (firstFrameOpen && Input.GetMouseButtonUp(0))
-            firstFrameOpen = false;
     }
 
 
@@ -296,6 +300,7 @@ public class CharacterDropper : MonoBehaviour {
 
     void OnEnable()
     {
+        characterFilePath = Application.dataPath + "/FullPackage/Settings/SavedChars.characters";
         ResetMenu();
     }
 
@@ -370,6 +375,8 @@ public class CharacterDropper : MonoBehaviour {
 
     public void OpenCharacterDrop()
     {
+        if (!hasRaycastLock && RaycastLock.GetLock())
+            hasRaycastLock = true;
         dropCharacterSelectPanel.gameObject.SetActive(true);
         modelToggleGroup.SetAllTogglesOff();
         randomToggle.isOn = true;
@@ -380,6 +387,12 @@ public class CharacterDropper : MonoBehaviour {
 
     public void CloseCharacterDrop()
     {
+
+        if (hasRaycastLock)
+        {
+            hasRaycastLock = false;
+            RaycastLock.GiveLock();
+        }
         dropCharacterSelectPanel.gameObject.SetActive(false);
         Destroy(charToDrop);
         charToDrop = null;

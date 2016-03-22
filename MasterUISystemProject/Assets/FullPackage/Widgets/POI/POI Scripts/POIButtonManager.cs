@@ -64,6 +64,11 @@ public class POIButtonManager : MonoBehaviour {
             RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
             if (RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null)
                 RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>().SetupCanvas();
+            else
+            {
+                hasRaycastLock = false;
+                RaycastLock.GiveLock();
+            }
             
         }
     }
