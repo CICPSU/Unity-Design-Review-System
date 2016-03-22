@@ -51,7 +51,7 @@ public class NavMeshWander : MonoBehaviour {
 
             userDestination = false;
         }
-        else
+        else if (mode != NavMeshWander.WanderMode.Idle)
         {
             idleTimer = Time.time;
             animator.SetFloat("Speed", 1f);
@@ -110,7 +110,7 @@ public class NavMeshWander : MonoBehaviour {
     void OnAnimatorMove()
     {
         //only perform if moving
-        if (!(navAgent.remainingDistance < .5f) && !navAgent.pathPending)
+        if (!(navAgent.remainingDistance < .5f) && !navAgent.pathPending && mode != NavMeshWander.WanderMode.Idle)
         {
             if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) > 5)
                 animator.SetFloat("Direction", Vector3.Angle(transform.forward, navAgent.destination - transform.position));

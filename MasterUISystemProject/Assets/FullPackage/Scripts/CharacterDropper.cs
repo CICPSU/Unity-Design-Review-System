@@ -14,6 +14,7 @@ public class CharacterDropper : MonoBehaviour {
     public GameObject avatar;
     private Camera mouseCam;
     public bool hasRaycastLock = false;
+    private bool initializing = false;
 
     private List<DroppedCharacter> droppedCharacters = new List<DroppedCharacter>();
     private string characterFilePath;
@@ -73,8 +74,8 @@ public class CharacterDropper : MonoBehaviour {
 
     void Start()
     {
-        characterFilePath = Application.dataPath + "/FullPackage/Settings/SavedChars.characters";
-        LoadCharacters();
+        //characterFilePath = Application.dataPath + "/FullPackage/Settings/SavedChars.characters";
+        //LoadCharacters();
 
         radiusInput.onValueChanged.AddListener(SetRadiusProjectorFromInputValueChanged);
         ResetMenu();
@@ -301,11 +302,13 @@ public class CharacterDropper : MonoBehaviour {
     void OnEnable()
     {
         characterFilePath = Application.dataPath + "/FullPackage/Settings/SavedChars.characters";
+        LoadCharacters();
         ResetMenu();
     }
 
     public void ResetMenu()
     {
+        initializing = true;
         Destroy(charToDrop);
         newCharDrop = false;
         charInfoOpen = false;
@@ -316,6 +319,7 @@ public class CharacterDropper : MonoBehaviour {
         CloseCharacterDrop();
         CloseCharacterInfo();
         CloseCharacterEdit();
+        initializing = false;
     }
 
     public void ToggleMenu()
@@ -645,7 +649,9 @@ public class CharacterDropper : MonoBehaviour {
         {
             GameObject newChar = GameObject.Instantiate(Resources.Load("Characters/" + character.modelName)) as GameObject;
             newChar.transform.parent = charRoot.transform;
-            newChar.transform.position = character.dropPoint;
+            newChar.transform.localPosition = character.dropPoint;
+            Debug.Log("droppping character: " + character.dropPoint);
+            newChar.transform.localScale = Vector3.one;
             NavMeshWander newWander = newChar.GetComponent<NavMeshWander>();
             newWander.dropPoint = character.dropPoint;
             newWander.localWanderCenter = character.localWanderCenter;
@@ -658,13 +664,16 @@ public class CharacterDropper : MonoBehaviour {
 
     public void SaveCharacters()
     {
-        droppedCharacters = new List<DroppedCharacter>();
-        for (int i = 0; i < charRoot.transform.childCount; i++)
+        if (!initializing)
         {
-            droppedCharacters.Add(new DroppedCharacter(charRoot.transform.GetChild(i).GetComponent<NavMeshWander>()));
+            droppedCharacters = new List<DroppedCharacter>();
+            Debug.Log("saving " + charRoot.transform.childCount + " characters");
+            for (int i = 0; i < charRoot.transform.childCount; i++)
+            {
+                droppedCharacters.Add(new DroppedCharacter(charRoot.transform.GetChild(i).GetComponent<NavMeshWander>()));
+            }
+            XmlIO.Save(droppedCharacters, characterFilePath);
         }
-        XmlIO.Save(droppedCharacters, characterFilePath);
-
     }
 
     public void DeleteCharacters()
