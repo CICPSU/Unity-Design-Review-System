@@ -1,28 +1,11 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <ArrayOfDroppedCharacter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DroppedCharacter>
-    <modelName>Natasha</modelName>
+    <modelName>carl</modelName>
     <dropPoint>
-      <x>-1.16097069</x>
-      <y>-5.78205336E-17</y>
-      <z>2.60400534</z>
-    </dropPoint>
-    <localWanderCenter>
-      <x>-1.16098022</x>
-      <y>0</y>
-      <z>2.60400534</z>
-    </localWanderCenter>
-    <localWanderRadius>2.96</localWanderRadius>
-    <mode>Patrol</mode>
-    <defaultSpeed>1.5</defaultSpeed>
-    <normalSpeedRadius>3</normalSpeedRadius>
-  </DroppedCharacter>
-  <DroppedCharacter>
-    <modelName>Victoria</modelName>
-    <dropPoint>
-      <x>0.494467884</x>
-      <y>-6.718151E-17</y>
-      <z>3.02558637</z>
+      <x>-2.433978</x>
+      <y>-6.00806558E-17</y>
+      <z>2.70579219</z>
     </dropPoint>
     <localWanderCenter>
       <x>0</x>
@@ -35,11 +18,45 @@
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>
   <DroppedCharacter>
-    <modelName>vincent</modelName>
+    <modelName>Mia</modelName>
     <dropPoint>
-      <x>1.58561885</x>
-      <y>-6.369027E-17</y>
-      <z>2.86835456</z>
+      <x>-0.5781805</x>
+      <y>-6.290006E-17</y>
+      <z>2.83276653</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>-1.70947266</x>
+      <y>0</y>
+      <z>1.04329479</z>
+    </localWanderCenter>
+    <localWanderRadius>2.64411</localWanderRadius>
+    <mode>Patrol</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>Michael</modelName>
+    <dropPoint>
+      <x>1.45289552</x>
+      <y>-5.41648718E-17</y>
+      <z>2.43936872</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </localWanderCenter>
+    <localWanderRadius>10</localWanderRadius>
+    <mode>Explore</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>carl</modelName>
+    <dropPoint>
+      <x>13.5329008</x>
+      <y>-3.30986436E-16</y>
+      <z>14.9063034</z>
     </dropPoint>
     <localWanderCenter>
       <x>0</x>
