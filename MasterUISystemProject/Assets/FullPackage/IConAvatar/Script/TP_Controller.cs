@@ -76,10 +76,14 @@ public class TP_Controller : MonoBehaviour {
 		
 	}
 	
-	void HandleActionInput(){
-			if(Input.GetButton("Jump")){     // It seems redundent to call a Jump() here which calls the Jump() in TP_Motor
+	void HandleActionInput()
+    {
+        TP_Motor.Instance.CheckJump();
+
+		if(Input.GetButton("Jump"))
+        {// It seems redundent to call a Jump() here which calls the Jump() in TP_Motor
 			Jump();
-		}									// the reason of doing this is to create space for future functions, such as climb and animations	
+		}// the reason of doing this is to create space for future functions, such as climb and animations	
 	}
 	
 	void Jump(){

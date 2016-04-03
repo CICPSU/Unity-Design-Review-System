@@ -26,6 +26,7 @@ public class TP_Motor : MonoBehaviour {
 	public float VerticalVelocity {get; set;}
 
     private float jumpStartTime = 0;
+    public bool hasJumped = false;
 
 	void Awake () {
 		if(Instance == null)
@@ -35,7 +36,9 @@ public class TP_Motor : MonoBehaviour {
 	
     void Update()
     {
-        if (avatarAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && Time.time > jumpStartTime + 0.25f)
+
+
+        if (avatarAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && Time.time > jumpStartTime + 1.3f)
             avatarAnimator.SetBool("Jump", false);
         
     }
@@ -84,12 +87,20 @@ public class TP_Motor : MonoBehaviour {
 			MoveVector = new Vector3(MoveVector.x,-1, MoveVector.z);
 	}
 	
+    public void CheckJump()
+    {
+        if (avatarAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && Time.time > jumpStartTime + .66f && !hasJumped)
+        {
+            hasJumped = true;
+            VerticalVelocity = JumpSpeed;
+        }
 
+    }
 	
 	public void Jump(){
         if (TP_Controller.characterController.isGrounded)
         {
-            VerticalVelocity = JumpSpeed;
+            hasJumped = false;
             avatarAnimator.SetBool("Jump", true);
             jumpStartTime = Time.time;
         }

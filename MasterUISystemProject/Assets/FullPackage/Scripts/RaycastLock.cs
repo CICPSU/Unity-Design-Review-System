@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
 
 public static class RaycastLock{
@@ -8,6 +9,9 @@ public static class RaycastLock{
 
     public static bool GetLock()
     {
+
+        if (EventSystem.current.IsPointerOverGameObject())
+            return false;
 
         if (raycastAvailable)
         {

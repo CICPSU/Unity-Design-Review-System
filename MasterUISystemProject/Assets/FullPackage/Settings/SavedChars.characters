@@ -8,9 +8,9 @@
       <z>2.70579219</z>
     </dropPoint>
     <localWanderCenter>
-      <x>0</x>
+      <x>-2.42834473</x>
       <y>0</y>
-      <z>0</z>
+      <z>2.716468</z>
     </localWanderCenter>
     <localWanderRadius>10</localWanderRadius>
     <mode>Idle</mode>
@@ -25,9 +25,9 @@
       <z>2.83276653</z>
     </dropPoint>
     <localWanderCenter>
-      <x>-1.70947266</x>
+      <x>-2.69036865</x>
       <y>0</y>
-      <z>1.04329479</z>
+      <z>0.311193645</z>
     </localWanderCenter>
     <localWanderRadius>2.64411</localWanderRadius>
     <mode>Patrol</mode>
@@ -42,9 +42,9 @@
       <z>2.43936872</z>
     </dropPoint>
     <localWanderCenter>
-      <x>0</x>
+      <x>-15.3674927</x>
       <y>0</y>
-      <z>0</z>
+      <z>2.053439</z>
     </localWanderCenter>
     <localWanderRadius>10</localWanderRadius>
     <mode>Explore</mode>

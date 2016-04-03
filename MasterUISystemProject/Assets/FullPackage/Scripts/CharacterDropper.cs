@@ -169,7 +169,7 @@ public class CharacterDropper : MonoBehaviour {
                 //set size of the projector to the distance between the character being editted and the raycast hit at the mouse location
                 if (mouseCam != null && hasRaycastLock)
                 {
-                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
+                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 2 | 1 << 8));
                     radiusProjector.orthographicSize = (charToEdit.transform.position - RaycastLock.hit.point).magnitude;
                 }
 
@@ -228,7 +228,7 @@ public class CharacterDropper : MonoBehaviour {
 
             //raycast that ignores characters in the scene
             if (mouseCam != null && hasRaycastLock)
-                RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
+                RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 2 | 1 << 8));
 
             #region makes sure the displayed char is correct
             if (charToDrop == null)
@@ -278,7 +278,7 @@ public class CharacterDropper : MonoBehaviour {
 
                 if (hasRaycastLock)
                 {
-                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
+                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 2));
                     //if we are pointing at an existing avatar and left click, open char info
                     if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<NavMeshWander>() != null && !charInfoOpen)
                         OpenCharacterInfo();
