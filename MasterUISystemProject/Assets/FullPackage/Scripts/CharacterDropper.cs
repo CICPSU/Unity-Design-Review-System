@@ -278,7 +278,8 @@ public class CharacterDropper : MonoBehaviour {
 
                 if (hasRaycastLock)
                 {
-                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 2));
+                    Debug.Log("has raycast lock");
+                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 7));
                     //if we are pointing at an existing avatar and left click, open char info
                     if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<NavMeshWander>() != null && !charInfoOpen)
                         OpenCharacterInfo();
@@ -634,7 +635,6 @@ public class CharacterDropper : MonoBehaviour {
         if (charToEdit != null)
         {
             navMeshWanderToEdit.mode = selectedMode;
-
 
             UpdateCharInfoLabels();
         }
