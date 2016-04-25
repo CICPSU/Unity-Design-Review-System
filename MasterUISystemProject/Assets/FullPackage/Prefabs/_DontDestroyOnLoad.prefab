@@ -4311,7 +4311,7 @@ GameObject:
   - 4: {fileID: 424178}
   - 33: {fileID: 3383156}
   - 23: {fileID: 2345078}
-  m_Layer: 9
+  m_Layer: 5
   m_Name: Arrow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20488,11 +20488,11 @@ RectTransform:
   - {fileID: 22404744}
   - {fileID: 22480452}
   - {fileID: 22498452}
-  m_Father: {fileID: 22447172}
-  m_RootOrder: 6
+  m_Father: {fileID: 22459320}
+  m_RootOrder: 4
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 7, y: -195}
+  m_AnchoredPosition: {x: 477, y: 54.899994}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &22428170
@@ -21380,7 +21380,6 @@ RectTransform:
   - {fileID: 22496816}
   - {fileID: 22423648}
   - {fileID: 437038}
-  - {fileID: 22428086}
   m_Father: {fileID: 22459320}
   m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
@@ -21895,6 +21894,7 @@ RectTransform:
   - {fileID: 22440434}
   - {fileID: 22447172}
   - {fileID: 420178}
+  - {fileID: 22428086}
   m_Father: {fileID: 22455114}
   m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}

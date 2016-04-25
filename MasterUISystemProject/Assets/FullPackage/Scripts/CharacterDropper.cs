@@ -278,7 +278,6 @@ public class CharacterDropper : MonoBehaviour {
 
                 if (hasRaycastLock)
                 {
-                    Debug.Log("has raycast lock");
                     RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 7));
                     //if we are pointing at an existing avatar and left click, open char info
                     if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<NavMeshWander>() != null && !charInfoOpen)
@@ -515,6 +514,14 @@ public class CharacterDropper : MonoBehaviour {
         Toggle toggleToActivate = charEditWanderToggleGroup.transform.GetChild((int)navMeshWanderToEdit.mode).GetComponent<Toggle>();
         toggleToActivate.isOn = true;
         charEditWanderToggleGroup.NotifyToggleOn(toggleToActivate);
+
+        // move info panel off screen
+        iTween.MoveBy(charInfoPanel.gameObject, iTween.Hash("y", Screen.height, "easeType", "easeInOutExpo", "delay", .1));
+
+        // grow edit panel
+        charEditPanel.localPosition = Input.mousePosition;
+        charEditPanel.localScale = new Vector3(.01f, .01f, .01f);
+        iTween.ScaleBy(charEditPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo", "delay", .1));
     }
 
     public void CloseCharacterEdit()
@@ -533,6 +540,9 @@ public class CharacterDropper : MonoBehaviour {
 
             }
         }
+
+        iTween.MoveBy(charInfoPanel.gameObject, iTween.Hash("y", -Screen.height, "easeType", "easeInOutExpo", "delay", .1));
+
 
         charEditOpen = false;
         charEditPanel.gameObject.SetActive(false);
@@ -569,6 +579,12 @@ public class CharacterDropper : MonoBehaviour {
             charInfoPanel.transform.position = new Vector3(Input.mousePosition.x, charEditPanel.sizeDelta.y, 0);
         else
             charInfoPanel.transform.position = Input.mousePosition;
+
+
+        iTween.Stop(charInfoPanel.gameObject, true);
+        charInfoPanel.localScale = new Vector3(.01f, .01f, .01f);
+        iTween.ScaleBy(charInfoPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo", "delay", .1));
+
 
         UpdateCharInfoLabels();
 
