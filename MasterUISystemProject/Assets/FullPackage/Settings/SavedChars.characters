@@ -8,9 +8,9 @@
       <z>2.70579219</z>
     </dropPoint>
     <localWanderCenter>
-      <x>-2.434204</x>
+      <x>-3.91824341</x>
       <y>0</y>
-      <z>2.70524216</z>
+      <z>4.19576359</z>
     </localWanderCenter>
     <localWanderRadius>10</localWanderRadius>
     <mode>Idle</mode>
@@ -59,9 +59,9 @@
       <z>14.9063034</z>
     </dropPoint>
     <localWanderCenter>
-      <x>0</x>
+      <x>13.5328979</x>
       <y>0</y>
-      <z>0</z>
+      <z>14.9063034</z>
     </localWanderCenter>
     <localWanderRadius>10</localWanderRadius>
     <mode>Idle</mode>

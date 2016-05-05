@@ -583,8 +583,7 @@ public class CharacterDropper : MonoBehaviour {
 
         iTween.Stop(charInfoPanel.gameObject, true);
         charInfoPanel.localScale = new Vector3(.01f, .01f, .01f);
-        iTween.ScaleBy(charInfoPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo", "delay", .1));
-
+        iTween.ScaleBy(charInfoPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo"));
 
         UpdateCharInfoLabels();
 
