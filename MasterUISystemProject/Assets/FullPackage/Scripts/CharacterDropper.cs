@@ -342,11 +342,13 @@ public class CharacterDropper : MonoBehaviour {
             userSetRadius = true;
             if (value == null || value == "")
             {
-                value = radiusProjector.orthographicSize.ToString();
-                radiusInput.text = value;
+                radiusInput.text = 0.ToString();
             }
-            radiusProjector.orthographicSize = float.Parse(value);
+            else
+                radiusInput.text = value.ToString();
         }
+
+        radiusProjector.orthographicSize = float.Parse(radiusInput.text);
     }
 
     public void SetWanderRadiusFromInput()
@@ -532,9 +534,14 @@ public class CharacterDropper : MonoBehaviour {
                 selectedMode = (CharacterWander.WanderMode)0;
             else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
             {
-                selectedMode = (CharacterWander.WanderMode)1;
-                navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
-                navMeshWanderToEdit.localWanderRadius = float.Parse(radiusInput.text);
+                if (float.Parse(radiusInput.text) > .5f)
+                {
+                    selectedMode = (CharacterWander.WanderMode)1;
+                    navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
+                    navMeshWanderToEdit.localWanderRadius = float.Parse(radiusInput.text);
+                }
+                else
+                    selectedMode = (CharacterWander.WanderMode)0;
             }
             else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Explore")
                 selectedMode = (CharacterWander.WanderMode)2;

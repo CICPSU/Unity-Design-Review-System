@@ -29,8 +29,8 @@
       <y>0</y>
       <z>2.69648576</z>
     </localWanderCenter>
-    <localWanderRadius>3</localWanderRadius>
-    <mode>Idle</mode>
+    <localWanderRadius>0</localWanderRadius>
+    <mode>Patrol</mode>
     <defaultSpeed>1.5</defaultSpeed>
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>
