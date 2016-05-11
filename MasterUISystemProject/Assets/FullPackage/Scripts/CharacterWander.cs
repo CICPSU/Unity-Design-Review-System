@@ -20,7 +20,7 @@ public class CharacterWander : MonoBehaviour {
 
     public float navSpeedRatio = 1;
 
-    public int poiDestination = 0;
+    public int poiDestination = -1;
 
     private NavMeshAgent navAgent;
 
@@ -28,9 +28,7 @@ public class CharacterWander : MonoBehaviour {
 
     private NavMeshHit hit;
 
-    private int idleTimer = 0;
-
-    private bool invoked = false;
+    private int idleTime = 0;
 
     public void SetWanderMode()
     {
@@ -55,6 +53,7 @@ public class CharacterWander : MonoBehaviour {
         if (navAgent.isOnNavMesh)
             navAgent.Stop();
         animator.SetFloat("Speed", 0f);
+        animator.SetFloat("Direction", 0);
     }
 
     private void SetPatrolMode()
@@ -74,10 +73,11 @@ public class CharacterWander : MonoBehaviour {
         StartMovement();
     }
 
-    private void SetBookmarkMode()
+    public void SetBookmarkMode()
     {
         if (navAgent.isOnNavMesh)
             navAgent.Stop();
+
         prevMode = mode;
         mode = WanderMode.Bookmark;
         CalcDestination();
@@ -111,17 +111,6 @@ public class CharacterWander : MonoBehaviour {
         navAgent.SetDestination(hit.position);
         navAgent.Resume();
         animator.SetFloat("Speed", 1f);
-    }
-
-    protected void TransitBtwDestinations()
-    {
-        
-        if (mode == WanderMode.Bookmark)
-        {
-            mode = prevMode;
-        }
-        SetWanderMode();
-        invoked = false;
     }
 
     void OnAnimatorMove()
@@ -165,14 +154,20 @@ public class CharacterWander : MonoBehaviour {
 
     void Update()
     {
-        if (navAgent.remainingDistance < .5f && !navAgent.pathPending && !invoked)
+        if (navAgent.remainingDistance < .5f && !navAgent.pathPending && !IsInvoking())
         {
             if (navAgent.isOnNavMesh)
                 navAgent.Stop();
             animator.SetFloat("Speed", 0f);
 
-            Invoke("TransitBtwDestinations", 3);
-            invoked = true;
+            if (mode == WanderMode.Bookmark)
+            {
+                poiDestination = -1;
+                mode = prevMode;
+                localWanderCenter = transform.position;
+            }
+
+            Invoke("SetWanderMode", idleTime);
         }
 
     }

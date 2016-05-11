@@ -554,6 +554,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!224 &1232840894 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 22485426, guid: b1aa694318b253d4c82556250dc69bf4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1998726232}
 --- !u!1 &1327006524
 GameObject:
   m_ObjectHideFlags: 0
@@ -629,6 +634,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 949715443}
   m_RootOrder: 3
+--- !u!224 &1394396119 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 22406316, guid: b1aa694318b253d4c82556250dc69bf4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1998726232}
 --- !u!1 &1586869038 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 194896, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
@@ -758,7 +768,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22496680, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0.9186937
+      value: 0.91869366
       objectReference: {fileID: 0}
     - target: {fileID: 22453262, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
       propertyPath: m_AnchorMax.x
@@ -879,3 +889,20 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &2099737750 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 158220, guid: b1aa694318b253d4c82556250dc69bf4, type: 2}
+  m_PrefabInternal: {fileID: 1998726232}
+--- !u!114 &2099737752
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2099737750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 215053ca469fb8a47bd4e833bc81bd55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  widgetRoot: {fileID: 1232840894}
+  widgetConfig: {fileID: 1394396119}
