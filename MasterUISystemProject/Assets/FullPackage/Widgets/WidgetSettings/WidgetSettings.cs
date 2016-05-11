@@ -67,11 +67,11 @@ public class MiniMapSettings : WidgetSettings {
 	public Vector2 rectPos = Vector2.zero;
     public string rectPosDescription;
 
-	public float mapPortionOfScreen;
-    public string mapPortionDescription;
+	public float mapPortionOfScreen = 0.2f;
+    public string mapPortionDescription = "";
 
-	public float orthoCamRadiusFeet;
-    public string orthoCamRadiusDescription;
+	public float orthoCamRadiusFeet = 5;
+    public string orthoCamRadiusDescription = "";
 
 	public override void ApplySettings()
 	{

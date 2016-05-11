@@ -49,7 +49,7 @@ public static class XmlIO
 	{
 		object thing = null;
 
-		Debug.Log("Loading (" + type.Name + "): " + path);
+		//Debug.Log("Loading (" + type.Name + "): " + path);
 
 		XmlTextReader reader = new XmlTextReader( path );
 		XmlSerializer serializer = new  XmlSerializer( type, AdditionalTypes.ToArray() );

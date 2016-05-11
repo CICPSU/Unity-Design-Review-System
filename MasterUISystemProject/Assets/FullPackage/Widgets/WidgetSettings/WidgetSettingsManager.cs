@@ -176,7 +176,7 @@ public class WidgetSettingsManager : MonoBehaviour{
 
 		string file = settingsFileFolderPath + "/" + activeSettingsFileType.Name + ".sets";
 
-		Debug.Log(file);
+		Debug.Log("saving: " + file);
 		XmlIO.Save (objToSave, file);
         //LoadSettingsFiles();
 	}
