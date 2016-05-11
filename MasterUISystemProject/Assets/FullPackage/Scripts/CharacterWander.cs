@@ -30,6 +30,8 @@ public class CharacterWander : MonoBehaviour {
 
     private int idleTimer = 0;
 
+    private bool invoked = false;
+
     public void SetWanderMode()
     {
         switch (mode)
@@ -113,11 +115,13 @@ public class CharacterWander : MonoBehaviour {
 
     protected void TransitBtwDestinations()
     {
+        
         if (mode == WanderMode.Bookmark)
         {
             mode = prevMode;
         }
         SetWanderMode();
+        invoked = false;
     }
 
     void OnAnimatorMove()
@@ -161,13 +165,14 @@ public class CharacterWander : MonoBehaviour {
 
     void Update()
     {
-        if (navAgent.remainingDistance < .5f && !navAgent.pathPending)
+        if (navAgent.remainingDistance < .5f && !navAgent.pathPending && !invoked)
         {
             if (navAgent.isOnNavMesh)
                 navAgent.Stop();
             animator.SetFloat("Speed", 0f);
 
             Invoke("TransitBtwDestinations", 3);
+            invoked = true;
         }
 
     }
