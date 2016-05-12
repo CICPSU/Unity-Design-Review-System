@@ -55,10 +55,10 @@ public class CharacterDropper : MonoBehaviour {
     public InputField radiusInput;
     public ToggleGroup charEditWanderToggleGroup;
     public Image radiusSelectMask;
-    public NavMeshWander.WanderMode selectedMode;
+    public CharacterWander.WanderMode selectedMode;
 
     private GameObject charToEdit;
-    private NavMeshWander navMeshWanderToEdit;
+    private CharacterWander navMeshWanderToEdit;
 
     /// <summary>
     /// STATES
@@ -169,7 +169,7 @@ public class CharacterDropper : MonoBehaviour {
                 //set size of the projector to the distance between the character being editted and the raycast hit at the mouse location
                 if (mouseCam != null && hasRaycastLock)
                 {
-                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 2 | 1 << 8));
+                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
                     radiusProjector.orthographicSize = (charToEdit.transform.position - RaycastLock.hit.point).magnitude;
                 }
 
@@ -228,7 +228,7 @@ public class CharacterDropper : MonoBehaviour {
 
             //raycast that ignores characters in the scene
             if (mouseCam != null && hasRaycastLock)
-                RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 2 | 1 << 8));
+                RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
 
             #region makes sure the displayed char is correct
             if (charToDrop == null)
@@ -278,9 +278,9 @@ public class CharacterDropper : MonoBehaviour {
 
                 if (hasRaycastLock)
                 {
-                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 7));
+                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
                     //if we are pointing at an existing avatar and left click, open char info
-                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<NavMeshWander>() != null && !charInfoOpen)
+                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen)
                         OpenCharacterInfo();
                     else
                     {
@@ -342,11 +342,13 @@ public class CharacterDropper : MonoBehaviour {
             userSetRadius = true;
             if (value == null || value == "")
             {
-                value = radiusProjector.orthographicSize.ToString();
-                radiusInput.text = value;
+                radiusInput.text = 0.ToString();
             }
-            radiusProjector.orthographicSize = float.Parse(value);
+            else
+                radiusInput.text = value.ToString();
         }
+
+        radiusProjector.orthographicSize = float.Parse(radiusInput.text);
     }
 
     public void SetWanderRadiusFromInput()
@@ -359,20 +361,20 @@ public class CharacterDropper : MonoBehaviour {
     {
         charToDrop.GetComponent<CapsuleCollider>().enabled = true;
         charToDrop.GetComponent<NavMeshAgent>().enabled = true;
-        charToDrop.GetComponent<NavMeshWander>().enabled = true;
-        charToDrop.GetComponent<NavMeshWander>().mode = (NavMeshWander.WanderMode)newCharWanderSelect.value;
-        charToDrop.GetComponent<NavMeshWander>().dropPoint = charToDrop.transform.position;
+        charToDrop.GetComponent<CharacterWander>().enabled = true;
+        charToDrop.GetComponent<CharacterWander>().mode = (CharacterWander.WanderMode)newCharWanderSelect.value;
+        charToDrop.GetComponent<CharacterWander>().dropPoint = charToDrop.transform.position;
        
         charToDrop.transform.parent = charRoot.transform;
 
-        if ((NavMeshWander.WanderMode)newCharWanderSelect.value == NavMeshWander.WanderMode.Patrol)
+        if ((CharacterWander.WanderMode)newCharWanderSelect.value == CharacterWander.WanderMode.Patrol)
         {
             charToEdit = charToDrop;
-            navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
+            navMeshWanderToEdit = charToEdit.GetComponent<CharacterWander>();
             StartCharRadiusSelect();
         }
 
-        droppedCharacters.Add(new DroppedCharacter(charToDrop.GetComponent<NavMeshWander>()));
+        droppedCharacters.Add(new DroppedCharacter(charToDrop.GetComponent<CharacterWander>()));
         SaveCharacters();
         charToDrop = null;
     }
@@ -426,7 +428,7 @@ public class CharacterDropper : MonoBehaviour {
 
         returnChar.GetComponent<CapsuleCollider>().enabled = false;
         returnChar.GetComponent<NavMeshAgent>().enabled = false;
-        returnChar.GetComponent<NavMeshWander>().enabled = false;
+        returnChar.GetComponent<CharacterWander>().enabled = false;
         return returnChar;
     }
 
@@ -446,7 +448,7 @@ public class CharacterDropper : MonoBehaviour {
 
     public void DeleteCharacter()
     {
-        droppedCharacters.Remove(new DroppedCharacter(charToEdit.GetComponent<NavMeshWander>()));
+        droppedCharacters.Remove(new DroppedCharacter(charToEdit.GetComponent<CharacterWander>()));
         SaveCharacters();
         Destroy(charToEdit);
         charToEdit = null;
@@ -477,7 +479,7 @@ public class CharacterDropper : MonoBehaviour {
             charToDrop = null;
         }
         if(navMeshWanderToEdit == null)
-            navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
+            navMeshWanderToEdit = charToEdit.GetComponent<CharacterWander>();
 
         if (charToEdit != null)
             navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
@@ -493,7 +495,7 @@ public class CharacterDropper : MonoBehaviour {
         {
             navMeshWanderToEdit.localWanderRadius = radiusProjector.orthographicSize;
             if(startMotion)
-                navMeshWanderToEdit.ConfigureDestination();
+                navMeshWanderToEdit.SetWanderMode();
         }
         
 
@@ -516,12 +518,12 @@ public class CharacterDropper : MonoBehaviour {
         charEditWanderToggleGroup.NotifyToggleOn(toggleToActivate);
 
         // move info panel off screen
-        iTween.MoveBy(charInfoPanel.gameObject, iTween.Hash("y", Screen.height, "easeType", "easeInOutExpo", "delay", .1));
+        iTween.MoveBy(charInfoPanel.gameObject, iTween.Hash("y", Screen.height, "easeType", "easeInOutExpo", "time", .5f));
 
         // grow edit panel
         charEditPanel.localPosition = Input.mousePosition;
         charEditPanel.localScale = new Vector3(.01f, .01f, .01f);
-        iTween.ScaleBy(charEditPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo", "delay", .1));
+        iTween.ScaleBy(charEditPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo", "time", .5f));
     }
 
     public void CloseCharacterEdit()
@@ -529,19 +531,23 @@ public class CharacterDropper : MonoBehaviour {
         if (navMeshWanderToEdit != null && charEditOpen)
         {
             if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Idle")
-                selectedMode = (NavMeshWander.WanderMode)0;
-            else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Explore")
-                selectedMode = (NavMeshWander.WanderMode)2;
+                selectedMode = (CharacterWander.WanderMode)0;
             else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
             {
-                selectedMode = (NavMeshWander.WanderMode)1;
-                navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
-                navMeshWanderToEdit.localWanderRadius = float.Parse(radiusInput.text);
-
+                if (float.Parse(radiusInput.text) > .5f)
+                {
+                    selectedMode = (CharacterWander.WanderMode)1;
+                    navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
+                    navMeshWanderToEdit.localWanderRadius = float.Parse(radiusInput.text);
+                }
+                else
+                    selectedMode = (CharacterWander.WanderMode)0;
             }
+            else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Explore")
+                selectedMode = (CharacterWander.WanderMode)2;
         }
 
-        iTween.MoveBy(charInfoPanel.gameObject, iTween.Hash("y", -Screen.height, "easeType", "easeInOutExpo", "delay", .1));
+        iTween.MoveBy(charInfoPanel.gameObject, iTween.Hash("y", -Screen.height, "easeType", "easeInOutExpo", "time", .5f));
 
 
         charEditOpen = false;
@@ -554,8 +560,9 @@ public class CharacterDropper : MonoBehaviour {
         charInfoOpen = true;
         charRadiusSelect = false;
         charToEdit = RaycastLock.hit.transform.gameObject;
-        navMeshWanderToEdit = charToEdit.GetComponent<NavMeshWander>();
+        navMeshWanderToEdit = charToEdit.GetComponent<CharacterWander>();
         charToEdit.GetComponent<NavMeshAgent>().Stop();
+        navMeshWanderToEdit.CancelInvoke();
         charToEdit.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
         selectedMode = navMeshWanderToEdit.mode;
@@ -583,7 +590,7 @@ public class CharacterDropper : MonoBehaviour {
 
         iTween.Stop(charInfoPanel.gameObject, true);
         charInfoPanel.localScale = new Vector3(.01f, .01f, .01f);
-        iTween.ScaleBy(charInfoPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo"));
+        iTween.ScaleBy(charInfoPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo", "time", .5f));
 
         UpdateCharInfoLabels();
 
@@ -600,18 +607,26 @@ public class CharacterDropper : MonoBehaviour {
             RaycastLock.GiveLock();
             hasRaycastLock = false;
         }
+        if(charEditOpen)
+            CloseCharacterEdit();
 
-        CloseCharacterEdit();
         if (charToEdit != null)
             charToEdit.GetComponent<Animator>().enabled = true;
+        
+
+        ApplyOptions();
+
         if (navMeshWanderToEdit != null)
         {
-            if(destinationDropDown.value == 0)
-                navMeshWanderToEdit.ConfigureDestination();
+            if (destinationDropDown.value == 0)
+                navMeshWanderToEdit.SetWanderMode();
             else
-                navMeshWanderToEdit.ConfigureDestination(destinationDropDown.value - 1);
+            {
+                navMeshWanderToEdit.poiDestination = destinationDropDown.value - 1;
+                navMeshWanderToEdit.SetBookmarkMode();
+            }
         }
-        ApplyOptions();
+
         SaveCharacters();
         charToEdit = null;
         navMeshWanderToEdit = null;
@@ -622,27 +637,31 @@ public class CharacterDropper : MonoBehaviour {
 
     public void UpdateCharInfoLabels()
     {
-        modelNameLabel.text = charToEdit.gameObject.name.Remove(charToEdit.gameObject.name.IndexOf("("));
+        if(charToEdit != null)
+            modelNameLabel.text = charToEdit.gameObject.name.Remove(charToEdit.gameObject.name.IndexOf("("));
 
-        wanderModeLabel.text = navMeshWanderToEdit.mode.ToString();
+        if (navMeshWanderToEdit != null)
+        {
+            wanderModeLabel.text = navMeshWanderToEdit.mode.ToString();
 
-        if ((int)navMeshWanderToEdit.mode == 0)
-        {
-            radiusProjector.orthographicSize = 0;
-            wanderRangeLabel.text = "0";
-        }
-        else if ((int)navMeshWanderToEdit.mode == 1)
-        {
-            radiusProjector.orthographicSize = navMeshWanderToEdit.localWanderRadius;
-            wanderRangeLabel.text = navMeshWanderToEdit.localWanderRadius.ToString();
-        }
-        else if ((int)navMeshWanderToEdit.mode == 2)
-        {
-            radiusProjector.orthographicSize = 0;
-            wanderRangeLabel.text = "Infinite";
-        }
+            if ((int)navMeshWanderToEdit.mode == 0)
+            {
+                radiusProjector.orthographicSize = 0;
+                wanderRangeLabel.text = "0";
+            }
+            else if ((int)navMeshWanderToEdit.mode == 1)
+            {
+                radiusProjector.orthographicSize = navMeshWanderToEdit.localWanderRadius;
+                wanderRangeLabel.text = navMeshWanderToEdit.localWanderRadius.ToString();
+            }
+            else if ((int)navMeshWanderToEdit.mode == 2)
+            {
+                radiusProjector.orthographicSize = 0;
+                wanderRangeLabel.text = "Infinite";
+            }
 
-        destinationDropDown.value = navMeshWanderToEdit.poiDestination;
+            destinationDropDown.value = navMeshWanderToEdit.poiDestination + 1;
+        }
     }
 
     public void ApplyOptions()
@@ -650,8 +669,7 @@ public class CharacterDropper : MonoBehaviour {
         if (charToEdit != null)
         {
             navMeshWanderToEdit.mode = selectedMode;
-
-            UpdateCharInfoLabels();
+            navMeshWanderToEdit.SetWanderMode();
         }
     }
 
@@ -668,7 +686,7 @@ public class CharacterDropper : MonoBehaviour {
             newChar.transform.localPosition = character.dropPoint;
             Debug.Log("droppping character: " + character.dropPoint);
             newChar.transform.localScale = Vector3.one;
-            NavMeshWander newWander = newChar.GetComponent<NavMeshWander>();
+            CharacterWander newWander = newChar.GetComponent<CharacterWander>();
             newWander.dropPoint = character.dropPoint;
             newWander.localWanderCenter = character.localWanderCenter;
             newWander.localWanderRadius = character.localWanderRadius;
@@ -686,7 +704,7 @@ public class CharacterDropper : MonoBehaviour {
             Debug.Log("saving " + charRoot.transform.childCount + " characters");
             for (int i = 0; i < charRoot.transform.childCount; i++)
             {
-                droppedCharacters.Add(new DroppedCharacter(charRoot.transform.GetChild(i).GetComponent<NavMeshWander>()));
+                droppedCharacters.Add(new DroppedCharacter(charRoot.transform.GetChild(i).GetComponent<CharacterWander>()));
             }
             XmlIO.Save(droppedCharacters, characterFilePath);
         }
@@ -707,7 +725,7 @@ public class DroppedCharacter
     public Vector3 dropPoint;
     public Vector3 localWanderCenter;
     public float localWanderRadius;
-    public NavMeshWander.WanderMode mode;
+    public CharacterWander.WanderMode mode;
     public float defaultSpeed;
     public float normalSpeedRadius;
 
@@ -716,7 +734,7 @@ public class DroppedCharacter
 
     }
 
-    public DroppedCharacter(NavMeshWander wanderScript)
+    public DroppedCharacter(CharacterWander wanderScript)
     {
         modelName = wanderScript.gameObject.name.Substring(0, wanderScript.gameObject.name.IndexOf("("));
         localWanderCenter = wanderScript.localWanderCenter;

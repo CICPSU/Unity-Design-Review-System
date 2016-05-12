@@ -220,8 +220,8 @@ GameObject:
   - 4: {fileID: 461906}
   - 95: {fileID: 9554280}
   - 195: {fileID: 19500174}
-  - 114: {fileID: 11435292}
   - 136: {fileID: 13631600}
+  - 114: {fileID: 11454514}
   m_Layer: 8
   m_Name: Victoria
   m_TagString: Untagged
@@ -2376,7 +2376,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11435292
+--- !u!114 &11454514
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -2384,15 +2384,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 118624}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b22b66311811ea04cb8f8f0190b3f4a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 58e826f1ab0fb614bae5f6dc75f5c1a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  localWanderRadius: 10
+  localWanderRadius: 3
   localWanderCenter: {x: 0, y: 0, z: 0}
+  dropPoint: {x: 0, y: 0, z: 0}
   mode: 0
   defaultSpeed: 1.5
   normalSpeedRadius: 3
-  navSpeedRatio: 0
+  navSpeedRatio: 1
+  poiDestination: 0
 --- !u!136 &13631600
 CapsuleCollider:
   m_ObjectHideFlags: 1

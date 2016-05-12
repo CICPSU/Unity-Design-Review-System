@@ -3,67 +3,84 @@
   <DroppedCharacter>
     <modelName>carl</modelName>
     <dropPoint>
-      <x>-2.433978</x>
-      <y>-6.00806558E-17</y>
-      <z>2.70579219</z>
+      <x>-1.72003269</x>
+      <y>-5.8493144E-17</y>
+      <z>2.63429666</z>
     </dropPoint>
     <localWanderCenter>
-      <x>-3.91824341</x>
+      <x>-0.13381958</x>
       <y>0</y>
-      <z>4.19576359</z>
+      <z>0.473153055</z>
     </localWanderCenter>
-    <localWanderRadius>10</localWanderRadius>
+    <localWanderRadius>3</localWanderRadius>
     <mode>Idle</mode>
-    <defaultSpeed>1.5</defaultSpeed>
-    <normalSpeedRadius>3</normalSpeedRadius>
-  </DroppedCharacter>
-  <DroppedCharacter>
-    <modelName>Mia</modelName>
-    <dropPoint>
-      <x>-0.5781805</x>
-      <y>-6.290006E-17</y>
-      <z>2.83276653</z>
-    </dropPoint>
-    <localWanderCenter>
-      <x>-1.47015381</x>
-      <y>0</y>
-      <z>2.122274</z>
-    </localWanderCenter>
-    <localWanderRadius>2.64411</localWanderRadius>
-    <mode>Patrol</mode>
-    <defaultSpeed>1.5</defaultSpeed>
-    <normalSpeedRadius>3</normalSpeedRadius>
-  </DroppedCharacter>
-  <DroppedCharacter>
-    <modelName>Michael</modelName>
-    <dropPoint>
-      <x>1.45289552</x>
-      <y>-5.41648718E-17</y>
-      <z>2.43936872</z>
-    </dropPoint>
-    <localWanderCenter>
-      <x>-15.3674927</x>
-      <y>0</y>
-      <z>2.053439</z>
-    </localWanderCenter>
-    <localWanderRadius>10</localWanderRadius>
-    <mode>Explore</mode>
     <defaultSpeed>1.5</defaultSpeed>
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>
   <DroppedCharacter>
     <modelName>carl</modelName>
     <dropPoint>
-      <x>13.5329008</x>
-      <y>-3.30986436E-16</y>
-      <z>14.9063034</z>
+      <x>0.728647053</x>
+      <y>-5.783929E-17</y>
+      <z>2.60484982</z>
     </dropPoint>
     <localWanderCenter>
-      <x>13.5328979</x>
+      <x>0.66607666</x>
       <y>0</y>
-      <z>14.9063034</z>
+      <z>2.69648576</z>
     </localWanderCenter>
-    <localWanderRadius>10</localWanderRadius>
+    <localWanderRadius>0</localWanderRadius>
+    <mode>Patrol</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>Mia</modelName>
+    <dropPoint>
+      <x>1.71916342</x>
+      <y>-6.615198E-17</y>
+      <z>2.97922039</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </localWanderCenter>
+    <localWanderRadius>3</localWanderRadius>
+    <mode>Idle</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>Michael</modelName>
+    <dropPoint>
+      <x>2.33700919</x>
+      <y>-5.573963E-17</y>
+      <z>2.51029</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>3.58239746</x>
+      <y>0</y>
+      <z>2.63423252</z>
+    </localWanderCenter>
+    <localWanderRadius>2.76</localWanderRadius>
+    <mode>Patrol</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>Natasha</modelName>
+    <dropPoint>
+      <x>1.16730475</x>
+      <y>-4.35691E-17</y>
+      <z>1.96217787</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>1.2293396</x>
+      <y>0</y>
+      <z>1.87128437</z>
+    </localWanderCenter>
+    <localWanderRadius>1.61</localWanderRadius>
     <mode>Idle</mode>
     <defaultSpeed>1.5</defaultSpeed>
     <normalSpeedRadius>3</normalSpeedRadius>
