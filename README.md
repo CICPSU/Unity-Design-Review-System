@@ -14,4 +14,4 @@ We recommend downloading the project and load your model into the "Template Scen
 You can also export the Full Package folder as a Unitypackage and import into your own project. This will require you to set up your input manager accordingly. Or you can go to the project settings folder and copy the InputManager.asset into your new project.
 
 COPYRIGHT and LICENSE：
-This project is free to use. Please acknowledge Penn State CIC Research Group as the original developer of this project.
+Unity-Design-Review-System is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. Unity-Design-Review-System is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
