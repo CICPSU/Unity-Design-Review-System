@@ -383,12 +383,15 @@ public class CharacterDropper : MonoBehaviour {
     {
         if (!hasRaycastLock && RaycastLock.GetLock())
             hasRaycastLock = true;
+
         dropCharacterSelectPanel.gameObject.SetActive(true);
         modelToggleGroup.SetAllTogglesOff();
         randomToggle.isOn = true;
         charToDrop = GetCharacter();
         buttonImage.color = Color.red;
         firstFrameOpen = true;
+
+        CloseCharacterInfo();
     }
 
     public void CloseCharacterDrop()

@@ -17,4 +17,21 @@
     <defaultSpeed>1.5</defaultSpeed>
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>carl</modelName>
+    <dropPoint>
+      <x>-2.304549</x>
+      <y>-9.098042E-17</y>
+      <z>4.097394</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </localWanderCenter>
+    <localWanderRadius>3</localWanderRadius>
+    <mode>Idle</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
 </ArrayOfDroppedCharacter>
