@@ -41,10 +41,10 @@ public class POIMenuStateManager : MonoBehaviour {
 				Time.timeScale = 1;
 			}
 			else{
-				Time.timeScale = 0;
+				Time.timeScale = 0.05f;
 			}
 
-			Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixed update is 50fps, which is 0.02s when time scale is 1
+			//Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixed update is 50fps, which is 0.02s when time scale is 1
 
 			//switch off 
 			foreach(MonoBehaviour mono in disableWhileMenuOpen)
