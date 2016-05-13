@@ -12,7 +12,7 @@ public class CharacterWander : MonoBehaviour {
     public Vector3 dropPoint = Vector3.zero;
 
     public WanderMode mode = WanderMode.Idle;
-    private WanderMode prevMode = WanderMode.Idle;
+    public WanderMode prevMode = WanderMode.Idle;
 
     public float defaultSpeed = 1.5f;
 
@@ -78,7 +78,9 @@ public class CharacterWander : MonoBehaviour {
         if (navAgent.isOnNavMesh)
             navAgent.Stop();
 
-        prevMode = mode;
+        if(mode != WanderMode.Bookmark)
+            prevMode = mode;
+
         mode = WanderMode.Bookmark;
         CalcDestination();
         StartMovement();

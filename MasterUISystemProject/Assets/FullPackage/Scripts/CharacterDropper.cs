@@ -58,7 +58,7 @@ public class CharacterDropper : MonoBehaviour {
     public CharacterWander.WanderMode selectedMode;
 
     private GameObject charToEdit;
-    private CharacterWander navMeshWanderToEdit;
+    private CharacterWander wanderToEdit;
 
     /// <summary>
     /// STATES
@@ -123,9 +123,9 @@ public class CharacterDropper : MonoBehaviour {
         if ( charEditOpen  && charEditWanderToggleGroup.ActiveToggles().ToArray().Count() != 0 
             && charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
         {
-            radiusProjector.transform.position = navMeshWanderToEdit.localWanderCenter + new Vector3(0, 2, 0);
+            radiusProjector.transform.position = wanderToEdit.localWanderCenter + new Vector3(0, 2, 0);
             if (!userSetRadius)
-                radiusProjector.orthographicSize = navMeshWanderToEdit.localWanderRadius;
+                radiusProjector.orthographicSize = wanderToEdit.localWanderRadius;
 
             radiusSelectMask.enabled = false;
         }
@@ -153,7 +153,7 @@ public class CharacterDropper : MonoBehaviour {
         if (charRadiusSelect || charInfoOpen)
         {
             radiusProjector.gameObject.SetActive(true);
-            radiusProjector.transform.position = navMeshWanderToEdit.localWanderCenter + new Vector3(0, 2, 0);
+            radiusProjector.transform.position = wanderToEdit.localWanderCenter + new Vector3(0, 2, 0);
         }
         else
         {
@@ -174,7 +174,7 @@ public class CharacterDropper : MonoBehaviour {
                 }
 
                 else
-                    radiusProjector.orthographicSize = navMeshWanderToEdit.localWanderRadius;
+                    radiusProjector.orthographicSize = wanderToEdit.localWanderRadius;
             }
 
             radiusInput.text = radiusProjector.orthographicSize.ToString("F2");
@@ -370,7 +370,7 @@ public class CharacterDropper : MonoBehaviour {
         if ((CharacterWander.WanderMode)newCharWanderSelect.value == CharacterWander.WanderMode.Patrol)
         {
             charToEdit = charToDrop;
-            navMeshWanderToEdit = charToEdit.GetComponent<CharacterWander>();
+            wanderToEdit = charToEdit.GetComponent<CharacterWander>();
             StartCharRadiusSelect();
         }
 
@@ -478,11 +478,11 @@ public class CharacterDropper : MonoBehaviour {
            
             charToDrop = null;
         }
-        if(navMeshWanderToEdit == null)
-            navMeshWanderToEdit = charToEdit.GetComponent<CharacterWander>();
+        if(wanderToEdit == null)
+            wanderToEdit = charToEdit.GetComponent<CharacterWander>();
 
         if (charToEdit != null)
-            navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
+            wanderToEdit.localWanderCenter = charToEdit.transform.position;
 
         charRadiusSelect = true;
         firstFrameRadiusSelect = true;
@@ -491,16 +491,16 @@ public class CharacterDropper : MonoBehaviour {
 
     public void StopCharRadiusSelect(bool startMotion)
     {
-        if (navMeshWanderToEdit != null)
+        if (wanderToEdit != null)
         {
-            navMeshWanderToEdit.localWanderRadius = radiusProjector.orthographicSize;
+            wanderToEdit.localWanderRadius = radiusProjector.orthographicSize;
             if(startMotion)
-                navMeshWanderToEdit.SetWanderMode();
+                wanderToEdit.SetWanderMode();
         }
         
 
         //charToEdit = null;
-        //navMeshWanderToEdit = null;
+        //wanderToEdit = null;
         charRadiusSelect = false;
         
     }
@@ -511,9 +511,13 @@ public class CharacterDropper : MonoBehaviour {
         charEditOpen = true;
         charEditPanel.gameObject.SetActive(true);
         charEditWanderToggleGroup.SetAllTogglesOff();
-        radiusInput.text = navMeshWanderToEdit.localWanderRadius.ToString();
-        navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
-        Toggle toggleToActivate = charEditWanderToggleGroup.transform.GetChild((int)navMeshWanderToEdit.mode).GetComponent<Toggle>();
+        radiusInput.text = wanderToEdit.localWanderRadius.ToString();
+        wanderToEdit.localWanderCenter = charToEdit.transform.position;
+        Toggle toggleToActivate;
+        if(wanderToEdit.mode == CharacterWander.WanderMode.Bookmark)
+            toggleToActivate = charEditWanderToggleGroup.transform.GetChild((int)wanderToEdit.prevMode).GetComponent<Toggle>();
+        else
+            toggleToActivate = charEditWanderToggleGroup.transform.GetChild((int)wanderToEdit.mode).GetComponent<Toggle>();
         toggleToActivate.isOn = true;
         charEditWanderToggleGroup.NotifyToggleOn(toggleToActivate);
 
@@ -528,7 +532,7 @@ public class CharacterDropper : MonoBehaviour {
 
     public void CloseCharacterEdit()
     {
-        if (navMeshWanderToEdit != null && charEditOpen)
+        if (wanderToEdit != null && charEditOpen)
         {
             if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Idle")
                 selectedMode = (CharacterWander.WanderMode)0;
@@ -537,8 +541,8 @@ public class CharacterDropper : MonoBehaviour {
                 if (float.Parse(radiusInput.text) > .5f)
                 {
                     selectedMode = (CharacterWander.WanderMode)1;
-                    navMeshWanderToEdit.localWanderCenter = charToEdit.transform.position;
-                    navMeshWanderToEdit.localWanderRadius = float.Parse(radiusInput.text);
+                    wanderToEdit.localWanderCenter = charToEdit.transform.position;
+                    wanderToEdit.localWanderRadius = float.Parse(radiusInput.text);
                 }
                 else
                     selectedMode = (CharacterWander.WanderMode)0;
@@ -560,12 +564,15 @@ public class CharacterDropper : MonoBehaviour {
         charInfoOpen = true;
         charRadiusSelect = false;
         charToEdit = RaycastLock.hit.transform.gameObject;
-        navMeshWanderToEdit = charToEdit.GetComponent<CharacterWander>();
+        wanderToEdit = charToEdit.GetComponent<CharacterWander>();
         charToEdit.GetComponent<NavMeshAgent>().Stop();
-        navMeshWanderToEdit.CancelInvoke();
+        wanderToEdit.CancelInvoke();
         charToEdit.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
-        selectedMode = navMeshWanderToEdit.mode;
+        if (wanderToEdit.mode == CharacterWander.WanderMode.Bookmark)
+            selectedMode = wanderToEdit.prevMode;
+        else
+            selectedMode = wanderToEdit.mode;
 
         if (Input.mousePosition.x > Screen.width - charInfoPanel.sizeDelta.x)
         {
@@ -616,20 +623,21 @@ public class CharacterDropper : MonoBehaviour {
 
         ApplyOptions();
 
-        if (navMeshWanderToEdit != null)
+        if (wanderToEdit != null)
         {
+            wanderToEdit.poiDestination = destinationDropDown.value - 1;
+
             if (destinationDropDown.value == 0)
-                navMeshWanderToEdit.SetWanderMode();
+                wanderToEdit.SetWanderMode();
             else
             {
-                navMeshWanderToEdit.poiDestination = destinationDropDown.value - 1;
-                navMeshWanderToEdit.SetBookmarkMode();
+                wanderToEdit.SetBookmarkMode();
             }
         }
 
         SaveCharacters();
         charToEdit = null;
-        navMeshWanderToEdit = null;
+        wanderToEdit = null;
         charInfoOpen = false;
         charInfoPanel.gameObject.SetActive(false);
         
@@ -640,27 +648,30 @@ public class CharacterDropper : MonoBehaviour {
         if(charToEdit != null)
             modelNameLabel.text = charToEdit.gameObject.name.Remove(charToEdit.gameObject.name.IndexOf("("));
 
-        if (navMeshWanderToEdit != null)
+        if (wanderToEdit != null)
         {
-            wanderModeLabel.text = navMeshWanderToEdit.mode.ToString();
+            if (wanderToEdit.mode == CharacterWander.WanderMode.Bookmark)
+                wanderModeLabel.text = wanderToEdit.prevMode.ToString();
+            else
+                wanderModeLabel.text = wanderToEdit.mode.ToString();
 
-            if ((int)navMeshWanderToEdit.mode == 0)
+            if ((int)wanderToEdit.mode == 0)
             {
                 radiusProjector.orthographicSize = 0;
                 wanderRangeLabel.text = "0";
             }
-            else if ((int)navMeshWanderToEdit.mode == 1)
+            else if ((int)wanderToEdit.mode == 1)
             {
-                radiusProjector.orthographicSize = navMeshWanderToEdit.localWanderRadius;
-                wanderRangeLabel.text = navMeshWanderToEdit.localWanderRadius.ToString();
+                radiusProjector.orthographicSize = wanderToEdit.localWanderRadius;
+                wanderRangeLabel.text = wanderToEdit.localWanderRadius.ToString();
             }
-            else if ((int)navMeshWanderToEdit.mode == 2)
+            else if ((int)wanderToEdit.mode == 2)
             {
                 radiusProjector.orthographicSize = 0;
                 wanderRangeLabel.text = "Infinite";
             }
 
-            destinationDropDown.value = navMeshWanderToEdit.poiDestination + 1;
+            destinationDropDown.value = wanderToEdit.poiDestination + 1;
         }
     }
 
@@ -668,8 +679,12 @@ public class CharacterDropper : MonoBehaviour {
     {
         if (charToEdit != null)
         {
-            navMeshWanderToEdit.mode = selectedMode;
-            navMeshWanderToEdit.SetWanderMode();
+            if (wanderToEdit.mode == CharacterWander.WanderMode.Bookmark)
+                wanderToEdit.prevMode = selectedMode;
+            else
+                wanderToEdit.mode = selectedMode;
+
+            wanderToEdit.SetWanderMode();
         }
     }
 
