@@ -76,6 +76,9 @@ public class WidgetCanvasManager : MonoBehaviour {
         //all of the menu buttons need to be opened here
         toggleSettingsMenu.SetActive(true);
         dropCharacterButton.SetActive(true);
+
+        iTween.MoveFrom(dropCharacterButton, iTween.Hash(iT.MoveFrom.x, -150, iT.MoveFrom.easetype, "easeOutSExpo", iT.MoveFrom.time, .05));
+        iTween.MoveFrom(toggleSettingsMenu, iTween.Hash(iT.MoveFrom.x, -150, iT.MoveFrom.easetype, "easeOutExpo", iT.MoveFrom.time, .05));
         menuButtonsOpen = true;
         //tpCamRef.allowPlayerInput = false;
         tpControlRef.allowPlayerInput = false;
