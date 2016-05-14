@@ -21,7 +21,7 @@ public class POIInfo : MonoBehaviour {
          point.buttonName = buttonName;
          point.position = position;
          point.rotation = rotation;
-			point.markerModelPrefab = markerPrefabName;
+		 point.markerModelPrefab = markerPrefabName;
          return point;
      }
 
@@ -32,7 +32,10 @@ public class POIInfo : MonoBehaviour {
             buttonName = point.buttonName;
             position = point.position;
             rotation = point.rotation;
-			markerPrefabName = point.markerModelPrefab;
+            if (value.markerModelPrefab != "" && value.markerModelPrefab != null)
+                markerPrefabName = point.markerModelPrefab;
+            else
+                point.markerModelPrefab = markerPrefabName;
         }
     }
 

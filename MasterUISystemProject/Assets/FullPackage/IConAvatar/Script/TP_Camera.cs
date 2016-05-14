@@ -249,9 +249,10 @@ public class TP_Camera : MonoBehaviour {
 		var posX = Mathf.SmoothDamp(position.x, desiredPosition.x, ref velX, X_Smooth * Time.timeScale);
 		var posY = Mathf.SmoothDamp(position.y, desiredPosition.y, ref velY, Y_Smooth * Time.timeScale);
 		var posZ = Mathf.SmoothDamp(position.z, desiredPosition.z, ref velZ, X_Smooth * Time.timeScale);
-		position = new Vector3(posX, posY, posZ);
-		transform.position = position;
-		transform.LookAt(TargetLookAt);
+
+            position = new Vector3(posX, posY, posZ);
+            transform.position = position;
+            transform.LookAt(TargetLookAt);
 	}
 	
 	public void Reset(){

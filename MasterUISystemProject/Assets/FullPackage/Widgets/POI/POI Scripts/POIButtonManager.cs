@@ -58,7 +58,7 @@ public class POIButtonManager : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetMouseButton(0) && !hasRaycastLock && RaycastLock.GetLock())
+        if (Input.GetMouseButtonUp(0) && !hasRaycastLock && RaycastLock.GetLock())
         {
             hasRaycastLock = true;
             RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
