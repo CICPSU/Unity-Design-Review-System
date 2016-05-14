@@ -21,9 +21,12 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     private List<GameObject> openWidgets = new List<GameObject>();
 
+    private float currentTime; //used to ensure the the gear icon is only clicked once within 0.5 second
+
     void Start()
     {
-        CloseAll();
+        currentTime = Time.time;
+        IntializeUI();
     }
 
     void Update()
@@ -31,35 +34,54 @@ public class WidgetCanvasManager : MonoBehaviour {
        
     }
 
-    public void ToggleMenuButtons()
+    private void IntializeUI()
     {
-        if (menuButtonsOpen)
-            CloseAll();
-        else
-            OpenMenu();
-
-    }
-
-    private void CloseAll()
-    {
-        //this re-enables any widgets that were open and loads the settings files to make sure they are up to date
-        foreach (GameObject gO in openWidgets)
-            gO.SetActive(true);
-
         widgetRoot.GetComponent<WidgetSettingsManager>().LoadSettingsFiles();
-
         //this closes all menu buttons along with any other panels that were opened
         GetComponent<ToggleGroup>().SetAllTogglesOff();
+
         toggleSettingsMenu.SetActive(false);
         dropCharacterButton.SetActive(false);
         errorWindow.SetActive(false);
         menuButtonsOpen = false;
         //tpCamRef.allowPlayerInput = true;
         tpControlRef.allowPlayerInput = true;
-        timeScale = 1f;
-        Time.timeScale = timeScale;
     }
-    
+
+    public void ToggleMenuButtons()
+    {
+        if (Time.time - currentTime >= 0.8f) { //make sure two clicks are at least 0.8s apart
+            if (menuButtonsOpen)
+                CloseAll();
+            else
+                OpenMenu();
+
+            currentTime = Time.time;
+        }
+
+    }
+
+    private void CloseAll()
+    {
+        //this re-enables any widgets that were open and loads the settings files to make sure they are up to date
+        foreach (GameObject gO in openWidgets) {
+            iTween.MoveBy(gO, new Vector3(0, -Screen.height, 0), 0.8f);
+        }
+
+        widgetRoot.GetComponent<WidgetSettingsManager>().LoadSettingsFiles();
+
+        //this closes all menu buttons along with any other panels that were opened
+        GetComponent<ToggleGroup>().SetAllTogglesOff();
+
+        toggleSettingsMenu.SetActive(false);
+        dropCharacterButton.SetActive(false);
+        errorWindow.SetActive(false);
+        menuButtonsOpen = false;
+        //tpCamRef.allowPlayerInput = true;
+        tpControlRef.allowPlayerInput = true;
+        
+    }
+
     private void OpenMenu()
     {
         //this goes through and deactivates all the open widgets
@@ -68,7 +90,7 @@ public class WidgetCanvasManager : MonoBehaviour {
         {
             if (widgetRoot.transform.GetChild(i).gameObject.activeSelf)
             {
-                widgetRoot.transform.GetChild(i).gameObject.SetActive(false);
+                iTween.MoveBy(widgetRoot.transform.GetChild(i).gameObject, new Vector3(0, Screen.height, 0), 0.8f);
                 openWidgets.Add(widgetRoot.transform.GetChild(i).gameObject);
             }
         }
@@ -77,14 +99,11 @@ public class WidgetCanvasManager : MonoBehaviour {
         toggleSettingsMenu.SetActive(true);
         dropCharacterButton.SetActive(true);
 
-        iTween.MoveFrom(dropCharacterButton, iTween.Hash(iT.MoveFrom.x, -150, iT.MoveFrom.easetype, "easeOutSExpo", iT.MoveFrom.time, .05));
-        iTween.MoveFrom(toggleSettingsMenu, iTween.Hash(iT.MoveFrom.x, -150, iT.MoveFrom.easetype, "easeOutExpo", iT.MoveFrom.time, .05));
+        iTween.MoveFrom(dropCharacterButton, iTween.Hash(iT.MoveBy.x, Screen.width, iT.MoveBy.easetype, "easeOutCubic", iT.MoveBy.time, .4)); // time is different to control button arrive time
+        iTween.MoveFrom(toggleSettingsMenu, iTween.Hash(iT.MoveFrom.x, Screen.width, iT.MoveFrom.easetype, "easeOutCubic", iT.MoveFrom.time, .5));
         menuButtonsOpen = true;
         //tpCamRef.allowPlayerInput = false;
         tpControlRef.allowPlayerInput = false;
-
-        timeScale = 0.05f;
-        Time.timeScale = timeScale;
     }
 }
 
