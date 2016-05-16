@@ -364,6 +364,7 @@ public class CharacterDropper : MonoBehaviour {
         charToDrop.GetComponent<CharacterWander>().enabled = true;
         charToDrop.GetComponent<CharacterWander>().mode = (CharacterWander.WanderMode)newCharWanderSelect.value;
         charToDrop.GetComponent<CharacterWander>().dropPoint = charToDrop.transform.position;
+        charToDrop.GetComponent<CharacterWander>().poiDestination = -1;
        
         charToDrop.transform.parent = charRoot.transform;
 
