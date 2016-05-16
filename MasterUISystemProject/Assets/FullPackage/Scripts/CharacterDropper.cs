@@ -666,7 +666,7 @@ public class CharacterDropper : MonoBehaviour {
             else if ((int)wanderToEdit.mode == 1)
             {
                 radiusProjector.orthographicSize = wanderToEdit.localWanderRadius;
-                wanderRangeLabel.text = wanderToEdit.localWanderRadius.ToString();
+                wanderRangeLabel.text = wanderToEdit.localWanderRadius.ToString("F2");
             }
             else if ((int)wanderToEdit.mode == 2)
             {

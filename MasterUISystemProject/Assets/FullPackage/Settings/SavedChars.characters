@@ -64,7 +64,7 @@
       <z>7.83459425</z>
     </localWanderCenter>
     <localWanderRadius>2.871613</localWanderRadius>
-    <mode>Patrol</mode>
+    <mode>Bookmark</mode>
     <defaultSpeed>1.5</defaultSpeed>
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>
