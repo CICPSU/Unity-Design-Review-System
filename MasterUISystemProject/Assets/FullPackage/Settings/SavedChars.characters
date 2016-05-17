@@ -13,7 +13,7 @@
       <z>2.83371973</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
-    <mode>Idle</mode>
+    <mode>Patrol</mode>
     <defaultSpeed>1.5</defaultSpeed>
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>
@@ -30,7 +30,7 @@
       <z>2.89805627</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
-    <mode>Bookmark</mode>
+    <mode>Idle</mode>
     <defaultSpeed>1.5</defaultSpeed>
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>

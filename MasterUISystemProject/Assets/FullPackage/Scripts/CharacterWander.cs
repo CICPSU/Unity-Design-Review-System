@@ -94,7 +94,9 @@ public class CharacterWander : MonoBehaviour {
         switch(mode)
         {
             case WanderMode.Patrol:
-                NavMesh.SamplePosition(localWanderCenter + new Vector3(Random.Range(-localWanderRadius, localWanderRadius), 0, Random.Range(-localWanderRadius, localWanderRadius)), out hit, 10, -1);
+                float xVal = Random.Range(-localWanderRadius,localWanderRadius);
+                float zVal = Random.Range(-Mathf.Sqrt(Mathf.Pow(localWanderRadius, 2) - Mathf.Pow(xVal, 2)), Mathf.Sqrt(Mathf.Pow(localWanderRadius, 2) - Mathf.Pow(xVal, 2)));
+                NavMesh.SamplePosition(localWanderCenter + new Vector3(xVal, 0, zVal), out hit, 10, -1);
                 break;
             case WanderMode.Explore:
                 NavMesh.SamplePosition(transform.position + new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10)), out hit, 10, -1);
