@@ -713,6 +713,7 @@ public class CharacterDropper : MonoBehaviour {
             newWander.mode = character.mode;
             newWander.normalSpeedRadius = character.normalSpeedRadius;
             newWander.defaultSpeed = character.defaultSpeed;
+            newWander.poiDestination = -1;
         }
     }
 

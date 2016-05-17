@@ -8,9 +8,9 @@
       <z>2.83371973</z>
     </dropPoint>
     <localWanderCenter>
-      <x>-0.7377014</x>
+      <x>-0.66796875</x>
       <y>0</y>
-      <z>2.83371973</z>
+      <z>-0.4228551</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
     <mode>Patrol</mode>
@@ -25,9 +25,77 @@
       <z>2.89805627</z>
     </dropPoint>
     <localWanderCenter>
-      <x>0.601104736</x>
+      <x>0.758972168</x>
       <y>0</y>
-      <z>2.89805627</z>
+      <z>2.89942479</z>
+    </localWanderCenter>
+    <localWanderRadius>3</localWanderRadius>
+    <mode>Idle</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>carl</modelName>
+    <dropPoint>
+      <x>1.59731555</x>
+      <y>-5.237912E-17</y>
+      <z>2.35894585</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>1.59942627</x>
+      <y>0</y>
+      <z>2.35757732</z>
+    </localWanderCenter>
+    <localWanderRadius>3</localWanderRadius>
+    <mode>Idle</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>Mia</modelName>
+    <dropPoint>
+      <x>-1.60710108</x>
+      <y>-5.4198366E-17</y>
+      <z>2.44087744</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </localWanderCenter>
+    <localWanderRadius>3</localWanderRadius>
+    <mode>Explore</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>carl</modelName>
+    <dropPoint>
+      <x>-1.12728333</x>
+      <y>-5.419838E-17</y>
+      <z>2.440878</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </localWanderCenter>
+    <localWanderRadius>3</localWanderRadius>
+    <mode>Idle</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>Mia</modelName>
+    <dropPoint>
+      <x>0.246837124</x>
+      <y>-7.665295E-17</y>
+      <z>3.45214224</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
     <mode>Idle</mode>
