@@ -26,7 +26,7 @@
       </Position>
       <Rotation>
         <x>0</x>
-        <y>20</y>
+        <y>1</y>
         <z>0</z>
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>
