@@ -17,13 +17,13 @@ public class WidgetTransitions : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.R) && iTween.Count(widgetRoot.gameObject) == 0)
             SlideWidgetRoot();
 
-        if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetKeyUp(KeyCode.C) && iTween.Count(widgetConfig.gameObject) == 0)
             SlideWidgetConfig();
 
-        if (Input.GetKeyUp(KeyCode.B))
+        if (Input.GetKeyUp(KeyCode.B) && iTween.Count(widgetRoot.gameObject) == 0 && iTween.Count(widgetConfig.gameObject) == 0)
             ClearScreen();
 
 	}
