@@ -57,12 +57,11 @@ public class POI_ReferenceHub : MonoBehaviour{
 
         // Here we get the POI from the POIInfo script that is attached to the activeButton.
         // We then use this info to populate the edit menu fields.
-        POI clickedPOI = Instance.POIMenu.GetComponent<POIActiveButtonManager>().activeButton.GetComponent<POIInfoRef>().poiInfo.Point;
-        Instance.poiInfoFields[0].text = clickedPOI.buttonName;
-        Instance.poiInfoFields[1].text = clickedPOI.position.x.ToString();
-        Instance.poiInfoFields[2].text = clickedPOI.position.y.ToString();
-        Instance.poiInfoFields[3].text = clickedPOI.position.z.ToString();
-        Instance.poiInfoFields[4].text = clickedPOI.rotation.y.ToString();
+        if (Instance.POIMenu.GetComponent<POIActiveButtonManager>().activeButton !=null && Instance.POIMenu.GetComponent<POIActiveButtonManager>().activeButton.GetComponent<POIInfoRef>().poiInfo.Point != null)
+            Instance.FillPOIInfoFields(Instance.POIMenu.GetComponent<POIActiveButtonManager>().activeButton.GetComponent<POIInfoRef>().poiInfo.Point);
+        else
+            Instance.FillPOIInfoFields(new POI("", "Name", Vector3.zero, Vector3.zero, ""));
+
 
         //disable the Add bookmark button, enable save changes
         Instance.POIEditWindow.FindChild("AddBookmark").gameObject.SetActive(false);
