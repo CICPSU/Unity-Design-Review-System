@@ -28,7 +28,7 @@ public class CharacterWander : MonoBehaviour {
 
     private NavMeshHit hit;
 
-    private int idleTime = 0;
+    private int idleTime = 3;
 
     public void SetWanderMode()
     {
@@ -120,7 +120,7 @@ public class CharacterWander : MonoBehaviour {
     void OnAnimatorMove()
     {
         //only perform if moving
-        if (!(navAgent.remainingDistance < .5f) && !navAgent.pathPending)
+        if (!(navAgent.remainingDistance < .5f) && !navAgent.pathPending && mode!= WanderMode.Idle)
         {
             if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) > 5)
                 animator.SetFloat("Direction", Vector3.Angle(transform.forward, navAgent.destination - transform.position));
