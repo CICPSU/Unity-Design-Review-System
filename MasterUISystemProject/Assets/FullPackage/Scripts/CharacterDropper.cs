@@ -573,6 +573,7 @@ public class CharacterDropper : MonoBehaviour {
         wanderToEdit.CancelInvoke();
         charToEdit.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
+
         if (wanderToEdit.mode == CharacterWander.WanderMode.Bookmark)
             selectedMode = wanderToEdit.prevMode;
         else

@@ -30,7 +30,7 @@
       <z>2.89805627</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
-    <mode>Idle</mode>
+    <mode>Bookmark</mode>
     <defaultSpeed>1.5</defaultSpeed>
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>
