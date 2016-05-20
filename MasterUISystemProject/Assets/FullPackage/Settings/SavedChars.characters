@@ -195,9 +195,9 @@
       <z>2.85673976</z>
     </dropPoint>
     <localWanderCenter>
-      <x>0</x>
+      <x>-2.61737061</x>
       <y>0</y>
-      <z>0</z>
+      <z>3.3651104</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
     <mode>Idle</mode>
