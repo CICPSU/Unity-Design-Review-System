@@ -8,9 +8,9 @@
       <z>2.83371973</z>
     </dropPoint>
     <localWanderCenter>
-      <x>-0.66796875</x>
+      <x>-0.271118164</x>
       <y>0</y>
-      <z>-0.4228551</z>
+      <z>0.8857073</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
     <mode>Patrol</mode>
@@ -76,9 +76,9 @@
       <z>2.440878</z>
     </dropPoint>
     <localWanderCenter>
-      <x>0</x>
+      <x>-1.69293213</x>
       <y>0</y>
-      <z>0</z>
+      <z>1.87511945</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
     <mode>Idle</mode>
@@ -176,6 +176,57 @@
       <x>-0.200519577</x>
       <y>8.434868E-17</y>
       <z>-3.7987268</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </localWanderCenter>
+    <localWanderRadius>3</localWanderRadius>
+    <mode>Explore</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>carl</modelName>
+    <dropPoint>
+      <x>-2.35731578</x>
+      <y>-6.343237E-17</y>
+      <z>2.85673976</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </localWanderCenter>
+    <localWanderRadius>3</localWanderRadius>
+    <mode>Idle</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>Mia</modelName>
+    <dropPoint>
+      <x>-0.373846054</x>
+      <y>-6.31303052E-17</y>
+      <z>2.84313631</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>-0.373840332</x>
+      <y>0</y>
+      <z>2.84313631</z>
+    </localWanderCenter>
+    <localWanderRadius>1.4369576</localWanderRadius>
+    <mode>Idle</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>Michael</modelName>
+    <dropPoint>
+      <x>-1.4168334</x>
+      <y>-8.047213E-17</y>
+      <z>3.62414217</z>
     </dropPoint>
     <localWanderCenter>
       <x>0</x>

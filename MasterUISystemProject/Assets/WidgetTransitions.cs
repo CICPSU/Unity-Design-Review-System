@@ -5,13 +5,14 @@ public class WidgetTransitions : MonoBehaviour {
 
     public RectTransform widgetRoot;
     public RectTransform widgetConfig;
+    public GameObject widget3D;
 
     private int rootDirection = 1;
     private int configDirection = -1;
 
 	// Use this for initialization
 	void Start () {
-	
+        widget3D.transform.position = Vector3.zero;
 	}
 	
 	// Update is called once per frame
