@@ -5,25 +5,26 @@ public class WidgetTransitions : MonoBehaviour {
 
     public RectTransform widgetRoot;
     public RectTransform widgetConfig;
+    public GameObject widget3D;
 
     private int rootDirection = 1;
     private int configDirection = -1;
 
 	// Use this for initialization
 	void Start () {
-	
+        widget3D.transform.position = Vector3.zero;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyUp(KeyCode.R))
+        if (Input.GetKeyUp(KeyCode.R) && iTween.Count(widgetRoot.gameObject) == 0)
             SlideWidgetRoot();
 
-        if (Input.GetKeyUp(KeyCode.C))
+        if (Input.GetKeyUp(KeyCode.C) && iTween.Count(widgetConfig.gameObject) == 0)
             SlideWidgetConfig();
 
-        if (Input.GetKeyUp(KeyCode.B))
+        if (Input.GetKeyUp(KeyCode.B) && iTween.Count(widgetRoot.gameObject) == 0 && iTween.Count(widgetConfig.gameObject) == 0)
             ClearScreen();
 
 	}

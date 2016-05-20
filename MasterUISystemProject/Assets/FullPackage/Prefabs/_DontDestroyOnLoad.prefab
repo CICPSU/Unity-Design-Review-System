@@ -5647,7 +5647,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 194896}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.1314087, y: -1.1547241, z: -0.60869884}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 495340}
@@ -5993,7 +5993,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 111794}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -687.8686, y: -296.34528, z: 0.60869884}
+  m_LocalPosition: {x: -690, y: -297.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 455224}
@@ -10689,7 +10689,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 22496680}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.91869366
+  m_Size: 0.9186937
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -14005,7 +14005,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11480132}
   m_HandleRect: {fileID: 22453262}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -14602,6 +14602,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   widgetRoot: {fileID: 22485426}
   widgetConfig: {fileID: 22406316}
+  widget3D: {fileID: 111794}
 --- !u!114 &11474066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -20373,7 +20374,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: -0.000061035156}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22424982
@@ -23207,7 +23208,7 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 153.00002, y: -173.34998}
+  m_AnchoredPosition: {x: 153, y: -204.09998}
   m_SizeDelta: {x: 342, y: 221.6}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22490612

@@ -20,13 +20,13 @@
       <SceneFlag>BaseScene</SceneFlag>
       <Name>second</Name>
       <Position>
-        <x>-2.19359183</x>
+        <x>-2.193592</x>
         <y>-0.0200001</y>
-        <z>8.30446148</z>
+        <z>8.304461</z>
       </Position>
       <Rotation>
         <x>0</x>
-        <y>19.778986</y>
+        <y>1</y>
         <z>0</z>
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>

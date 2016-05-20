@@ -7,6 +7,8 @@ public class EditBookmarkBut : MonoBehaviour {
 
 	public void clicked(){
 
+        POI_ReferenceHub.Instance.OpenEditWindow();
+        /*
 		if(!POI_ReferenceHub.Instance.POIEditWindow.gameObject.activeSelf)
 			POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(true);
 		
@@ -28,5 +30,6 @@ public class EditBookmarkBut : MonoBehaviour {
 		editBut.GetComponent<Button>().enabled = false; //disable edit button
 		Transform editButText = editBut.FindChild("Text") as Transform;
 		editButText.GetComponent<Text>().color = new Color(0.57f,0.57f,0.57f);
+        */
 	}
 }
