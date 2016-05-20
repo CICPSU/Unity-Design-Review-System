@@ -30,8 +30,12 @@ public class CharacterWander : MonoBehaviour {
 
     private int idleTime = 3;
 
+    private bool canceledMovement = false;
+
     public void SetWanderMode()
     {
+
+        canceledMovement = false;
         switch (mode)
         {
             case WanderMode.Idle:
@@ -75,6 +79,9 @@ public class CharacterWander : MonoBehaviour {
 
     public void SetBookmarkMode()
     {
+
+        canceledMovement = false;
+
         if (navAgent.isOnNavMesh)
             navAgent.Stop();
 
@@ -115,6 +122,12 @@ public class CharacterWander : MonoBehaviour {
         navAgent.SetDestination(hit.position);
         navAgent.Resume();
         animator.SetFloat("Speed", 1f);
+    }
+
+    public void CancelMovement()
+    {
+        CancelInvoke();
+        canceledMovement = true;
     }
 
     void OnAnimatorMove()
@@ -158,7 +171,7 @@ public class CharacterWander : MonoBehaviour {
 
     void Update()
     {
-        if (navAgent.remainingDistance < .5f && !navAgent.pathPending && !IsInvoking())
+        if (navAgent.remainingDistance < .5f && !canceledMovement && !navAgent.pathPending && !IsInvoking())
         {
             if (navAgent.isOnNavMesh)
                 navAgent.Stop();

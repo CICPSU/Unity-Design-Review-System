@@ -570,7 +570,7 @@ public class CharacterDropper : MonoBehaviour {
         charToEdit = RaycastLock.hit.transform.gameObject;
         wanderToEdit = charToEdit.GetComponent<CharacterWander>();
         charToEdit.GetComponent<NavMeshAgent>().Stop();
-        wanderToEdit.CancelInvoke();
+        wanderToEdit.CancelMovement();
         charToEdit.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
 
