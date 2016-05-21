@@ -11,6 +11,9 @@ public class WidgetCanvasManager : MonoBehaviour {
     public GameObject displaySettingsPanel;
     public GameObject errorWindow;
     public GameObject widgetRoot;
+	public GameObject backgroundBlueBar;
+	public GameObject settingBar;
+	public GameObject characterDropTool;
     public float timeScale = 1f;
 
 
@@ -39,10 +42,11 @@ public class WidgetCanvasManager : MonoBehaviour {
         widgetRoot.GetComponent<WidgetSettingsManager>().LoadSettingsFiles();
         //this closes all menu buttons along with any other panels that were opened
         GetComponent<ToggleGroup>().SetAllTogglesOff();
+		foreach(Transform child in settingBar.transform){
+			child.gameObject.SetActive(false);
+		}
 
-        toggleSettingsMenu.SetActive(false);
-        dropCharacterButton.SetActive(false);
-        errorWindow.SetActive(false);
+		characterDropTool.SetActive(false);
         menuButtonsOpen = false;
         //tpCamRef.allowPlayerInput = true;
         tpControlRef.allowPlayerInput = true;
@@ -50,14 +54,26 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     public void ToggleMenuButtons()
     {
-        if (Time.time - currentTime >= 0.8f) { //make sure two clicks are at least 0.8s apart
+        //check if UIs under the menu is playing animation, if yes, skip
+		foreach(Transform child in settingBar.transform){
+			if(iTween.Count(child.gameObject) != 0)
+				return;
+		}
+
+		//check if widgets are playing 
+		foreach(GameObject gO in openWidgets){
+			if(iTween.Count(gO) !=0){
+				return;
+			}
+		}
+
+		//no animation is playing in bottom menus.
             if (menuButtonsOpen)
                 CloseAll();
             else
                 OpenMenu();
 
             currentTime = Time.time;
-        }
 
     }
 
@@ -73,20 +89,22 @@ public class WidgetCanvasManager : MonoBehaviour {
         //this closes all menu buttons along with any other panels that were opened
         GetComponent<ToggleGroup>().SetAllTogglesOff();
 
-        toggleSettingsMenu.SetActive(false);
-        dropCharacterButton.SetActive(false);
+		foreach(Transform child in settingBar.transform){
+			child.gameObject.SetActive(false);
+		}
         errorWindow.SetActive(false);
         menuButtonsOpen = false;
         //tpCamRef.allowPlayerInput = true;
         tpControlRef.allowPlayerInput = true;
-        
+	
     }
 
     private void OpenMenu()
     {
         //this goes through and deactivates all the open widgets
         //the ones that were open are stored in a list so that they can be reopened when the menu is closed
-        for (int i = 0; i < widgetRoot.transform.childCount; i++)
+		openWidgets.Clear(); //clear previous section
+		for (int i = 0; i < widgetRoot.transform.childCount; i++)
         {
             if (widgetRoot.transform.GetChild(i).gameObject.activeSelf)
             {
@@ -96,11 +114,11 @@ public class WidgetCanvasManager : MonoBehaviour {
         }
 
         //all of the menu buttons need to be opened here
-        toggleSettingsMenu.SetActive(true);
-        dropCharacterButton.SetActive(true);
-
-        iTween.MoveFrom(dropCharacterButton, iTween.Hash(iT.MoveBy.x, Screen.width, iT.MoveBy.easetype, "easeOutCubic", iT.MoveBy.time, .4)); // time is different to control button arrive time
-        iTween.MoveFrom(toggleSettingsMenu, iTween.Hash(iT.MoveFrom.x, Screen.width, iT.MoveFrom.easetype, "easeOutCubic", iT.MoveFrom.time, .5));
+		foreach(Transform child in settingBar.transform){
+			child.gameObject.SetActive(true);
+			iTween.MoveFrom(child.gameObject, iTween.Hash(iT.MoveBy.x, Screen.width, iT.MoveBy.easetype, "easeOutCubic", iT.MoveBy.time, .6)); // time is different to control button arrive time
+		}
+			
         menuButtonsOpen = true;
         //tpCamRef.allowPlayerInput = false;
         tpControlRef.allowPlayerInput = false;
