@@ -24,11 +24,9 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     private List<GameObject> openWidgets = new List<GameObject>();
 
-    private float currentTime; //used to ensure the the gear icon is only clicked once within 0.5 second
 
     void Start()
     {
-        currentTime = Time.time;
         IntializeUI();
     }
 
@@ -46,7 +44,7 @@ public class WidgetCanvasManager : MonoBehaviour {
 			child.gameObject.SetActive(false);
 		}
 
-		characterDropTool.SetActive(false);
+		characterDropTool.GetComponent<Widget>().Active = false;
         menuButtonsOpen = false;
         //tpCamRef.allowPlayerInput = true;
         tpControlRef.allowPlayerInput = true;
@@ -72,8 +70,6 @@ public class WidgetCanvasManager : MonoBehaviour {
                 CloseAll();
             else
                 OpenMenu();
-
-            currentTime = Time.time;
 
     }
 
@@ -101,12 +97,12 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     private void OpenMenu()
     {
-        //this goes through and deactivates all the open widgets
+        //this goes through and slides up all the active widgets
         //the ones that were open are stored in a list so that they can be reopened when the menu is closed
 		openWidgets.Clear(); //clear previous section
 		for (int i = 0; i < widgetRoot.transform.childCount; i++)
         {
-            if (widgetRoot.transform.GetChild(i).gameObject.activeSelf)
+			if (widgetRoot.transform.GetChild(i).gameObject.GetComponent<Widget>().Active && widgetRoot.transform.GetChild(i).gameObject.activeSelf)
             {
                 iTween.MoveBy(widgetRoot.transform.GetChild(i).gameObject, new Vector3(0, Screen.height, 0), 0.8f);
                 openWidgets.Add(widgetRoot.transform.GetChild(i).gameObject);
