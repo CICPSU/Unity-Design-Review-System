@@ -40,7 +40,7 @@ public class POIActiveButtonManager : MonoBehaviour {
 				Transform deleteBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("Delete") as Transform;
 				deleteBut.GetComponent<Button>().enabled = true; //enable delete button
 				Transform deleteButText = deleteBut.FindChild("Text") as Transform;
-				deleteButText.GetComponent<Text>().color = new Color(50f/255,50f/255,50f/255,1);
+				deleteButText.GetComponent<Text>().color = new Color(50f / 255, 50f / 255, 50f / 255, 1);
 
 				if(POI_ReferenceHub.Instance.POIEditWindow.gameObject.activeSelf)
 				{
@@ -59,11 +59,7 @@ public class POIActiveButtonManager : MonoBehaviour {
 				}
 				// we also need to fill in the input fields in the edit window when a button is made active
 				POI clickedPOI = activeButton.GetComponent<POIInfoRef>().poiInfo.Point;
-				POI_ReferenceHub.Instance.poiInfoFields [0].text = clickedPOI.buttonName;
-				POI_ReferenceHub.Instance.poiInfoFields [1].text = clickedPOI.position.x.ToString();
-				POI_ReferenceHub.Instance.poiInfoFields [2].text = clickedPOI.position.y.ToString();
-				POI_ReferenceHub.Instance.poiInfoFields [3].text = clickedPOI.position.z.ToString();
-				POI_ReferenceHub.Instance.poiInfoFields [4].text = clickedPOI.rotation.y.ToString();
+                POI_ReferenceHub.Instance.FillPOIInfoFields(clickedPOI);
 				POI_ReferenceHub.Instance.POIEditWindow.FindChild("AddBookmark").gameObject.SetActive(false);
 				POI_ReferenceHub.Instance.POIEditWindow.FindChild("SaveChanges").gameObject.SetActive(true);
 
@@ -72,8 +68,6 @@ public class POIActiveButtonManager : MonoBehaviour {
 		else
 		{
 			// teleport to the poi
-			//POI_ReferenceHub.Instance.Avatar = GameObject.FindWithTag("Player");
-			//Debug.Log("found gameobject with player tag: " + avatar.name);
 			if(clicked.GetComponent<POIInfoRef>().poiInfo.Point.sceneFlag != Application.loadedLevelName)
 				Application.LoadLevel(clicked.GetComponent<POIInfoRef>().poiInfo.Point.sceneFlag);
 

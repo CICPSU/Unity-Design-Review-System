@@ -364,6 +364,7 @@ public class CharacterDropper : MonoBehaviour {
         charToDrop.GetComponent<CharacterWander>().enabled = true;
         charToDrop.GetComponent<CharacterWander>().mode = (CharacterWander.WanderMode)newCharWanderSelect.value;
         charToDrop.GetComponent<CharacterWander>().dropPoint = charToDrop.transform.position;
+        charToDrop.GetComponent<CharacterWander>().poiDestination = -1;
        
         charToDrop.transform.parent = charRoot.transform;
 
@@ -528,7 +529,8 @@ public class CharacterDropper : MonoBehaviour {
         iTween.MoveBy(charInfoPanel.gameObject, iTween.Hash("y", Screen.height, "easeType", "easeInOutExpo", "time", .5f));
 
         // grow edit panel
-        charEditPanel.localPosition = Input.mousePosition;
+        //charEditPanel.localPosition = Input.mousePosition;
+        charEditPanel.transform.position = IConUtilities.SetPopUpPanel(charEditPanel);
         charEditPanel.localScale = new Vector3(.01f, .01f, .01f);
         iTween.ScaleBy(charEditPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo", "time", .5f));
     }
@@ -569,14 +571,15 @@ public class CharacterDropper : MonoBehaviour {
         charToEdit = RaycastLock.hit.transform.gameObject;
         wanderToEdit = charToEdit.GetComponent<CharacterWander>();
         charToEdit.GetComponent<NavMeshAgent>().Stop();
-        wanderToEdit.CancelInvoke();
+        wanderToEdit.CancelMovement();
         charToEdit.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
+
         if (wanderToEdit.mode == CharacterWander.WanderMode.Bookmark)
             selectedMode = wanderToEdit.prevMode;
         else
             selectedMode = wanderToEdit.mode;
-
+        /*
         if (Input.mousePosition.x > Screen.width - charInfoPanel.sizeDelta.x)
         {
             if (Input.mousePosition.y > Screen.height - charInfoPanel.sizeDelta.y)
@@ -596,7 +599,8 @@ public class CharacterDropper : MonoBehaviour {
             charInfoPanel.transform.position = new Vector3(Input.mousePosition.x, charEditPanel.sizeDelta.y, 0);
         else
             charInfoPanel.transform.position = Input.mousePosition;
-
+            */
+        charInfoPanel.transform.position = IConUtilities.SetPopUpPanel(charInfoPanel);
 
         iTween.Stop(charInfoPanel.gameObject, true);
         charInfoPanel.localScale = new Vector3(.01f, .01f, .01f);
@@ -666,7 +670,7 @@ public class CharacterDropper : MonoBehaviour {
             else if ((int)wanderToEdit.mode == 1)
             {
                 radiusProjector.orthographicSize = wanderToEdit.localWanderRadius;
-                wanderRangeLabel.text = wanderToEdit.localWanderRadius.ToString();
+                wanderRangeLabel.text = wanderToEdit.localWanderRadius.ToString("F2");
             }
             else if ((int)wanderToEdit.mode == 2)
             {
@@ -711,6 +715,7 @@ public class CharacterDropper : MonoBehaviour {
             newWander.mode = character.mode;
             newWander.normalSpeedRadius = character.normalSpeedRadius;
             newWander.defaultSpeed = character.defaultSpeed;
+            newWander.poiDestination = -1;
         }
     }
 

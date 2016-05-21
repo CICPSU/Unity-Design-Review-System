@@ -7,8 +7,8 @@
     <y>0</y>
   </rectPos>
   <rectPosDescription>Offset of the map position from the top right corner of the screen.</rectPosDescription>
-  <mapPortionOfScreen>0.350000024</mapPortionOfScreen>
+  <mapPortionOfScreen>0.50000006</mapPortionOfScreen>
   <mapPortionDescription>Portion of the screen taken by the minimap, between 0 and 1.</mapPortionDescription>
-  <orthoCamRadiusFeet>62.5</orthoCamRadiusFeet>
+  <orthoCamRadiusFeet>57.5</orthoCamRadiusFeet>
   <orthoCamRadiusDescription>This is the radius of the range of minimap in feet</orthoCamRadiusDescription>
 </MiniMapSettings>
