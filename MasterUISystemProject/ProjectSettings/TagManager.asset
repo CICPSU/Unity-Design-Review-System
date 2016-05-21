@@ -8,6 +8,7 @@ TagManager:
   - Canvas
   - KeepOnLoad
   - Menu
+  - UIfor3Dobjects
   layers:
   - Default
   - TransparentFX
