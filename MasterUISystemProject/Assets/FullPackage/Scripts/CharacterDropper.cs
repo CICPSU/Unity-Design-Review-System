@@ -530,7 +530,7 @@ public class CharacterDropper : MonoBehaviour {
 
         // grow edit panel
         //charEditPanel.localPosition = Input.mousePosition;
-        charEditPanel.transform.position = IConUtilities.SetPopUpPanel(charEditPanel);
+        charEditPanel.transform.position = UIUtilities.SetPopUpPanel(charEditPanel);
         charEditPanel.localScale = new Vector3(.01f, .01f, .01f);
         iTween.ScaleBy(charEditPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo", "time", .5f));
     }
@@ -600,7 +600,7 @@ public class CharacterDropper : MonoBehaviour {
         else
             charInfoPanel.transform.position = Input.mousePosition;
             */
-        charInfoPanel.transform.position = IConUtilities.SetPopUpPanel(charInfoPanel);
+        charInfoPanel.transform.position = UIUtilities.SetPopUpPanel(charInfoPanel);
 
         iTween.Stop(charInfoPanel.gameObject, true);
         charInfoPanel.localScale = new Vector3(.01f, .01f, .01f);
