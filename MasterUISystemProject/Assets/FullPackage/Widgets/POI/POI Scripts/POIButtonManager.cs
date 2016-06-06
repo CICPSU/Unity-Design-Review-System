@@ -5,6 +5,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class POIButtonManager : MonoBehaviour {
 
@@ -23,8 +24,8 @@ public class POIButtonManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		if(POIButtonManager.instance ==null){
-			POIButtonManager.instance = this;
+		if(instance ==null){
+			instance = this;
 		}else{
 			Debug.LogError("More than one instance of POIButtonManager!");
 		}
@@ -58,6 +59,7 @@ public class POIButtonManager : MonoBehaviour {
 
     void Update()
     {
+        // click on a marker to open up the MarkerInfoCanvas
         if (Input.GetMouseButtonUp(0) && !hasRaycastLock && RaycastLock.GetLock())
         {
             hasRaycastLock = true;
@@ -134,7 +136,7 @@ public class POIButtonManager : MonoBehaviour {
 	private void GenerateButsMarkers(POIHandler handler){
 		ClearButsMarkers ();
 
-		//generate new buttons
+		//generate new buttons from the xml file
 		foreach(POI point in handler.projectPOIs){
 			GenerateButMarkerPair(point);
 			POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
@@ -165,7 +167,7 @@ public class POIButtonManager : MonoBehaviour {
 		GameObject markerModel = Instantiate(prefab, point.position, Quaternion.Euler(point.rotation)) as GameObject;
 		markerModel.transform.parent = marker.transform;
 
-		if (point.sceneFlag != Application.loadedLevelName)
+		if (point.sceneFlag != SceneManager.GetActiveScene().name)
 			markerModel.SetActive (false);
 
 		point.marker = marker;
@@ -274,24 +276,6 @@ public class POIButtonManager : MonoBehaviour {
 		}
 	}
 
-	public void ResetPOIMenu()
-	{
-		POIMenuStateManager.EditModeState = false;
-
-		//restoring the original window
-		POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.white;
-
-		POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
-		POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive (false);
-		POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(false);
-		POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(false); 
-		POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive (false);
-
-		POI_ReferenceHub.Instance.EditBut.gameObject.SetActive(true);
-
-		LoadAndGenerateButs ();
-	}
-
 	//compare two POI classes by value
 	//return true if two points are the same
 	private bool IsPointSame(POI pointA, POI pointB){
@@ -316,7 +300,7 @@ public class POIButtonManager : MonoBehaviour {
 	
 	public void GeneratePairCurrentLocation()
 	{
-		POI newPOI = new POI (Application.loadedLevelName, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
+		POI newPOI = new POI (SceneManager.GetActiveScene().name, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
 		GenerateButMarkerPair (newPOI);
 	}
 
