@@ -3,6 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+
+/// <summary>
+/// This script manages the changes to the POIMenu when going between Edit mode and Normal mode.
+/// The MenuStateChange delegate allows otehr scripts to add functions that will be called when the state of the POIMenu changes.
+/// </summary>
 public class POIMenuStateManager : MonoBehaviour {
 
 	public List<MonoBehaviour> disableWhileMenuOpen = new List<MonoBehaviour> ();
@@ -22,7 +27,7 @@ public class POIMenuStateManager : MonoBehaviour {
 	public static bool EditModeState{
 		get{
 
-			return editModeState; //default of bool is faulse, no need to initialize
+			return editModeState; //default of bool is false, no need to initialize
 
 		}
 		set{
@@ -37,16 +42,16 @@ public class POIMenuStateManager : MonoBehaviour {
 	void Update ()
 	{
 		if(!finshedSetupForModeChange){
+            //this if/else statement changes the time scale while the POIMenu is in Edit mode.
 			if (!editModeState){
-				Time.timeScale = 1;
+                ControlUtilities.UnPause();
 			}
 			else{
-				Time.timeScale = 0.05f;
+                ControlUtilities.Pause();
 			}
 
-			//Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixed update is 50fps, which is 0.02s when time scale is 1
-
-			//switch off 
+			//toggle all of the scripts in disableWhileMenuOpen
+            //scripts can be added to this list so that they will not be active while the POIMenu is in Edit mode.
 			foreach(MonoBehaviour mono in disableWhileMenuOpen)
 			{
 				mono.enabled = !editModeState;

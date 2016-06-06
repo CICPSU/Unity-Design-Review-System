@@ -27,9 +27,8 @@ public class EditButton : MonoBehaviour {
 		POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(true);
 		POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(true);
 
-		//pause the game
-		Time.timeScale = 0.05f;
-		//Time.fixedDeltaTime = 0.02f * Time.timeScale; // fixed update is 50fps, which is 0.02s when time scale is 1			
+        //pause the game
+        ControlUtilities.Pause();		
 
 		//hide the edit button
 		gameObject.SetActive(false);
