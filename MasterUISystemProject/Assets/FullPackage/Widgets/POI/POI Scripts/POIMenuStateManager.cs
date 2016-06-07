@@ -43,6 +43,81 @@ public class POIMenuStateManager : MonoBehaviour {
 
     }
 
+    // buttons in the gui wont reference static functions
+    // this is a non-static function to trigger opening the bookmark edit window from a button
+    public void B_OpenBookmarkEditWindow()
+    {
+        OpenBookmarkEditWindow();
+    }
+
+    // this function is used to open the bookmark edit window
+    // if there is an activeButton, we open the window to edit the selected poi
+    // if there is not an activeButton, we open the window to create a custom bookmark
+    public static void OpenBookmarkEditWindow()
+    {
+        if (!POI_ReferenceHub.Instance.POIEditWindow.gameObject.activeSelf)
+            POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(true);
+
+        // Here we get the POI from the POIInfo script that is attached to the activeButton.
+        // We then use this info to populate the edit menu fields.
+        if (POI_ReferenceHub.Instance.POIMenu.GetComponent<POIActiveButtonManager>().activeButton != null && POI_ReferenceHub.Instance.POIMenu.GetComponent<POIActiveButtonManager>().activeButton.GetComponent<POIInfoRef>().poiInfo.Point != null)
+        {
+            POI_ReferenceHub.Instance.FillPOIInfoFields(POI_ReferenceHub.Instance.POIMenu.GetComponent<POIActiveButtonManager>().activeButton.GetComponent<POIInfoRef>().poiInfo.Point);
+            //disable the Add bookmark button, enable save changes
+            POI_ReferenceHub.Instance.POIEditWindow.FindChild("AddBookmark").gameObject.SetActive(false);
+            POI_ReferenceHub.Instance.POIEditWindow.FindChild("SaveChanges").gameObject.SetActive(true);
+
+            //grey out edit bookmark
+            Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
+            editBut.GetComponent<Button>().enabled = false; //disable edit button
+            Transform editButText = editBut.FindChild("Text") as Transform;
+            editButText.GetComponent<Text>().color = new Color(0.57f, 0.57f, 0.57f);
+        }
+        // if there is no activeButton, we open the edit bookmark window with default values to create a custom bookmark
+        else
+        {
+            POI_ReferenceHub.Instance.FillPOIInfoFields(new POI("", "Name", Vector3.zero, Vector3.zero, ""));
+
+            //enable the Add bookmark button, disable save changes
+            POI_ReferenceHub.Instance.POIEditWindow.FindChild("AddBookmark").gameObject.SetActive(true);
+            POI_ReferenceHub.Instance.POIEditWindow.FindChild("SaveChanges").gameObject.SetActive(false);
+
+            //grey out delete point button
+            Transform deleteBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("Delete") as Transform;
+            deleteBut.GetComponent<Button>().enabled = false; //disable delete button
+            Transform deleteButText = deleteBut.FindChild("Text") as Transform;
+            deleteButText.GetComponent<Text>().color = new Color(0.57f, 0.57f, 0.57f);
+
+            //clear the old value from input fields
+            foreach (InputField input in POI_ReferenceHub.Instance.poiInfoFields)
+            {
+                input.transform.FindChild("Text").GetComponent<Text>().text = "";
+                input.text = "";
+            }
+        }
+
+
+    }
+
+    // buttons in the gui wont reference static functions
+    // this is a non-static function to trigger closing the bookmark edit window from a button
+    public void B_CloseBookmarkEditWindow()
+    {
+        CloseBookmarkEditWindow();
+    }
+
+    // this function is used to close the bookmark edit window
+    public static void CloseBookmarkEditWindow()
+    {
+        //enable edit bookmark
+        Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
+        editBut.GetComponent<Button>().enabled = true; //enable edit button
+        Transform editButText = editBut.FindChild("Text") as Transform;
+        editButText.GetComponent<Text>().color = new Color(50f / 255, 50f / 255, 50f / 255);
+
+        POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
+    }
+
     // this is the single function that can be called to switch the Edit mode.
     // the edit button and cancel button both call this
     public void ToggleEditModeState()

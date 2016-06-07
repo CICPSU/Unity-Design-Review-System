@@ -50,40 +50,7 @@ public class POI_ReferenceHub : MonoBehaviour{
 		defaultMarkerPrefab = Resources.Load ("POIPanel/Pin");
 	}
 	
-    public void OpenEditWindow()
-    {
-        if (!Instance.POIEditWindow.gameObject.activeSelf)
-            Instance.POIEditWindow.gameObject.SetActive(true);
-
-        // Here we get the POI from the POIInfo script that is attached to the activeButton.
-        // We then use this info to populate the edit menu fields.
-        if (Instance.POIMenu.GetComponent<POIActiveButtonManager>().activeButton !=null && Instance.POIMenu.GetComponent<POIActiveButtonManager>().activeButton.GetComponent<POIInfoRef>().poiInfo.Point != null)
-            Instance.FillPOIInfoFields(Instance.POIMenu.GetComponent<POIActiveButtonManager>().activeButton.GetComponent<POIInfoRef>().poiInfo.Point);
-        else
-            Instance.FillPOIInfoFields(new POI("", "Name", Vector3.zero, Vector3.zero, ""));
-
-
-        //disable the Add bookmark button, enable save changes
-        Instance.POIEditWindow.FindChild("AddBookmark").gameObject.SetActive(false);
-        Instance.POIEditWindow.FindChild("SaveChanges").gameObject.SetActive(true);
-
-        //grey out edit bookmark
-        Transform editBut = Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
-        editBut.GetComponent<Button>().enabled = false; //disable edit button
-        Transform editButText = editBut.FindChild("Text") as Transform;
-        editButText.GetComponent<Text>().color = new Color(0.57f, 0.57f, 0.57f);
-    }
-
-    public void CloseEditWindow()
-    {
-        //enable edit bookmark
-        Transform editBut = Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
-        editBut.GetComponent<Button>().enabled = true; //enable edit button
-        Transform editButText = editBut.FindChild("Text") as Transform;
-        editButText.GetComponent<Text>().color = new Color(50f / 255, 50f / 255, 50f / 255);
-
-        Instance.POIEditWindow.gameObject.SetActive(false);
-    }
+    
 
     public void FillPOIInfoFields(POI newPoint)
     {
