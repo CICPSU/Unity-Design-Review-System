@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
 /// <summary>
@@ -11,6 +12,7 @@ using UnityEngine.EventSystems;
 public class FlexibleDraggableObject : MonoBehaviour
 {
     public GameObject Target;
+    private Collider2D collider;
     private EventTrigger _eventTrigger;
     private Rigidbody2D rigid;
 
@@ -34,6 +36,7 @@ public class FlexibleDraggableObject : MonoBehaviour
     void OnDrag(BaseEventData data)
     {
         PointerEventData ped = (PointerEventData) data;
+        
         Target.transform.Translate(ped.delta);
         // while the ui element is being dragged, freeze the rotation but let the static ui elements push it into place
         rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
