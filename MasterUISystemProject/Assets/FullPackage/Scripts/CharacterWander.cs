@@ -28,10 +28,14 @@ public class CharacterWander : MonoBehaviour {
 
     private NavMeshHit hit;
 
-    private int idleTime = 0;
+    private int idleTime = 3;
+
+    private bool canceledMovement = false;
 
     public void SetWanderMode()
     {
+
+        canceledMovement = false;
         switch (mode)
         {
             case WanderMode.Idle:
@@ -75,6 +79,9 @@ public class CharacterWander : MonoBehaviour {
 
     public void SetBookmarkMode()
     {
+
+        canceledMovement = false;
+
         if (navAgent.isOnNavMesh)
             navAgent.Stop();
 
@@ -94,7 +101,9 @@ public class CharacterWander : MonoBehaviour {
         switch(mode)
         {
             case WanderMode.Patrol:
-                NavMesh.SamplePosition(localWanderCenter + new Vector3(Random.Range(-localWanderRadius, localWanderRadius), 0, Random.Range(-localWanderRadius, localWanderRadius)), out hit, 10, -1);
+                float xVal = Random.Range(-localWanderRadius,localWanderRadius);
+                float zVal = Random.Range(-Mathf.Sqrt(Mathf.Pow(localWanderRadius, 2) - Mathf.Pow(xVal, 2)), Mathf.Sqrt(Mathf.Pow(localWanderRadius, 2) - Mathf.Pow(xVal, 2)));
+                NavMesh.SamplePosition(localWanderCenter + new Vector3(xVal, 0, zVal), out hit, 10, -1);
                 break;
             case WanderMode.Explore:
                 NavMesh.SamplePosition(transform.position + new Vector3(Random.Range(-10, 10), 0, Random.Range(-10, 10)), out hit, 10, -1);
@@ -115,10 +124,16 @@ public class CharacterWander : MonoBehaviour {
         animator.SetFloat("Speed", 1f);
     }
 
+    public void CancelMovement()
+    {
+        CancelInvoke();
+        canceledMovement = true;
+    }
+
     void OnAnimatorMove()
     {
         //only perform if moving
-        if (!(navAgent.remainingDistance < .5f) && !navAgent.pathPending)
+        if (!(navAgent.remainingDistance < .5f) && !navAgent.pathPending && mode!= WanderMode.Idle)
         {
             if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) > 5)
                 animator.SetFloat("Direction", Vector3.Angle(transform.forward, navAgent.destination - transform.position));
@@ -156,7 +171,7 @@ public class CharacterWander : MonoBehaviour {
 
     void Update()
     {
-        if (navAgent.remainingDistance < .5f && !navAgent.pathPending && !IsInvoking())
+        if (navAgent.remainingDistance < .5f && !canceledMovement && !navAgent.pathPending && !IsInvoking())
         {
             if (navAgent.isOnNavMesh)
                 navAgent.Stop();
