@@ -25,30 +25,40 @@ public static class UIUtilities {
         Vector3[] objectCorners = new Vector3[4];
         rectObject.GetWorldCorners(objectCorners);
         Rect screenRect = new Rect(0,0,Screen.width,Screen.height);
-        Debug.Log(objectCorners[0] + " " + objectCorners[1] + " " + objectCorners[2] + " " + objectCorners[3]);
-        /*
-        Vector2 result = Vector2.zero;
-        // if the x position cuts off the menu at the right of the screen, line the right side of the menu up with the right of the screen.
-        if (!screenRect.Contains())
-            result += new Vector2(Screen.width - rectObject.sizeDelta.x, 0);
-        // if the x position is off the left of the screen, line the left side of the menu up with the left of the screen
-        else if (rectObject.anchoredPosition.x - rectObject.pivot.x * rectObject.sizeDelta.x < 0)
-            result += new Vector2(0, 0);
-        // if the menu is on the screen, keep its x position
-        else
-            result += new Vector2(rectObject.anchoredPosition.x, 0);
-        
-        // if the menu is cut off on the top of the screen, line the top of the menu up at the top of the screen
-        if (rectObject.anchoredPosition.y + (1f - rectObject.pivot.y) * rectObject.sizeDelta.y > Screen.height)
-            result += new Vector2(0, Screen.height - );
-        // if the y position cuts the menu off at the bottom of the screen, line the bottom of the menu up on the bottom of the screen
-        else if (rectObject.anchoredPosition.y  - rectObject.pivot.y * rectObject.sizeDelta.y < -Screen.height)
-            result += new Vector2(0, );
-        // if the menu is on the screen, snap to the grid
-        else
-            result += new Vector2(0, );
+        BoxCollider2D boxCollider2d = rectObject.GetComponent<BoxCollider2D>();
 
-        rectObject.anchoredPosition = result;
-        */
+        // if the bottom left corner is off the screen
+        if (!screenRect.Contains(objectCorners[0]))
+        {
+            // if both the left side corners are off the screen
+            if (!screenRect.Contains(objectCorners[1]))
+            {
+                rectObject.Translate(-objectCorners[1].x, 0, 0);
+            }
+
+            // if both of the bottom corners are off the screen
+            if (!screenRect.Contains(objectCorners[3]))
+            {
+                rectObject.Translate(0, -objectCorners[3].y, 0);
+            }
+        }
+
+        // if the top right corner is off the screen
+        if (!screenRect.Contains(objectCorners[2]))
+        {
+            // if both the right side corners are off the screen
+            if (!screenRect.Contains(objectCorners[3]))
+            {
+                rectObject.Translate(-objectCorners[3].x + Screen.width, 0, 0);
+            }
+
+            // if both of the top corners are off the screen
+            if (!screenRect.Contains(objectCorners[1]))
+            {
+                rectObject.Translate(0, -objectCorners[1].y + Screen.height, 0);
+            }
+        }
+
+
     }
 }
