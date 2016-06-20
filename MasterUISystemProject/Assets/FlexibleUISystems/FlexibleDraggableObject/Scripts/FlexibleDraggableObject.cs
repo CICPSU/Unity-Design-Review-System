@@ -39,17 +39,33 @@ public class FlexibleDraggableObject : MonoBehaviour
     void OnDrag(BaseEventData data)
     {
         dragging = true;
+
+        // these two lines turn off camera rotation while dragging a menu object
+        TP_Motor.Instance.stopRotation = true;
+        TP_Camera.Instance.stopRotation = true;
+
         PointerEventData ped = (PointerEventData) data;
+
+        // if the object is not touching another ui element, move it based on the movement of the cursor between frames
         if (!colliding)
         {
+            // store the previous position so we know where to move to if we collide with something
             prevPos = targetRectTrans.anchoredPosition3D;
+
             targetRectTrans.Translate(ped.delta);
+
+            // this function returns the four corners of the rectTransform in world coordinates
+            // order: bottom left, top left, top right, bottom right
             targetRectTrans.GetWorldCorners(corners);
+
+            // if we manually set the width of the menu, adjust the corners accordingly
             if (manualWidth != -1)
             {
                 corners[2] = corners[1] + new Vector3(manualWidth, 0, 0);
                 corners[3] = corners[0] + new Vector3(manualWidth, 0, 0);
             }
+
+            // this calls the function to make sure the menu object stays on the screen
             UIUtilities.PlaceMenuObject(targetRectTrans, corners);
         }
     }
@@ -57,16 +73,17 @@ public class FlexibleDraggableObject : MonoBehaviour
     void OnDragEnd(BaseEventData data)
     {
         dragging = false;
+        TP_Motor.Instance.stopRotation = false;
+        TP_Camera.Instance.stopRotation = false;
     }
 
     /// <summary>
-    /// when the ui element is no longer colliding with any other ui elements, freeze it in place
+    /// When the ui element collides with another, move it back to its previous position, scaled up to avoid continuous collisions
     /// </summary>
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (dragging)
         {
-            Debug.Log("hit");
             colliding = true;
             targetRectTrans.Translate((prevPos - targetRectTrans.anchoredPosition3D) * 5);
             
@@ -77,7 +94,6 @@ public class FlexibleDraggableObject : MonoBehaviour
     {
         if (colliding)
         {
-            Debug.Log("stop");
             colliding = false;
         }
     }

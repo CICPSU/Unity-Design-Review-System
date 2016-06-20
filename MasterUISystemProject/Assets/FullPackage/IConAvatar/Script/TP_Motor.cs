@@ -27,6 +27,7 @@ public class TP_Motor : MonoBehaviour {
 
     private float jumpStartTime = 0;
     public bool hasJumped = false;
+    public bool stopRotation = false;
 
 	void Awake () {
 		if(Instance == null)
@@ -44,7 +45,7 @@ public class TP_Motor : MonoBehaviour {
     }
 
 	public void UpdateMotor () {
-        if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
+        if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting") && !stopRotation)
             SnapAlignCharacterWithCamera();
         ProcessMotion();
         

@@ -8,6 +8,7 @@ public class TP_Camera : MonoBehaviour {
 	public Transform TargetLookAt;
 	public Transform cameraDistanceCheck;
     public GameObject avatarMesh;
+    public bool stopRotation = false;
 	public float Distance = 0.3f;  // distance from the camera to the capsule(TargetLookAt)
 									//was 5f
 	public float DistanceMin = 0.3f; // near limit
@@ -81,6 +82,7 @@ public class TP_Camera : MonoBehaviour {
 
         //if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
         //if(allowPlayerInput)
+        if(!stopRotation)
             HandlePlayerInput();
         checkCameraCharacterDistance(desiredPosition, cameraDistanceCheck.position);
 
