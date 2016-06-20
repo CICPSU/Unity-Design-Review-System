@@ -145,12 +145,13 @@ public class POIMenuStateManager : MonoBehaviour {
 	{
 		if(!finshedSetupForModeChange){
             //this if/else statement changes the time scale while the POIMenu is in Edit mode.
-			if (!editModeState){
+			/*if (!editModeState){
                 ControlUtilities.UnPause();
 			}
 			else{
                 ControlUtilities.Pause();
 			}
+            */
 
 			//toggle all of the scripts in disableWhileMenuOpen
             //scripts can be added to this list so that they will not be active while the POIMenu is in Edit mode.
