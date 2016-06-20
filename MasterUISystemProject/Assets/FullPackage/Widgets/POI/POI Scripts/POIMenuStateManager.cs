@@ -181,7 +181,7 @@ public class POIMenuStateManager : MonoBehaviour {
 
             POI_ReferenceHub.Instance.EditBut.gameObject.SetActive(true);
 
-            ControlUtilities.UnPause();
+            //ControlUtilities.UnPause();
         }
         // this means we are switching into Edit mode
         else
@@ -196,7 +196,7 @@ public class POIMenuStateManager : MonoBehaviour {
             POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(true);
 
             //pause the game
-            ControlUtilities.Pause();
+            //ControlUtilities.Pause();
 
         }
     }

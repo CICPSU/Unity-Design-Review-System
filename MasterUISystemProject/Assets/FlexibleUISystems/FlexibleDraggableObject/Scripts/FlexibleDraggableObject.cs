@@ -11,7 +11,9 @@ using UnityEngine.EventSystems;
 public class FlexibleDraggableObject : MonoBehaviour
 {
     public GameObject Target;
+    public float manualWidth = -1;
     private RectTransform targetRectTrans;
+    private Vector3[] corners = new Vector3[4];
     private EventTrigger _eventTrigger;
     
     void Start ()
@@ -31,7 +33,13 @@ public class FlexibleDraggableObject : MonoBehaviour
         PointerEventData ped = (PointerEventData) data;
         
         targetRectTrans.Translate(ped.delta);
-        UIUtilities.PlaceMenuObject(targetRectTrans);
+        targetRectTrans.GetWorldCorners(corners);
+        if (manualWidth != -1)
+        {
+            corners[2] = corners[1] + new Vector3(manualWidth, 0, 0);
+            corners[3] = corners[0] + new Vector3(manualWidth, 0, 0);
+        }
+        UIUtilities.PlaceMenuObject(targetRectTrans, corners);
     }
 
     /// <summary>

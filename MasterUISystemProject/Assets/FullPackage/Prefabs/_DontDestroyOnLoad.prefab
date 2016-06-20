@@ -1747,6 +1747,7 @@ GameObject:
   - 224: {fileID: 22458370}
   - 222: {fileID: 22275444}
   - 114: {fileID: 11467236}
+  - 114: {fileID: 11404298}
   m_Layer: 5
   m_Name: AddDeleteWindow
   m_TagString: Menu
@@ -2047,6 +2048,7 @@ GameObject:
   - 114: {fileID: 11484592}
   - 114: {fileID: 11447186}
   - 114: {fileID: 11483416}
+  - 114: {fileID: 11433772}
   m_Layer: 5
   m_Name: POIMenu
   m_TagString: Menu
@@ -2377,7 +2379,6 @@ GameObject:
   - 222: {fileID: 22299934}
   - 114: {fileID: 11478554}
   - 114: {fileID: 11456800}
-  - 114: {fileID: 11499640}
   m_Layer: 5
   m_Name: EditBookmark
   m_TagString: Untagged
@@ -2839,7 +2840,6 @@ GameObject:
   - 222: {fileID: 22296196}
   - 114: {fileID: 11435442}
   - 114: {fileID: 11445480}
-  - 114: {fileID: 11427502}
   m_Layer: 5
   m_Name: Cancel
   m_TagString: Untagged
@@ -3560,7 +3560,6 @@ GameObject:
   - 222: {fileID: 22236406}
   - 114: {fileID: 11477890}
   - 114: {fileID: 11409038}
-  - 114: {fileID: 11474926}
   m_Layer: 5
   m_Name: CustomBookmark
   m_TagString: Untagged
@@ -3897,6 +3896,7 @@ GameObject:
   - 224: {fileID: 22490340}
   - 222: {fileID: 22271614}
   - 114: {fileID: 11449436}
+  - 114: {fileID: 11466804}
   m_Layer: 5
   m_Name: POIEditWindow
   m_TagString: Menu
@@ -4059,6 +4059,7 @@ GameObject:
   - 224: {fileID: 22498098}
   - 222: {fileID: 22218586}
   - 114: {fileID: 11449110}
+  - 114: {fileID: 11428764}
   m_Layer: 5
   m_Name: BookmarkCurrentPanel
   m_TagString: Menu
@@ -5037,7 +5038,6 @@ GameObject:
   - 222: {fileID: 22275312}
   - 114: {fileID: 11482152}
   - 114: {fileID: 11420994}
-  - 114: {fileID: 11417742}
   m_Layer: 5
   m_Name: EditButton
   m_TagString: Untagged
@@ -5454,6 +5454,9 @@ GameObject:
   - 224: {fileID: 22429462}
   - 222: {fileID: 22281788}
   - 114: {fileID: 11498930}
+  - 61: {fileID: 6185226}
+  - 114: {fileID: 11455648}
+  - 114: {fileID: 11490996}
   m_Layer: 5
   m_Name: MiniMapPanel
   m_TagString: Menu
@@ -9184,6 +9187,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 177108}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!61 &6185226
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171450}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -100, y: -100}
+  serializedVersion: 2
+  m_Size: {x: 200, y: 200}
 --- !u!65 &6546566
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -9702,6 +9719,19 @@ MonoBehaviour:
   charEditWanderToggleGroup: {fileID: 11445328}
   radiusSelectMask: {fileID: 11478660}
   selectedMode: 0
+--- !u!114 &11404298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 123688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &11404324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -10786,8 +10816,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 11474926}
-        m_MethodName: clicked
+      - m_Target: {fileID: 11447186}
+        m_MethodName: B_OpenBookmarkEditWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -12315,17 +12345,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &11417742
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 164318}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99240c261ba6d4b48ae9bc76828c488b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11417988
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13049,8 +13068,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11417742}
-        m_MethodName: EditClicked
+      - m_Target: {fileID: 11447186}
+        m_MethodName: ToggleEditModeState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13058,8 +13077,19 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 1
+      - m_Target: {fileID: 164318}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11421064
@@ -14571,17 +14601,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 
---- !u!114 &11427502
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140026}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 156bc9e1604b1cf4bbe4d4e984dd4135, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11427618
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -14863,6 +14882,19 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &11428764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 151390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &11429118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15567,6 +15599,19 @@ MonoBehaviour:
   m_Spacing: 0
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
+--- !u!114 &11433772
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &11433878
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -17516,8 +17561,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11427502}
-        m_MethodName: CancelClicked
+      - m_Target: {fileID: 11447186}
+        m_MethodName: B_CloseBookmarkEditWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19404,6 +19449,18 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: +
+--- !u!114 &11455648
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6c737f9a0b0e045b2acc208d52e48a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 171450}
 --- !u!114 &11455950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19555,8 +19612,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11499640}
-        m_MethodName: clicked
+      - m_Target: {fileID: 11447186}
+        m_MethodName: B_OpenBookmarkEditWindow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -20954,6 +21011,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11466804
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &11466818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -21456,8 +21526,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11410788}
-        m_MethodName: ResetPOIMenu
+      - m_Target: {fileID: 11447186}
+        m_MethodName: ToggleEditModeState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -21467,6 +21537,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
+      - m_Target: {fileID: 11410788}
+        m_MethodName: LoadAndGenerateButs
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &11469086
@@ -22281,8 +22362,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 1
-      - m_Target: {fileID: 11410788}
-        m_MethodName: ResetPOIMenu
+      - m_Target: {fileID: 11447186}
+        m_MethodName: ToggleEditModeState
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22312,17 +22393,6 @@ MonoBehaviour:
   m_PreferredHeight: -1
   m_FlexibleWidth: 0
   m_FlexibleHeight: -1
---- !u!114 &11474926
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 146710}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: efb4896402672e3419785d10e1a92b5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11474960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -24783,6 +24853,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11490996
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates: []
+  delegates: []
 --- !u!114 &11491536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -26585,17 +26668,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: range
---- !u!114 &11499640
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 133870}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf04faf6c4ea66f448cd94dbb076bbef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11499738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -29230,6 +29302,7 @@ Canvas:
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -29872,7 +29945,7 @@ RectTransform:
   - {fileID: 22425408}
   - {fileID: 22455812}
   m_Father: {fileID: 22413504}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 324, y: -344.2}
@@ -30054,11 +30127,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22485544}
-  - {fileID: 22490340}
-  - {fileID: 22458370}
   - {fileID: 22438164}
   - {fileID: 22409890}
-  - {fileID: 22498098}
   - {fileID: 22488844}
   m_Father: {fileID: 22485426}
   m_RootOrder: 2
@@ -31802,7 +31872,7 @@ RectTransform:
   - {fileID: 22440258}
   - {fileID: 22491734}
   m_Father: {fileID: 22413504}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 318, y: -518}
@@ -33048,11 +33118,11 @@ RectTransform:
   - {fileID: 22453038}
   - {fileID: 22409136}
   - {fileID: 22434584}
-  m_Father: {fileID: 22413504}
-  m_RootOrder: 2
+  m_Father: {fileID: 22485544}
+  m_RootOrder: 7
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 152.55, y: -5.299988}
+  m_AnchoredPosition: {x: 144.00002, y: 0.15002441}
   m_SizeDelta: {x: 218, y: 198.8}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22458568
@@ -34758,12 +34828,15 @@ RectTransform:
   - {fileID: 22432840}
   - {fileID: 22401620}
   - {fileID: 22497490}
+  - {fileID: 22490340}
+  - {fileID: 22458370}
+  - {fileID: 22498098}
   m_Father: {fileID: 22413504}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 8.549988, y: -5.4499817}
-  m_SizeDelta: {x: 144, y: 372}
+  m_SizeDelta: {x: 144, y: 439.95}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22485846
 RectTransform:
@@ -35010,7 +35083,7 @@ RectTransform:
   m_Children:
   - {fileID: 22443152}
   m_Father: {fileID: 22413504}
-  m_RootOrder: 6
+  m_RootOrder: 3
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 1}
@@ -35114,11 +35187,11 @@ RectTransform:
   - {fileID: 22419634}
   - {fileID: 22486806}
   - {fileID: 22468364}
-  m_Father: {fileID: 22413504}
-  m_RootOrder: 1
+  m_Father: {fileID: 22485544}
+  m_RootOrder: 6
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 153.00002, y: -173.34998}
+  m_AnchoredPosition: {x: 144.45003, y: -167.9}
   m_SizeDelta: {x: 342, y: 221.6}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22490450
@@ -35708,11 +35781,11 @@ RectTransform:
   - {fileID: 22444474}
   - {fileID: 22487134}
   - {fileID: 22433730}
-  m_Father: {fileID: 22413504}
-  m_RootOrder: 5
+  m_Father: {fileID: 22485544}
+  m_RootOrder: 8
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 453.3, y: -59}
+  m_AnchoredPosition: {x: 444.75, y: -53.55005}
   m_SizeDelta: {x: 144.8, y: 107.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &22498116
