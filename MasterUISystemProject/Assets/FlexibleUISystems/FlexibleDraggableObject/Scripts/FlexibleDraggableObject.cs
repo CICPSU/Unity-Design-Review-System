@@ -13,6 +13,7 @@ public class FlexibleDraggableObject : MonoBehaviour
     public GameObject Target;
     public float manualWidth = -1;
     private RectTransform targetRectTrans;
+    private Vector3 prevPos = new Vector3();
     private Vector3[] corners = new Vector3[4];
     private EventTrigger _eventTrigger;
     
@@ -31,7 +32,7 @@ public class FlexibleDraggableObject : MonoBehaviour
     void OnDrag(BaseEventData data)
     {
         PointerEventData ped = (PointerEventData) data;
-        
+        prevPos = targetRectTrans.anchoredPosition3D;
         targetRectTrans.Translate(ped.delta);
         targetRectTrans.GetWorldCorners(corners);
         if (manualWidth != -1)
@@ -45,8 +46,9 @@ public class FlexibleDraggableObject : MonoBehaviour
     /// <summary>
     /// when the ui element is no longer colliding with any other ui elements, freeze it in place
     /// </summary>
-    void OnCollisionEnter2D(Collision2D coll)
+    void OnCollisionEnter2D(Collision2D collision)
     {
-
+        Debug.Log("hit");
+        targetRectTrans.anchoredPosition3D = prevPos;
     }
 }

@@ -2049,6 +2049,8 @@ GameObject:
   - 114: {fileID: 11447186}
   - 114: {fileID: 11483416}
   - 114: {fileID: 11433772}
+  - 61: {fileID: 6186168}
+  - 114: {fileID: 11407074}
   m_Layer: 5
   m_Name: POIMenu
   m_TagString: Menu
@@ -9201,6 +9203,20 @@ BoxCollider2D:
   m_Offset: {x: -100, y: -100}
   serializedVersion: 2
   m_Size: {x: 200, y: 200}
+--- !u!61 &6186168
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128432}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
 --- !u!65 &6546566
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -10372,6 +10388,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!114 &11407074
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 128432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6c737f9a0b0e045b2acc208d52e48a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 128432}
+  manualWidth: 520
 --- !u!114 &11407268
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15743,7 +15772,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 11404324}
   m_HandleRect: {fileID: 22496680}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 0.8381963
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -18079,6 +18108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   disableWhileMenuOpen: []
+  disableGOWhileEdit: []
 --- !u!114 &11447292
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -19461,6 +19491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 171450}
+  manualWidth: -1
 --- !u!114 &11455950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -29481,7 +29512,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 61.00003}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!224 &22402714

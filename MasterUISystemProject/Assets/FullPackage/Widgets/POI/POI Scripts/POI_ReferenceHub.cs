@@ -17,6 +17,7 @@ public class POI_ReferenceHub : MonoBehaviour{
 	public  RectTransform ApplyBut;
 	public  RectTransform CancelBut;
 	public  RectTransform EditBut;
+    public RectTransform ExitBut;
 	public RectTransform InvalidInputWarning;
 	public RectTransform NameExistedWarning;
 	public RectTransform BookmarkCurrentLocationNameField;

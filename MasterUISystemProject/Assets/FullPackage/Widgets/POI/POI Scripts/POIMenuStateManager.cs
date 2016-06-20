@@ -12,6 +12,7 @@ using System.Linq;
 public class POIMenuStateManager : MonoBehaviour {
 
 	public List<MonoBehaviour> disableWhileMenuOpen = new List<MonoBehaviour> ();
+    public List<GameObject> disableGOWhileEdit = new List<GameObject>();
 
 	private static bool editModeState = false;
 
@@ -143,16 +144,8 @@ public class POIMenuStateManager : MonoBehaviour {
 
 	void Update ()
 	{
-		if(!finshedSetupForModeChange){
-            //this if/else statement changes the time scale while the POIMenu is in Edit mode.
-			/*if (!editModeState){
-                ControlUtilities.UnPause();
-			}
-			else{
-                ControlUtilities.Pause();
-			}
-            */
-
+		if(!finshedSetupForModeChange)
+        {
 			//toggle all of the scripts in disableWhileMenuOpen
             //scripts can be added to this list so that they will not be active while the POIMenu is in Edit mode.
 			foreach(MonoBehaviour mono in disableWhileMenuOpen)
@@ -179,9 +172,11 @@ public class POIMenuStateManager : MonoBehaviour {
             POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(false);
             POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive(false);
 
-            POI_ReferenceHub.Instance.EditBut.gameObject.SetActive(true);
+            foreach (GameObject gO in disableGOWhileEdit)
+            {
+                gO.SetActive(true);
+            }
 
-            //ControlUtilities.UnPause();
         }
         // this means we are switching into Edit mode
         else
@@ -195,8 +190,10 @@ public class POIMenuStateManager : MonoBehaviour {
             POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(true);
             POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(true);
 
-            //pause the game
-            //ControlUtilities.Pause();
+            foreach (GameObject gO in disableGOWhileEdit)
+            {
+                gO.SetActive(false);
+            }
 
         }
     }
