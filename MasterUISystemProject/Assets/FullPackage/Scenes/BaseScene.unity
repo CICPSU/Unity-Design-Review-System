@@ -26487,6 +26487,7 @@ GameObject:
   - 61: {fileID: 837925411}
   - 114: {fileID: 837925408}
   - 114: {fileID: 837925409}
+  - 50: {fileID: 837925410}
   m_Layer: 5
   m_Name: MiniMapPanel
   m_TagString: Menu
@@ -26568,6 +26569,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 837925404}
   manualWidth: -1
+  dragging: 0
+  colliding: 0
 --- !u!114 &837925409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26582,6 +26585,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates: []
   delegates: []
+--- !u!50 &837925410
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 837925404}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &837925411
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32462,8 +32482,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 117559738}
   m_HandleRect: {fileID: 117559736}
   m_Direction: 2
-  m_Value: 0
-  m_Size: 0.8381963
+  m_Value: 0.8434419
+  m_Size: 0.8381962
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -34932,7 +34952,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000015258789}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1080643736
@@ -60820,7 +60840,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 61.00003}
+  m_AnchoredPosition: {x: 0, y: 9.550049}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1933857086
@@ -61770,6 +61790,7 @@ GameObject:
   - 114: {fileID: 1965281248}
   - 61: {fileID: 1965281249}
   - 114: {fileID: 1965281247}
+  - 50: {fileID: 1965281250}
   m_Layer: 5
   m_Name: POIMenu
   m_TagString: Menu
@@ -61886,6 +61907,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Target: {fileID: 1965281241}
   manualWidth: 520
+  dragging: 0
+  colliding: 0
 --- !u!114 &1965281248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61915,6 +61938,23 @@ BoxCollider2D:
   m_Offset: {x: 72, y: -220}
   serializedVersion: 2
   m_Size: {x: 144, y: 440}
+--- !u!50 &1965281250
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1965281241}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1969136590
 GameObject:
   m_ObjectHideFlags: 0
