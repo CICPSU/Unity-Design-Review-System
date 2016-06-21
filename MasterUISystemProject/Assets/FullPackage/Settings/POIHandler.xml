@@ -61,5 +61,20 @@
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>
     </POI>
+    <POI>
+      <SceneFlag>BaseScene</SceneFlag>
+      <Name>LONGPOINAMEEEEEEEE</Name>
+      <Position>
+        <x>2.147352</x>
+        <y>-0.01999992</y>
+        <z>0.1506568</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>350.8611</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
   </ProjectPOIs>
 </POIHandler>

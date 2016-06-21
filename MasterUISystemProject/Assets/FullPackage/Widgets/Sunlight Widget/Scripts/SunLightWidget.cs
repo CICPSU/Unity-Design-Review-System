@@ -108,7 +108,7 @@ public class SunLightWidget : MonoBehaviour {
 
 		foreach(City city in listOfCity){
 			RectTransform cityItem = Instantiate(cityButPrefab) as RectTransform;
-			cityItem.parent = dropdownPanel;
+			cityItem.SetParent(dropdownPanel);
 			cityItem.FindChild("Text").GetComponent<UnityEngine.UI.Text>().text = city.CityName;
 			if(!CityDropdownLongEnough()){
 				IncreaseCityDropdownSize();

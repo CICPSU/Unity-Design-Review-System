@@ -14,6 +14,8 @@ namespace UnityEngine.UI.Extensions
 
 		public Vector3 offset;
 
+        public Text textObject;
+
 		public void OnPointerEnter(PointerEventData eventData)
 		{
 			if (useMousePosition)
@@ -43,7 +45,8 @@ namespace UnityEngine.UI.Extensions
 
 		void StartHover(Vector3 position)
 		{
-			BoundTooltipItem.Instance.ShowTooltip(text, position);
+            if(LayoutUtility.GetPreferredWidth(textObject.rectTransform) > GetComponent<RectTransform>().rect.width)
+			    BoundTooltipItem.Instance.ShowTooltip(textObject.text, position);
 		}
 
 		void StopHover()

@@ -32,6 +32,7 @@ namespace UnityEngine.UI.Extensions
             transform.position = pos + ToolTipOffset;
 
             gameObject.SetActive(true);
+            GetComponent<RectTransform>().sizeDelta = new Vector2(LayoutUtility.GetPreferredWidth(TooltipText.rectTransform) + 50 ,GetComponent<RectTransform>().sizeDelta.y);
         }
 
         public void HideTooltip()
