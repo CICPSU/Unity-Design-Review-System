@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI.Extensions;
 
 public class POIButtonManager : MonoBehaviour {
 
@@ -183,6 +184,9 @@ public class POIButtonManager : MonoBehaviour {
 		GameObject newButton = Instantiate(buttonPrefab) as GameObject;
 		RectTransform buttonRectTransform = newButton.transform as RectTransform;
 		buttonRectTransform.SetParent(POIList);
+
+        // this sets the TooltipTrigger text value to the name of the button
+        newButton.GetComponent<BoundTooltipTrigger>().text = point.buttonName;
 
 		// the following line positions the button correctly as a child of the POIList
 		// !!!! when we convert to using the Layout system, this will be automatically done
