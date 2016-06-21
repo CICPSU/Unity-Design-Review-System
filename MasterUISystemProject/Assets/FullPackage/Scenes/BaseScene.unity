@@ -20203,7 +20203,6 @@ RectTransform:
   - {fileID: 152233196}
   - {fileID: 1192845768}
   - {fileID: 1798980250}
-  - {fileID: 1732883295}
   m_Father: {fileID: 278468214}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -32620,7 +32619,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 117559736}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.8381963
+  m_Size: 0.83819634
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -55246,8 +55245,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 876679758}
-  m_Father: {fileID: 650595640}
-  m_RootOrder: 4
+  m_Father: {fileID: 2123630221}
+  m_RootOrder: 5
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -55298,7 +55297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TooltipText: {fileID: 876679759}
-  ToolTipOffset: {x: 100, y: 55, z: 0}
+  ToolTipOffset: {x: 100, y: 60, z: 0}
 --- !u!1 &1736462699
 GameObject:
   m_ObjectHideFlags: 0
@@ -61188,7 +61187,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0.000061035156}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1933857086
@@ -66334,6 +66333,7 @@ RectTransform:
   - {fileID: 1368594333}
   - {fileID: 603261345}
   - {fileID: 460760702}
+  - {fileID: 1732883295}
   m_Father: {fileID: 278468214}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}

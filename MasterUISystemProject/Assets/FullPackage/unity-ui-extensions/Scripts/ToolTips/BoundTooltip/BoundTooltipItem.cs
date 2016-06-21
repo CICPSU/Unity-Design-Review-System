@@ -28,11 +28,16 @@ namespace UnityEngine.UI.Extensions
         {
             if (TooltipText.text != text)
                 TooltipText.text = text;
+            Vector3 finalPos = pos + ToolTipOffset;
+            if (finalPos.y + .5f * GetComponent<RectTransform>().sizeDelta.y > Screen.height)
+                finalPos -= new Vector3(0, finalPos.y + .5f * GetComponent<RectTransform>().sizeDelta.y - Screen.height,0);
+            if (finalPos.x + .5f * GetComponent<RectTransform>().sizeDelta.x > Screen.width)
+                finalPos -= new Vector3(0, finalPos.x + .5f * GetComponent<RectTransform>().sizeDelta.x - Screen.width, 0);
 
             transform.position = pos + ToolTipOffset;
 
             gameObject.SetActive(true);
-            GetComponent<RectTransform>().sizeDelta = new Vector2(LayoutUtility.GetPreferredWidth(TooltipText.rectTransform) + 50 ,GetComponent<RectTransform>().sizeDelta.y);
+            GetComponent<RectTransform>().sizeDelta = new Vector2(LayoutUtility.GetPreferredWidth(TooltipText.rectTransform) + 100 ,GetComponent<RectTransform>().sizeDelta.y);
         }
 
         public void HideTooltip()
