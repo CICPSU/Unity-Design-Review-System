@@ -23,7 +23,7 @@ public abstract class WidgetSettings {
 	{
 	}
 }
-
+/*
 public class AvatarSettings : WidgetSettings
 {
 
@@ -61,7 +61,7 @@ public class AvatarSettings : WidgetSettings
     }
 
 }
-
+*/
 public class MiniMapSettings : WidgetSettings {
 
 	public Vector2 rectPos = Vector2.zero;
@@ -131,4 +131,7 @@ public class POISettings : WidgetSettings {
 		return new object[]{enabled};
 	}
 
+    public POISettings()
+    {
+    }
 }

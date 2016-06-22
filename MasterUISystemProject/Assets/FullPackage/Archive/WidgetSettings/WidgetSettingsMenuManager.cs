@@ -8,7 +8,6 @@ public class WidgetSettingsMenuManager : MonoBehaviour {
     public GameObject chooseWidgetPanel;
     public GameObject displaySettingsPanel;
     public WidgetSettingsManager settingsManager;
-    public WidgetCanvasManager canvasManager;
 
     private bool shouldOpen = false;
 

@@ -3,21 +3,17 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class WidgetCanvasManager : MonoBehaviour {
+public class SettingsBarManager : MonoBehaviour {
 
     public GameObject toggleSettingsMenu;
     public GameObject dropCharacterButton;
-    public GameObject chooseWidgetPanel;
-    public GameObject displaySettingsPanel;
     public GameObject errorWindow;
     public GameObject widgetRoot;
 	public GameObject backgroundBlueBar;
 	public GameObject settingBar;
 	public GameObject characterDropTool;
-    public float timeScale = 1f;
 
-
-    public TP_Camera tpCamRef;
+    
     public TP_Controller tpControlRef;
 
     public bool menuButtonsOpen = false;
@@ -37,7 +33,9 @@ public class WidgetCanvasManager : MonoBehaviour {
 
     private void IntializeUI()
     {
-        widgetRoot.GetComponent<WidgetSettingsManager>().LoadSettingsFiles();
+        // leads settings file when the application starts
+        GetComponent<SettingsManager>().LoadSettingsFiles();
+
         //this closes all menu buttons along with any other panels that were opened
         GetComponent<ToggleGroup>().SetAllTogglesOff();
 		foreach(Transform child in settingBar.transform){
@@ -46,7 +44,6 @@ public class WidgetCanvasManager : MonoBehaviour {
 
 		characterDropTool.GetComponent<Widget>().Active = false;
         menuButtonsOpen = false;
-        //tpCamRef.allowPlayerInput = true;
         tpControlRef.allowPlayerInput = true;
     }
 
@@ -90,7 +87,6 @@ public class WidgetCanvasManager : MonoBehaviour {
 		}
         errorWindow.SetActive(false);
         menuButtonsOpen = false;
-        //tpCamRef.allowPlayerInput = true;
         tpControlRef.allowPlayerInput = true;
 	
     }
@@ -116,7 +112,6 @@ public class WidgetCanvasManager : MonoBehaviour {
 		}
 			
         menuButtonsOpen = true;
-        //tpCamRef.allowPlayerInput = false;
         tpControlRef.allowPlayerInput = false;
     }
 }

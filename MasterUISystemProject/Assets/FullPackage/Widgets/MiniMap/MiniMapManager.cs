@@ -15,7 +15,6 @@ public class MiniMapManager : MonoBehaviour {
 	public bool isMiniActive = false;
 	public float orthoCamRadiusFeet = 5;
 	public int mapRadiusIncrementInFeet;
-    public WidgetSettingsManager widgetSetManager;
 
 	private bool minimapRotate = false;
 	private float feetToMetersFactor = 0.3048f;
@@ -23,8 +22,6 @@ public class MiniMapManager : MonoBehaviour {
 	private Vector2 miniMapCenter = Vector2.zero;
 	private Vector3 rayStartPostion = Vector2.zero;
 	private int mapDim;
-
-    private MiniMapSettings currentSettings;
 	
 	void Start()
 	{
@@ -43,8 +40,6 @@ public class MiniMapManager : MonoBehaviour {
         }
         SetMiniMapCam ();
 		zoomLabel.text = "Diameter: " + (2 * orthoCamRadiusFeet).ToString("F1")  + " ft";
-
-        currentSettings = widgetSetManager.GetSettingsFile("MiniMapSettings", typeof(MiniMapSettings)) as MiniMapSettings;
 	}
 
 	void Update()
@@ -97,9 +92,13 @@ public class MiniMapManager : MonoBehaviour {
 		miniMapCam.GetComponent<Camera>().orthographicSize = orthoCamRadiusFeet*feetToMetersFactor;
 	}
 
+    /// <summary>
+    /// This function gets called by the buttons to change size in the MiniMap panel.
+    /// This function updates the mapProportionOfScreen variable, sets the MiniMap camera, then updates the SettingsManager Instance with the new values.
+    /// </summary>
+    /// <param name="isIncrease"></param>
 	public void ChangeSize(bool isIncrease)
 	{
-        currentSettings = widgetSetManager.GetSettingsFile("MiniMapSettings", typeof(MiniMapSettings)) as MiniMapSettings;
         if (isIncrease) 
 		{
 			mapProportionOfScreen += 0.05f;
@@ -116,13 +115,16 @@ public class MiniMapManager : MonoBehaviour {
 						mapProportionOfScreen = .9f;
 
 		SetMiniMapCam ();
-        currentSettings.mapPortionOfScreen = mapProportionOfScreen;
-        widgetSetManager.SaveSettingsFile(currentSettings, typeof(MiniMapSettings));
+        SettingsManager.Instance.SetMiniMapFields(mapProportionOfScreen, orthoCamRadiusFeet);
 	}
 
+    /// <summary>
+    /// This function gets called by the buttons to change the zoom in the MiniMap panel.
+    /// This function updates the orthoCamRadiusFeet variable, sets the MiniMap camera, then updates the SettingsManager Instance with the new values.
+    /// </summary>
+    /// <param name="isIncrease"></param>
 	public void ChangeZoom(bool isIncrease)
 	{
-        currentSettings = widgetSetManager.GetSettingsFile("MiniMapSettings", typeof(MiniMapSettings)) as MiniMapSettings;
         if (isIncrease) 
 			orthoCamRadiusFeet += mapRadiusIncrementInFeet*0.5f;
 		else
@@ -131,15 +133,15 @@ public class MiniMapManager : MonoBehaviour {
 
 		if (orthoCamRadiusFeet < 5)
 			orthoCamRadiusFeet = 5;
+
 		// This is where we will reset the zoom of the ortho camera that is used to capture the minimap.
 		SetMiniMapCam ();
 		
 		// set zoom label
 		zoomLabel.text = "Diameter: " + (2 * orthoCamRadiusFeet).ToString("F1")  + " ft";
 
-        currentSettings.orthoCamRadiusFeet = orthoCamRadiusFeet;
-        widgetSetManager.SaveSettingsFile(currentSettings, typeof(MiniMapSettings));
+        SettingsManager.Instance.SetMiniMapFields(mapProportionOfScreen, orthoCamRadiusFeet);
 
-	}
+    }
 
 }
