@@ -23,6 +23,9 @@ public class MiniMapManager : MonoBehaviour {
 	private Vector3 rayStartPostion = Vector2.zero;
 	private int mapDim;
 	
+    /// <summary>
+    /// Here we initialize the avatar object and the MiniMap camera.
+    /// </summary>
 	void Start()
 	{
         if (avatar == null)
@@ -42,6 +45,11 @@ public class MiniMapManager : MonoBehaviour {
 		zoomLabel.text = "Diameter: " + (2 * orthoCamRadiusFeet).ToString("F1")  + " ft";
 	}
 
+    /// <summary>
+    /// Move the MiniMap camera to be over the avatar.
+    /// Check for user input, m to toggle MiniMap, r to change rotation mode.
+    /// Update the MiniMap based on the current rotation mode.
+    /// </summary>
 	void Update()
 	{
 		miniMapCam.transform.position = new Vector3 (avatar.transform.position.x, avatar.transform.position.y + 2.6f, avatar.transform.position.z);
@@ -67,10 +75,17 @@ public class MiniMapManager : MonoBehaviour {
 		}
 	}
 
+    /// <summary>
+    /// This function switches the rotate mode between up being North and up being the direction the avatar is facing.
+    /// </summary>
+    /// <param name="rotateOn"></param>
 	public void SetRotate(bool rotateOn){
 		minimapRotate = rotateOn;
 	}
 
+    /// <summary>
+    /// This function teleports the avatar to the location on the minimap that was clicked by the user.
+    /// </summary>
 	public void Teleport()
 	{
 		relativeClickPostion.x = (Input.mousePosition.x - miniMapCenter.x) / (0.5f*mapDim);
@@ -81,6 +96,10 @@ public class MiniMapManager : MonoBehaviour {
 			avatar.transform.position = hit.point;
 	}
 	
+    /// <summary>
+    /// This function sets all of the MiniMap camera parameters.
+    /// It is called whenever the ortho size or the render size changes.
+    /// </summary>
 	public void SetMiniMapCam()
 	{
 		miniMapCenter = new Vector2 (miniMapMask.position.x - 0.5f*miniMapMask.sizeDelta.x, miniMapMask.position.y -0.5f*miniMapMask.sizeDelta.y);

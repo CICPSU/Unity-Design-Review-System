@@ -113,10 +113,10 @@ public class TP_Camera : MonoBehaviour {
 		if(Input.GetKey(TP_InputManager.instance.rotateRight) || Input.GetKey(TP_InputManager.instance.rotateLeft)){	
 			if(Input.GetKey (TP_InputManager.instance.rotateRight)){
                 TP_Animator.Instance.avatarRotation = 90f;
-				mouseX += TP_InputManager.instance.roateKeySensitivity;
+				mouseX += TP_InputManager.instance.rotateKeySensitivity;
 			}
 			if(Input.GetKey (TP_InputManager.instance.rotateLeft)){
-				mouseX -= TP_InputManager.instance.roateKeySensitivity;
+				mouseX -= TP_InputManager.instance.rotateKeySensitivity;
                 TP_Animator.Instance.avatarRotation = -90f;
 			}
             //		Debug.Log ("Rotate: " + Input.GetAxis ("Rotate"));
