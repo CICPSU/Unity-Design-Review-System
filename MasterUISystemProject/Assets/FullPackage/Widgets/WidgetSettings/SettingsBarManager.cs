@@ -17,6 +17,7 @@ public class SettingsBarManager : MonoBehaviour {
     public TP_Controller tpControlRef;
 
     public bool menuButtonsOpen = false;
+    public bool settingsMenusOpen = false;
 
     private List<GameObject> openWidgets = new List<GameObject>();
 
@@ -33,7 +34,7 @@ public class SettingsBarManager : MonoBehaviour {
 
     private void IntializeUI()
     {
-        // leads settings file when the application starts
+        // loads settings file when the application starts
         GetComponent<SettingsManager>().LoadSettingsFiles();
 
         //this closes all menu buttons along with any other panels that were opened
@@ -61,23 +62,27 @@ public class SettingsBarManager : MonoBehaviour {
 				return;
 			}
 		}
-
+        
 		//no animation is playing in bottom menus.
             if (menuButtonsOpen)
                 CloseAll();
             else
                 OpenMenu();
-
+                
     }
-
+    
     private void CloseAll()
     {
         //this re-enables any widgets that were open and loads the settings files to make sure they are up to date
+        /*
         foreach (GameObject gO in openWidgets) {
             iTween.MoveBy(gO, new Vector3(0, -Screen.height, 0), 0.8f);
         }
+        */
 
-        widgetRoot.GetComponent<WidgetSettingsManager>().LoadSettingsFiles();
+        WidgetTransitions.Instance.SlideWidgetRoot();
+
+        GetComponent<SettingsManager>().LoadSettingsFiles();
 
         //this closes all menu buttons along with any other panels that were opened
         GetComponent<ToggleGroup>().SetAllTogglesOff();
@@ -95,7 +100,8 @@ public class SettingsBarManager : MonoBehaviour {
     {
         //this goes through and slides up all the active widgets
         //the ones that were open are stored in a list so that they can be reopened when the menu is closed
-		openWidgets.Clear(); //clear previous section
+        /*
+        openWidgets.Clear(); //clear previous section
 		for (int i = 0; i < widgetRoot.transform.childCount; i++)
         {
 			if (widgetRoot.transform.GetChild(i).gameObject.GetComponent<Widget>().Active && widgetRoot.transform.GetChild(i).gameObject.activeSelf)
@@ -104,7 +110,9 @@ public class SettingsBarManager : MonoBehaviour {
                 openWidgets.Add(widgetRoot.transform.GetChild(i).gameObject);
             }
         }
+        */
 
+        WidgetTransitions.Instance.SlideWidgetRoot();
         //all of the menu buttons need to be opened here
 		foreach(Transform child in settingBar.transform){
 			child.gameObject.SetActive(true);
@@ -114,15 +122,32 @@ public class SettingsBarManager : MonoBehaviour {
         menuButtonsOpen = true;
         tpControlRef.allowPlayerInput = false;
     }
-}
-
-public abstract class WidgetMenu : MonoBehaviour
-{
-    public WidgetMenu()
+    
+    public void ToggleSettingsSelectMenu()
     {
-
+        if (!settingsMenusOpen)
+        {
+            SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = Vector2.zero;
+            SettingsMenusRefs.Instance.SettingsSelectMenu.anchoredPosition = new Vector2(0, -25);
+            settingsMenusOpen = true;
+        }
+        else
+        {
+            SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = new Vector2(0, Screen.height * 2);
+            settingsMenusOpen = false;
+        }
     }
 
-    public abstract void ToggleMenu();
+    public void OpenMenu(RectTransform menuToOpen)
+    {
+        menuToOpen.anchoredPosition = new Vector2(0, -25);
+        SettingsMenusRefs.Instance.SettingsSelectMenu.anchoredPosition = new Vector2(0, Screen.height * 2);
+    }
+
+    public void CloseMenu(RectTransform menuToClose)
+    {
+        menuToClose.anchoredPosition = new Vector2(0, Screen.height * 2);
+        SettingsMenusRefs.Instance.SettingsSelectMenu.anchoredPosition = new Vector2(0, -25);
+    }
 
 }

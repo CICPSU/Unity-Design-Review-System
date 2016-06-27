@@ -3,6 +3,8 @@ using System.Collections;
 
 public class WidgetTransitions : MonoBehaviour {
 
+    public static WidgetTransitions Instance;
+
     public RectTransform widgetRoot;
     public RectTransform widgetConfig;
     public GameObject widget3D;
@@ -12,6 +14,8 @@ public class WidgetTransitions : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        if (Instance == null)
+            Instance = this;
         widget3D.transform.position = Vector3.zero;
 	}
 	

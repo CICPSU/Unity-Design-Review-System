@@ -706,7 +706,7 @@ public class CharacterDropper : MonoBehaviour {
             GameObject newChar = GameObject.Instantiate(Resources.Load("Characters/" + character.modelName)) as GameObject;
             newChar.transform.parent = charRoot.transform;
             newChar.transform.localPosition = character.dropPoint;
-            Debug.Log("droppping character: " + character.dropPoint);
+            //Debug.Log("droppping character: " + character.dropPoint);
             newChar.transform.localScale = Vector3.one;
             CharacterWander newWander = newChar.GetComponent<CharacterWander>();
             newWander.dropPoint = character.dropPoint;

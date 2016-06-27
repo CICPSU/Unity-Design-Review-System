@@ -34,6 +34,11 @@ public class SettingsMenusRefs : MonoBehaviour {
     public InputField strafeSpeedInput;
     public InputField jumpSpeedInput;
 
+    // References for the SettingsSelectMenu
+    public RectTransform SettingsContentPanel;
+    public RectTransform SettingsSelectMenu;
+    public RectTransform SettingsHeader;
+
     void Start()
     {
         if (Instance == null)
