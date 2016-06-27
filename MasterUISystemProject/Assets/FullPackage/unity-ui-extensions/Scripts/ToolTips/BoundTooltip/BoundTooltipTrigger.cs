@@ -16,6 +16,8 @@ namespace UnityEngine.UI.Extensions
 
         public Text textObject;
 
+        public string infoString = "";
+
 		public void OnPointerEnter(PointerEventData eventData)
 		{
 			if (useMousePosition)
@@ -45,8 +47,10 @@ namespace UnityEngine.UI.Extensions
 
 		void StartHover(Vector3 position)
 		{
-            if(LayoutUtility.GetPreferredWidth(textObject.rectTransform) > GetComponent<RectTransform>().rect.width)
-			    BoundTooltipItem.Instance.ShowTooltip(textObject.text, position);
+            if (infoString != "")
+                BoundTooltipItem.Instance.ShowTooltip(infoString, position);
+            else if (textObject != null && LayoutUtility.GetPreferredWidth(textObject.rectTransform) > GetComponent<RectTransform>().rect.width)
+                BoundTooltipItem.Instance.ShowTooltip(textObject.text, position);
 		}
 
 		void StopHover()

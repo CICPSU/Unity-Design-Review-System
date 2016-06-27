@@ -14,8 +14,6 @@ public class POI_ReferenceHub : MonoBehaviour{
 	public  RectTransform POIEditWindow;
 	public  RectTransform AddDeleteWindow;
 	public RectTransform BookmarkCurrentLocationWindow;
-	public  RectTransform ApplyBut;
-	public  RectTransform CancelBut;
 	public  RectTransform EditBut;
     public RectTransform ExitBut;
 	public RectTransform InvalidInputWarning;

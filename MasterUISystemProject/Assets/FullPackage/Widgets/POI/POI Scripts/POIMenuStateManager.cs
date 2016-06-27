@@ -168,8 +168,6 @@ public class POIMenuStateManager : MonoBehaviour {
 
             POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
             POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive(false);
-            POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(false);
-            POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(false);
             POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive(false);
 
             foreach (GameObject gO in disableGOWhileEdit)
@@ -185,10 +183,6 @@ public class POIMenuStateManager : MonoBehaviour {
 
             //change the color of the POImenu
             POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.black;
-
-            //show the apply and cancel button
-            POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(true);
-            POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(true);
 
             foreach (GameObject gO in disableGOWhileEdit)
             {
