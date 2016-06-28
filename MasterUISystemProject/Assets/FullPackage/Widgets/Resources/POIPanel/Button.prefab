@@ -289,9 +289,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: 
-  useMousePosition: 1
-  offset: {x: 0, y: 0, z: 0}
+  useMousePosition: 0
+  offset: {x: 150, y: 55, z: 0}
   textObject: {fileID: 11400002}
+  infoString: 
 --- !u!222 &22200000
 CanvasRenderer:
   m_ObjectHideFlags: 1

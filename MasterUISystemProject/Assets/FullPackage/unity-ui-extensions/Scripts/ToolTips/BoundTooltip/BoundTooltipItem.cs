@@ -15,13 +15,47 @@ namespace UnityEngine.UI.Extensions
         }
 
         public UnityEngine.UI.Text TooltipText;
-        public Vector3 ToolTipOffset;
+        public bool moveTooltip = false;
+
+        private Vector3 finalPos = Vector3.zero;
+        private RectTransform tooltipRect;
 
         void Awake()
         {
+            tooltipRect = GetComponent<RectTransform>();
             instance = this;
             if(!TooltipText) TooltipText = GetComponentInChildren<Text>();
             HideTooltip();
+        }
+
+        void Update()
+        {
+            // here we will need to update the tooltips position based on the mouse
+            // Show and Hide tooltip will just enable and disable it and update the text
+            if (moveTooltip)
+            {
+                PlaceTooltip();
+            }
+        }
+
+
+        public void PlaceTooltip()
+        {
+            finalPos = Input.mousePosition;
+
+            // need to check to keep the tootip on screen
+            // open in a quadrant around the mouse to keep it on screen.
+            if (Input.mousePosition.x + tooltipRect.sizeDelta.x > Screen.width)
+                finalPos -= new Vector3(tooltipRect.sizeDelta.x * .51f, 0, 0);
+            else
+                finalPos += new Vector3(tooltipRect.sizeDelta.x * .51f, 0, 0);
+
+            if (Input.mousePosition.y + tooltipRect.sizeDelta.y * .5f > Screen.height)
+                finalPos -= new Vector3(0, tooltipRect.sizeDelta.y * .5f, 0);
+            else
+                finalPos += new Vector3(0, tooltipRect.sizeDelta.y * .5f, 0);
+
+            transform.position = finalPos;
         }
 
         /// <summary>
@@ -30,20 +64,14 @@ namespace UnityEngine.UI.Extensions
         /// </summary>
         /// <param name="text"></param>
         /// <param name="pos"></param>
-        public void ShowTooltip(string text, Vector3 pos)
+        public void ShowTooltip(string text)
         {
+
             if (TooltipText.text != text)
                 TooltipText.text = text;
-            Vector3 finalPos = pos + ToolTipOffset;
-            
-            // this code is used to keep the tooltip on the screen, but causes flickering when it moves the tooltip under the mouse
-            /*
-            if (finalPos.y + .5f * GetComponent<RectTransform>().sizeDelta.y > Screen.height)
-                finalPos -= new Vector3(0, finalPos.y + .5f * GetComponent<RectTransform>().sizeDelta.y - Screen.height,0);
-            if (finalPos.x + .5f * GetComponent<RectTransform>().sizeDelta.x > Screen.width)
-                finalPos -= new Vector3(0, finalPos.x + .5f * GetComponent<RectTransform>().sizeDelta.x - Screen.width, 0);
-                */
-            transform.position = finalPos;
+
+            moveTooltip = true;
+            PlaceTooltip();
 
             gameObject.SetActive(true);
             GetComponent<RectTransform>().sizeDelta = new Vector2(LayoutUtility.GetPreferredWidth(TooltipText.rectTransform) + 100 ,GetComponent<RectTransform>().sizeDelta.y);
@@ -51,6 +79,7 @@ namespace UnityEngine.UI.Extensions
 
         public void HideTooltip()
         {
+            moveTooltip = false;
             gameObject.SetActive(false);
         }
 

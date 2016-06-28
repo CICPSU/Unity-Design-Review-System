@@ -12,7 +12,6 @@ using UnityEngine.EventSystems;
 public class FlexibleDraggableObject : MonoBehaviour
 {
     public GameObject Target;
-    public float manualWidth = -1;
     private RectTransform targetRectTrans;
     private Vector3 prevPos = new Vector3();
     private Vector3[] corners = new Vector3[4];
@@ -58,13 +57,6 @@ public class FlexibleDraggableObject : MonoBehaviour
             // order: bottom left, top left, top right, bottom right
             targetRectTrans.GetWorldCorners(corners);
 
-            // if we manually set the width of the menu, adjust the corners accordingly
-            if (manualWidth != -1)
-            {
-                corners[2] = corners[1] + new Vector3(manualWidth, 0, 0);
-                corners[3] = corners[0] + new Vector3(manualWidth, 0, 0);
-            }
-
             // this calls the function to make sure the menu object stays on the screen
             UIUtilities.PlaceMenuObject(targetRectTrans, corners);
         }
@@ -82,7 +74,7 @@ public class FlexibleDraggableObject : MonoBehaviour
     /// </summary>
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (dragging)
+        if (dragging || colliding)
         {
             colliding = true;
             targetRectTrans.Translate((prevPos - targetRectTrans.anchoredPosition3D) * 5);

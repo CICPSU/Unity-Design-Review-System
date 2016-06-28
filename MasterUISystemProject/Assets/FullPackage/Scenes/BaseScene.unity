@@ -2697,7 +2697,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  manualWidth: -1
   dragging: 0
   colliding: 0
 --- !u!61 &67128828
@@ -12601,7 +12600,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -43, y: 637}
+  m_AnchoredPosition: {x: -1000, y: 666}
   m_SizeDelta: {x: 404, y: 470}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &314766741
@@ -13856,6 +13855,17 @@ MonoBehaviour:
       - m_Target: {fileID: 622528326}
         m_MethodName: SetActive
         m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 650595639}
+        m_MethodName: ExitEditMode
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -22967,6 +22977,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 650595639}
+        m_MethodName: EnterEditMode
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 1798980250}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.RectTransform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &573237707
@@ -24113,8 +24134,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: 
-  useMousePosition: 0
-  offset: {x: 150, y: 100, z: 0}
   textObject: {fileID: 0}
   infoString: Click to open the Settings Bar.
 --- !u!1 &604624888
@@ -26020,6 +26039,7 @@ GameObject:
   - 114: {fileID: 650595638}
   - 114: {fileID: 650595636}
   - 114: {fileID: 650595637}
+  - 114: {fileID: 650595639}
   m_Layer: 5
   m_Name: WidgetRoot
   m_TagString: Untagged
@@ -26101,8 +26121,6 @@ MonoBehaviour:
   POIEditWindow: {fileID: 1032245299}
   AddDeleteWindow: {fileID: 1815836566}
   BookmarkCurrentLocationWindow: {fileID: 1591905332}
-  ApplyBut: {fileID: 0}
-  CancelBut: {fileID: 0}
   EditBut: {fileID: 445041956}
   ExitBut: {fileID: 338428858}
   InvalidInputWarning: {fileID: 1905734735}
@@ -26118,6 +26136,17 @@ MonoBehaviour:
   - {fileID: 768796411}
   - {fileID: 519717567}
   defaultMarkerPrefab: {fileID: 100012, guid: 2fdf97db1b1ee004e9b74084497c61ba, type: 3}
+--- !u!114 &650595639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 650595635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ef4dcb779662c5469c4f9e9f98fc1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &650595640
 RectTransform:
   m_ObjectHideFlags: 0
@@ -34382,7 +34411,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 837925404}
-  manualWidth: -1
   dragging: 0
   colliding: 0
 --- !u!114 &837925409
@@ -42675,8 +42703,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 117559738}
   m_HandleRect: {fileID: 117559736}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.83819634
+  m_Value: 0.9999995
+  m_Size: 0.8381963
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -68146,11 +68174,11 @@ RectTransform:
   - {fileID: 981269637}
   m_Father: {fileID: 1798980250}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000022888184, y: -7}
-  m_SizeDelta: {x: 0, y: 4}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 0, y: -5}
+  m_SizeDelta: {x: 250, y: 160}
+  m_Pivot: {x: 0, y: 1}
 --- !u!114 &1663509171
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68213,7 +68241,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  manualWidth: -1
   dragging: 0
   colliding: 0
 --- !u!61 &1663509174
@@ -68227,9 +68254,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 125, y: -80}
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 250, y: 160}
 --- !u!50 &1663509175
 Rigidbody2D:
   serializedVersion: 2
@@ -70814,7 +70841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TooltipText: {fileID: 876679759}
-  ToolTipOffset: {x: 0, y: 0, z: 0}
+  moveTooltip: 0
 --- !u!1 &1736462699
 GameObject:
   m_ObjectHideFlags: 0
@@ -73805,7 +73832,6 @@ GameObject:
   m_Component:
   - 224: {fileID: 1798980250}
   - 222: {fileID: 1798980252}
-  - 114: {fileID: 1798980251}
   m_Layer: 5
   m_Name: SunlightWidget
   m_TagString: Untagged
@@ -73827,23 +73853,11 @@ RectTransform:
   - {fileID: 1663509170}
   m_Father: {fileID: 650595640}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 155, y: -5}
-  m_SizeDelta: {x: 518, y: 228}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
---- !u!114 &1798980251
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11454352, guid: b1aa694318b253d4c82556250dc69bf4,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1798980249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b08af2826b65a4b9eb4e624688b251b2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!222 &1798980252
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -74946,6 +74960,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1830844406}
         m_MethodName: addCity
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 650595639}
+        m_MethodName: ExitEditMode
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -79334,7 +79359,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1933857086
@@ -80774,7 +80799,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1965281241}
-  manualWidth: 520
   dragging: 0
   colliding: 0
 --- !u!114 &1965281248

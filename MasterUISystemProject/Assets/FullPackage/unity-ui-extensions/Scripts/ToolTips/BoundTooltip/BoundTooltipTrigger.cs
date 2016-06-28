@@ -10,29 +10,19 @@ namespace UnityEngine.UI.Extensions
 		[TextAreaAttribute]
 		public string text;
 
-		public bool useMousePosition = false;
-
-		public Vector3 offset;
-
         public Text textObject;
 
         public string infoString = "";
 
 		public void OnPointerEnter(PointerEventData eventData)
 		{
-			if (useMousePosition)
-			{
-				StartHover(new Vector3(eventData.position.x, eventData.position.y, 0f));
-			}
-			else
-			{
-				StartHover(transform.position + offset);
-			}
+			StartHover();
+			
 		}
 
 		public void OnSelect(BaseEventData eventData)
 		{
-			StartHover(transform.position);
+			StartHover();
 		}
 
 		public void OnPointerExit(PointerEventData eventData)
@@ -45,12 +35,12 @@ namespace UnityEngine.UI.Extensions
 			StopHover();
 		}
 
-		void StartHover(Vector3 position)
+		void StartHover()
 		{
             if (infoString != "")
-                BoundTooltipItem.Instance.ShowTooltip(infoString, position);
+                BoundTooltipItem.Instance.ShowTooltip(infoString);
             else if (textObject != null && LayoutUtility.GetPreferredWidth(textObject.rectTransform) > GetComponent<RectTransform>().rect.width)
-                BoundTooltipItem.Instance.ShowTooltip(textObject.text, position);
+                BoundTooltipItem.Instance.ShowTooltip(textObject.text);
 		}
 
 		void StopHover()

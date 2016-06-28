@@ -133,7 +133,7 @@ public class SettingsBarManager : MonoBehaviour {
         }
         else
         {
-            SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = new Vector2(0, Screen.height * 2);
+            SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = new Vector2(-1000, Screen.height * 2);
             settingsMenusOpen = false;
         }
     }
@@ -141,7 +141,7 @@ public class SettingsBarManager : MonoBehaviour {
     public void OpenMenu(RectTransform menuToOpen)
     {
         menuToOpen.anchoredPosition = new Vector2(0, -25);
-        SettingsMenusRefs.Instance.SettingsSelectMenu.anchoredPosition = new Vector2(0, Screen.height * 2);
+        SettingsMenusRefs.Instance.SettingsSelectMenu.anchoredPosition = new Vector2(-1000, Screen.height * 2);
     }
 
     public void CloseMenu(RectTransform menuToClose)

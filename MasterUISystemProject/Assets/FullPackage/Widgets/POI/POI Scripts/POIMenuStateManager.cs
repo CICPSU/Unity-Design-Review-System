@@ -169,11 +169,13 @@ public class POIMenuStateManager : MonoBehaviour {
             POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
             POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive(false);
             POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive(false);
-
+            /*
             foreach (GameObject gO in disableGOWhileEdit)
             {
                 gO.SetActive(true);
             }
+            */
+            EditModeManager.Instance.ExitEditMode();
 
         }
         // this means we are switching into Edit mode
@@ -184,11 +186,13 @@ public class POIMenuStateManager : MonoBehaviour {
             //change the color of the POImenu
             POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.black;
 
+            EditModeManager.Instance.EnterEditMode(GetComponent<RectTransform>());
+            /*
             foreach (GameObject gO in disableGOWhileEdit)
             {
                 gO.SetActive(false);
             }
-
+            */
         }
     }
 }
