@@ -18,7 +18,7 @@ public class SettingsManager : MonoBehaviour
     public GameObject sl_GameObject;
     public GameObject bm_GameObject;
 
-    void Start()
+    void OnEnable()
     {
         if (Instance == null)
             Instance = this;

@@ -35,14 +35,37 @@ public class WidgetTransitions : MonoBehaviour {
 
     public void SlideWidgetRoot()
     {
+        if (iTween.Count(widgetRoot.gameObject) != 0)
+        {
+            iTween.Stop(widgetRoot.gameObject);
+
+            if (rootDirection == -1)
+                widgetRoot.anchoredPosition = new Vector3(widgetRoot.anchoredPosition.x, 0, 0);
+            else
+                widgetRoot.anchoredPosition = new Vector3(widgetRoot.anchoredPosition.x, -Screen.height, 0);
+        }
+
         iTween.MoveBy(widgetRoot.gameObject, iTween.Hash("y", Screen.height * rootDirection, "easeType", "easeInOutExpo", "time", .5f));
         rootDirection *= -1;
+        
     }
 
     public void SlideWidgetConfig()
     {
+        if (iTween.Count(widgetConfig.gameObject) != 0)
+        {
+            iTween.Stop(widgetConfig.gameObject);
+
+            if (rootDirection == -1)
+                widgetConfig.anchoredPosition = new Vector3(widgetConfig.anchoredPosition.x, 0, 0);
+            else
+                widgetConfig.anchoredPosition = new Vector3(widgetConfig.anchoredPosition.x, -Screen.height, 0);
+        }
+
+
         iTween.MoveBy(widgetConfig.gameObject, iTween.Hash("y", Screen.height * configDirection, "easeType", "easeInOutExpo", "time", .5f));
         configDirection *= -1;
+        
     }
 
     public void ClearScreen()

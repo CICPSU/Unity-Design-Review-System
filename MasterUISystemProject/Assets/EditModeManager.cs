@@ -3,12 +3,15 @@ using System.Collections;
 
 public class EditModeManager : MonoBehaviour {
 
-    public static EditModeManager Instance;
+    public void EnterEditFromButton(RectTransform widgetToEnter)
+    {
+        EnterEditMode(widgetToEnter);
+    }
 
     /// <summary>
     /// Widgets can call this function to enter into their edit mode.
     /// </summary>
-    public void EnterEditMode(RectTransform widgetToEnterEdit)
+    public static void EnterEditMode(RectTransform widgetToEnterEdit)
     { 
         // these two if statements will make sure that the widgets that are not going into edit mode are disabled
         if (widgetToEnterEdit != SettingsManager.Instance.bm_GameObject.GetComponent<RectTransform>())
@@ -23,24 +26,28 @@ public class EditModeManager : MonoBehaviour {
         SettingsManager.Instance.mm_GameObject.SetActive(false);
     }
 
+    public void ExitEditFromButton()
+    {
+        ExitEditMode();
+    }
+
     /// <summary>
     /// Widgets can call this function to exit their edit mode.
     /// </summary>
-    public void ExitEditMode()
+    public static void ExitEditMode()
     {
-        if (!SettingsManager.Instance.bm_GameObject.activeSelf)
-            SettingsManager.Instance.bm_GameObject.SetActive(true);
-        if (!SettingsManager.Instance.sl_GameObject.activeSelf)
-            SettingsManager.Instance.sl_GameObject.SetActive(true);
-
-        WidgetTransitions.Instance.SlideWidgetConfig();
+        if (SettingsManager.Instance != null)
+        {
+            if (!SettingsManager.Instance.bm_GameObject.activeSelf)
+                SettingsManager.Instance.bm_GameObject.SetActive(true);
+            if (!SettingsManager.Instance.sl_GameObject.activeSelf)
+                SettingsManager.Instance.sl_GameObject.SetActive(true);
+            if (!SettingsManager.Instance.mm_GameObject.activeSelf)
+                SettingsManager.Instance.mm_GameObject.SetActive(true);
+        }
+        if(WidgetTransitions.Instance != null)
+            WidgetTransitions.Instance.SlideWidgetConfig();
     }
-
-	// Use this for initialization
-	void Start () {
-        if (Instance == null)
-            Instance = this;
-	}
 	
 	// Update is called once per frame
 	void Update () {

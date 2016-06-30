@@ -46,6 +46,7 @@ public class CharacterDropper : MonoBehaviour {
     public Text wanderModeLabel;
     public Text wanderRangeLabel;
     public Dropdown destinationDropDown;
+    public bool mouseDownOnChar = false;
 
     /// <summary>
     /// CHAR EDIT VARS
@@ -268,8 +269,27 @@ public class CharacterDropper : MonoBehaviour {
         }
         else // this is when we are not dropping a new character
         {
-            //raycast that ignores the user avatar
             if (mouseCam != null && Input.GetMouseButtonDown(0))
+            {
+                if (!hasRaycastLock && RaycastLock.GetLock())
+                    hasRaycastLock = true;
+
+                if (hasRaycastLock)
+                {
+                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
+                    //if we are pointing at an existing avatar and left click, open char info
+                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen)
+                        mouseDownOnChar = true;
+                    else
+                    {
+                        RaycastLock.GiveLock();
+                        hasRaycastLock = false;
+                        mouseDownOnChar = false;
+                    }
+                }
+            }
+            //raycast that ignores the user avatar
+            if (mouseCam != null && Input.GetMouseButtonUp(0) && mouseDownOnChar)
             {
                 if (!hasRaycastLock && RaycastLock.GetLock())
                 {
@@ -568,6 +588,8 @@ public class CharacterDropper : MonoBehaviour {
         Destroy(charToDrop);
         charInfoOpen = true;
         charRadiusSelect = false;
+        mouseDownOnChar = false;
+        EditModeManager.EnterEditMode(charInfoPanel);
         charToEdit = RaycastLock.hit.transform.gameObject;
         wanderToEdit = charToEdit.GetComponent<CharacterWander>();
         charToEdit.GetComponent<NavMeshAgent>().Stop();
@@ -645,9 +667,12 @@ public class CharacterDropper : MonoBehaviour {
         SaveCharacters();
         charToEdit = null;
         wanderToEdit = null;
+
+        if(charInfoOpen)
+            EditModeManager.ExitEditMode();
+
         charInfoOpen = false;
         charInfoPanel.gameObject.SetActive(false);
-        
     }
 
     public void UpdateCharInfoLabels()
