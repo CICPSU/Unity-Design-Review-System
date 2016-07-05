@@ -2730,6 +2730,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
+  draggable: 1
   dragging: 0
   colliding: 0
 --- !u!61 &67128828
@@ -34857,6 +34858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 837925404}
+  draggable: 1
   dragging: 0
   colliding: 0
 --- !u!114 &837925409
@@ -43255,7 +43257,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 117559738}
   m_HandleRect: {fileID: 117559736}
   m_Direction: 2
-  m_Value: 0.9999995
+  m_Value: 1
   m_Size: 0.8381963
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -69133,7 +69135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6c737f9a0b0e045b2acc208d52e48a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
+  Target: {fileID: 1663509169}
+  draggable: 1
   dragging: 0
   colliding: 0
 --- !u!61 &1663509174
@@ -75377,6 +75380,9 @@ GameObject:
   - 222: {fileID: 1815836571}
   - 114: {fileID: 1815836567}
   - 114: {fileID: 1815836569}
+  - 50: {fileID: 1815836572}
+  - 61: {fileID: 1815836570}
+  - 114: {fileID: 1815836568}
   m_Layer: 5
   m_Name: AddDeleteWindow
   m_TagString: Menu
@@ -75436,6 +75442,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &1815836568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815836565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed6c737f9a0b0e045b2acc208d52e48a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  draggable: 0
+  dragging: 0
+  colliding: 0
 --- !u!114 &1815836569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75450,6 +75471,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Delegates: []
   delegates: []
+--- !u!61 &1815836570
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815836565}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
 --- !u!222 &1815836571
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -75457,6 +75492,23 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1815836565}
+--- !u!50 &1815836572
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1815836565}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1822010155
 GameObject:
   m_ObjectHideFlags: 0
@@ -81857,6 +81909,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1965281241}
+  draggable: 1
   dragging: 0
   colliding: 0
 --- !u!114 &1965281248
@@ -87426,7 +87479,7 @@ MonoBehaviour:
   tp_InputManager_Ref: {fileID: 1026231208}
   mm_Manager_Ref: {fileID: 650595637}
   mm_GameObject: {fileID: 152233195}
-  sl_GameObject: {fileID: 1798980249}
+  sl_GameObject: {fileID: 1663509169}
   bm_GameObject: {fileID: 1965281241}
 --- !u!114 &2123630225
 MonoBehaviour:

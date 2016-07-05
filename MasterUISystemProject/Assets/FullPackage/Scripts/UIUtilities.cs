@@ -18,8 +18,7 @@ public static class UIUtilities {
 
         return returnPos;
     }
-
-    // this was written for use with the POIMenu object as an example and will be expanded to work with different pivot/anchor layouts
+    
     public static void PlaceMenuObject(RectTransform rectObject, Vector3[] corners)
     {
         Rect screenRect = new Rect(0,0,Screen.width,Screen.height);

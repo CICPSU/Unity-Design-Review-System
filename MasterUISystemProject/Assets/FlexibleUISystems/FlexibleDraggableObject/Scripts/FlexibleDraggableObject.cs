@@ -13,9 +13,11 @@ public class FlexibleDraggableObject : MonoBehaviour
 {
     public GameObject Target;
     private RectTransform targetRectTrans;
-    private Vector3 prevPos = new Vector3();
+    private BoxCollider2D targetCollider2D;
     private Vector3[] corners = new Vector3[4];
     private EventTrigger _eventTrigger;
+
+    public bool draggable = true;
 
     public bool dragging = false;
     public bool colliding = false;
@@ -27,6 +29,7 @@ public class FlexibleDraggableObject : MonoBehaviour
         _eventTrigger.AddEventTrigger(OnDrag, EventTriggerType.Drag);
         _eventTrigger.AddEventTrigger(OnDragEnd, EventTriggerType.EndDrag);
         targetRectTrans = GetComponent<RectTransform>();
+        targetCollider2D = GetComponent<BoxCollider2D>();
         GetComponent<Rigidbody2D>().gravityScale = 0;
         GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeAll;
     }
@@ -37,56 +40,40 @@ public class FlexibleDraggableObject : MonoBehaviour
     /// <param name="data"></param>
     void OnDrag(BaseEventData data)
     {
-        dragging = true;
-
-        // these two lines turn off camera rotation while dragging a menu object
-        TP_Motor.Instance.stopRotation = true;
-        TP_Camera.Instance.stopRotation = true;
-
-        PointerEventData ped = (PointerEventData) data;
-
-        // if the object is not touching another ui element, move it based on the movement of the cursor between frames
-        if (!colliding)
+        if (draggable)
         {
-            // store the previous position so we know where to move to if we collide with something
-            prevPos = targetRectTrans.anchoredPosition3D;
+            dragging = true;
 
-            targetRectTrans.Translate(ped.delta);
+            // these two lines turn off camera rotation while dragging a menu object
+            TP_Motor.Instance.stopRotation = true;
+            TP_Camera.Instance.stopRotation = true;
 
+            PointerEventData ped = (PointerEventData)data;
+
+            if(!targetCollider2D.IsTouchingLayers())
+                targetRectTrans.Translate(ped.delta);
+
+            if (targetCollider2D.IsTouchingLayers())
+                targetRectTrans.Translate(-ped.delta);
+            
             // this function returns the four corners of the rectTransform in world coordinates
             // order: bottom left, top left, top right, bottom right
             targetRectTrans.GetWorldCorners(corners);
 
             // this calls the function to make sure the menu object stays on the screen
             UIUtilities.PlaceMenuObject(targetRectTrans, corners);
+            
         }
     }
 
     void OnDragEnd(BaseEventData data)
     {
-        dragging = false;
-        TP_Motor.Instance.stopRotation = false;
-        TP_Camera.Instance.stopRotation = false;
-    }
-
-    /// <summary>
-    /// When the ui element collides with another, move it back to its previous position, scaled up to avoid continuous collisions
-    /// </summary>
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (dragging || colliding)
+        if (draggable)
         {
-            colliding = true;
-            targetRectTrans.Translate((prevPos - targetRectTrans.anchoredPosition3D) * 5);
-            
+            dragging = false;
+            TP_Motor.Instance.stopRotation = false;
+            TP_Camera.Instance.stopRotation = false;
         }
     }
 
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        if (colliding)
-        {
-            colliding = false;
-        }
-    }
 }

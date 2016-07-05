@@ -32,6 +32,10 @@ public class POIMenuStateManager : MonoBehaviour {
     {
         //show the add/delete window
         POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive(true);
+        Vector3[] corners = new Vector3[4];
+        POI_ReferenceHub.Instance.AddDeleteWindow.GetWorldCorners(corners);
+        UIUtilities.PlaceMenuObject(POI_ReferenceHub.Instance.AddDeleteWindow, corners);
+
         Transform deleteBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("Delete") as Transform;
         deleteBut.GetComponent<Button>().enabled = false; //disable delete button
         Transform deleteButText = deleteBut.FindChild("Text") as Transform;
