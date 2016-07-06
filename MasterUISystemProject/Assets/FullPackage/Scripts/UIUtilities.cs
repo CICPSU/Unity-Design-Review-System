@@ -23,6 +23,8 @@ public static class UIUtilities {
     {
         Rect screenRect = new Rect(0,0,Screen.width,Screen.height);
 
+        // need to handle case where all 4 corners are off the screen
+
         // if the bottom left corner is off the screen
         if (!screenRect.Contains(corners[0]))
         {
