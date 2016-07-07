@@ -14,33 +14,9 @@ public class FlexibleDraggableObject : MonoBehaviour
     public GameObject Target;
     private RectTransform targetRectTrans;
     private BoxCollider2D targetCollider2D;
-    private Vector3[] corners = new Vector3[4];
+    private Vector3 startPos = new Vector3();
     private EventTrigger _eventTrigger;
     private Vector3 mouseMovement = new Vector3();
-
-    public bool active = false;
-    public bool dragging = false;
-    public bool moved = false;
-
-    void Update()
-    {
-
-        if (active)
-        {
-            
-
-            if (targetCollider2D.IsTouchingLayers())
-                targetRectTrans.Translate(-mouseMovement);
-            else if (moved)
-                targetRectTrans.Translate(mouseMovement);
-
-        }
-
-        if (!targetCollider2D.IsTouchingLayers() && !dragging)
-            active = false;
-
-        moved = false;
-    }
     
     void Start ()
     {
@@ -63,38 +39,26 @@ public class FlexibleDraggableObject : MonoBehaviour
     {
         PointerEventData ped = (PointerEventData)data;
 
-        if (ped.delta != Vector2.zero && !targetCollider2D.IsTouchingLayers())
-        {
-            moved = true;
-            mouseMovement = ped.delta;
-        }
-            
-        // this function returns the four corners of the rectTransform in world coordinates
-        // order: bottom left, top left, top right, bottom right
-        targetRectTrans.GetWorldCorners(corners);
-
-        // this calls the function to make sure the menu object stays on the screen
-        UIUtilities.PlaceMenuObject(targetRectTrans, corners);
-            
-        
+        targetRectTrans.Translate(ped.delta);
     }
 
     void OnDragBegin(BaseEventData data)
     {
-        dragging = true;
-        active = true;
-
         // these two lines turn off camera rotation while dragging a menu object
         TP_Motor.Instance.stopRotation = true;
         TP_Camera.Instance.stopRotation = true;
+
+        startPos = targetRectTrans.anchoredPosition3D;
         
     }
 
     void OnDragEnd(BaseEventData data)
     {
-        dragging = false;
         TP_Motor.Instance.stopRotation = false;
         TP_Camera.Instance.stopRotation = false;
+
+        if (targetCollider2D.IsTouchingLayers())
+            targetRectTrans.anchoredPosition3D = startPos;
         
     }
 }

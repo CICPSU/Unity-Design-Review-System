@@ -280,9 +280,9 @@
       <z>2.87960386</z>
     </dropPoint>
     <localWanderCenter>
-      <x>0</x>
+      <x>0.299621582</x>
       <y>0</y>
-      <z>0</z>
+      <z>2.37749386</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
     <mode>Idle</mode>
