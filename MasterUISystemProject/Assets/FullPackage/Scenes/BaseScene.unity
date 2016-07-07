@@ -2697,9 +2697,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  active: 0
-  dragging: 0
-  moved: 0
 --- !u!61 &67128828
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6862,7 +6859,7 @@ RectTransform:
   - {fileID: 2092245803}
   - {fileID: 837925405}
   m_Father: {fileID: 650595640}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -26160,7 +26157,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1914262586}
   - {fileID: 152233196}
   - {fileID: 1192845768}
   - {fileID: 1798980250}
@@ -34413,9 +34409,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 837925404}
-  active: 0
-  dragging: 0
-  moved: 0
 --- !u!114 &837925409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50415,7 +50408,7 @@ RectTransform:
   - {fileID: 1905734735}
   - {fileID: 735724241}
   m_Father: {fileID: 650595640}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -68245,9 +68238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1663509169}
-  active: 0
-  dragging: 0
-  moved: 0
 --- !u!61 &1663509174
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -73857,7 +73847,7 @@ RectTransform:
   m_Children:
   - {fileID: 1663509170}
   m_Father: {fileID: 650595640}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -74482,9 +74472,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  active: 0
-  dragging: 0
-  moved: 0
 --- !u!114 &1815836569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78988,8 +78975,8 @@ RectTransform:
   - {fileID: 67128824}
   - {fileID: 731212871}
   - {fileID: 390045207}
-  m_Father: {fileID: 650595640}
-  m_RootOrder: 0
+  m_Father: {fileID: 2123630221}
+  m_RootOrder: 5
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -79413,7 +79400,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1933857086
@@ -80853,9 +80840,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 1965281241}
-  active: 0
-  dragging: 0
-  moved: 0
 --- !u!114 &1965281248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86291,6 +86275,7 @@ RectTransform:
   - {fileID: 603261345}
   - {fileID: 460760702}
   - {fileID: 1732883295}
+  - {fileID: 1914262586}
   m_Father: {fileID: 278468214}
   m_RootOrder: 1
   m_AnchorMin: {x: 0, y: 0}

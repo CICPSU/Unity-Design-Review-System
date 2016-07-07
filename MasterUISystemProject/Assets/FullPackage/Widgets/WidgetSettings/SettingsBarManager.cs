@@ -73,13 +73,6 @@ public class SettingsBarManager : MonoBehaviour {
     
     private void CloseAll()
     {
-        //this re-enables any widgets that were open and loads the settings files to make sure they are up to date
-        /*
-        foreach (GameObject gO in openWidgets) {
-            iTween.MoveBy(gO, new Vector3(0, -Screen.height, 0), 0.8f);
-        }
-        */
-
         WidgetTransitions.Instance.SlideWidgetRoot();
 
         GetComponent<SettingsManager>().LoadSettingsFiles();
@@ -98,20 +91,6 @@ public class SettingsBarManager : MonoBehaviour {
 
     private void OpenMenu()
     {
-        //this goes through and slides up all the active widgets
-        //the ones that were open are stored in a list so that they can be reopened when the menu is closed
-        /*
-        openWidgets.Clear(); //clear previous section
-		for (int i = 0; i < widgetRoot.transform.childCount; i++)
-        {
-			if (widgetRoot.transform.GetChild(i).gameObject.GetComponent<Widget>().Active && widgetRoot.transform.GetChild(i).gameObject.activeSelf)
-            {
-                iTween.MoveBy(widgetRoot.transform.GetChild(i).gameObject, new Vector3(0, Screen.height, 0), 0.8f);
-                openWidgets.Add(widgetRoot.transform.GetChild(i).gameObject);
-            }
-        }
-        */
-
         WidgetTransitions.Instance.SlideWidgetRoot();
         //all of the menu buttons need to be opened here
 		foreach(Transform child in settingBar.transform){

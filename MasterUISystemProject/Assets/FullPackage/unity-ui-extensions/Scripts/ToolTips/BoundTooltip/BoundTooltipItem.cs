@@ -52,9 +52,9 @@ namespace UnityEngine.UI.Extensions
                 finalPos += new Vector3(tooltipRect.sizeDelta.x * .51f, 0, 0);
 
             if (Input.mousePosition.y + tooltipRect.sizeDelta.y * .5f > Screen.height)
-                finalPos -= new Vector3(0, tooltipRect.sizeDelta.y * .5f, 0);
+                finalPos -= new Vector3(0, tooltipRect.sizeDelta.y * .51f, 0);
             else
-                finalPos += new Vector3(0, tooltipRect.sizeDelta.y * .5f, 0);
+                finalPos += new Vector3(0, tooltipRect.sizeDelta.y * .51f, 0);
 
             transform.position = finalPos;
         }
@@ -72,10 +72,13 @@ namespace UnityEngine.UI.Extensions
                 TooltipText.text = text;
 
             moveTooltip = true;
+
             PlaceTooltip();
 
             gameObject.SetActive(true);
-            GetComponent<RectTransform>().sizeDelta = new Vector2(LayoutUtility.GetPreferredWidth(TooltipText.rectTransform) + 100 ,GetComponent<RectTransform>().sizeDelta.y);
+            GetComponent<RectTransform>().sizeDelta = new Vector2(LayoutUtility.GetPreferredWidth(TooltipText.rectTransform) + 100, GetComponent<RectTransform>().sizeDelta.y);
+
+
         }
 
         public void HideTooltip()

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 namespace UnityEngine.UI.Extensions
 {
 	[AddComponentMenu("UI/Extensions/Bound Tooltip/Tooltip Trigger")]
-	public class BoundTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, ISelectHandler, IDeselectHandler
+	public class BoundTooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 	{
 		[TextAreaAttribute]
 		public string text;
@@ -16,41 +16,37 @@ namespace UnityEngine.UI.Extensions
 
 		public void OnPointerEnter(PointerEventData eventData)
 		{
+            Debug.Log("pointer enter");
 			StartHover();
 			
 		}
-
-		public void OnSelect(BaseEventData eventData)
-		{
-			StartHover();
-		}
-
+        
 		public void OnPointerExit(PointerEventData eventData)
 		{
+            Debug.Log("pointer exit");
 			StopHover();
 		}
-
-		public void OnDeselect(BaseEventData eventData)
-		{
-			StopHover();
-		}
-
+        
 		void StartHover()
 		{
-            Invoke("TriggerShowTooltip", 2);
-            Invoke("StopHover", 7);
+            Debug.Log("start hover");
+            Invoke("TriggerShowTooltip", 2f);
+            
 		}
 
         private void TriggerShowTooltip()
         {
+            Debug.Log("trigger show");
             if (infoString != "")
                 BoundTooltipItem.Instance.ShowTooltip(infoString);
             else if (textObject != null && LayoutUtility.GetPreferredWidth(textObject.rectTransform) > GetComponent<RectTransform>().rect.width)
                 BoundTooltipItem.Instance.ShowTooltip(textObject.text);
+            Invoke("StopHover", 5f);
         }
 
 		void StopHover()
 		{
+            Debug.Log("stop hover");
             CancelInvoke();
 			BoundTooltipItem.Instance.HideTooltip();
 		}
