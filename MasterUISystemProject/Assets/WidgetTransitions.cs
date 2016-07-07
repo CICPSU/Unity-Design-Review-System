@@ -9,8 +9,8 @@ public class WidgetTransitions : MonoBehaviour {
     public RectTransform widgetConfig;
     public GameObject widget3D;
 
-    private int rootDirection = 1;
-    private int configDirection = -1;
+    private int rootDirection = 2;
+    private int configDirection = -2;
 
 	// Use this for initialization
 	void Start () {
@@ -39,13 +39,13 @@ public class WidgetTransitions : MonoBehaviour {
         {
             iTween.Stop(widgetRoot.gameObject);
 
-            if (rootDirection == -1)
+            if (rootDirection == -2)
                 widgetRoot.anchoredPosition = new Vector3(widgetRoot.anchoredPosition.x, 0, 0);
             else
-                widgetRoot.anchoredPosition = new Vector3(widgetRoot.anchoredPosition.x, -Screen.height, 0);
+                widgetRoot.anchoredPosition = new Vector3(widgetRoot.anchoredPosition.x, -2 * Screen.height, 0);
         }
 
-        iTween.MoveBy(widgetRoot.gameObject, iTween.Hash("y", Screen.height * rootDirection, "easeType", "easeInOutExpo", "time", .5f));
+        iTween.MoveBy(widgetRoot.gameObject, iTween.Hash("y", Screen.height * rootDirection, "easeType", "easeInOutExpo", "time", .75f));
         rootDirection *= -1;
         
     }
@@ -56,14 +56,14 @@ public class WidgetTransitions : MonoBehaviour {
         {
             iTween.Stop(widgetConfig.gameObject);
 
-            if (rootDirection == -1)
+            if (rootDirection == -2)
                 widgetConfig.anchoredPosition = new Vector3(widgetConfig.anchoredPosition.x, 0, 0);
             else
-                widgetConfig.anchoredPosition = new Vector3(widgetConfig.anchoredPosition.x, -Screen.height, 0);
+                widgetConfig.anchoredPosition = new Vector3(widgetConfig.anchoredPosition.x, -2 * Screen.height, 0);
         }
 
 
-        iTween.MoveBy(widgetConfig.gameObject, iTween.Hash("y", Screen.height * configDirection, "easeType", "easeInOutExpo", "time", .5f));
+        iTween.MoveBy(widgetConfig.gameObject, iTween.Hash("y", Screen.height * configDirection, "easeType", "easeInOutExpo", "time", .75f));
         configDirection *= -1;
         
     }
