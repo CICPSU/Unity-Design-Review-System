@@ -24,7 +24,8 @@ namespace UnityEngine.UI.Extensions
         {
             tooltipRect = GetComponent<RectTransform>();
             instance = this;
-            if(!TooltipText) TooltipText = GetComponentInChildren<Text>();
+            if(!TooltipText)
+                TooltipText = GetComponentInChildren<Text>();
             HideTooltip();
         }
 

@@ -37,14 +37,21 @@ namespace UnityEngine.UI.Extensions
 
 		void StartHover()
 		{
+            Invoke("TriggerShowTooltip", 2);
+            Invoke("StopHover", 7);
+		}
+
+        private void TriggerShowTooltip()
+        {
             if (infoString != "")
                 BoundTooltipItem.Instance.ShowTooltip(infoString);
             else if (textObject != null && LayoutUtility.GetPreferredWidth(textObject.rectTransform) > GetComponent<RectTransform>().rect.width)
                 BoundTooltipItem.Instance.ShowTooltip(textObject.text);
-		}
+        }
 
 		void StopHover()
 		{
+            CancelInvoke();
 			BoundTooltipItem.Instance.HideTooltip();
 		}
 	}
