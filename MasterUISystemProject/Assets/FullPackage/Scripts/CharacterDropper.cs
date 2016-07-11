@@ -283,6 +283,8 @@ public class CharacterDropper : MonoBehaviour {
                     {
                         mouseDownOnChar = true;
                         mouseDownChar = RaycastLock.hit.transform.gameObject;
+                        RaycastLock.GiveLock();
+                        hasRaycastLock = false;
                     }
                     else
                     {

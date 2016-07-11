@@ -20,6 +20,8 @@ public class POIButtonManager : MonoBehaviour {
     public float POIlistHeight = 7.0f;
 	public GameObject markerRoot; //empty obj, root of all markers. assigned through inspector
 
+    public GameObject markerMouseDown = null;
+
     public bool hasRaycastLock = false;
 
 	// Use this for initialization
@@ -60,13 +62,36 @@ public class POIButtonManager : MonoBehaviour {
 
     void Update()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            if (!hasRaycastLock && RaycastLock.GetLock())
+            {
+                hasRaycastLock = true;
+                RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
+                if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null)
+                {
+                    markerMouseDown = RaycastLock.hit.transform.gameObject;
+                    hasRaycastLock = false;
+                    RaycastLock.GiveLock();
+                }
+                else
+                {
+                    hasRaycastLock = false;
+                    RaycastLock.GiveLock();
+                    markerMouseDown = null;
+                }
+            }
+        }
+
         // click on a marker to open up the MarkerInfoCanvas
         if (Input.GetMouseButtonUp(0) && !hasRaycastLock && RaycastLock.GetLock())
         {
             hasRaycastLock = true;
             RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
-            if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null)
+            if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null && markerMouseDown == RaycastLock.hit.transform.gameObject)
+            {
                 RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>().SetupCanvas();
+            }
             else
             {
                 hasRaycastLock = false;
@@ -75,6 +100,9 @@ public class POIButtonManager : MonoBehaviour {
             
         }
     }
+
+
+
 	//whenever a new level is loaded, we regenerate the buttons from the xml file so that only the buttons for the current scene are visible
 	public void OnLevelWasLoaded(int level)
 	{
