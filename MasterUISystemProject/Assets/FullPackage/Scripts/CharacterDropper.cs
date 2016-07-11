@@ -47,6 +47,7 @@ public class CharacterDropper : MonoBehaviour {
     public Text wanderRangeLabel;
     public Dropdown destinationDropDown;
     public bool mouseDownOnChar = false;
+    public GameObject mouseDownChar = null;
 
     /// <summary>
     /// CHAR EDIT VARS
@@ -279,12 +280,16 @@ public class CharacterDropper : MonoBehaviour {
                     RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
                     //if we are pointing at an existing avatar and left click, open char info
                     if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen)
+                    {
                         mouseDownOnChar = true;
+                        mouseDownChar = RaycastLock.hit.transform.gameObject;
+                    }
                     else
                     {
                         RaycastLock.GiveLock();
                         hasRaycastLock = false;
                         mouseDownOnChar = false;
+                        mouseDownChar = null;
                     }
                 }
             }
@@ -300,12 +305,14 @@ public class CharacterDropper : MonoBehaviour {
                 {
                     RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
                     //if we are pointing at an existing avatar and left click, open char info
-                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen)
+                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen && mouseDownChar == RaycastLock.hit.transform.gameObject)
                         OpenCharacterInfo();
                     else
                     {
                         RaycastLock.GiveLock();
                         hasRaycastLock = false;
+                        mouseDownOnChar = false;
+                        mouseDownChar = null;
                     }
                 }
             }

@@ -17,6 +17,7 @@ public class SettingsManager : MonoBehaviour
     public GameObject mm_GameObject;
     public GameObject sl_GameObject;
     public GameObject bm_GameObject;
+    public GameObject ci_Gameobject;
 
     void OnEnable()
     {

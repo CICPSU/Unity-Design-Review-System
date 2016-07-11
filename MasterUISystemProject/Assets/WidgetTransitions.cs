@@ -9,8 +9,8 @@ public class WidgetTransitions : MonoBehaviour {
     public RectTransform widgetConfig;
     public GameObject widget3D;
 
-    private int rootDirection = 2;
-    private int configDirection = -2;
+    public int rootDirection = 2;
+    public int configDirection = -2;
 
 	// Use this for initialization
 	void Start () {

@@ -11103,6 +11103,8 @@ MonoBehaviour:
   widgetRoot: {fileID: 650595640}
   widgetConfig: {fileID: 2123630221}
   widget3D: {fileID: 621010388}
+  rootDirection: 2
+  configDirection: -2
 --- !u!114 &278468216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26073,6 +26075,7 @@ MonoBehaviour:
   wanderRangeLabel: {fileID: 959754203}
   destinationDropDown: {fileID: 559242413}
   mouseDownOnChar: 0
+  mouseDownChar: {fileID: 0}
   charEditPanel: {fileID: 390045207}
   radiusProjector: {fileID: 976245273}
   radiusInput: {fileID: 963985075}
@@ -56857,6 +56860,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 650595639}
+        m_MethodName: ExitEditFromButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1356558056
@@ -75010,17 +75024,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 650595639}
-        m_MethodName: ExitEditFromButton
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1830844408
@@ -79400,7 +79403,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000030517578}
+  m_AnchoredPosition: {x: 0, y: -0.000030517578}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1933857086
@@ -85202,7 +85205,7 @@ MonoBehaviour:
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 2094366693}
-  toggleTransition: 1
+  toggleTransition: 0
   graphic: {fileID: 0}
   m_Group: {fileID: 2123630222}
   onValueChanged:
@@ -86315,6 +86318,7 @@ MonoBehaviour:
   backgroundBlueBar: {fileID: 875069356}
   settingBar: {fileID: 460760701}
   characterDropTool: {fileID: 1914262584}
+  settingsButtonImage: {fileID: 2094366693}
   tpControlRef: {fileID: 1026231206}
   menuButtonsOpen: 0
   settingsMenusOpen: 0
@@ -86335,6 +86339,7 @@ MonoBehaviour:
   mm_GameObject: {fileID: 152233195}
   sl_GameObject: {fileID: 1663509169}
   bm_GameObject: {fileID: 1965281241}
+  ci_Gameobject: {fileID: 731212870}
 --- !u!114 &2123630225
 MonoBehaviour:
   m_ObjectHideFlags: 0
