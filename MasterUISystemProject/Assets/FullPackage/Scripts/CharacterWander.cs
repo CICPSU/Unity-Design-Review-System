@@ -31,6 +31,7 @@ public class CharacterWander : MonoBehaviour {
     private int idleTime = 3;
 
     private bool canceledMovement = false;
+    private bool moving = false;
 
     public void SetWanderMode()
     {
@@ -122,6 +123,7 @@ public class CharacterWander : MonoBehaviour {
         navAgent.SetDestination(hit.position);
         navAgent.Resume();
         animator.SetFloat("Speed", 1f);
+        moving = true;
     }
 
     public void CancelMovement()
@@ -133,23 +135,13 @@ public class CharacterWander : MonoBehaviour {
     void OnAnimatorMove()
     {
         //only perform if moving
-        if (!(navAgent.remainingDistance < .5f) && !navAgent.pathPending && mode!= WanderMode.Idle)
+        if (moving && !navAgent.pathPending && mode!= WanderMode.Idle)
         {
             if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) > 5)
                 animator.SetFloat("Direction", Vector3.Angle(transform.forward, navAgent.destination - transform.position));
             else
                 animator.SetFloat("Direction", 0);
-            /*
-            if (animator.GetFloat("Speed") == 1)
-            {
-                if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) > 45)
-                    animator.SetFloat("Direction", 90f);
-                else if (Vector3.Angle(transform.forward, navAgent.desiredVelocity) < -45)
-                    animator.SetFloat("Direction", -90f);
-                else
-                    animator.SetFloat("Direction", 0f);    
-            }
-            */
+            
             animator.speed = navSpeedRatio;
             navAgent.velocity = animator.deltaPosition / Time.deltaTime * navSpeedRatio;
             navAgent.speed = navAgent.velocity.magnitude;
@@ -176,6 +168,8 @@ public class CharacterWander : MonoBehaviour {
             if (navAgent.isOnNavMesh)
                 navAgent.Stop();
             animator.SetFloat("Speed", 0f);
+            animator.SetFloat("Direction", 0f);
+            moving = false;
 
             if (mode == WanderMode.Bookmark)
             {
