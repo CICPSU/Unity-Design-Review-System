@@ -1,0 +1,326 @@
+-debug
+-target:library
+-nowarn:0169
+-out:'Temp/Assembly-CSharp.dll'
+-r:'/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEngine.dll'
+-r:'Library/ScriptAssemblies/Assembly-CSharp-firstpass.dll'
+-r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll'
+-r:'/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll'
+-r:'Assets/FullPackage/InputMap/TrackD/TrackDNet.dll'
+-r:'/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.dll'
+-define:UNITY_5_3_OR_NEWER
+-define:UNITY_5_3_5
+-define:UNITY_5_3
+-define:UNITY_5
+-define:ENABLE_NEW_BUGREPORTER
+-define:ENABLE_AUDIO
+-define:ENABLE_CACHING
+-define:ENABLE_CLOTH
+-define:ENABLE_DUCK_TYPING
+-define:ENABLE_FRAME_DEBUGGER
+-define:ENABLE_GENERICS
+-define:ENABLE_HOME_SCREEN
+-define:ENABLE_IMAGEEFFECTS
+-define:ENABLE_LIGHT_PROBES_LEGACY
+-define:ENABLE_MICROPHONE
+-define:ENABLE_MULTIPLE_DISPLAYS
+-define:ENABLE_PHYSICS
+-define:ENABLE_PLUGIN_INSPECTOR
+-define:ENABLE_SHADOWS
+-define:ENABLE_SINGLE_INSTANCE_BUILD_SETTING
+-define:ENABLE_SPRITERENDERER_FLIPPING
+-define:ENABLE_SPRITES
+-define:ENABLE_SPRITE_POLYGON
+-define:ENABLE_TERRAIN
+-define:ENABLE_RAKNET
+-define:ENABLE_UNET
+-define:ENABLE_UNITYEVENTS
+-define:ENABLE_VR
+-define:ENABLE_WEBCAM
+-define:ENABLE_WWW
+-define:ENABLE_CLOUD_SERVICES
+-define:ENABLE_CLOUD_SERVICES_ADS
+-define:ENABLE_CLOUD_HUB
+-define:ENABLE_CLOUD_PROJECT_ID
+-define:ENABLE_CLOUD_SERVICES_PURCHASING
+-define:ENABLE_CLOUD_SERVICES_ANALYTICS
+-define:ENABLE_CLOUD_SERVICES_UNET
+-define:ENABLE_CLOUD_SERVICES_BUILD
+-define:ENABLE_CLOUD_LICENSE
+-define:ENABLE_EDITOR_METRICS
+-define:ENABLE_EDITOR_METRICS_CACHING
+-define:INCLUDE_DYNAMIC_GI
+-define:INCLUDE_GI
+-define:INCLUDE_IL2CPP
+-define:INCLUDE_DIRECTX12
+-define:PLATFORM_SUPPORTS_MONO
+-define:RENDER_SOFTWARE_CURSOR
+-define:ENABLE_LOCALIZATION
+-define:ENABLE_ANDROID_ATLAS_ETC1_COMPRESSION
+-define:ENABLE_EDITOR_TESTS_RUNNER
+-define:UNITY_STANDALONE_OSX
+-define:UNITY_STANDALONE
+-define:ENABLE_SUBSTANCE
+-define:ENABLE_GAMECENTER
+-define:ENABLE_TEXTUREID_MAP
+-define:ENABLE_RUNTIME_GI
+-define:ENABLE_MOVIES
+-define:ENABLE_NETWORK
+-define:ENABLE_CRUNCH_TEXTURE_COMPRESSION
+-define:ENABLE_LOG_MIXED_STACKTRACE
+-define:ENABLE_UNITYWEBREQUEST
+-define:ENABLE_CLUSTERINPUT
+-define:ENABLE_WEBSOCKET_HOST
+-define:ENABLE_MONO
+-define:ENABLE_PROFILER
+-define:DEBUG
+-define:TRACE
+-define:UNITY_ASSERTIONS
+-define:UNITY_EDITOR
+-define:UNITY_EDITOR_64
+-define:UNITY_EDITOR_OSX
+-define:CROSS_PLATFORM_INPUT
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_AnimateCurvedFillOnStart.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_CameraController.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_CameraRotationOnButtonHeld.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_ChangeValueOnHold.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_GunController.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_GunMovement.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_HandheldController.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_MoveAlong.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_MoveHeartbeat.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_OrientOnCurvedSpace.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_PerlinNoisePosition.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_PerlinNoiseRotation.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_RaycastToCanvas.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_RiseChildrenOverTime.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_ShowParentCoordinates.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_TMPChecker.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_WorldSpaceCursorFollow.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_WorldSpaceMouseMultipleCanvases.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_ZChangeOnHover.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_draggable.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_guntarget.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_inventory_paralax.cs'
+'Assets/CurvedUI/Demo Scenes/Demo Scenes Content/CUI_rotation_anim.cs'
+'Assets/CurvedUI/Scripts/CurvedUIInputFieldCaret.cs'
+'Assets/CurvedUI/Scripts/CurvedUIRaycaster.cs'
+'Assets/CurvedUI/Scripts/CurvedUISettings.cs'
+'Assets/CurvedUI/Scripts/CurvedUIVertexEffect.cs'
+'Assets/CurvedUI/Scripts/Experimental/CurvedUITMP.cs'
+'Assets/EditModeManager.cs'
+'Assets/FadeExample.cs'
+'Assets/FlexibleUISystems/FlexibleDraggableObject/Scripts/FlexibleDraggableObject.cs'
+'Assets/FlexibleUISystems/FlexibleDraggableObject/Scripts/FlexibleResizeHandler.cs'
+'Assets/FlexibleUISystems/Generic/FlexibleExtensions.cs'
+'Assets/FullPackage/Archive/Content/ContentManager.cs'
+'Assets/FullPackage/Archive/Loaders/DisplaySetup.cs'
+'Assets/FullPackage/Archive/MessageSystem/MessageHandler.cs'
+'Assets/FullPackage/Archive/MessageSystem/MessageListManager.cs'
+'Assets/FullPackage/Archive/MessageSystem/MessageTimer.cs'
+'Assets/FullPackage/Archive/Preferences/LinearUnits.cs'
+'Assets/FullPackage/Archive/Preferences/Preferences.cs'
+'Assets/FullPackage/Archive/WidgetSettings/WidgetSettings.cs'
+'Assets/FullPackage/Archive/WidgetSettings/WidgetSettingsManager.cs'
+'Assets/FullPackage/Archive/WidgetSettings/WidgetSettingsMenuManager.cs'
+'Assets/FullPackage/IConAvatar/Script/TP_Animator.cs'
+'Assets/FullPackage/IConAvatar/Script/TP_Camera.cs'
+'Assets/FullPackage/IConAvatar/Script/TP_Controller.cs'
+'Assets/FullPackage/IConAvatar/Script/TP_InputManager.cs'
+'Assets/FullPackage/IConAvatar/Script/TP_Motor.cs'
+'Assets/FullPackage/InputMap/Devices.cs'
+'Assets/FullPackage/InputMap/InputDebugger.cs'
+'Assets/FullPackage/InputMap/InputManager.cs'
+'Assets/FullPackage/InputMap/InputMap.cs'
+'Assets/FullPackage/InputMap/InputTransform.cs'
+'Assets/FullPackage/InputMap/TimeLine.cs'
+'Assets/FullPackage/InputMap/TrackD/TrackD.cs'
+'Assets/FullPackage/Plugins/Pixelplacement/iTween/Sample/MoveSample.cs'
+'Assets/FullPackage/Plugins/Pixelplacement/iTween/Sample/RotateSample.cs'
+'Assets/FullPackage/Plugins/Pixelplacement/iTween/Sample/SampleInfo.cs'
+'Assets/FullPackage/Plugins/Pixelplacement/iTween/iTween.cs'
+'Assets/FullPackage/Plugins/iTweenHinting.cs'
+'Assets/FullPackage/Scripts/AnimationMotion.cs'
+'Assets/FullPackage/Scripts/CharacterDropper.cs'
+'Assets/FullPackage/Scripts/CharacterWander.cs'
+'Assets/FullPackage/Scripts/ControlInstruction.cs'
+'Assets/FullPackage/Scripts/ControlUtilities.cs'
+'Assets/FullPackage/Scripts/DIRE/Camera/FixedDisplay.cs'
+'Assets/FullPackage/Scripts/DIRE/Camera/WallDefinition.cs'
+'Assets/FullPackage/Scripts/DIRE/Functionality/Navigation/MouseNavigator.cs'
+'Assets/FullPackage/Scripts/DIRE/Functionality/System/DIRE.cs'
+'Assets/FullPackage/Scripts/DIRE/Functionality/Utilities/ARTtrack.cs'
+'Assets/FullPackage/Scripts/DIRE/Functionality/Utilities/ArgumentProcessor.cs'
+'Assets/FullPackage/Scripts/DIRE/Functionality/Utilities/FileSearch.cs'
+'Assets/FullPackage/Scripts/DIRE/Tools/IntersectionQuery.cs'
+'Assets/FullPackage/Scripts/Helper.cs'
+'Assets/FullPackage/Scripts/KeepOnLoad.cs'
+'Assets/FullPackage/Scripts/PostBuildProcess.cs'
+'Assets/FullPackage/Scripts/RaycastLock.cs'
+'Assets/FullPackage/Scripts/ToggleMenuButtonManager.cs'
+'Assets/FullPackage/Scripts/UIUtilities.cs'
+'Assets/FullPackage/Scripts/Widget.cs'
+'Assets/FullPackage/Scripts/XMLClasses/ChangesXML.cs'
+'Assets/FullPackage/Scripts/XMLClasses/DisplayXML.cs'
+'Assets/FullPackage/Scripts/XMLClasses/XmlIO.cs'
+'Assets/FullPackage/Widgets/MiniMap/MiniMapManager.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/AddPointButton.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/BookmarkCurrLocButton.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/DeleteAllPoints.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/DeletePoint.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIActiveButtonManager.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIButtonManager.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIClasses.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIInfo.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIInfoRef.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POIMenuStateManager.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POI_GlobalVariables.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/POI_ReferenceHub.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/PullCurrentTransform.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/SaveChangesButton.cs'
+'Assets/FullPackage/Widgets/POI/POI Scripts/Teleport.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/CloseMarkerInfoCanvas.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/DetectMouseClick.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/MarkerInfoCanvasRefs.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/MarkerInfoCanvasSetup.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/ReadMe.cs'
+'Assets/FullPackage/Widgets/ShowObjInfo/ShowNameOnClick.cs'
+'Assets/FullPackage/Widgets/Sunlight Widget/ReadMe_Instruction.cs'
+'Assets/FullPackage/Widgets/Sunlight Widget/Scripts/S_AddCityBut.cs'
+'Assets/FullPackage/Widgets/Sunlight Widget/Scripts/S_AutoPlayBut.cs'
+'Assets/FullPackage/Widgets/Sunlight Widget/Scripts/S_CitySelected.cs'
+'Assets/FullPackage/Widgets/Sunlight Widget/Scripts/S_EditDateBut.cs'
+'Assets/FullPackage/Widgets/Sunlight Widget/Scripts/S_UpdateTime.cs'
+'Assets/FullPackage/Widgets/Sunlight Widget/Scripts/S_ValidateTimeZone.cs'
+'Assets/FullPackage/Widgets/Sunlight Widget/Scripts/SunLightWidget.cs'
+'Assets/FullPackage/Widgets/Sunlight Widget/Scripts/SunlightWidgetData.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/Boolean_UI.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/FieldUIs.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/SettingsBarManager.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/SingleUI.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/StringUI.cs'
+'Assets/FullPackage/Widgets/WidgetSettings/Vector2UI.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Accordion/Accordion.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Accordion/AccordionElement.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Accordion/Tweening/FloatTween.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Accordion/Tweening/ITweenValue.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Accordion/Tweening/TweenRunner.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ComboBox/AutoCompleteComboBox.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ComboBox/ComboBox.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ComboBox/DropDownList.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ComboBox/DropDownListButton.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ComboBox/DropDownListItem.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/BestFitOutline.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/CurvedText.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/CylinderText.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/Gradient.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/ImageExtended.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/LetterSpacing.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/NicerOutline.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/RaycastMask.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/Shaders/UIAdditiveEffect.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/Shaders/UIImageCrop.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/Shaders/UILinearDodgeEffect.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/Shaders/UIMultiplyEffect.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/Shaders/UIScreenEffect.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/Shaders/UISoftAdditiveEffect.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/ShineEffect.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/ShineEffector.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/SoftMaskScript.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/UIFlippable.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Effects/UIParticleSystem.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/HSVPicker/ColorPickerTester.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/HSVPicker/HSVPicker.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/HSVPicker/HSVSliderEvent.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/HSVPicker/HSVUtil.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/HSVPicker/HexRGB.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/HSVPicker/HsvBoxSelector.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/HSVPicker/HsvSliderPicker.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/InputModules/AimerInputModule.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/InputModules/GamePadInputModule.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Layout/CurvedLayout.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Layout/FlowLayoutGroup.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Layout/HorizontalScrollSnap.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Layout/RadialLayout.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Layout/ScrollSnap.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Layout/TileSizeFitter.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Layout/UIVerticalScroller.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Layout/UIVerticalScrollerDemo/Scripts/ScrollingCalendar.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Layout/VerticalScrollSnap.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Primitives/DiamondGraph.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Primitives/UICircle.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Primitives/UICornerCut.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Primitives/UILineRenderer.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Primitives/UILineTextureRenderer.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Primitives/UIMesh.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Primitives/UIPolygon.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Primitives/UIPrimitiveBase.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ReorderableList/ReorderableList.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ReorderableList/ReorderableListContent.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ReorderableList/ReorderableListDebug.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ReorderableList/ReorderableListElement.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/RescalingPanels/RescaleDragPanel.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/RescalingPanels/RescalePanel.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/RescalingPanels/ResizePanel.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/SelectionBox/ExampleSelectable.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/SelectionBox/IBoxSelectable.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/SelectionBox/SelectionBox.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/TabNavigation.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ToolTips/BoundTooltip/BoundTooltipItem.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ToolTips/BoundTooltip/BoundTooltipTrigger.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ToolTips/HoverTooltip.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/ToolTips/ToolTip.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/UIWindowBase.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/BezierPath.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/CLZF2.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/DragCorrector.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/ExtensionsToggle.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/ExtensionsToggleGroup.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/InputFieldEnterSubmit.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/InputFocus.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/PPIViewer.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/ReturnKeyTriggersButton.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/ScrollConflictManager.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/ScrollRectEx.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/ScrollRectExtensions.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/ScrollRectLinker.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/ScrollRectTweener.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Attributes/DontSaveField.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/ExampleScriptsAndClasses/TestClass.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/ExampleScriptsAndClasses/TestScript.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Non-Mono Classes/ObjectComponent.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Non-Mono Classes/SceneData.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Non-Mono Classes/SceneObject.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/ObjectIdentifier.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/SaveLoad.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/SaveLoadMenu.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Surrogates/ColorSurrogate.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Surrogates/GameObjectSurrogate.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Surrogates/QuaternionSurrogate.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Surrogates/Texture2DSurrogate.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Surrogates/TransformSurrogate.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Surrogates/Vector2Surrogate.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Surrogates/Vector3Surrogate.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Surrogates/Vector4Surrogate.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/Serialization/Utilities/TypeSystem.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/SetPropertyUtility.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/TestCompression.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/UIScrollToSelection.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/UIScrollToSelectionXY.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/UISelectableExtension.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/Utilities/switchToRectTransform.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/VR Extensions/VRCursor.cs'
+'Assets/FullPackage/unity-ui-extensions/Scripts/VR Extensions/VRInputModule.cs'
+'Assets/GrowExample.cs'
+'Assets/SSAO Pro/Demo/Scripts/DemoUI.cs'
+'Assets/SSAO Pro/Demo/Scripts/RotateAround.cs'
+'Assets/SSAO Pro/Scripts/Attributes/ColorUsageAttribute.cs'
+'Assets/SSAO Pro/Scripts/Attributes/HelpURLAttribute.cs'
+'Assets/SSAO Pro/Scripts/SSAOPro.cs'
+'Assets/SettingsManager.cs'
+'Assets/SettingsMenusRefs.cs'
+'Assets/SlideExample.cs'
+'Assets/UI Resources/UITransitions/UIDemoManager.cs'
+'Assets/WidgetTransitions.cs'
+-r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Runtime.Serialization.dll'
+-r:'/Applications/Unity/Unity.app/Contents/Frameworks/Mono/lib/mono/unity/System.Xml.Linq.dll'
