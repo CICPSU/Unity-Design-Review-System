@@ -97,10 +97,18 @@ public class SettingsManager : MonoBehaviour
     {
         a_Settings.a_Tracking = SettingsMenusRefs.Instance.trackingToggle.isOn;
         a_Settings.a_GravColl = SettingsMenusRefs.Instance.gravityToggle.isOn;
-        a_Settings.a_ForwardSpeed = float.Parse(SettingsMenusRefs.Instance.forwardSpeedInput.text);
-        a_Settings.a_BackwardSpeed = float.Parse(SettingsMenusRefs.Instance.backwardSpeedInput.text);
-        a_Settings.a_StrafeSpeed = float.Parse(SettingsMenusRefs.Instance.strafeSpeedInput.text);
-        a_Settings.a_JumpSpeed = float.Parse(SettingsMenusRefs.Instance.jumpSpeedInput.text);
+
+        if (SettingsMenusRefs.Instance.forwardSpeedInput.text != null && SettingsMenusRefs.Instance.forwardSpeedInput.text != "")
+            a_Settings.a_ForwardSpeed = float.Parse(SettingsMenusRefs.Instance.forwardSpeedInput.text);
+
+        if (SettingsMenusRefs.Instance.backwardSpeedInput.text != null && SettingsMenusRefs.Instance.backwardSpeedInput.text != "")
+            a_Settings.a_BackwardSpeed = float.Parse(SettingsMenusRefs.Instance.backwardSpeedInput.text);
+
+        if (SettingsMenusRefs.Instance.strafeSpeedInput.text != null && SettingsMenusRefs.Instance.strafeSpeedInput.text != "")
+            a_Settings.a_StrafeSpeed = float.Parse(SettingsMenusRefs.Instance.strafeSpeedInput.text);
+
+        if (SettingsMenusRefs.Instance.jumpSpeedInput.text != null && SettingsMenusRefs.Instance.jumpSpeedInput.text != "")
+            a_Settings.a_JumpSpeed = float.Parse(SettingsMenusRefs.Instance.jumpSpeedInput.text);
 
         ApplyAvatarSettings();
     }
@@ -158,19 +166,44 @@ public class SettingsManager : MonoBehaviour
     /// </summary>
     public void UpdateKeyBindingsFromMenu()
     {
-        kb_Settings.kb_Forward = SettingsMenusRefs.Instance.forwardInput.text;
-        kb_Settings.kb_Backward = SettingsMenusRefs.Instance.backwardInput.text;
-        kb_Settings.kb_Leftward = SettingsMenusRefs.Instance.leftInput.text;
-        kb_Settings.kb_Rightward = SettingsMenusRefs.Instance.rightInput.text;
-        kb_Settings.kb_Elevate = SettingsMenusRefs.Instance.elevateInput.text;
-        kb_Settings.kb_Descend = SettingsMenusRefs.Instance.descendInput.text;
-        kb_Settings.kb_Gravity = SettingsMenusRefs.Instance.gravityInput.text;
-        kb_Settings.kb_RotateLeft = SettingsMenusRefs.Instance.rotateLeftInput.text;
-        kb_Settings.kb_RotateRight = SettingsMenusRefs.Instance.rotateRightInput.text;
-        kb_Settings.kb_RotateKeySensitivity = float.Parse(SettingsMenusRefs.Instance.rotateSensitivityInput.text);
-        kb_Settings.kb_IncreaseSpeed = SettingsMenusRefs.Instance.increaseSpeedInput.text;
-        kb_Settings.kb_DecreaseSpeed = SettingsMenusRefs.Instance.decreaseSpeedInput.text;
-        kb_Settings.kb_ToggleCamera = SettingsMenusRefs.Instance.toggleCameraInput.text;
+        if(SettingsMenusRefs.Instance.forwardInput.text != null && SettingsMenusRefs.Instance.forwardInput.text != "")
+            kb_Settings.kb_Forward = SettingsMenusRefs.Instance.forwardInput.text;
+
+        if (SettingsMenusRefs.Instance.backwardInput.text != null && SettingsMenusRefs.Instance.backwardInput.text != "")
+            kb_Settings.kb_Backward = SettingsMenusRefs.Instance.backwardInput.text;
+
+        if (SettingsMenusRefs.Instance.leftInput.text != null && SettingsMenusRefs.Instance.leftInput.text != "")
+            kb_Settings.kb_Leftward = SettingsMenusRefs.Instance.leftInput.text;
+
+        if (SettingsMenusRefs.Instance.rightInput.text != null && SettingsMenusRefs.Instance.rightInput.text != "")
+            kb_Settings.kb_Rightward = SettingsMenusRefs.Instance.rightInput.text;
+
+        if (SettingsMenusRefs.Instance.elevateInput.text != null && SettingsMenusRefs.Instance.elevateInput.text != "")
+            kb_Settings.kb_Elevate = SettingsMenusRefs.Instance.elevateInput.text;
+
+        if (SettingsMenusRefs.Instance.descendInput.text != null && SettingsMenusRefs.Instance.descendInput.text != "")
+            kb_Settings.kb_Descend = SettingsMenusRefs.Instance.descendInput.text;
+
+        if (SettingsMenusRefs.Instance.gravityInput.text != null && SettingsMenusRefs.Instance.gravityInput.text != "")
+            kb_Settings.kb_Gravity = SettingsMenusRefs.Instance.gravityInput.text;
+
+        if (SettingsMenusRefs.Instance.rotateLeftInput.text != null && SettingsMenusRefs.Instance.rotateLeftInput.text != "")
+            kb_Settings.kb_RotateLeft = SettingsMenusRefs.Instance.rotateLeftInput.text;
+
+        if (SettingsMenusRefs.Instance.rotateRightInput.text != null && SettingsMenusRefs.Instance.rotateRightInput.text != "")
+            kb_Settings.kb_RotateRight = SettingsMenusRefs.Instance.rotateRightInput.text;
+
+        if (SettingsMenusRefs.Instance.rotateSensitivityInput.text != null && SettingsMenusRefs.Instance.rotateSensitivityInput.text != "")
+            kb_Settings.kb_RotateKeySensitivity = float.Parse(SettingsMenusRefs.Instance.rotateSensitivityInput.text);
+
+        if (SettingsMenusRefs.Instance.increaseSpeedInput.text != null && SettingsMenusRefs.Instance.increaseSpeedInput.text != "")
+            kb_Settings.kb_IncreaseSpeed = SettingsMenusRefs.Instance.increaseSpeedInput.text;
+
+        if (SettingsMenusRefs.Instance.decreaseSpeedInput.text != null && SettingsMenusRefs.Instance.decreaseSpeedInput.text != "")
+            kb_Settings.kb_DecreaseSpeed = SettingsMenusRefs.Instance.decreaseSpeedInput.text;
+
+        if (SettingsMenusRefs.Instance.toggleCameraInput.text != null && SettingsMenusRefs.Instance.toggleCameraInput.text != "")
+            kb_Settings.kb_ToggleCamera = SettingsMenusRefs.Instance.toggleCameraInput.text;
 
         ApplyKeyBindings();
     }
