@@ -142,7 +142,7 @@ public class CharacterDropper : MonoBehaviour {
         //manage raycast lock
         if (charRadiusSelect || newCharDrop || charInfoOpen)
         {
-            if (!hasRaycastLock && RaycastLock.GetLock())
+            if (!hasRaycastLock && RaycastLock.GetLock(false))
                 hasRaycastLock = true;
         }
         else if (hasRaycastLock)
@@ -272,7 +272,7 @@ public class CharacterDropper : MonoBehaviour {
         {
             if (mouseCam != null && Input.GetMouseButtonDown(0))
             {
-                if (!hasRaycastLock && RaycastLock.GetLock())
+                if (!hasRaycastLock && RaycastLock.GetLock(false))
                     hasRaycastLock = true;
 
                 if (hasRaycastLock)
@@ -298,7 +298,7 @@ public class CharacterDropper : MonoBehaviour {
             //raycast that ignores the user avatar
             if (mouseCam != null && Input.GetMouseButtonUp(0) && mouseDownOnChar)
             {
-                if (!hasRaycastLock && RaycastLock.GetLock())
+                if (!hasRaycastLock && RaycastLock.GetLock(false))
                 {
                     hasRaycastLock = true;
                 }
@@ -308,7 +308,9 @@ public class CharacterDropper : MonoBehaviour {
                     RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
                     //if we are pointing at an existing avatar and left click, open char info
                     if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen && mouseDownChar == RaycastLock.hit.transform.gameObject)
+                    {
                         OpenCharacterInfo();
+                    }
                     else
                     {
                         RaycastLock.GiveLock();
@@ -411,7 +413,7 @@ public class CharacterDropper : MonoBehaviour {
 
     public void OpenCharacterDrop()
     {
-        if (!hasRaycastLock && RaycastLock.GetLock())
+        if (!hasRaycastLock && RaycastLock.GetLock(false))
             hasRaycastLock = true;
 
         dropCharacterSelectPanel.gameObject.SetActive(true);
@@ -610,27 +612,7 @@ public class CharacterDropper : MonoBehaviour {
             selectedMode = wanderToEdit.prevMode;
         else
             selectedMode = wanderToEdit.mode;
-        /*
-        if (Input.mousePosition.x > Screen.width - charInfoPanel.sizeDelta.x)
-        {
-            if (Input.mousePosition.y > Screen.height - charInfoPanel.sizeDelta.y)
-            {
-                charInfoPanel.transform.position = new Vector3(Screen.width - charInfoPanel.sizeDelta.x, Screen.height - charInfoPanel.sizeDelta.y, 0);
-            }
-            else if (Input.mousePosition.y < charEditPanel.sizeDelta.y)
-            {
-                charInfoPanel.transform.position = new Vector3(Screen.width - charInfoPanel.sizeDelta.x, charEditPanel.sizeDelta.y, 0);
-            }
-            else
-                charInfoPanel.transform.position = new Vector3(Screen.width - charInfoPanel.sizeDelta.x, Input.mousePosition.y, 0);
-        }
-        else if (Input.mousePosition.y > Screen.height - charInfoPanel.sizeDelta.y)
-            charInfoPanel.transform.position = new Vector3(Input.mousePosition.x, Screen.height - charInfoPanel.sizeDelta.y, 0);
-        else if (Input.mousePosition.y < charEditPanel.sizeDelta.y)
-            charInfoPanel.transform.position = new Vector3(Input.mousePosition.x, charEditPanel.sizeDelta.y, 0);
-        else
-            charInfoPanel.transform.position = Input.mousePosition;
-            */
+       
         charInfoPanel.transform.position = UIUtilities.SetPopUpPanel(charInfoPanel);
 
         iTween.Stop(charInfoPanel.gameObject, true);

@@ -4,6 +4,7 @@ using System.Collections;
 public class EditModeManager : MonoBehaviour {
 
     public static bool inEditMode = false;
+    private static bool editHasRaycastLock = false;
 
     public void EnterEditFromButton(RectTransform widgetToEnter)
     {
@@ -17,6 +18,8 @@ public class EditModeManager : MonoBehaviour {
     {
         if (!inEditMode)
         {
+            editHasRaycastLock = RaycastLock.GetLock(true);
+
             // these two if statements will make sure that the widgets that are not going into edit mode are disabled
             if (widgetToEnterEdit != SettingsManager.Instance.bm_GameObject.GetComponent<RectTransform>())
                 SettingsManager.Instance.bm_GameObject.SetActive(false);
@@ -57,6 +60,9 @@ public class EditModeManager : MonoBehaviour {
             if (WidgetTransitions.Instance != null)
                 WidgetTransitions.Instance.SlideWidgetConfig();
             inEditMode = false;
+
+            if (editHasRaycastLock)
+                RaycastLock.GiveLock();
         }
     }
 	

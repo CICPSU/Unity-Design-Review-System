@@ -62,29 +62,28 @@ public class POIButtonManager : MonoBehaviour {
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && !hasRaycastLock && RaycastLock.GetLock(false))
         {
-            if (!hasRaycastLock && RaycastLock.GetLock())
+            
+            hasRaycastLock = true;
+            RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
+            if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null)
             {
-                hasRaycastLock = true;
-                RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
-                if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null)
-                {
-                    markerMouseDown = RaycastLock.hit.transform.gameObject;
-                    hasRaycastLock = false;
-                    RaycastLock.GiveLock();
-                }
-                else
-                {
-                    hasRaycastLock = false;
-                    RaycastLock.GiveLock();
-                    markerMouseDown = null;
-                }
+                markerMouseDown = RaycastLock.hit.transform.gameObject;
+                hasRaycastLock = false;
+                RaycastLock.GiveLock();
             }
+            else
+            {
+                hasRaycastLock = false;
+                RaycastLock.GiveLock();
+                markerMouseDown = null;
+            }
+            
         }
-
+        
         // click on a marker to open up the MarkerInfoCanvas
-        if (Input.GetMouseButtonUp(0) && !hasRaycastLock && RaycastLock.GetLock())
+        if (Input.GetMouseButtonUp(0) && !hasRaycastLock && RaycastLock.GetLock(false))
         {
             hasRaycastLock = true;
             RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
@@ -99,6 +98,7 @@ public class POIButtonManager : MonoBehaviour {
             }
             
         }
+        
     }
 
 

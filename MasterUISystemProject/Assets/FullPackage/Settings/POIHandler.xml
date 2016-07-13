@@ -18,21 +18,6 @@
     </POI>
     <POI>
       <SceneFlag>BaseScene</SceneFlag>
-      <Name>second</Name>
-      <Position>
-        <x>-2.193592</x>
-        <y>-0.0200001</y>
-        <z>8.304461</z>
-      </Position>
-      <Rotation>
-        <x>0</x>
-        <y>1</y>
-        <z>0</z>
-      </Rotation>
-      <MarkerPrefabName>Pin</MarkerPrefabName>
-    </POI>
-    <POI>
-      <SceneFlag>BaseScene</SceneFlag>
       <Name>third</Name>
       <Position>
         <x>1</x>
