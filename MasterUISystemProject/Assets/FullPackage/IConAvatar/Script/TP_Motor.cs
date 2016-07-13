@@ -64,13 +64,12 @@ public class TP_Motor : MonoBehaviour {
 
         // Multiply MoveVector by MoveSpeed;
         MoveVector = MoveVector * MoveSpeed();
-       // MoveVector = MoveVector * MoveSpeed() * avatarAnimator.deltaPosition.magnitude/Time.deltaTime;
-       
-
-		if(gravityOn){
+        
+		if(gravityOn)
+        {
 			// Reapply VerticalVelocity MoveVector, as it should continue from previous frame but is erased by
 			//TPController. It is the falling speed.
-			MoveVector = new Vector3(MoveVector.x,VerticalVelocity, MoveVector.z);
+			MoveVector = new Vector3(MoveVector.x, VerticalVelocity, MoveVector.z);
 			// Apply gravity
 			ApplyGravity();
 		}
@@ -80,7 +79,8 @@ public class TP_Motor : MonoBehaviour {
 	}
 
 
-	void ApplyGravity(){
+	void ApplyGravity()
+    {
 		if(MoveVector.y > - TerminalVelocity)
 			MoveVector = new Vector3(MoveVector.x,MoveVector.y - Gravity * Time.deltaTime, MoveVector.z);
 		if (TP_Controller.characterController.isGrounded && MoveVector.y < -1)  // if the character is on the ground, we want to keep its y speed to a small number. 
@@ -98,7 +98,8 @@ public class TP_Motor : MonoBehaviour {
 
     }
 	
-	public void Jump(){
+	public void Jump()
+    {
         if (TP_Controller.characterController.isGrounded)
         {
             hasJumped = false;
@@ -107,7 +108,8 @@ public class TP_Motor : MonoBehaviour {
         }
 	}
 	
-	void SnapAlignCharacterWithCamera(){
+	void SnapAlignCharacterWithCamera()
+    {
 //		if(MoveVector.x != 0 || MoveVector.z != 0){    // comment this out is to make the capsule follows the camera direction all the time
 //****************************!!!!!!!!!!!!!!***************** If ()added by me
 		if(Input.GetMouseButton(1)|| Input.GetMouseButton(2)){  
