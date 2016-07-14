@@ -79472,7 +79472,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000030517578}
+  m_AnchoredPosition: {x: 0, y: 0.000030517578}
   m_SizeDelta: {x: 0, y: 377}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1933857086
@@ -86389,6 +86389,7 @@ MonoBehaviour:
   characterDropTool: {fileID: 1914262584}
   settingsButtonImage: {fileID: 2094366693}
   tpControlRef: {fileID: 1026231206}
+  toggleMenuButtonManagerRef: {fileID: 603261346}
   menuButtonsOpen: 0
   settingsMenusOpen: 0
 --- !u!114 &2123630224
@@ -86409,6 +86410,7 @@ MonoBehaviour:
   sl_GameObject: {fileID: 1663509169}
   bm_GameObject: {fileID: 1965281241}
   ci_Gameobject: {fileID: 731212870}
+  wc_Gameobject: {fileID: 2123630220}
 --- !u!114 &2123630225
 MonoBehaviour:
   m_ObjectHideFlags: 0

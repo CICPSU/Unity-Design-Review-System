@@ -16,6 +16,7 @@ public class SettingsBarManager : MonoBehaviour {
 
     
     public TP_Controller tpControlRef;
+    public ToggleMenuButtonManager toggleMenuButtonManagerRef;
 
     public bool menuButtonsOpen = false;
     public bool settingsMenusOpen = false;
@@ -51,25 +52,27 @@ public class SettingsBarManager : MonoBehaviour {
 
     public void ToggleMenuButtons()
     {
-        //check if UIs under the menu is playing animation, if yes, skip
-		foreach(Transform child in settingBar.transform){
-			if(iTween.Count(child.gameObject) != 0)
-				return;
-		}
+        if (EditModeManager.widgetInEdit != SettingsManager.Instance.ci_Gameobject.GetComponent<RectTransform>())
+        {
+            //check if UIs under the menu is playing animation, if yes, skip
+            foreach (Transform child in settingBar.transform) {
+                if (iTween.Count(child.gameObject) != 0)
+                    return;
+            }
 
-		//check if widgets are playing 
-		foreach(GameObject gO in openWidgets){
-			if(iTween.Count(gO) !=0){
-				return;
-			}
-		}
-        
-		//no animation is playing in bottom menus.
+            //check if widgets are playing 
+            foreach (GameObject gO in openWidgets) {
+                if (iTween.Count(gO) != 0) {
+                    return;
+                }
+            }
+
+            //no animation is playing in bottom menus.
             if (menuButtonsOpen)
                 CloseAll();
             else
                 OpenMenu();
-                
+        }      
     }
     
     private void CloseAll()
@@ -87,7 +90,10 @@ public class SettingsBarManager : MonoBehaviour {
         errorWindow.SetActive(false);
         menuButtonsOpen = false;
         tpControlRef.allowPlayerInput = true;
-	
+        EditModeManager.ExitEditMode();
+        toggleMenuButtonManagerRef.clickedState = false;
+
+
     }
 
     private void OpenMenu()
@@ -101,6 +107,9 @@ public class SettingsBarManager : MonoBehaviour {
 			
         menuButtonsOpen = true;
         tpControlRef.allowPlayerInput = false;
+        EditModeManager.EnterEditMode(GetComponent<RectTransform>());
+        toggleMenuButtonManagerRef.clickedState = true;
+        toggleMenuButtonManagerRef.clickTime = Time.time;
     }
     
     public void ToggleSettingsSelectMenu()

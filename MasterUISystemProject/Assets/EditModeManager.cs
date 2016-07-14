@@ -5,6 +5,7 @@ public class EditModeManager : MonoBehaviour {
 
     public static bool inEditMode = false;
     private static bool editHasRaycastLock = false;
+    public static RectTransform widgetInEdit = null;
 
     public void EnterEditFromButton(RectTransform widgetToEnter)
     {
@@ -27,12 +28,15 @@ public class EditModeManager : MonoBehaviour {
                 SettingsManager.Instance.sl_GameObject.SetActive(false);
 
             // moves the widget config object off the screen
-            if(widgetToEnterEdit != SettingsManager.Instance.ci_Gameobject.GetComponent<RectTransform>())
+            if(WidgetTransitions.Instance != null 
+                && widgetToEnterEdit != SettingsManager.Instance.ci_Gameobject.GetComponent<RectTransform>() 
+                && widgetToEnterEdit != SettingsManager.Instance.wc_Gameobject.GetComponent<RectTransform>())
                 WidgetTransitions.Instance.SlideWidgetConfig();
 
             // since the minimap doesnt have an edit mode, it will always be disabled
             SettingsManager.Instance.mm_GameObject.SetActive(false);
             inEditMode = true;
+            widgetInEdit = widgetToEnterEdit;
         }
     }
 
@@ -57,9 +61,13 @@ public class EditModeManager : MonoBehaviour {
                 if (!SettingsManager.Instance.mm_GameObject.activeSelf)
                     SettingsManager.Instance.mm_GameObject.SetActive(true);
             }
-            if (WidgetTransitions.Instance != null)
+            if (WidgetTransitions.Instance != null 
+                && widgetInEdit != SettingsManager.Instance.ci_Gameobject.GetComponent<RectTransform>() 
+                && widgetInEdit != SettingsManager.Instance.wc_Gameobject.GetComponent<RectTransform>())
                 WidgetTransitions.Instance.SlideWidgetConfig();
             inEditMode = false;
+
+            widgetInEdit = null;
 
             if (editHasRaycastLock)
                 RaycastLock.GiveLock();
