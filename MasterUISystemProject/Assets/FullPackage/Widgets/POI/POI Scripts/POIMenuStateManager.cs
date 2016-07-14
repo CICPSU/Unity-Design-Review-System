@@ -178,12 +178,9 @@ public class POIMenuStateManager : MonoBehaviour {
             POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
             POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive(false);
             POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive(false);
-            /*
-            foreach (GameObject gO in disableGOWhileEdit)
-            {
-                gO.SetActive(true);
-            }
-            */
+
+            POIButtonManager.instance.LoadAndGenerateButs();
+
             EditModeManager.ExitEditMode();
 
         }
