@@ -7,12 +7,12 @@ public static class RaycastLock{
     public static bool raycastAvailable = true;
     public static RaycastHit hit;
 
-    public static bool GetLock()
+    public static bool GetLock(bool fromMenu)
     {
-
-        if (EventSystem.current.IsPointerOverGameObject())
+        
+        if (!fromMenu && EventSystem.current.IsPointerOverGameObject())
             return false;
-
+            
         if (raycastAvailable)
         {
             raycastAvailable = false;

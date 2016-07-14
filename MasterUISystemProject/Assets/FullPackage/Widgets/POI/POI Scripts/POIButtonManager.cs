@@ -5,6 +5,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI.Extensions;
 
 public class POIButtonManager : MonoBehaviour {
 
@@ -18,13 +20,15 @@ public class POIButtonManager : MonoBehaviour {
     public float POIlistHeight = 7.0f;
 	public GameObject markerRoot; //empty obj, root of all markers. assigned through inspector
 
+    public GameObject markerMouseDown = null;
+
     public bool hasRaycastLock = false;
 
 	// Use this for initialization
 	void Start () {
 
-		if(POIButtonManager.instance ==null){
-			POIButtonManager.instance = this;
+		if(instance ==null){
+			instance = this;
 		}else{
 			Debug.LogError("More than one instance of POIButtonManager!");
 		}
@@ -58,12 +62,35 @@ public class POIButtonManager : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0) && !hasRaycastLock && RaycastLock.GetLock())
+        if(Input.GetMouseButtonDown(0) && !hasRaycastLock && RaycastLock.GetLock(false))
         {
+            
             hasRaycastLock = true;
             RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
             if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null)
+            {
+                markerMouseDown = RaycastLock.hit.transform.gameObject;
+                hasRaycastLock = false;
+                RaycastLock.GiveLock();
+            }
+            else
+            {
+                hasRaycastLock = false;
+                RaycastLock.GiveLock();
+                markerMouseDown = null;
+            }
+            
+        }
+        
+        // click on a marker to open up the MarkerInfoCanvas
+        if (Input.GetMouseButtonUp(0) && !hasRaycastLock && RaycastLock.GetLock(false))
+        {
+            hasRaycastLock = true;
+            RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
+            if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null && markerMouseDown == RaycastLock.hit.transform.gameObject)
+            {
                 RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>().SetupCanvas();
+            }
             else
             {
                 hasRaycastLock = false;
@@ -71,7 +98,11 @@ public class POIButtonManager : MonoBehaviour {
             }
             
         }
+        
     }
+
+
+
 	//whenever a new level is loaded, we regenerate the buttons from the xml file so that only the buttons for the current scene are visible
 	public void OnLevelWasLoaded(int level)
 	{
@@ -134,7 +165,7 @@ public class POIButtonManager : MonoBehaviour {
 	private void GenerateButsMarkers(POIHandler handler){
 		ClearButsMarkers ();
 
-		//generate new buttons
+		//generate new buttons from the xml file
 		foreach(POI point in handler.projectPOIs){
 			GenerateButMarkerPair(point);
 			POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
@@ -165,7 +196,7 @@ public class POIButtonManager : MonoBehaviour {
 		GameObject markerModel = Instantiate(prefab, point.position, Quaternion.Euler(point.rotation)) as GameObject;
 		markerModel.transform.parent = marker.transform;
 
-		if (point.sceneFlag != Application.loadedLevelName)
+		if (point.sceneFlag != SceneManager.GetActiveScene().name)
 			markerModel.SetActive (false);
 
 		point.marker = marker;
@@ -181,6 +212,9 @@ public class POIButtonManager : MonoBehaviour {
 		GameObject newButton = Instantiate(buttonPrefab) as GameObject;
 		RectTransform buttonRectTransform = newButton.transform as RectTransform;
 		buttonRectTransform.SetParent(POIList);
+
+        // this sets the TooltipTrigger text value to the name of the button
+        newButton.GetComponent<BoundTooltipTrigger>().text = point.buttonName;
 
 		// the following line positions the button correctly as a child of the POIList
 		// !!!! when we convert to using the Layout system, this will be automatically done
@@ -274,24 +308,6 @@ public class POIButtonManager : MonoBehaviour {
 		}
 	}
 
-	public void ResetPOIMenu()
-	{
-		POIMenuStateManager.EditModeState = false;
-
-		//restoring the original window
-		POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.white;
-
-		POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
-		POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive (false);
-		POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(false);
-		POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(false); 
-		POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive (false);
-
-		POI_ReferenceHub.Instance.EditBut.gameObject.SetActive(true);
-
-		LoadAndGenerateButs ();
-	}
-
 	//compare two POI classes by value
 	//return true if two points are the same
 	private bool IsPointSame(POI pointA, POI pointB){
@@ -316,7 +332,7 @@ public class POIButtonManager : MonoBehaviour {
 	
 	public void GeneratePairCurrentLocation()
 	{
-		POI newPOI = new POI (Application.loadedLevelName, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
+		POI newPOI = new POI (SceneManager.GetActiveScene().name, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
 		GenerateButMarkerPair (newPOI);
 	}
 

@@ -46,6 +46,8 @@ public class CharacterDropper : MonoBehaviour {
     public Text wanderModeLabel;
     public Text wanderRangeLabel;
     public Dropdown destinationDropDown;
+    public bool mouseDownOnChar = false;
+    public GameObject mouseDownChar = null;
 
     /// <summary>
     /// CHAR EDIT VARS
@@ -140,7 +142,7 @@ public class CharacterDropper : MonoBehaviour {
         //manage raycast lock
         if (charRadiusSelect || newCharDrop || charInfoOpen)
         {
-            if (!hasRaycastLock && RaycastLock.GetLock())
+            if (!hasRaycastLock && RaycastLock.GetLock(false))
                 hasRaycastLock = true;
         }
         else if (hasRaycastLock)
@@ -268,10 +270,35 @@ public class CharacterDropper : MonoBehaviour {
         }
         else // this is when we are not dropping a new character
         {
-            //raycast that ignores the user avatar
             if (mouseCam != null && Input.GetMouseButtonDown(0))
             {
-                if (!hasRaycastLock && RaycastLock.GetLock())
+                if (!hasRaycastLock && RaycastLock.GetLock(false))
+                    hasRaycastLock = true;
+
+                if (hasRaycastLock)
+                {
+                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
+                    //if we are pointing at an existing avatar and left click, open char info
+                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen)
+                    {
+                        mouseDownOnChar = true;
+                        mouseDownChar = RaycastLock.hit.transform.gameObject;
+                        RaycastLock.GiveLock();
+                        hasRaycastLock = false;
+                    }
+                    else
+                    {
+                        RaycastLock.GiveLock();
+                        hasRaycastLock = false;
+                        mouseDownOnChar = false;
+                        mouseDownChar = null;
+                    }
+                }
+            }
+            //raycast that ignores the user avatar
+            if (mouseCam != null && Input.GetMouseButtonUp(0) && mouseDownOnChar)
+            {
+                if (!hasRaycastLock && RaycastLock.GetLock(false))
                 {
                     hasRaycastLock = true;
                 }
@@ -280,12 +307,16 @@ public class CharacterDropper : MonoBehaviour {
                 {
                     RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
                     //if we are pointing at an existing avatar and left click, open char info
-                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen)
+                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen && mouseDownChar == RaycastLock.hit.transform.gameObject)
+                    {
                         OpenCharacterInfo();
+                    }
                     else
                     {
                         RaycastLock.GiveLock();
                         hasRaycastLock = false;
+                        mouseDownOnChar = false;
+                        mouseDownChar = null;
                     }
                 }
             }
@@ -382,7 +413,7 @@ public class CharacterDropper : MonoBehaviour {
 
     public void OpenCharacterDrop()
     {
-        if (!hasRaycastLock && RaycastLock.GetLock())
+        if (!hasRaycastLock && RaycastLock.GetLock(false))
             hasRaycastLock = true;
 
         dropCharacterSelectPanel.gameObject.SetActive(true);
@@ -530,7 +561,7 @@ public class CharacterDropper : MonoBehaviour {
 
         // grow edit panel
         //charEditPanel.localPosition = Input.mousePosition;
-        charEditPanel.transform.position = IConUtilities.SetPopUpPanel(charEditPanel);
+        charEditPanel.transform.position = UIUtilities.SetPopUpPanel(charEditPanel);
         charEditPanel.localScale = new Vector3(.01f, .01f, .01f);
         iTween.ScaleBy(charEditPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo", "time", .5f));
     }
@@ -568,6 +599,8 @@ public class CharacterDropper : MonoBehaviour {
         Destroy(charToDrop);
         charInfoOpen = true;
         charRadiusSelect = false;
+        mouseDownOnChar = false;
+        EditModeManager.EnterEditMode(charInfoPanel);
         charToEdit = RaycastLock.hit.transform.gameObject;
         wanderToEdit = charToEdit.GetComponent<CharacterWander>();
         charToEdit.GetComponent<NavMeshAgent>().Stop();
@@ -579,28 +612,8 @@ public class CharacterDropper : MonoBehaviour {
             selectedMode = wanderToEdit.prevMode;
         else
             selectedMode = wanderToEdit.mode;
-        /*
-        if (Input.mousePosition.x > Screen.width - charInfoPanel.sizeDelta.x)
-        {
-            if (Input.mousePosition.y > Screen.height - charInfoPanel.sizeDelta.y)
-            {
-                charInfoPanel.transform.position = new Vector3(Screen.width - charInfoPanel.sizeDelta.x, Screen.height - charInfoPanel.sizeDelta.y, 0);
-            }
-            else if (Input.mousePosition.y < charEditPanel.sizeDelta.y)
-            {
-                charInfoPanel.transform.position = new Vector3(Screen.width - charInfoPanel.sizeDelta.x, charEditPanel.sizeDelta.y, 0);
-            }
-            else
-                charInfoPanel.transform.position = new Vector3(Screen.width - charInfoPanel.sizeDelta.x, Input.mousePosition.y, 0);
-        }
-        else if (Input.mousePosition.y > Screen.height - charInfoPanel.sizeDelta.y)
-            charInfoPanel.transform.position = new Vector3(Input.mousePosition.x, Screen.height - charInfoPanel.sizeDelta.y, 0);
-        else if (Input.mousePosition.y < charEditPanel.sizeDelta.y)
-            charInfoPanel.transform.position = new Vector3(Input.mousePosition.x, charEditPanel.sizeDelta.y, 0);
-        else
-            charInfoPanel.transform.position = Input.mousePosition;
-            */
-        charInfoPanel.transform.position = IConUtilities.SetPopUpPanel(charInfoPanel);
+       
+        charInfoPanel.transform.position = UIUtilities.SetPopUpPanel(charInfoPanel);
 
         iTween.Stop(charInfoPanel.gameObject, true);
         charInfoPanel.localScale = new Vector3(.01f, .01f, .01f);
@@ -645,9 +658,12 @@ public class CharacterDropper : MonoBehaviour {
         SaveCharacters();
         charToEdit = null;
         wanderToEdit = null;
+
+        if(charInfoOpen)
+            EditModeManager.ExitEditMode();
+
         charInfoOpen = false;
         charInfoPanel.gameObject.SetActive(false);
-        
     }
 
     public void UpdateCharInfoLabels()
@@ -706,7 +722,7 @@ public class CharacterDropper : MonoBehaviour {
             GameObject newChar = GameObject.Instantiate(Resources.Load("Characters/" + character.modelName)) as GameObject;
             newChar.transform.parent = charRoot.transform;
             newChar.transform.localPosition = character.dropPoint;
-            Debug.Log("droppping character: " + character.dropPoint);
+            //Debug.Log("droppping character: " + character.dropPoint);
             newChar.transform.localScale = Vector3.one;
             CharacterWander newWander = newChar.GetComponent<CharacterWander>();
             newWander.dropPoint = character.dropPoint;

@@ -22,7 +22,7 @@ public class SaveChangesButton : MonoBehaviour {
         activeButton.GetComponent<POIInfoRef>().poiInfo.Point = newPoint;
 		activeButton.GetComponentInChildren<Text> ().text = newPoint.buttonName;
 
-        POI_ReferenceHub.Instance.CloseEditWindow();
+        POIMenuStateManager.CloseBookmarkEditWindow();
 
 
     }

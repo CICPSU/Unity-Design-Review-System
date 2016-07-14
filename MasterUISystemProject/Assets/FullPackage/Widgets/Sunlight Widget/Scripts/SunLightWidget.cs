@@ -26,6 +26,7 @@ public class SunLightWidget : MonoBehaviour {
 
 	public RectTransform cityButPrefab;
 	public RectTransform cityDropdown;
+    public RectTransform newCityPanel;
 
 	public Text yearLabelText;
 	public Text monthLabelText;
@@ -94,6 +95,18 @@ public class SunLightWidget : MonoBehaviour {
 		dayLightSaving = false; 
 	}
 
+    public void OpenNewCityPanel()
+    {
+        newCityPanel.gameObject.SetActive(true);
+        newCityPanel.anchoredPosition3D = new Vector3(350, -80, 0);
+
+        Vector3[] corners = new Vector3[4];
+        newCityPanel.GetWorldCorners(corners);
+        Rect screenRect = new Rect(0,0,Screen.width,Screen.height);
+        if (!screenRect.Contains(corners[2]))
+            newCityPanel.anchoredPosition3D = new Vector3(-105, -80, 0);
+    }
+
 	public void AddNewCityToDropDown(string cityName){
 		RectTransform cityItem = Instantiate(cityButPrefab) as RectTransform;
 		cityItem.parent = cityDropdown;
@@ -108,7 +121,7 @@ public class SunLightWidget : MonoBehaviour {
 
 		foreach(City city in listOfCity){
 			RectTransform cityItem = Instantiate(cityButPrefab) as RectTransform;
-			cityItem.parent = dropdownPanel;
+			cityItem.SetParent(dropdownPanel);
 			cityItem.FindChild("Text").GetComponent<UnityEngine.UI.Text>().text = city.CityName;
 			if(!CityDropdownLongEnough()){
 				IncreaseCityDropdownSize();

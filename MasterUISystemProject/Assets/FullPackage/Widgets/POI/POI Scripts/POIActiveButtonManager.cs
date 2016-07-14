@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class POIActiveButtonManager : MonoBehaviour {
 
@@ -30,6 +31,7 @@ public class POIActiveButtonManager : MonoBehaviour {
 
 			if(activeButton == clicked)
 			{
+                // this will de-select the active button
 				resetActiveButton();
 			}
 			else
@@ -57,6 +59,7 @@ public class POIActiveButtonManager : MonoBehaviour {
 					Transform editButText = editBut.FindChild("Text") as Transform;
 					editButText.GetComponent<Text>().color = new Color(50f/255,50f/255,50f/255,1);
 				}
+
 				// we also need to fill in the input fields in the edit window when a button is made active
 				POI clickedPOI = activeButton.GetComponent<POIInfoRef>().poiInfo.Point;
                 POI_ReferenceHub.Instance.FillPOIInfoFields(clickedPOI);
@@ -68,14 +71,16 @@ public class POIActiveButtonManager : MonoBehaviour {
 		else
 		{
 			// teleport to the poi
-			if(clicked.GetComponent<POIInfoRef>().poiInfo.Point.sceneFlag != Application.loadedLevelName)
-				Application.LoadLevel(clicked.GetComponent<POIInfoRef>().poiInfo.Point.sceneFlag);
+            // if it is in a different scene, load that scene first
+			if(clicked.GetComponent<POIInfoRef>().poiInfo.Point.sceneFlag != SceneManager.GetActiveScene().name)
+				SceneManager.LoadScene(clicked.GetComponent<POIInfoRef>().poiInfo.Point.sceneFlag);
 
 			POI_ReferenceHub.Instance.Avatar.transform.position = clicked.GetComponent<POIInfoRef>().poiInfo.Point.position;
 			POI_ReferenceHub.Instance.Avatar.transform.eulerAngles = clicked.GetComponent<POIInfoRef>().poiInfo.Point.rotation;
 		}
 	}// poiclicked
 
+    // this resets the active button and disables the Delete and EditBookmark buttons
 	public void resetActiveButton()
 	{
 		if(activeButton != null)
@@ -85,12 +90,12 @@ public class POIActiveButtonManager : MonoBehaviour {
 			POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
 
 			Transform deleteBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("Delete") as Transform;
-			deleteBut.GetComponent<Button>().enabled = false; //enable delete button
+			deleteBut.GetComponent<Button>().enabled = false; //disable delete button
 			Transform deleteButText = deleteBut.FindChild("Text") as Transform;
 			deleteButText.GetComponent<Text>().color = new Color(145f/255,145f/255,145f/255,1);
 			
 			Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
-			editBut.GetComponent<Button>().enabled = false; //enable edit button
+			editBut.GetComponent<Button>().enabled = false; //disable edit button
 			Transform editButText = editBut.FindChild("Text") as Transform;
 			editButText.GetComponent<Text>().color = new Color(145f/255,145f/255,145f/255,1);
 		}
