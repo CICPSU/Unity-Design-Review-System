@@ -1,20 +1,2 @@
 <?xml version="1.0" encoding="us-ascii"?>
-<ArrayOfDroppedCharacter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <DroppedCharacter>
-    <modelName>carl</modelName>
-    <dropPoint>
-      <x>2.34105015</x>
-      <y>-1.20234077E-16</y>
-      <z>5.41486168</z>
-    </dropPoint>
-    <localWanderCenter>
-      <x>0</x>
-      <y>0</y>
-      <z>0</z>
-    </localWanderCenter>
-    <localWanderRadius>3</localWanderRadius>
-    <mode>Idle</mode>
-    <defaultSpeed>1.5</defaultSpeed>
-    <normalSpeedRadius>3</normalSpeedRadius>
-  </DroppedCharacter>
-</ArrayOfDroppedCharacter>
+<ArrayOfDroppedCharacter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />

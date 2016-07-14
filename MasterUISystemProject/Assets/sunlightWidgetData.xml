@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <SunlightWidgetData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CurrentCity>
-    <CityName>San Francisco, CA</CityName>
-    <Longitude>-122.4183</Longitude>
-    <Latitude>37.775</Latitude>
-    <TimeZone>-8</TimeZone>
+    <CityName>New York City</CityName>
+    <Longitude>-74.0064</Longitude>
+    <Latitude>40.7142</Latitude>
+    <TimeZone>-5</TimeZone>
   </CurrentCity>
   <ListOfCity>
     <City>
@@ -47,5 +47,5 @@
   <Year>2014</Year>
   <Month>4</Month>
   <Date>20</Date>
-  <CurrentTime>0.51867032051086426</CurrentTime>
+  <CurrentTime>0.173593208193779</CurrentTime>
 </SunlightWidgetData>
