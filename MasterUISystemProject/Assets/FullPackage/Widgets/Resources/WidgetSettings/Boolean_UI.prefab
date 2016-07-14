@@ -43,6 +43,7 @@ GameObject:
   - 224: {fileID: 22429208}
   - 222: {fileID: 22216622}
   - 114: {fileID: 11499950}
+  - 114: {fileID: 11484994}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -308,6 +309,21 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &11484994
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 143358}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d7c934af453a9469701b72267593ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 
+  useMousePosition: 1
+  offset: {x: 0, y: 0, z: 0}
+  textObject: {fileID: 11499950}
 --- !u!114 &11499950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -331,7 +347,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 0

@@ -99,6 +99,7 @@ GameObject:
   - 224: {fileID: 22462074}
   - 222: {fileID: 22285656}
   - 114: {fileID: 11488194}
+  - 114: {fileID: 11493044}
   m_Layer: 5
   m_Name: Description
   m_TagString: Untagged
@@ -409,7 +410,7 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 1
+    m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
     m_Alignment: 0
@@ -432,6 +433,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
+--- !u!114 &11493044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d7c934af453a9469701b72267593ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: 
+  useMousePosition: 1
+  offset: {x: 0, y: 0, z: 0}
+  textObject: {fileID: 11488194}
 --- !u!114 &11498230
 MonoBehaviour:
   m_ObjectHideFlags: 1

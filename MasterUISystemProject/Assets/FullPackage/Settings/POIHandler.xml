@@ -18,15 +18,45 @@
     </POI>
     <POI>
       <SceneFlag>BaseScene</SceneFlag>
-      <Name>second</Name>
+      <Name>third</Name>
       <Position>
-        <x>-2.193592</x>
-        <y>-0.0200001</y>
-        <z>8.304461</z>
+        <x>1</x>
+        <y>2</y>
+        <z>3</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
+    <POI>
+      <SceneFlag>BaseScene</SceneFlag>
+      <Name>4</Name>
+      <Position>
+        <x>1</x>
+        <y>1</y>
+        <z>1</z>
       </Position>
       <Rotation>
         <x>0</x>
         <y>1</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
+    <POI>
+      <SceneFlag>BaseScene</SceneFlag>
+      <Name>LONGPOINAMEEEEEEEE</Name>
+      <Position>
+        <x>2.147352</x>
+        <y>-0.01999992</y>
+        <z>0.1506568</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>350.8611</y>
         <z>0</z>
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>

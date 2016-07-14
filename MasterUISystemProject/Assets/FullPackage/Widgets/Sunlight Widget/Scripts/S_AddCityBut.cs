@@ -14,7 +14,8 @@ public class S_AddCityBut : MonoBehaviour {
 	public RectTransform CityExistedPanel;
 
 	public void addCity(){
-		if(cityNameInput.text != "" && longitudeInput.text != "" && latitudeInput.text != "" && timeZoneInput.text != ""){
+		if(cityNameInput.text != "" && longitudeInput.text != "" && latitudeInput.text != "" && timeZoneInput.text != "")
+        {
 			City city = new City(cityNameInput.text, float.Parse(longitudeInput.text), float.Parse(latitudeInput.text), int.Parse(timeZoneInput.text));
 			if(cityExisted(city.CityName)){
 				//overwrite, continue?
@@ -31,7 +32,10 @@ public class S_AddCityBut : MonoBehaviour {
 				}
 			}
 			SunLightWidget.Instance.calcSunCoordination();
-		}else{
+            EditModeManager.ExitEditMode();
+		}
+        else
+        {
 			emptyInputWarningPanel.gameObject.SetActive(true);
 		}
 	}

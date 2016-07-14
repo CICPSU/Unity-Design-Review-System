@@ -8,11 +8,12 @@ public class TP_Camera : MonoBehaviour {
 	public Transform TargetLookAt;
 	public Transform cameraDistanceCheck;
     public GameObject avatarMesh;
-	public float Distance = 0.3f;  // distance from the camera to the capsule(TargetLookAt)
-									//was 5f
-	public float DistanceMin = 0.3f; // near limit
-	public float DistanceMax = 10f;   //far limit
-	public float DistanceSmooth = 0.05f;  //Transition time in seconds
+    public bool stopRotation = false;
+	public float Distance = 0.3f;   // distance from the camera to the capsule(TargetLookAt)
+								    // was 5f
+	public float DistanceMin = 0.3f;    // near limit
+	public float DistanceMax = 10f;     //far limit
+	public float DistanceSmooth = 0.05f;    //Transition time in seconds
 	public float DistanceResumeSmooth = 1f;
 	
 	public float X_MouseSensitivity = 5f;
@@ -31,7 +32,8 @@ public class TP_Camera : MonoBehaviour {
 	public float OcclusionDistanceStep = 0.5f;
 	public int MaxOcclusionChecks = 1;
     public bool iconLabCam = false;
-//used to control the smoothDamn of camera snap
+
+    //used to control the smoothDamn of camera snap
 	public float XSnapSmooth = 100f;
 	public float YSnapSmooth = 1.5f;
 	private float velXSnap = 0f;
@@ -40,15 +42,15 @@ public class TP_Camera : MonoBehaviour {
 
 	
 	private float mouseX = 0f;  // rotation around Y axis, 0 is right behind the avatar
-	private float mouseY = 0f;    // rotation around X axis
+	private float mouseY = 0f;  // rotation around X axis
 	
 	private float velX = 0f;
 	private float velY = 0f;
 	private float velZ = 0f;
-	private float velDistance = 0f;  //speed along the smoothing curve
-	private  float startDistance = 0f;   //validated start distance
+	private float velDistance = 0f; //speed along the smoothing curve
+	private  float startDistance = 0f;  //validated start distance
 	private Vector3 position = Vector3.zero;
-	public float desiredDistance = 0f;    //distance you want to move to
+	public float desiredDistance = 0f;  //distance you want to move to
 	public Vector3 desiredPosition = Vector3.zero;
 	private float distanceSmooth = 0f;
 	private float preOccludedDistance = 0f; // this will store the distance value very time we move the mousewheel
@@ -56,17 +58,19 @@ public class TP_Camera : MonoBehaviour {
 	
 	private bool showSpeed = false;
 	
-	private int countRightClick = 0; // tell if it is the first time right mouse is clicked. 
+	private int countRightClick = 0;    // tell if it is the first time right mouse is clicked. 
 	
 	private Rect showSpeedRect;
 	private GUIStyle style;
 		
-	void Awake () {
-		Instance = this;
-		
+	void Awake ()
+    {
+        if(Instance == null)
+		    Instance = this;
 	}
 	
-	void Start(){
+	void Start()
+    {
 		showSpeedRect= new Rect (Screen.width/2, Screen.height - 20, 120, 20);
 		style = new GUIStyle();
 		style.fontSize = 15;
@@ -79,8 +83,7 @@ public class TP_Camera : MonoBehaviour {
 		if (TargetLookAt == null)
 			return;
 
-        //if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
-        //if(allowPlayerInput)
+        if(!stopRotation)
             HandlePlayerInput();
         checkCameraCharacterDistance(desiredPosition, cameraDistanceCheck.position);
 
@@ -111,10 +114,10 @@ public class TP_Camera : MonoBehaviour {
 		if(Input.GetKey(TP_InputManager.instance.rotateRight) || Input.GetKey(TP_InputManager.instance.rotateLeft)){	
 			if(Input.GetKey (TP_InputManager.instance.rotateRight)){
                 TP_Animator.Instance.avatarRotation = 90f;
-				mouseX += TP_InputManager.instance.roateKeySensitivity;
+				mouseX += TP_InputManager.instance.rotateKeySensitivity;
 			}
 			if(Input.GetKey (TP_InputManager.instance.rotateLeft)){
-				mouseX -= TP_InputManager.instance.roateKeySensitivity;
+				mouseX -= TP_InputManager.instance.rotateKeySensitivity;
                 TP_Animator.Instance.avatarRotation = -90f;
 			}
             //		Debug.Log ("Rotate: " + Input.GetAxis ("Rotate"));
@@ -122,7 +125,7 @@ public class TP_Camera : MonoBehaviour {
                 TP_Motor.Instance.SnapCharaterWithCamera_Key();
 		}
 
-		if(Input.GetMouseButton(0)){
+		if(Input.GetMouseButton(0) && Input.GetKey(KeyCode.LeftControl)){
 			mouseX += Input.GetAxis("Mouse X") * X_MouseSensitivity;
 			mouseY -= Input.GetAxis("Mouse Y") * Y_MouseSensitivity;
 			if(mouseX != 0){
