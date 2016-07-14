@@ -47,14 +47,14 @@ namespace UnityEngine.UI.Extensions
             // need to check to keep the tootip on screen
             // open in a quadrant around the mouse to keep it on screen.
             if (Input.mousePosition.x + tooltipRect.sizeDelta.x > Screen.width)
-                finalPos -= new Vector3(tooltipRect.sizeDelta.x * .51f, 0, 0);
+                finalPos -= new Vector3(tooltipRect.sizeDelta.x * .6f, 0, 0);
             else
-                finalPos += new Vector3(tooltipRect.sizeDelta.x * .51f, 0, 0);
+                finalPos += new Vector3(tooltipRect.sizeDelta.x * .6f, 0, 0);
 
-            if (Input.mousePosition.y + tooltipRect.sizeDelta.y * .5f > Screen.height)
-                finalPos -= new Vector3(0, tooltipRect.sizeDelta.y * .51f, 0);
+            if (Input.mousePosition.y + tooltipRect.sizeDelta.y * .6f > Screen.height)
+                finalPos -= new Vector3(0, tooltipRect.sizeDelta.y * .6f, 0);
             else
-                finalPos += new Vector3(0, tooltipRect.sizeDelta.y * .51f, 0);
+                finalPos += new Vector3(0, tooltipRect.sizeDelta.y * .6f, 0);
 
             transform.position = finalPos;
         }
