@@ -259,9 +259,9 @@ public class POIButtonManager : MonoBehaviour {
 				buttonToRemove.transform.parent.GetChild(i).position += new Vector3(0,37,0);
 			}
 		}
-
+        
 		// The destroy call is what actually removes the button
-		GameObject.Destroy(buttonToRemove);
+		DestroyImmediate(buttonToRemove);
 
 		// numofbuttons is used for positioning and sizing the list and buttons
 		// !!!! it will be unnecessary in the Layout system
@@ -269,7 +269,8 @@ public class POIButtonManager : MonoBehaviour {
 	}
 
 	//save the buttons in the scene into the XML file and the orginalHandler
-	public void SaveButsToXML(){
+	public void SaveButsToXML()
+    {
 		Debug.Log("generating saved button files based on current project");
 		originalHandler = new POIHandler();
 		foreach (Transform child in POIList.transform)
