@@ -56,7 +56,7 @@ public class WidgetTransitions : MonoBehaviour {
         {
             iTween.Stop(widgetConfig.gameObject);
 
-            if (rootDirection == -2)
+            if (configDirection == -2)
                 widgetConfig.anchoredPosition = new Vector3(widgetConfig.anchoredPosition.x, 0, 0);
             else
                 widgetConfig.anchoredPosition = new Vector3(widgetConfig.anchoredPosition.x, -2 * Screen.height, 0);
