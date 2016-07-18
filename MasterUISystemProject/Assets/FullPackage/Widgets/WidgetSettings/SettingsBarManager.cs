@@ -52,7 +52,7 @@ public class SettingsBarManager : MonoBehaviour {
 
     public void ToggleMenuButtons()
     {
-        if (EditModeManager.widgetInEdit != SettingsManager.Instance.ci_Gameobject.GetComponent<RectTransform>())
+        //if (EditModeManager.widgetInEdit != SettingsManager.Instance.ci_Gameobject.GetComponent<RectTransform>())
         {
             //check if UIs under the menu is playing animation, if yes, skip
             foreach (Transform child in settingBar.transform) {
@@ -90,7 +90,7 @@ public class SettingsBarManager : MonoBehaviour {
         errorWindow.SetActive(false);
         menuButtonsOpen = false;
         tpControlRef.allowPlayerInput = true;
-        EditModeManager.ExitEditMode();
+        //EditModeManager.ExitEditMode();
         toggleMenuButtonManagerRef.clickedState = false;
 
 
@@ -107,7 +107,7 @@ public class SettingsBarManager : MonoBehaviour {
 			
         menuButtonsOpen = true;
         tpControlRef.allowPlayerInput = false;
-        EditModeManager.EnterEditMode(GetComponent<RectTransform>());
+        //EditModeManager.EnterEditMode(GetComponent<RectTransform>());
         toggleMenuButtonManagerRef.clickedState = true;
         toggleMenuButtonManagerRef.clickTime = Time.time;
     }

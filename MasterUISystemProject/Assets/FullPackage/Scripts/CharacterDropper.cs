@@ -8,14 +8,17 @@ using System.IO;
 
 public class CharacterDropper : MonoBehaviour {
 
+    public static CharacterDropper Instance;
+
     /// <summary>
     /// GENERAL VARS
     /// </summary>
     public GameObject avatar;
-    private Camera mouseCam;
     public bool hasRaycastLock = false;
-    private bool initializing = false;
+    public GameObject activeChar = null;
 
+    private bool initializing = false;
+    private Camera mouseCam;
     private List<DroppedCharacter> droppedCharacters = new List<DroppedCharacter>();
     private string characterFilePath;
     
@@ -31,12 +34,13 @@ public class CharacterDropper : MonoBehaviour {
     public Dropdown newCharWanderSelect;
     public Image buttonImage;
     public GameObject charRoot;
+
     private List<GameObject> loadedCharacters = new List<GameObject>();
     private List<Toggle> toggleList = new List<Toggle>();
-    private GameObject charToDrop;
     private bool modelOptionsGreyed;
     private Vector3 dropLocation = Vector3.zero;
     private int randomCharIndex = -1;
+    private bool mouseDownDrop = false;
 
     /// <summary>
     /// CHAR INFO VARS
@@ -59,28 +63,30 @@ public class CharacterDropper : MonoBehaviour {
     public Image radiusSelectMask;
     public CharacterWander.WanderMode selectedMode;
 
-    private GameObject charToEdit;
     private CharacterWander wanderToEdit;
 
     /// <summary>
     /// STATES
     /// </summary>
-    private bool newCharDrop = false;
-    private bool charInfoOpen = false;
-    private bool charEditOpen = false;
-    private bool charRadiusSelect = false;
+    public enum CharacterDropperState { None, SelectExisting, DroppingNew, CharInfoOpen, CharEditOpen, CharRadiusSelect}
+    public CharacterDropperState currentState = CharacterDropperState.None;
+    private CharacterDropperState prevState = CharacterDropperState.None;
+
     private bool userSetRadius = false;
-    private bool firstFrameOpen = false;
-    private bool firstFrameRadiusSelect = false;
-
-
+    
     void Start()
     {
         //characterFilePath = Application.dataPath + "/FullPackage/Settings/SavedChars.characters";
         //LoadCharacters();
 
+        if (Instance == null)
+            Instance = this;
+
         radiusInput.onValueChanged.AddListener(SetRadiusProjectorFromInputValueChanged);
+
         ResetMenu();
+        currentState = CharacterDropperState.SelectExisting;
+
         if (avatar == null)
         {
             Debug.Log("CharacterDropper.Avatar was null! Searching for tag: Player");
@@ -111,217 +117,44 @@ public class CharacterDropper : MonoBehaviour {
 
     void Update()
     {
-
-        if (firstFrameRadiusSelect && Input.GetMouseButtonDown(0))
-            firstFrameRadiusSelect = false;
-
-        if (firstFrameOpen && Input.GetMouseButtonDown(0))
-            firstFrameOpen = false;
-
-        // this finds the camera whose viewport contains the mouse cursor
-        mouseCam = FindMouseCamera();
-
-        // if the char edit group is set to patrol, disable the mask
-        if ( charEditOpen  && charEditWanderToggleGroup.ActiveToggles().ToArray().Count() != 0 
-            && charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
+        // if characterdrop is the active widget, we can either drop a new character or be in charinfo/charedit/radiusselect
+        // for charinfo/charedit we dont need to do anything on update
+        if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.CharacterDrop)
         {
-            radiusProjector.transform.position = wanderToEdit.localWanderCenter + new Vector3(0, 2, 0);
-            if (!userSetRadius)
-                radiusProjector.orthographicSize = wanderToEdit.localWanderRadius;
-
-            radiusSelectMask.enabled = false;
-        }
-        else if (charEditOpen)
-        {
-
-            radiusProjector.orthographicSize = 0;
-
-            radiusSelectMask.enabled = true;
-        }
-
-        //manage raycast lock
-        if (charRadiusSelect || newCharDrop || charInfoOpen)
-        {
-            if (!hasRaycastLock && RaycastLock.GetLock(false))
-                hasRaycastLock = true;
-        }
-        else if (hasRaycastLock)
-        {
-            RaycastLock.GiveLock();
-            hasRaycastLock = false;
-        }
-
-
-        if (charRadiusSelect || charInfoOpen)
-        {
-            radiusProjector.gameObject.SetActive(true);
-            radiusProjector.transform.position = wanderToEdit.localWanderCenter + new Vector3(0, 2, 0);
-        }
-        else
-        {
-
-            radiusProjector.gameObject.SetActive(false);
-        }
-        //radius select mode
-        if (charRadiusSelect)
-        {
-
-            if (!userSetRadius)
+            // if we are dropping a new char, we need to raycast for the placement of the temp char
+            if (currentState == CharacterDropperState.DroppingNew)
             {
-                //set size of the projector to the distance between the character being editted and the raycast hit at the mouse location
-                if (mouseCam != null && hasRaycastLock)
+                RaycastControl.RaycastCursor(~(1 << 9 | 1 << 8));
+                activeChar.transform.position = RaycastControl.hit.point;
+
+                if (!EventSystem.current.IsPointerOverGameObject())
                 {
-                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
-                    radiusProjector.orthographicSize = (charToEdit.transform.position - RaycastLock.hit.point).magnitude;
-                }
-
-                else
-                    radiusProjector.orthographicSize = wanderToEdit.localWanderRadius;
-            }
-
-            radiusInput.text = radiusProjector.orthographicSize.ToString("F2");
-
-            if (Input.GetMouseButtonUp(0) && !firstFrameRadiusSelect)
-            {
-                StopCharRadiusSelect(!charEditOpen);
-            }
-
-        }
-        // if we are dropping a new character
-        else if (newCharDrop)
-        {
-            #region dropping new char
-            #region toggles
-            if (randomToggle.isOn)
-            {
-                if (modelToggleGroup.AnyTogglesOn())
-                {
-                    modelToggleGroup.SetAllTogglesOff();
-                }
-
-                if (!modelOptionsGreyed)
-                {
-                    foreach (Toggle tog in modelToggleGroup.GetComponentsInChildren<Toggle>())
-                    {
-                        tog.GetComponentInChildren<Text>().color = Color.grey;
-                    }
-                    modelOptionsGreyed = true;
+                    if (Input.GetMouseButtonDown(0))
+                        mouseDownDrop = true;
+                    if (Input.GetMouseButtonUp(0) && mouseDownDrop)
+                        DropCharacter();
                 }
             }
-            else
+            else if (mouseDownDrop)
+                mouseDownDrop = false;
+
+            if(currentState == CharacterDropperState.CharRadiusSelect)
             {
-                if (modelOptionsGreyed)
+                if (!radiusProjector.gameObject.activeSelf)
                 {
-                    foreach (Toggle tog in modelToggleGroup.GetComponentsInChildren<Toggle>())
-                    {
-                        tog.GetComponentInChildren<Text>().color = Color.black;
-                    }
-                    modelOptionsGreyed = false;
+                    radiusProjector.gameObject.SetActive(true);
+                    radiusProjector.transform.position = new Vector3(RaycastControl.hit.point.x, RaycastControl.hit.point.y + 2, RaycastControl.hit.point.z);
                 }
+                RaycastControl.RaycastCursor(~(1 << 9 | 1 << 8));
+                radiusProjector.orthographicSize = (RaycastControl.hit.point - wanderToEdit.localWanderCenter).magnitude;
+
+                if (Input.GetMouseButtonDown(0))
+                    StopCharRadiusSelect(true);
             }
-
-            // this if is to make sure that a toggle in the toggle group is on if the random toggle is off
-            if (!modelToggleGroup.AnyTogglesOn() && !randomToggle.isOn)
-            {
-                modelToggleGroup.GetComponentInChildren<Toggle>().isOn = true;
-                modelToggleGroup.NotifyToggleOn(modelToggleGroup.GetComponentInChildren<Toggle>());
-            }
-            #endregion
-
-            //raycast that ignores characters in the scene
-            if (mouseCam != null && hasRaycastLock)
-                RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
-
-            #region makes sure the displayed char is correct
-            if (charToDrop == null)
-                charToDrop = GetCharacter();
-
-            if (modelToggleGroup.ActiveToggles().Count() > 0
-                && charToDrop.name != modelToggleGroup.ActiveToggles().ToList()[0].name + "(Clone)"
-                && !randomToggle.isOn)
-            {
-                Destroy(charToDrop);
-                charToDrop = GetCharacter();
-            }
-            #endregion
-
-            //sets the position of the temp avatar
-            if (mouseCam != null)
-            {
-                if (RaycastLock.hit.point != null)
-                    dropLocation = RaycastLock.hit.point;
-                else
-                    dropLocation = avatar.transform.position + avatar.transform.forward * 2f;
-
-                //Debug.Log("drop location: " + dropLocation + " haslock: " + hasRaycastLock);
-            }
-
-            if (charToDrop != null)
-                charToDrop.transform.position = dropLocation;
-
-            //if we left click at a valid location, drop the character
-            if (Input.GetMouseButtonUp(0) && RaycastLock.hit.transform != null && !firstFrameOpen && !EventSystem.current.IsPointerOverGameObject())
-            {
-                DropCharacter();
-                Debug.Log("dropping character");
-            }
-
-            #endregion
+            else if (radiusProjector.gameObject.activeSelf)
+                    radiusProjector.gameObject.SetActive(false);
         }
-        else // this is when we are not dropping a new character
-        {
-            if (mouseCam != null && Input.GetMouseButtonDown(0))
-            {
-                if (!hasRaycastLock && RaycastLock.GetLock(false))
-                    hasRaycastLock = true;
-
-                if (hasRaycastLock)
-                {
-                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
-                    //if we are pointing at an existing avatar and left click, open char info
-                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen)
-                    {
-                        mouseDownOnChar = true;
-                        mouseDownChar = RaycastLock.hit.transform.gameObject;
-                        RaycastLock.GiveLock();
-                        hasRaycastLock = false;
-                    }
-                    else
-                    {
-                        RaycastLock.GiveLock();
-                        hasRaycastLock = false;
-                        mouseDownOnChar = false;
-                        mouseDownChar = null;
-                    }
-                }
-            }
-            //raycast that ignores the user avatar
-            if (mouseCam != null && Input.GetMouseButtonUp(0) && mouseDownOnChar)
-            {
-                if (!hasRaycastLock && RaycastLock.GetLock(false))
-                {
-                    hasRaycastLock = true;
-                }
-
-                if (hasRaycastLock)
-                {
-                    RaycastLock.Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
-                    //if we are pointing at an existing avatar and left click, open char info
-                    if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<CharacterWander>() != null && !charInfoOpen && mouseDownChar == RaycastLock.hit.transform.gameObject)
-                    {
-                        OpenCharacterInfo();
-                    }
-                    else
-                    {
-                        RaycastLock.GiveLock();
-                        hasRaycastLock = false;
-                        mouseDownOnChar = false;
-                        mouseDownChar = null;
-                    }
-                }
-            }
-            
-        }
+        
     }
 
 
@@ -340,29 +173,25 @@ public class CharacterDropper : MonoBehaviour {
     public void ResetMenu()
     {
         initializing = true;
-        Destroy(charToDrop);
-        newCharDrop = false;
-        charInfoOpen = false;
-        charEditOpen = false;
-        charRadiusSelect = false;
+        Destroy(activeChar);
         modelOptionsGreyed = false;
         StopCharRadiusSelect(false);
         CloseCharacterDrop();
         CloseCharacterInfo();
         CloseCharacterEdit();
         initializing = false;
+        currentState = CharacterDropperState.None;
     }
 
     public void ToggleMenu()
     {
-        newCharDrop = !newCharDrop;
-        if (newCharDrop)
+        if(currentState == CharacterDropperState.DroppingNew)
         {
-            OpenCharacterDrop();
+            CloseCharacterDrop();
         }
         else
         {
-            CloseCharacterDrop();
+            OpenCharacterDrop();
         }
     }
 
@@ -390,56 +219,50 @@ public class CharacterDropper : MonoBehaviour {
 
     public void DropCharacter()
     {
-        charToDrop.GetComponent<CapsuleCollider>().enabled = true;
-        charToDrop.GetComponent<NavMeshAgent>().enabled = true;
-        charToDrop.GetComponent<CharacterWander>().enabled = true;
-        charToDrop.GetComponent<CharacterWander>().mode = (CharacterWander.WanderMode)newCharWanderSelect.value;
-        charToDrop.GetComponent<CharacterWander>().dropPoint = charToDrop.transform.position;
-        charToDrop.GetComponent<CharacterWander>().poiDestination = -1;
-       
-        charToDrop.transform.parent = charRoot.transform;
+        mouseDownDrop = false;
+        activeChar.GetComponent<CapsuleCollider>().enabled = true;
+        activeChar.GetComponent<NavMeshAgent>().enabled = true;
+        activeChar.GetComponent<CharacterWander>().enabled = true;
+        activeChar.GetComponent<CharacterWander>().mode = (CharacterWander.WanderMode)newCharWanderSelect.value;
+        activeChar.GetComponent<CharacterWander>().dropPoint = activeChar.transform.position;
+        activeChar.GetComponent<CharacterWander>().poiDestination = -1;
+
+        activeChar.transform.parent = charRoot.transform;
 
         if ((CharacterWander.WanderMode)newCharWanderSelect.value == CharacterWander.WanderMode.Patrol)
         {
-            charToEdit = charToDrop;
-            wanderToEdit = charToEdit.GetComponent<CharacterWander>();
+            wanderToEdit = activeChar.GetComponent<CharacterWander>();
             StartCharRadiusSelect();
         }
+        else
+        {
+            activeChar = GetCharacter();
+        }
 
-        droppedCharacters.Add(new DroppedCharacter(charToDrop.GetComponent<CharacterWander>()));
+        droppedCharacters.Add(new DroppedCharacter(activeChar.GetComponent<CharacterWander>()));
         SaveCharacters();
-        charToDrop = null;
+        
     }
 
     public void OpenCharacterDrop()
     {
-        if (!hasRaycastLock && RaycastLock.GetLock(false))
-            hasRaycastLock = true;
-
         dropCharacterSelectPanel.gameObject.SetActive(true);
         modelToggleGroup.SetAllTogglesOff();
         randomToggle.isOn = true;
-        charToDrop = GetCharacter();
+        activeChar = GetCharacter();
         buttonImage.color = Color.red;
-        firstFrameOpen = true;
-
-        CloseCharacterInfo();
+        currentState = CharacterDropperState.DroppingNew;
+        ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
     }
 
     public void CloseCharacterDrop()
     {
-
-        if (hasRaycastLock)
-        {
-            hasRaycastLock = false;
-            RaycastLock.GiveLock();
-        }
         dropCharacterSelectPanel.gameObject.SetActive(false);
-        Destroy(charToDrop);
-        charToDrop = null;
+        Destroy(activeChar);
+        activeChar = null;
         buttonImage.color = Color.white;
-        CloseCharacterInfo();
-        CloseCharacterEdit();
+        currentState = CharacterDropperState.SelectExisting;
+        ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
     }
 
 
@@ -469,10 +292,6 @@ public class CharacterDropper : MonoBehaviour {
 
     private GameObject CreateRandomChar()
     {
-        /*
-        int randomIndex = (int)Random.Range(0, loadedCharacters.Count - 1);
-        modelLabel.text = "Model: " + loadedCharacters[randomIndex].name;
-        */
         randomCharIndex++;
         if (randomCharIndex >= loadedCharacters.Count)
             randomCharIndex = 0;
@@ -483,44 +302,25 @@ public class CharacterDropper : MonoBehaviour {
 
     public void DeleteCharacter()
     {
-        droppedCharacters.Remove(new DroppedCharacter(charToEdit.GetComponent<CharacterWander>()));
+        droppedCharacters.Remove(new DroppedCharacter(activeChar.GetComponent<CharacterWander>()));
         SaveCharacters();
-        Destroy(charToEdit);
-        charToEdit = null;
+        Destroy(activeChar);
+        activeChar = null;
         CloseCharacterInfo();
-    }
-
-    private Camera FindMouseCamera()
-    {
-        List<Camera> camList = (from cam in GameObject.FindObjectsOfType<Camera>() where cam.targetTexture == null select cam).ToList();
-        foreach (Camera cam in camList)
-        {
-            if (Input.mousePosition.x > cam.pixelRect.xMin && Input.mousePosition.x < cam.pixelRect.xMax
-                && Input.mousePosition.y > cam.pixelRect.yMin && Input.mousePosition.y < cam.pixelRect.yMax)
-            {
-                return cam;
-            }
-        }
-        return null;
     }
 
     public void StartCharRadiusSelect()
     {
+        prevState = currentState;
+        currentState = CharacterDropperState.CharRadiusSelect;
+
         userSetRadius = false;
-        if (charToEdit == null && charToDrop != null)
-        {
-            charToEdit = charToDrop;
-           
-            charToDrop = null;
-        }
+        
         if(wanderToEdit == null)
-            wanderToEdit = charToEdit.GetComponent<CharacterWander>();
+            wanderToEdit = activeChar.GetComponent<CharacterWander>();
 
-        if (charToEdit != null)
-            wanderToEdit.localWanderCenter = charToEdit.transform.position;
-
-        charRadiusSelect = true;
-        firstFrameRadiusSelect = true;
+        if (activeChar != null)
+            wanderToEdit.localWanderCenter = activeChar.transform.position;
         
     }
 
@@ -532,22 +332,19 @@ public class CharacterDropper : MonoBehaviour {
             if(startMotion)
                 wanderToEdit.SetWanderMode();
         }
-        
+        currentState = prevState;
 
-        //charToEdit = null;
-        //wanderToEdit = null;
-        charRadiusSelect = false;
-        
+        if (currentState == CharacterDropperState.DroppingNew)
+            activeChar = GetCharacter();
     }
 
     public void OpenCharacterEdit()
     {
         userSetRadius = false;
-        charEditOpen = true;
         charEditPanel.gameObject.SetActive(true);
         charEditWanderToggleGroup.SetAllTogglesOff();
         radiusInput.text = wanderToEdit.localWanderRadius.ToString();
-        wanderToEdit.localWanderCenter = charToEdit.transform.position;
+        wanderToEdit.localWanderCenter = activeChar.transform.position;
         Toggle toggleToActivate;
         if(wanderToEdit.mode == CharacterWander.WanderMode.Bookmark)
             toggleToActivate = charEditWanderToggleGroup.transform.GetChild((int)wanderToEdit.prevMode).GetComponent<Toggle>();
@@ -560,7 +357,6 @@ public class CharacterDropper : MonoBehaviour {
         iTween.MoveBy(charInfoPanel.gameObject, iTween.Hash("y", Screen.height, "easeType", "easeInOutExpo", "time", .5f));
 
         // grow edit panel
-        //charEditPanel.localPosition = Input.mousePosition;
         charEditPanel.transform.position = UIUtilities.SetPopUpPanel(charEditPanel);
         charEditPanel.localScale = new Vector3(.01f, .01f, .01f);
         iTween.ScaleBy(charEditPanel.gameObject, iTween.Hash("x", 100, "y", 100, "easeType", "easeInOutExpo", "time", .5f));
@@ -568,16 +364,17 @@ public class CharacterDropper : MonoBehaviour {
 
     public void CloseCharacterEdit()
     {
-        if (wanderToEdit != null && charEditOpen)
+        if (wanderToEdit != null)
         {
             if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Idle")
                 selectedMode = (CharacterWander.WanderMode)0;
+
             else if (charEditWanderToggleGroup.ActiveToggles().ToArray()[0].name == "Patrol")
             {
                 if (float.Parse(radiusInput.text) > .5f)
                 {
                     selectedMode = (CharacterWander.WanderMode)1;
-                    wanderToEdit.localWanderCenter = charToEdit.transform.position;
+                    wanderToEdit.localWanderCenter = activeChar.transform.position;
                     wanderToEdit.localWanderRadius = float.Parse(radiusInput.text);
                 }
                 else
@@ -590,22 +387,19 @@ public class CharacterDropper : MonoBehaviour {
         iTween.MoveBy(charInfoPanel.gameObject, iTween.Hash("y", -Screen.height, "easeType", "easeInOutExpo", "time", .5f));
 
 
-        charEditOpen = false;
         charEditPanel.gameObject.SetActive(false);
     }
 
-    public void OpenCharacterInfo()
+    public void OpenCharacterInfo(GameObject charToOpen)
     {
-        Destroy(charToDrop);
-        charInfoOpen = true;
-        charRadiusSelect = false;
+        Destroy(activeChar);
+        activeChar = charToOpen;
+
         mouseDownOnChar = false;
-        EditModeManager.EnterEditMode(charInfoPanel);
-        charToEdit = RaycastLock.hit.transform.gameObject;
-        wanderToEdit = charToEdit.GetComponent<CharacterWander>();
-        charToEdit.GetComponent<NavMeshAgent>().Stop();
+        wanderToEdit = activeChar.GetComponent<CharacterWander>();
+        activeChar.GetComponent<NavMeshAgent>().Stop();
         wanderToEdit.CancelMovement();
-        charToEdit.GetComponent<Animator>().enabled = false;
+        activeChar.GetComponent<Animator>().enabled = false;
         charInfoPanel.gameObject.SetActive(true);
 
         if (wanderToEdit.mode == CharacterWander.WanderMode.Bookmark)
@@ -625,20 +419,16 @@ public class CharacterDropper : MonoBehaviour {
         destinationDropDown.AddOptions(new List<string>() { "None" });
 
         destinationDropDown.AddOptions(new List<string>( POIButtonManager.originalHandler.projectPOIs.Select(e => e.buttonName).ToList()));
+
+        ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
+
+        currentState = CharacterDropperState.CharInfoOpen;
     }
 
     public void CloseCharacterInfo()
     {
-        if (hasRaycastLock)
-        {
-            RaycastLock.GiveLock();
-            hasRaycastLock = false;
-        }
-        if(charEditOpen)
-            CloseCharacterEdit();
-
-        if (charToEdit != null)
-            charToEdit.GetComponent<Animator>().enabled = true;
+        if (activeChar != null)
+            activeChar.GetComponent<Animator>().enabled = true;
         
 
         ApplyOptions();
@@ -656,20 +446,19 @@ public class CharacterDropper : MonoBehaviour {
         }
 
         SaveCharacters();
-        charToEdit = null;
+        activeChar = null;
         wanderToEdit = null;
 
-        if(charInfoOpen)
-            EditModeManager.ExitEditMode();
-
-        charInfoOpen = false;
         charInfoPanel.gameObject.SetActive(false);
+        ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
+
+        currentState = CharacterDropperState.SelectExisting;
     }
 
     public void UpdateCharInfoLabels()
     {
-        if(charToEdit != null)
-            modelNameLabel.text = charToEdit.gameObject.name.Remove(charToEdit.gameObject.name.IndexOf("("));
+        if(activeChar != null)
+            modelNameLabel.text = activeChar.gameObject.name.Remove(activeChar.gameObject.name.IndexOf("("));
 
         if (wanderToEdit != null)
         {
@@ -700,7 +489,7 @@ public class CharacterDropper : MonoBehaviour {
 
     public void ApplyOptions()
     {
-        if (charToEdit != null)
+        if (activeChar != null)
         {
             if (wanderToEdit.mode == CharacterWander.WanderMode.Bookmark)
                 wanderToEdit.prevMode = selectedMode;
@@ -719,10 +508,9 @@ public class CharacterDropper : MonoBehaviour {
 
         foreach (DroppedCharacter character in droppedCharacters)
         {
-            GameObject newChar = GameObject.Instantiate(Resources.Load("Characters/" + character.modelName)) as GameObject;
+            GameObject newChar = GameObject.Instantiate(Resources.Load("Characters/" + character.modelName), character.dropPoint, Quaternion.identity) as GameObject;
             newChar.transform.parent = charRoot.transform;
             newChar.transform.localPosition = character.dropPoint;
-            //Debug.Log("droppping character: " + character.dropPoint);
             newChar.transform.localScale = Vector3.one;
             CharacterWander newWander = newChar.GetComponent<CharacterWander>();
             newWander.dropPoint = character.dropPoint;
@@ -753,7 +541,12 @@ public class CharacterDropper : MonoBehaviour {
     {
         List<GameObject> children = new List<GameObject>();
         foreach (Transform child in charRoot.transform) children.Add(child.gameObject);
-        children.ForEach(child => Destroy(child));
+        children.ForEach(child =>
+        {
+            droppedCharacters.Remove(new DroppedCharacter(child.GetComponent<CharacterWander>()));
+            DestroyImmediate(child);
+        }
+        );
         SaveCharacters();
     }
 }

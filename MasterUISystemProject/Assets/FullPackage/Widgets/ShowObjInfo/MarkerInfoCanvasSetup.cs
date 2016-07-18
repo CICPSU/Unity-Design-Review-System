@@ -2,16 +2,19 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class MarkerInfoCanvasSetup : MonoBehaviour {
-	private GameObject markerInfoCanvasRef;
+public class MarkerInfoCanvasSetup : MonoBehaviour, IAcceptRaycast{
 
-    //public bool hasRaycastLock = false;
-
+    private GameObject markerInfoCanvasRef;
+    
 	void Start()
 	{
 		markerInfoCanvasRef = POI_ReferenceHub.Instance.markerInfoCanvas;
 	}
     
+    public void RaycastTrigger()
+    {
+        SetupCanvas();
+    }
 
     public void SetupCanvas()
     {

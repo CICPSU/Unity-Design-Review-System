@@ -16,35 +16,5 @@
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>
     </POI>
-    <POI>
-      <SceneFlag>BaseScene</SceneFlag>
-      <Name>asfda</Name>
-      <Position>
-        <x>0.236831442</x>
-        <y>-0.02000004</y>
-        <z>-0.2135029</z>
-      </Position>
-      <Rotation>
-        <x>0</x>
-        <y>337.597229</y>
-        <z>0</z>
-      </Rotation>
-      <MarkerPrefabName>Pin</MarkerPrefabName>
-    </POI>
-    <POI>
-      <SceneFlag>BaseScene</SceneFlag>
-      <Name>asdf</Name>
-      <Position>
-        <x>-0.1715913</x>
-        <y>-0.02000004</y>
-        <z>0.523488939</z>
-      </Position>
-      <Rotation>
-        <x>0</x>
-        <y>342.754517</y>
-        <z>0</z>
-      </Rotation>
-      <MarkerPrefabName>Pin</MarkerPrefabName>
-    </POI>
   </ProjectPOIs>
 </POIHandler>

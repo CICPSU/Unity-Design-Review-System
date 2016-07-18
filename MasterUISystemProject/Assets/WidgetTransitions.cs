@@ -7,7 +7,6 @@ public class WidgetTransitions : MonoBehaviour {
 
     public RectTransform widgetRoot;
     public RectTransform widgetConfig;
-    public GameObject widget3D;
 
     public int rootDirection = 2;
     public int configDirection = -2;
@@ -16,7 +15,6 @@ public class WidgetTransitions : MonoBehaviour {
 	void Start () {
         if (Instance == null)
             Instance = this;
-        widget3D.transform.position = Vector3.zero;
 	}
 	
 	// Update is called once per frame

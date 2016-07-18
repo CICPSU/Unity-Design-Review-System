@@ -22,8 +22,6 @@ public class POIButtonManager : MonoBehaviour {
 
     public GameObject markerMouseDown = null;
 
-    public bool hasRaycastLock = false;
-
 	// Use this for initialization
 	void Start () {
 
@@ -62,6 +60,7 @@ public class POIButtonManager : MonoBehaviour {
 
     void Update()
     {
+        /*
         if(Input.GetMouseButtonDown(0) && !hasRaycastLock && RaycastLock.GetLock(false))
         {
             
@@ -98,6 +97,7 @@ public class POIButtonManager : MonoBehaviour {
             }
             
         }
+        */
         
     }
 

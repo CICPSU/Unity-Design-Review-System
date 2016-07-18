@@ -32,7 +32,6 @@ public class S_AddCityBut : MonoBehaviour {
 				}
 			}
 			SunLightWidget.Instance.calcSunCoordination();
-            EditModeManager.ExitEditMode();
 		}
         else
         {

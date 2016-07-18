@@ -181,7 +181,7 @@ public class POIMenuStateManager : MonoBehaviour {
 
             POIButtonManager.instance.LoadAndGenerateButs();
 
-            EditModeManager.ExitEditMode();
+            //EditModeManager.ExitEditMode();
 
         }
         // this means we are switching into Edit mode
@@ -192,7 +192,7 @@ public class POIMenuStateManager : MonoBehaviour {
             //change the color of the POImenu
             POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.black;
 
-            EditModeManager.EnterEditMode(GetComponent<RectTransform>());
+            //EditModeManager.EnterEditMode(GetComponent<RectTransform>());
             /*
             foreach (GameObject gO in disableGOWhileEdit)
             {
