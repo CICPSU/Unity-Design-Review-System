@@ -52,64 +52,67 @@ public class SettingsBarManager : MonoBehaviour {
 
     public void ToggleMenuButtons()
     {
-        //if (EditModeManager.widgetInEdit != SettingsManager.Instance.ci_Gameobject.GetComponent<RectTransform>())
-        {
-            //check if UIs under the menu is playing animation, if yes, skip
-            foreach (Transform child in settingBar.transform) {
-                if (iTween.Count(child.gameObject) != 0)
-                    return;
-            }
+        //check if UIs under the menu is playing animation, if yes, skip
+        foreach (Transform child in settingBar.transform) {
+            if (iTween.Count(child.gameObject) != 0)
+                return;
+        }
 
-            //check if widgets are playing 
-            foreach (GameObject gO in openWidgets) {
-                if (iTween.Count(gO) != 0) {
-                    return;
-                }
+        //check if widgets are playing 
+        foreach (GameObject gO in openWidgets) {
+            if (iTween.Count(gO) != 0) {
+                return;
             }
+        }
 
-            //no animation is playing in bottom menus.
-            if (menuButtonsOpen)
-                CloseAll();
-            else
-                OpenMenu();
-        }      
+        //no animation is playing in bottom menus.
+        if (menuButtonsOpen)
+            CloseAll();
+        else
+            OpenMenu();
+             
     }
     
     private void CloseAll()
     {
-        WidgetTransitions.Instance.SlideWidgetRoot();
+        if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.WidgetConfig)
+        {
+            WidgetTransitions.Instance.SlideWidgetRoot();
 
-        GetComponent<SettingsManager>().LoadSettingsFiles();
+            GetComponent<SettingsManager>().LoadSettingsFiles();
 
-        //this closes all menu buttons along with any other panels that were opened
-        GetComponent<ToggleGroup>().SetAllTogglesOff();
+            //this closes all menu buttons along with any other panels that were opened
+            GetComponent<ToggleGroup>().SetAllTogglesOff();
 
-		foreach(Transform child in settingBar.transform){
-			child.gameObject.SetActive(false);
-		}
-        errorWindow.SetActive(false);
-        menuButtonsOpen = false;
-        tpControlRef.allowPlayerInput = true;
-        //EditModeManager.ExitEditMode();
-        toggleMenuButtonManagerRef.clickedState = false;
-
-
+            foreach (Transform child in settingBar.transform)
+            {
+                child.gameObject.SetActive(false);
+            }
+            errorWindow.SetActive(false);
+            menuButtonsOpen = false;
+            tpControlRef.allowPlayerInput = true;
+            toggleMenuButtonManagerRef.clickedState = false;
+            ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.WidgetConfig);
+        }
     }
 
     private void OpenMenu()
     {
-        WidgetTransitions.Instance.SlideWidgetRoot();
-        //all of the menu buttons need to be opened here
-		foreach(Transform child in settingBar.transform){
-			child.gameObject.SetActive(true);
-			iTween.MoveFrom(child.gameObject, iTween.Hash(iT.MoveBy.x, Screen.width, iT.MoveBy.easetype, "easeOutCubic", iT.MoveBy.time, .6)); // time is different to control button arrive time
-		}
-			
-        menuButtonsOpen = true;
-        tpControlRef.allowPlayerInput = false;
-        //EditModeManager.EnterEditMode(GetComponent<RectTransform>());
-        toggleMenuButtonManagerRef.clickedState = true;
-        toggleMenuButtonManagerRef.clickTime = Time.time;
+        if (ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.WidgetConfig))
+        {
+            WidgetTransitions.Instance.SlideWidgetRoot();
+            //all of the menu buttons need to be opened here
+            foreach (Transform child in settingBar.transform)
+            {
+                child.gameObject.SetActive(true);
+                iTween.MoveFrom(child.gameObject, iTween.Hash(iT.MoveBy.x, Screen.width, iT.MoveBy.easetype, "easeOutCubic", iT.MoveBy.time, .6)); // time is different to control button arrive time
+            }
+
+            menuButtonsOpen = true;
+            tpControlRef.allowPlayerInput = false;
+            toggleMenuButtonManagerRef.clickedState = true;
+            toggleMenuButtonManagerRef.clickTime = Time.time;
+        }
     }
     
     public void ToggleSettingsSelectMenu()

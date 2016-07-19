@@ -246,23 +246,31 @@ public class CharacterDropper : MonoBehaviour {
 
     public void OpenCharacterDrop()
     {
-        dropCharacterSelectPanel.gameObject.SetActive(true);
-        modelToggleGroup.SetAllTogglesOff();
-        randomToggle.isOn = true;
-        activeChar = GetCharacter();
-        buttonImage.color = Color.red;
-        currentState = CharacterDropperState.DroppingNew;
-        ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
+        if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.WidgetConfig)
+        {
+            dropCharacterSelectPanel.gameObject.SetActive(true);
+            modelToggleGroup.SetAllTogglesOff();
+            randomToggle.isOn = true;
+            activeChar = GetCharacter();
+            buttonImage.color = Color.red;
+            currentState = CharacterDropperState.DroppingNew;
+            ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.WidgetConfig);
+            ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
+        }
     }
 
     public void CloseCharacterDrop()
     {
-        dropCharacterSelectPanel.gameObject.SetActive(false);
-        Destroy(activeChar);
-        activeChar = null;
-        buttonImage.color = Color.white;
-        currentState = CharacterDropperState.SelectExisting;
-        ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
+        if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.CharacterDrop)
+        {
+            dropCharacterSelectPanel.gameObject.SetActive(false);
+            Destroy(activeChar);
+            activeChar = null;
+            buttonImage.color = Color.white;
+            currentState = CharacterDropperState.SelectExisting;
+            ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
+            ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.WidgetConfig);
+        }
     }
 
 

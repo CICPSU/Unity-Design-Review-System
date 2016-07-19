@@ -35,8 +35,9 @@ public class CharacterWander : MonoBehaviour, IAcceptRaycast {
 
     public void RaycastTrigger()
     {
-        if(CharacterDropper.Instance.currentState == CharacterDropper.CharacterDropperState.SelectExisting)
-        CharacterDropper.Instance.OpenCharacterInfo(gameObject);
+        if(CharacterDropper.Instance.currentState == CharacterDropper.CharacterDropperState.SelectExisting 
+            && ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.None)
+            CharacterDropper.Instance.OpenCharacterInfo(gameObject);
     }
 
     public void SetWanderMode()
