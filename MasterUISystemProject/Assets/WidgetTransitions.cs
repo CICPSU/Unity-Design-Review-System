@@ -12,7 +12,8 @@ public class WidgetTransitions : MonoBehaviour {
     public int configDirection = -2;
 
 	// Use this for initialization
-	void Start () {
+	void Start ()
+    {
         if (Instance == null)
             Instance = this;
 	}
@@ -31,6 +32,9 @@ public class WidgetTransitions : MonoBehaviour {
 
 	}
 
+    /// <summary>
+    /// This function is used to slide the widget root off of the screen.
+    /// </summary>
     public void SlideWidgetRoot()
     {
         if (iTween.Count(widgetRoot.gameObject) != 0)
@@ -38,9 +42,9 @@ public class WidgetTransitions : MonoBehaviour {
             iTween.Stop(widgetRoot.gameObject);
 
             if (rootDirection == -2)
-                widgetRoot.anchoredPosition = new Vector3(widgetRoot.anchoredPosition.x, 0, 0);
+                widgetRoot.anchoredPosition = new Vector3(widgetRoot.anchoredPosition.x, Screen.height * 2, 0);
             else
-                widgetRoot.anchoredPosition = new Vector3(widgetRoot.anchoredPosition.x, -2 * Screen.height, 0);
+                widgetRoot.anchoredPosition = new Vector3(widgetRoot.anchoredPosition.x, 0, 0);
         }
 
         iTween.MoveBy(widgetRoot.gameObject, iTween.Hash("y", Screen.height * rootDirection, "easeType", "easeInOutExpo", "time", .75f));
