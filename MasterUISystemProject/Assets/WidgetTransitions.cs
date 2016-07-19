@@ -37,6 +37,7 @@ public class WidgetTransitions : MonoBehaviour {
     /// </summary>
     public void SlideWidgetRoot()
     {
+        // if the widgetroot has an itween running on it, finish that motion before triggering the next motion
         if (iTween.Count(widgetRoot.gameObject) != 0)
         {
             iTween.Stop(widgetRoot.gameObject);
@@ -47,13 +48,18 @@ public class WidgetTransitions : MonoBehaviour {
                 widgetRoot.anchoredPosition = new Vector3(widgetRoot.anchoredPosition.x, 0, 0);
         }
 
+        // start the itween to move the widgetroot
         iTween.MoveBy(widgetRoot.gameObject, iTween.Hash("y", Screen.height * rootDirection, "easeType", "easeInOutExpo", "time", .75f));
         rootDirection *= -1;
         
     }
 
+    /// <summary>
+    /// This function is used to slide the widget config off the screen.
+    /// </summary>
     public void SlideWidgetConfig()
     {
+        // if the widgetconfig has an itween running on it, finish that motion before triggering the next motion
         if (iTween.Count(widgetConfig.gameObject) != 0)
         {
             iTween.Stop(widgetConfig.gameObject);
@@ -64,12 +70,15 @@ public class WidgetTransitions : MonoBehaviour {
                 widgetConfig.anchoredPosition = new Vector3(widgetConfig.anchoredPosition.x, -2 * Screen.height, 0);
         }
 
-
+        // start the itween to move the widgetconfig
         iTween.MoveBy(widgetConfig.gameObject, iTween.Hash("y", Screen.height * configDirection, "easeType", "easeInOutExpo", "time", .75f));
         configDirection *= -1;
         
     }
 
+    /// <summary>
+    /// This function slides both the widgetroot and widgetconfig off the screen.
+    /// </summary>
     public void ClearScreen()
     {
         SlideWidgetRoot();
