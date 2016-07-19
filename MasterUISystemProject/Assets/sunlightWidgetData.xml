@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <SunlightWidgetData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <CurrentCity>
-    <CityName>New York City</CityName>
-    <Longitude>-74.0064</Longitude>
-    <Latitude>40.7142</Latitude>
+    <CityName>Boston, MA</CityName>
+    <Longitude>-71.0589</Longitude>
+    <Latitude>42.3601</Latitude>
     <TimeZone>-5</TimeZone>
   </CurrentCity>
   <ListOfCity>
@@ -37,15 +37,9 @@
       <Latitude>42.3601</Latitude>
       <TimeZone>-5</TimeZone>
     </City>
-    <City>
-      <CityName>iris</CityName>
-      <Longitude>22</Longitude>
-      <Latitude>2</Latitude>
-      <TimeZone>3</TimeZone>
-    </City>
   </ListOfCity>
   <Year>2014</Year>
   <Month>4</Month>
   <Date>20</Date>
-  <CurrentTime>0.173593208193779</CurrentTime>
+  <CurrentTime>0.18731814622879028</CurrentTime>
 </SunlightWidgetData>
