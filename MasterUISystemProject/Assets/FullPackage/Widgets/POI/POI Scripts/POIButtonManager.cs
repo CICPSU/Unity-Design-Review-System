@@ -57,52 +57,7 @@ public class POIButtonManager : MonoBehaviour {
 			SaveButsToXML();
 		}
 	}// start
-
-    void Update()
-    {
-        /*
-        if(Input.GetMouseButtonDown(0) && !hasRaycastLock && RaycastLock.GetLock(false))
-        {
-            
-            hasRaycastLock = true;
-            RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
-            if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null)
-            {
-                markerMouseDown = RaycastLock.hit.transform.gameObject;
-                hasRaycastLock = false;
-                RaycastLock.GiveLock();
-            }
-            else
-            {
-                hasRaycastLock = false;
-                RaycastLock.GiveLock();
-                markerMouseDown = null;
-            }
-            
-        }
-        
-        // click on a marker to open up the MarkerInfoCanvas
-        if (Input.GetMouseButtonUp(0) && !hasRaycastLock && RaycastLock.GetLock(false))
-        {
-            hasRaycastLock = true;
-            RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
-            if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null && markerMouseDown == RaycastLock.hit.transform.gameObject)
-            {
-                RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>().SetupCanvas();
-            }
-            else
-            {
-                hasRaycastLock = false;
-                RaycastLock.GiveLock();
-            }
-            
-        }
-        */
-        
-    }
-
-
-
+    
 	//whenever a new level is loaded, we regenerate the buttons from the xml file so that only the buttons for the current scene are visible
 	public void OnLevelWasLoaded(int level)
 	{
@@ -140,7 +95,8 @@ public class POIButtonManager : MonoBehaviour {
 		
 		NumOfButtons = 0;
 	}
-	//this is the combination of function loadButsFromXML and GenerateButsMarkers
+	
+    //this is the combination of function loadButsFromXML and GenerateButsMarkers
 	public void LoadAndGenerateButs(){
 		if (File.Exists(POI_GlobalVariables.XMLpath))
 		{

@@ -168,37 +168,36 @@ public class POIMenuStateManager : MonoBehaviour {
 
     private void ChangeState()
     {
-        editModeState = !editModeState;
-        // this means we are switching out of Edit mode
-        if (!editModeState)
+        if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.None || ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.Bookmark)
         {
-            //restoring the original window
-            POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.white;
-
-            POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
-            POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive(false);
-            POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive(false);
-
-            POIButtonManager.instance.LoadAndGenerateButs();
-
-            //EditModeManager.ExitEditMode();
-
-        }
-        // this means we are switching into Edit mode
-        else
-        {
-            OpenAddDeleteWindow();
-
-            //change the color of the POImenu
-            POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.black;
-
-            //EditModeManager.EnterEditMode(GetComponent<RectTransform>());
-            /*
-            foreach (GameObject gO in disableGOWhileEdit)
+            editModeState = !editModeState;
+            // this means we are switching out of Edit mode
+            if (!editModeState)
             {
-                gO.SetActive(false);
+                //restoring the original window
+                POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.white;
+
+                POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
+                POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive(false);
+                POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive(false);
+
+                POIButtonManager.instance.LoadAndGenerateButs();
+
+                ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.Bookmark);
+
             }
-            */
+            // this means we are switching into Edit mode
+            else
+            {
+                if (ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.Bookmark))
+                {
+                    OpenAddDeleteWindow();
+
+                    //change the color of the POImenu
+                    POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.black;
+                }
+
+            }
         }
     }
 }

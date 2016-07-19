@@ -3,15 +3,60 @@
   <ProjectPOIs>
     <POI>
       <SceneFlag>BaseScene</SceneFlag>
-      <Name>asdf</Name>
+      <Name>1</Name>
       <Position>
-        <x>0.51496017</x>
+        <x>0</x>
         <y>-0.02000004</y>
-        <z>-1.21981835</z>
+        <z>0</z>
       </Position>
       <Rotation>
         <x>0</x>
-        <y>343.447937</y>
+        <y>0</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
+    <POI>
+      <SceneFlag>BaseScene</SceneFlag>
+      <Name>2</Name>
+      <Position>
+        <x>6.3249464</x>
+        <y>-0.02000004</y>
+        <z>2.075981</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>99.22583</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
+    <POI>
+      <SceneFlag>BaseScene</SceneFlag>
+      <Name>3</Name>
+      <Position>
+        <x>9.012349</x>
+        <y>-0.0200001</y>
+        <z>7.87418127</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>5.39056826</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
+    <POI>
+      <SceneFlag>BaseScene</SceneFlag>
+      <Name>4</Name>
+      <Position>
+        <x>-2.8557117</x>
+        <y>-0.02000004</y>
+        <z>3.507474</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>306.6302</y>
         <z>0</z>
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>

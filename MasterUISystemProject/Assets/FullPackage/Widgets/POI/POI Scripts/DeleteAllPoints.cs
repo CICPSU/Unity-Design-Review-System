@@ -5,28 +5,26 @@ public class DeleteAllPoints : MonoBehaviour {
 
     public Transform poiList;
 
+    /// <summary>
+    /// This function is used to delete all of the POIs.
+    /// </summary>
     public void RemoveAllPointsFromMenuAndHandler()
     {
-        /*
-        //remove the points from the original handler
-        for (int i = 0; i < POIButtonManager.originalHandler.projectPOIs.Count; i++)
-        {
-            POIButtonManager.originalHandler.RemovePoint(POIButtonManager.originalHandler.projectPOIs[i]);
-        }
-        */
-
-        for(int i = 0; i < POI_ReferenceHub.Instance.markerRoot.transform.childCount; i++)
+        int limit = POI_ReferenceHub.Instance.markerRoot.transform.childCount;
+        for (int i = 0; i < limit; i++)
         { 
             //remove the marker from the marker root
-            Destroy(POI_ReferenceHub.Instance.markerRoot.transform.GetChild(i).gameObject);
+            DestroyImmediate(POI_ReferenceHub.Instance.markerRoot.transform.GetChild(0).gameObject);
             
         }
 
-        for (int i = 0; i < poiList.childCount; i++)
+        limit = poiList.childCount;
+        for (int i = 0; i < limit; i++)
         {
             //remove the button from the button manager
-            POIButtonManager.instance.RemoveButton(poiList.GetChild(i).gameObject);
+            POIButtonManager.instance.RemoveButton(poiList.GetChild(0).gameObject);
         }
+
         //close the edit window
         POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
     }
