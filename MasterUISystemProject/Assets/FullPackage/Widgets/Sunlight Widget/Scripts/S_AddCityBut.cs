@@ -32,7 +32,9 @@ public class S_AddCityBut : MonoBehaviour {
 				}
 			}
 			SunLightWidget.Instance.calcSunCoordination();
-		}
+
+            ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.Sunlight);
+        }
         else
         {
 			emptyInputWarningPanel.gameObject.SetActive(true);
