@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <AvatarSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <a_Tracking>false</a_Tracking>
-  <a_GravColl>true</a_GravColl>
+  <a_GravColl>false</a_GravColl>
   <a_ForwardSpeed>3</a_ForwardSpeed>
   <a_BackwardSpeed>3</a_BackwardSpeed>
   <a_StrafeSpeed>3</a_StrafeSpeed>

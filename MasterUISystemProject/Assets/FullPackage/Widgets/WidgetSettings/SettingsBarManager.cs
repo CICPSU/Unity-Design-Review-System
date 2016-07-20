@@ -67,13 +67,13 @@ public class SettingsBarManager : MonoBehaviour {
 
         //no animation is playing in bottom menus.
         if (menuButtonsOpen)
-            CloseAll();
+            CloseMenu();
         else
             OpenMenu();
              
     }
     
-    private void CloseAll()
+    private void CloseMenu()
     {
         if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.WidgetConfig)
         {
