@@ -16,5 +16,5 @@
     <y>0</y>
   </mm_DefaultPosition>
   <mm_ScreenSize>0.2</mm_ScreenSize>
-  <mm_ScopeRadius>25</mm_ScopeRadius>
+  <mm_ScopeRadius>5</mm_ScopeRadius>
 </WidgetControlSettings>
