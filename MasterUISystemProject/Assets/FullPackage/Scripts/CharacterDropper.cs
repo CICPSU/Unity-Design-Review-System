@@ -131,7 +131,8 @@ public class CharacterDropper : MonoBehaviour {
             if (currentState == CharacterDropperState.DroppingNew)
             {
                 RaycastControl.RaycastCursor(~(1 << 9 | 1 << 8));
-                activeChar.transform.position = RaycastControl.hit.point;
+                dropLocation = RaycastControl.hit.point;
+                activeChar.transform.position = dropLocation;
 
                 // This if checks if the pointer is over a menu object.
                 // If not, we can drop a char.
@@ -307,6 +308,7 @@ public class CharacterDropper : MonoBehaviour {
         activeChar.GetComponent<CharacterWander>().poiDestination = -1;
 
         activeChar.transform.parent = charRoot.transform;
+        ;
 
         if ((CharacterWander.WanderMode)newCharWanderSelect.value == CharacterWander.WanderMode.Patrol)
         {
