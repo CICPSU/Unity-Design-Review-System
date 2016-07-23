@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <WidgetControlSettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <bm_Enabled>true</bm_Enabled>
+  <bm_Enabled>false</bm_Enabled>
   <bm_DefaultPosition>
     <x>5</x>
     <y>-5</y>
   </bm_DefaultPosition>
-  <sl_Enabled>true</sl_Enabled>
+  <sl_Enabled>false</sl_Enabled>
   <sl_DefaultPosition>
     <x>155</x>
     <y>-5</y>
   </sl_DefaultPosition>
-  <mm_Enabled>true</mm_Enabled>
+  <mm_Enabled>false</mm_Enabled>
   <mm_DefaultPosition>
     <x>0</x>
     <y>0</y>

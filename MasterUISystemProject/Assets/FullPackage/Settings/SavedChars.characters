@@ -93,12 +93,12 @@
       <z>2.52072668</z>
     </dropPoint>
     <localWanderCenter>
-      <x>0</x>
-      <y>0</y>
-      <z>0</z>
+      <x>-0.9458295</x>
+      <y>-5.412101E-17</y>
+      <z>2.52072668</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
-    <mode>Bookmark</mode>
+    <mode>Idle</mode>
     <defaultSpeed>1.5</defaultSpeed>
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>

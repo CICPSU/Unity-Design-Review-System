@@ -57,11 +57,11 @@ public class ActiveWidgetManager : MonoBehaviour {
         {
             if (SettingsManager.Instance != null)
             {
-                if (!SettingsManager.Instance.bm_GameObject.activeSelf)
+                if (!SettingsManager.Instance.bm_GameObject.activeSelf && SettingsManager.Instance.wc_Settings.bm_Enabled)
                     SettingsManager.Instance.bm_GameObject.SetActive(true);
-                if (!SettingsManager.Instance.sl_GameObject.activeSelf)
+                if (!SettingsManager.Instance.sl_GameObject.activeSelf && SettingsManager.Instance.wc_Settings.sl_Enabled)
                     SettingsManager.Instance.sl_GameObject.SetActive(true);
-                if (!SettingsManager.Instance.mm_GameObject.activeSelf)
+                if (!SettingsManager.Instance.mm_GameObject.activeSelf && SettingsManager.Instance.wc_Settings.mm_Enabled)
                     SettingsManager.Instance.mm_GameObject.SetActive(true);
             }
 

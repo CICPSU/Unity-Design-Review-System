@@ -228,7 +228,7 @@ public class SettingsManager : MonoBehaviour
         sl_GameObject.SetActive(wc_Settings.sl_Enabled);
         mm_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.mm_DefaultPosition;
         mm_GameObject.SetActive(wc_Settings.mm_Enabled);
-
+        
         mm_Manager_Ref.mapProportionOfScreen = wc_Settings.mm_ScreenSize;
         mm_Manager_Ref.orthoCamRadiusFeet = wc_Settings.mm_ScopeRadius;
         mm_Manager_Ref.SetMiniMapCam();
