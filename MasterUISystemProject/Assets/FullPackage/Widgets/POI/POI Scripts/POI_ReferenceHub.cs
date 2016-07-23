@@ -54,10 +54,10 @@ public class POI_ReferenceHub : MonoBehaviour{
     public void FillPOIInfoFields(POI newPoint)
     {
         Instance.poiInfoFields[0].text = newPoint.buttonName;
-        Instance.poiInfoFields[1].text = newPoint.position.x.ToString();
-        Instance.poiInfoFields[2].text = newPoint.position.y.ToString();
-        Instance.poiInfoFields[3].text = newPoint.position.z.ToString();
-        Instance.poiInfoFields[4].text = newPoint.rotation.y.ToString();
+        Instance.poiInfoFields[1].text = newPoint.position.x.ToString("F2");
+        Instance.poiInfoFields[2].text = newPoint.position.y.ToString("F2");
+        Instance.poiInfoFields[3].text = newPoint.position.z.ToString("F2");
+        Instance.poiInfoFields[4].text = newPoint.rotation.y.ToString("F2");
     }
 
 }
