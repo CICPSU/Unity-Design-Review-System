@@ -35,23 +35,6 @@
     <normalSpeedRadius>3</normalSpeedRadius>
   </DroppedCharacter>
   <DroppedCharacter>
-    <modelName>Natasha</modelName>
-    <dropPoint>
-      <x>0.82626617</x>
-      <y>-5.60663152E-17</y>
-      <z>2.60833526</z>
-    </dropPoint>
-    <localWanderCenter>
-      <x>0.82626617</x>
-      <y>-5.60663152E-17</y>
-      <z>2.60833526</z>
-    </localWanderCenter>
-    <localWanderRadius>3</localWanderRadius>
-    <mode>Idle</mode>
-    <defaultSpeed>1.5</defaultSpeed>
-    <normalSpeedRadius>3</normalSpeedRadius>
-  </DroppedCharacter>
-  <DroppedCharacter>
     <modelName>Victoria</modelName>
     <dropPoint>
       <x>-0.0105511053</x>

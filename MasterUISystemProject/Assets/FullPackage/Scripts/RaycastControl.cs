@@ -18,7 +18,7 @@ public class RaycastControl : MonoBehaviour{
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             Raycast(mouseCam.ScreenPointToRay(Input.mousePosition), ~(1 << 9));
-            if (hit.transform.gameObject.GetComponent<IAcceptRaycast>() != null)
+            if (hit.transform != null && hit.transform.gameObject.GetComponent<IAcceptRaycast>() != null)
                 hit.transform.gameObject.GetComponent<IAcceptRaycast>().RaycastTrigger();
         }
     }

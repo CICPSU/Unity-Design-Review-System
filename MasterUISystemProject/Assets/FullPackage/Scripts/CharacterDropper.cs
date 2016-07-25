@@ -79,8 +79,8 @@ public class CharacterDropper : MonoBehaviour {
     
     void Start()
     {
-        patrolToggle.onValueChanged.AddListener(OnPatrolChanged);
-        randomToggle.onValueChanged.AddListener(OnRandomChanged);
+       // patrolToggle.onValueChanged.AddListener(OnPatrolChanged);
+      //  randomToggle.onValueChanged.AddListener(OnRandomChanged);
         //characterFilePath = Application.dataPath + "/FullPackage/Settings/SavedChars.characters";
         //LoadCharacters();
 

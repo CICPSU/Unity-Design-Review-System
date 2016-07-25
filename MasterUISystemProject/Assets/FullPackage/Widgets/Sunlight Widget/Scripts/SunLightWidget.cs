@@ -95,6 +95,15 @@ public class SunLightWidget : MonoBehaviour {
 		dayLightSaving = false; 
 	}
 
+    public void CloseSunlightWidget()
+    {
+        ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.Sunlight);
+        CloseNewCityPanel();
+        gameObject.SetActive(false);
+        SettingsManager.Instance.wc_Settings.sl_Enabled = false;
+        SettingsManager.Instance.SaveWidgetControlSettings();
+    }
+
     public void CloseNewCityPanel()
     {
         newCityPanel.gameObject.SetActive(false);
