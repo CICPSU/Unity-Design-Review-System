@@ -12,6 +12,7 @@ public class SettingsBarManager : MonoBehaviour {
 	public GameObject backgroundBlueBar;
 	public GameObject settingBar;
 	public GameObject characterDropTool;
+	public Text settingButText;
     public Image settingsButtonImage;
 
     
@@ -122,13 +123,15 @@ public class SettingsBarManager : MonoBehaviour {
             SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = Vector2.zero;
             SettingsMenusRefs.Instance.SettingsSelectMenu.anchoredPosition = new Vector2(0, -25);
             settingsButtonImage.color = Color.red;
-            settingsMenusOpen = true;
+			settingButText.text = "Close";
+			settingsMenusOpen = true;
         }
         else
         {
             SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = new Vector2(-1000, Screen.height * 2);
             settingsButtonImage.color = Color.white;
-            settingsMenusOpen = false;
+			settingButText.text = "Settings";
+			settingsMenusOpen = false;
         }
     }
 
