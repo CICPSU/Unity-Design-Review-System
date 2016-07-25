@@ -156,7 +156,6 @@ public class SettingsManager : MonoBehaviour
         SettingsMenusRefs.Instance.gravityInput.text = kb_Settings.kb_Gravity;
         SettingsMenusRefs.Instance.rotateLeftInput.text = kb_Settings.kb_RotateLeft;
         SettingsMenusRefs.Instance.rotateRightInput.text = kb_Settings.kb_RotateRight;
-        SettingsMenusRefs.Instance.rotateSensitivityInput.text = kb_Settings.kb_RotateKeySensitivity.ToString();
         SettingsMenusRefs.Instance.increaseSpeedInput.text = kb_Settings.kb_IncreaseSpeed;
         SettingsMenusRefs.Instance.decreaseSpeedInput.text = kb_Settings.kb_DecreaseSpeed;
         SettingsMenusRefs.Instance.toggleCameraInput.text = kb_Settings.kb_ToggleCamera;
@@ -193,9 +192,6 @@ public class SettingsManager : MonoBehaviour
 
         if (SettingsMenusRefs.Instance.rotateRightInput.text != null && SettingsMenusRefs.Instance.rotateRightInput.text != "")
             kb_Settings.kb_RotateRight = SettingsMenusRefs.Instance.rotateRightInput.text;
-
-        if (SettingsMenusRefs.Instance.rotateSensitivityInput.text != null && SettingsMenusRefs.Instance.rotateSensitivityInput.text != "")
-            kb_Settings.kb_RotateKeySensitivity = float.Parse(SettingsMenusRefs.Instance.rotateSensitivityInput.text);
 
         if (SettingsMenusRefs.Instance.increaseSpeedInput.text != null && SettingsMenusRefs.Instance.increaseSpeedInput.text != "")
             kb_Settings.kb_IncreaseSpeed = SettingsMenusRefs.Instance.increaseSpeedInput.text;

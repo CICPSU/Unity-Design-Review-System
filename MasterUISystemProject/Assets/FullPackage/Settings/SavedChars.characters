@@ -37,14 +37,14 @@
   <DroppedCharacter>
     <modelName>Victoria</modelName>
     <dropPoint>
-      <x>-0.0105511053</x>
-      <y>-3.506891E-17</y>
-      <z>1.662698</z>
+      <x>1.03244865</x>
+      <y>-4.05889718E-17</y>
+      <z>1.911299</z>
     </dropPoint>
     <localWanderCenter>
-      <x>-0.441100121</x>
-      <y>-5.709214E-18</y>
-      <z>0.340453655</z>
+      <x>1.03244865</x>
+      <y>-4.05889718E-17</y>
+      <z>1.911299</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
     <mode>Idle</mode>

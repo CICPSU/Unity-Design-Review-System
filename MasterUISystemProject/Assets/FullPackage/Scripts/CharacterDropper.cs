@@ -79,8 +79,8 @@ public class CharacterDropper : MonoBehaviour {
     
     void Start()
     {
-       // patrolToggle.onValueChanged.AddListener(OnPatrolChanged);
-      //  randomToggle.onValueChanged.AddListener(OnRandomChanged);
+        patrolToggle.onValueChanged.AddListener(OnPatrolChanged);
+        randomToggle.onValueChanged.AddListener(OnRandomChanged);
         //characterFilePath = Application.dataPath + "/FullPackage/Settings/SavedChars.characters";
         //LoadCharacters();
 
@@ -203,12 +203,12 @@ public class CharacterDropper : MonoBehaviour {
         // If the value is turned on, we enable the mask to hide the model options.
         if(newValue)
         {
-            modelSelectMask.enabled = true;
+            modelSelectMask.gameObject.SetActive(true);
         }
         // If the value is turned off, we disable the mask and turn on the correct model toggle.
         else
         {
-            modelSelectMask.enabled = false;
+            modelSelectMask.gameObject.SetActive(false);
             Toggle activeCharToggle = (from tog in modelToggleGroup.gameObject.GetComponentsInChildren<Toggle>() where tog.name.Equals(activeChar.gameObject.name.Substring(0, activeChar.gameObject.name.IndexOf("("))) select tog).ToArray()[0];
             activeCharToggle.isOn = true;
             modelToggleGroup.NotifyToggleOn(activeCharToggle);
@@ -224,12 +224,12 @@ public class CharacterDropper : MonoBehaviour {
         // If the value is turned on, we disable the mask hiding the radius select section.
         if(newValue)
         {
-            radiusSelectMask.enabled = false;
+            radiusSelectMask.gameObject.SetActive(false);
         }
         // If the value is turned off, we enable the mask and change the state.
         else
         {
-            radiusSelectMask.enabled = true;
+            radiusSelectMask.gameObject.SetActive(true);
             if (currentState == CharacterDropperState.CharRadiusSelect)
                 currentState = CharacterDropperState.EditCharacter;
         }

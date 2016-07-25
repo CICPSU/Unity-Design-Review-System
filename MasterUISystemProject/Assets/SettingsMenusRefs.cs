@@ -13,7 +13,6 @@ public class SettingsMenusRefs : MonoBehaviour {
     public InputField rightInput;
     public InputField rotateLeftInput;
     public InputField rotateRightInput;
-    public InputField rotateSensitivityInput;
     public InputField elevateInput;
     public InputField descendInput;
     public InputField gravityInput;
