@@ -11,12 +11,7 @@ using System.Linq;
 /// </summary>
 public class POIMenuStateManager : MonoBehaviour {
 
-	public List<MonoBehaviour> disableWhileMenuOpen = new List<MonoBehaviour> ();
-    public List<GameObject> disableGOWhileEdit = new List<GameObject>();
-
 	private static bool editModeState = false;
-
-	private bool finshedSetupForModeChange = false;
 
 	public delegate void stateChangeDelegate();
 
@@ -27,6 +22,15 @@ public class POIMenuStateManager : MonoBehaviour {
 	void Start(){
 		MenuStateChange += ChangeState;
 	}
+
+    public void ClosePOIWidget()
+    {
+        ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.Bookmark);
+        EditModeState = false;
+        SettingsManager.Instance.wc_Settings.bm_Enabled = false;
+        SettingsManager.Instance.SaveWidgetControlSettings();
+        gameObject.SetActive(false);
+    }
 
     public static void OpenAddDeleteWindow()
     {
@@ -148,21 +152,6 @@ public class POIMenuStateManager : MonoBehaviour {
 			}
 
 			editModeState = value;
-		}
-	}
-
-	void Update ()
-	{
-		if(!finshedSetupForModeChange)
-        {
-			//toggle all of the scripts in disableWhileMenuOpen
-            //scripts can be added to this list so that they will not be active while the POIMenu is in Edit mode.
-			foreach(MonoBehaviour mono in disableWhileMenuOpen)
-			{
-				mono.enabled = !editModeState;
-			}
-
-			finshedSetupForModeChange = true;
 		}
 	}
 
