@@ -1,50 +1,16 @@
 <?xml version="1.0" encoding="us-ascii"?>
 <ArrayOfDroppedCharacter xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <DroppedCharacter>
-    <modelName>Mia</modelName>
+    <modelName>carl</modelName>
     <dropPoint>
-      <x>1.21280181</x>
-      <y>-9.396071E-17</y>
-      <z>4.231614</z>
+      <x>-3.61510634</x>
+      <y>-9.634048E-17</y>
+      <z>4.33878946</z>
     </dropPoint>
     <localWanderCenter>
       <x>0</x>
       <y>0</y>
       <z>0</z>
-    </localWanderCenter>
-    <localWanderRadius>3</localWanderRadius>
-    <mode>Idle</mode>
-    <defaultSpeed>1.5</defaultSpeed>
-    <normalSpeedRadius>3</normalSpeedRadius>
-  </DroppedCharacter>
-  <DroppedCharacter>
-    <modelName>Michael</modelName>
-    <dropPoint>
-      <x>-0.0388097875</x>
-      <y>-7.41400262E-17</y>
-      <z>3.33896971</z>
-    </dropPoint>
-    <localWanderCenter>
-      <x>0</x>
-      <y>0</y>
-      <z>0</z>
-    </localWanderCenter>
-    <localWanderRadius>3</localWanderRadius>
-    <mode>Idle</mode>
-    <defaultSpeed>1.5</defaultSpeed>
-    <normalSpeedRadius>3</normalSpeedRadius>
-  </DroppedCharacter>
-  <DroppedCharacter>
-    <modelName>Victoria</modelName>
-    <dropPoint>
-      <x>1.03244865</x>
-      <y>-4.05889718E-17</y>
-      <z>1.911299</z>
-    </dropPoint>
-    <localWanderCenter>
-      <x>1.03244865</x>
-      <y>-4.05889718E-17</y>
-      <z>1.911299</z>
     </localWanderCenter>
     <localWanderRadius>3</localWanderRadius>
     <mode>Idle</mode>
@@ -54,9 +20,43 @@
   <DroppedCharacter>
     <modelName>vincent</modelName>
     <dropPoint>
-      <x>-0.285838217</x>
-      <y>-5.7160245E-17</y>
-      <z>2.57426858</z>
+      <x>1.07067752</x>
+      <y>-1.32164854E-16</y>
+      <z>5.952176</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </localWanderCenter>
+    <localWanderRadius>3</localWanderRadius>
+    <mode>Idle</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>Mia</modelName>
+    <dropPoint>
+      <x>2.68470526</x>
+      <y>-1.42343622E-16</y>
+      <z>6.410587</z>
+    </dropPoint>
+    <localWanderCenter>
+      <x>0</x>
+      <y>0</y>
+      <z>0</z>
+    </localWanderCenter>
+    <localWanderRadius>3</localWanderRadius>
+    <mode>Idle</mode>
+    <defaultSpeed>1.5</defaultSpeed>
+    <normalSpeedRadius>3</normalSpeedRadius>
+  </DroppedCharacter>
+  <DroppedCharacter>
+    <modelName>Natasha</modelName>
+    <dropPoint>
+      <x>3.61030483</x>
+      <y>-1.15814391E-16</y>
+      <z>5.2158165</z>
     </dropPoint>
     <localWanderCenter>
       <x>0</x>

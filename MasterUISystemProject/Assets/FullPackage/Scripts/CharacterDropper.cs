@@ -586,6 +586,8 @@ public class CharacterDropper : MonoBehaviour {
         activeChar = null;
         wanderToEdit = null;
 
+        iTween.Stop(charInfoPanel.gameObject);
+        charInfoPanel.localScale = new Vector3(1,1,1);
         charInfoPanel.gameObject.SetActive(false);
         ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
 
