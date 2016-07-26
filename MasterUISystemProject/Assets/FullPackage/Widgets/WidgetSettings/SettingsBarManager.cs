@@ -120,7 +120,7 @@ public class SettingsBarManager : MonoBehaviour {
     {
         if (!settingsMenusOpen)
         {
-            SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = Vector2.zero;
+            SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = Vector2.zero; //vector2.zero is at the center of the screen
             SettingsMenusRefs.Instance.SettingsSelectMenu.anchoredPosition = new Vector2(0, -25);
             settingsButtonImage.color = Color.red;
 			settingButText.text = "Close";
