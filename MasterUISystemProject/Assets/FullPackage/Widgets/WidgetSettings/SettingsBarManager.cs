@@ -15,6 +15,9 @@ public class SettingsBarManager : MonoBehaviour {
 	public Text settingButText;
     public Image settingsButtonImage;
 
+    public RectTransform keybindingsPanel;
+    public RectTransform avatarPanel;
+    public RectTransform widgetPanel;
     
     public TP_Controller tpControlRef;
     public ToggleMenuButtonManager toggleMenuButtonManagerRef;
@@ -46,7 +49,18 @@ public class SettingsBarManager : MonoBehaviour {
 			child.gameObject.SetActive(false);
 		}
 
-		characterDropTool.GetComponent<Widget>().Active = false;
+        SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = Vector2.zero; //vector2.zero is at the center of the screen
+        SettingsMenusRefs.Instance.SettingsContentPanel.gameObject.SetActive(false);
+        keybindingsPanel.anchoredPosition = new Vector2(0, -25);
+        keybindingsPanel.gameObject.SetActive(false);
+        avatarPanel.anchoredPosition = new Vector2(0, -25);
+        avatarPanel.gameObject.SetActive(false);
+        widgetPanel.anchoredPosition = new Vector2(0, -25);
+        widgetPanel.gameObject.SetActive(false);
+        SettingsMenusRefs.Instance.SettingsButtonMenu.anchoredPosition = new Vector2(0, -25);
+        SettingsMenusRefs.Instance.SettingsButtonMenu.gameObject.SetActive(false);
+
+        characterDropTool.GetComponent<Widget>().Active = false;
         menuButtonsOpen = false;
         tpControlRef.allowPlayerInput = true;
     }
@@ -120,15 +134,15 @@ public class SettingsBarManager : MonoBehaviour {
     {
         if (!settingsMenusOpen)
         {
-            SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = Vector2.zero; //vector2.zero is at the center of the screen
-            SettingsMenusRefs.Instance.SettingsSelectMenu.anchoredPosition = new Vector2(0, -25);
+            SettingsMenusRefs.Instance.SettingsContentPanel.gameObject.SetActive(true);
+            SettingsMenusRefs.Instance.SettingsButtonMenu.gameObject.SetActive(true);
             settingsButtonImage.color = Color.red;
 			settingButText.text = "Close";
 			settingsMenusOpen = true;
         }
         else
         {
-            SettingsMenusRefs.Instance.SettingsContentPanel.anchoredPosition = new Vector2(-1000, Screen.height * 2);
+            SettingsMenusRefs.Instance.SettingsContentPanel.gameObject.SetActive(false);
             settingsButtonImage.color = Color.white;
 			settingButText.text = "Settings";
 			settingsMenusOpen = false;
@@ -137,14 +151,14 @@ public class SettingsBarManager : MonoBehaviour {
 
     public void OpenMenu(RectTransform menuToOpen)
     {
-        menuToOpen.anchoredPosition = new Vector2(0, -25);
-        SettingsMenusRefs.Instance.SettingsSelectMenu.anchoredPosition = new Vector2(-1000, Screen.height * 2);
+        menuToOpen.gameObject.SetActive(true);
+        SettingsMenusRefs.Instance.SettingsButtonMenu.gameObject.SetActive(false);
     }
 
     public void CloseMenu(RectTransform menuToClose)
     {
-        menuToClose.anchoredPosition = new Vector2(0, Screen.height * 2);
-        SettingsMenusRefs.Instance.SettingsSelectMenu.anchoredPosition = new Vector2(0, -25);
+        menuToClose.gameObject.SetActive(false);
+        SettingsMenusRefs.Instance.SettingsButtonMenu.gameObject.SetActive(true);
     }
 
 }

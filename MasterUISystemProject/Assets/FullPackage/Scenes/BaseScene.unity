@@ -60439,7 +60439,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: -0.00008767232, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.0101}
   m_Children:
   - {fileID: 493392656}
   - {fileID: 1270877672}
@@ -65232,6 +65232,9 @@ MonoBehaviour:
   characterDropTool: {fileID: 478083654}
   settingButText: {fileID: 296817659}
   settingsButtonImage: {fileID: 1196788810}
+  keybindingsPanel: {fileID: 2084490580}
+  avatarPanel: {fileID: 157141006}
+  widgetPanel: {fileID: 1728833575}
   tpControlRef: {fileID: 107944868}
   toggleMenuButtonManagerRef: {fileID: 54382074}
   menuButtonsOpen: 0
@@ -65277,8 +65280,6 @@ MonoBehaviour:
   rotateLeftInput: {fileID: 988226666}
   rotateRightInput: {fileID: 1900317722}
   gravityInput: {fileID: 470519982}
-  increaseSpeedInput: {fileID: 0}
-  decreaseSpeedInput: {fileID: 0}
   toggleCameraInput: {fileID: 1130730006}
   minimapToggle: {fileID: 1790066653}
   bookmarkToggle: {fileID: 1933683216}
@@ -65290,7 +65291,7 @@ MonoBehaviour:
   strafeSpeedInput: {fileID: 856602440}
   jumpSpeedInput: {fileID: 978244134}
   SettingsContentPanel: {fileID: 1409462586}
-  SettingsSelectMenu: {fileID: 1452018289}
+  SettingsButtonMenu: {fileID: 1452018289}
   SettingsHeader: {fileID: 298281134}
 --- !u!1 &1574657521
 GameObject:
@@ -80420,6 +80421,7 @@ MonoBehaviour:
   cameraDistanceCheck: {fileID: 1068837332}
   avatarMesh: {fileID: 820271489}
   stopRotation: 0
+  allowZoom: 1
   Distance: 0.3
   DistanceMin: 0.3
   DistanceMax: 10
@@ -87756,7 +87758,6 @@ MonoBehaviour:
   POIList: {fileID: 941054158}
   buttonPrefab: {fileID: 100002, guid: 9b4441068a6bd904eaab9e0cbb895ed4, type: 2}
   NumOfButtons: 0
-  POIlistHeight: 7
   markerRoot: {fileID: 717364550}
   markerMouseDown: {fileID: 0}
 --- !u!224 &2117851721
