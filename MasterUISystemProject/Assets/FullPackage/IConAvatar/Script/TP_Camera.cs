@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.EventSystems;
 
 public class TP_Camera : MonoBehaviour {
 	public static TP_Camera Instance;
@@ -9,6 +10,7 @@ public class TP_Camera : MonoBehaviour {
 	public Transform cameraDistanceCheck;
     public GameObject avatarMesh;
     public bool stopRotation = false;
+    public bool allowZoom = true;
 	public float Distance = 0.3f;   // distance from the camera to the capsule(TargetLookAt)
 								    // was 5f
 	public float DistanceMin = 0.3f;    // near limit
@@ -18,12 +20,7 @@ public class TP_Camera : MonoBehaviour {
 	
 	public float X_MouseSensitivity = 5f;
 	public float Y_MouseSensitivity = 5f;
-
-    //****!!!!!!!! control the Q,E sensitivity NOTE: has been moved to TP_InputManager
-    //	public float RotateKeySensitivity = 0.8f;
-
-    //public bool allowPlayerInput = true;
-
+    
 	public float MouseWheelSensitivity = 2.5f;	
 	public float X_Smooth = 0.05f;
 	public float Y_Smooth = 0.1f;
@@ -145,7 +142,7 @@ public class TP_Camera : MonoBehaviour {
 		// This is where we will limit mouseY, mouseY will be limited between Y_MinLimit and Y_MaxLimit
 		mouseY = Helper.ClampAngle(mouseY, Y_MinLimit, Y_MaxLimit);
 		
-		if(Input.GetAxis("Mouse ScrollWheel") < - deadZone || Input.GetAxis("Mouse ScrollWheel") > deadZone){
+		if((Input.GetAxis("Mouse ScrollWheel") < - deadZone || Input.GetAxis("Mouse ScrollWheel") > deadZone) && !EventSystem.current.IsPointerOverGameObject()){
 			desiredDistance = Mathf.Clamp(Distance - Input.GetAxis("Mouse ScrollWheel")* MouseWheelSensitivity, DistanceMin, DistanceMax);
 			preOccludedDistance = desiredDistance;
 			distanceSmooth = DistanceSmooth;

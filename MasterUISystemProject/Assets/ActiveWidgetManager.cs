@@ -33,7 +33,6 @@ public class ActiveWidgetManager : MonoBehaviour {
 
             // since the minimap doesnt use an active state, it will always be disabled
             SettingsManager.Instance.mm_GameObject.SetActive(false);
-
             // set the reference for the currently active widget
             currentActive = widgetToActivate;
             return true;
