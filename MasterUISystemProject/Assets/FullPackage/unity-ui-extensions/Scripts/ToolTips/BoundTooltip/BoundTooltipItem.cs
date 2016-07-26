@@ -23,8 +23,10 @@ namespace UnityEngine.UI.Extensions
         void Awake()
         {
             tooltipRect = GetComponent<RectTransform>();
-            instance = this;
-            if(!TooltipText)
+            if(instance == null)
+                instance = this;
+
+            if (!TooltipText)
                 TooltipText = GetComponentInChildren<Text>();
             HideTooltip();
         }
@@ -73,11 +75,11 @@ namespace UnityEngine.UI.Extensions
 
             moveTooltip = true;
 
-            PlaceTooltip();
+            
 
             gameObject.SetActive(true);
             GetComponent<RectTransform>().sizeDelta = new Vector2(LayoutUtility.GetPreferredWidth(TooltipText.rectTransform) + 100, GetComponent<RectTransform>().sizeDelta.y);
-
+            PlaceTooltip();
 
         }
 
