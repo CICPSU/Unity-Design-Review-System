@@ -448,8 +448,11 @@ public class CharacterDropper : MonoBehaviour {
 
             if (startMotion)
                 wanderToEdit.SetWanderMode();
+
+            radiusInput.text = wanderToEdit.localWanderRadius.ToString("F2");
         }
         currentState = prevState;
+
 
         if (currentState == CharacterDropperState.DroppingNew)
             activeChar = GetCharacter();
