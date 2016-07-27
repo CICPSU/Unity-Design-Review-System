@@ -10,7 +10,6 @@ public class TP_Camera : MonoBehaviour {
 	public Transform cameraDistanceCheck;
     public GameObject avatarMesh;
     public bool stopRotation = false;
-    public bool allowZoom = true;
 	public float Distance = 0.3f;   // distance from the camera to the capsule(TargetLookAt)
 								    // was 5f
 	public float DistanceMin = 0.3f;    // near limit
@@ -142,6 +141,7 @@ public class TP_Camera : MonoBehaviour {
 		// This is where we will limit mouseY, mouseY will be limited between Y_MinLimit and Y_MaxLimit
 		mouseY = Helper.ClampAngle(mouseY, Y_MinLimit, Y_MaxLimit);
 		
+        /// EventSystem.current.IsPointerOverGameObject returns true if the mouse is over a UI element.  This is used to prevent the scrollwheel from zooming the camera in and out when over a menu.
 		if((Input.GetAxis("Mouse ScrollWheel") < - deadZone || Input.GetAxis("Mouse ScrollWheel") > deadZone) && !EventSystem.current.IsPointerOverGameObject()){
 			desiredDistance = Mathf.Clamp(Distance - Input.GetAxis("Mouse ScrollWheel")* MouseWheelSensitivity, DistanceMin, DistanceMax);
 			preOccludedDistance = desiredDistance;

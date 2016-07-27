@@ -14,7 +14,7 @@ public class SettingsMenusRefs : MonoBehaviour {
     public InputField rotateLeftInput;
     public InputField rotateRightInput;
     public InputField gravityInput;
-    public InputField toggleCameraInput;
+    public InputField toggleInterfaceInput;
 
     // References for the WidgetControlMenu
     public Toggle minimapToggle;

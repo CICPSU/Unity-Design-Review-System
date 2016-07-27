@@ -8,5 +8,5 @@
   <kb_RotateLeft>a</kb_RotateLeft>
   <kb_RotateRight>d</kb_RotateRight>
   <kb_RotateKeySensitivity>0.8</kb_RotateKeySensitivity>
-  <kb_ToggleCamera>c</kb_ToggleCamera>
+  <kb_ToggleInterface>c</kb_ToggleInterface>
 </KeyBindings>

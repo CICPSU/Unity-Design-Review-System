@@ -139,7 +139,7 @@ public class SettingsManager : MonoBehaviour
         tp_InputManager_Ref.rotateLeft = kb_Settings.kb_RotateLeft;
         tp_InputManager_Ref.rotateRight = kb_Settings.kb_RotateRight;
         tp_InputManager_Ref.rotateKeySensitivity = kb_Settings.kb_RotateKeySensitivity;
-        tp_InputManager_Ref.toggleCamera = kb_Settings.kb_ToggleCamera;
+        tp_InputManager_Ref.toggleInterface = kb_Settings.kb_ToggleInterface;
     }
 
     /// <summary>
@@ -154,7 +154,7 @@ public class SettingsManager : MonoBehaviour
         SettingsMenusRefs.Instance.gravityInput.text = kb_Settings.kb_Gravity;
         SettingsMenusRefs.Instance.rotateLeftInput.text = kb_Settings.kb_RotateLeft;
         SettingsMenusRefs.Instance.rotateRightInput.text = kb_Settings.kb_RotateRight;
-        SettingsMenusRefs.Instance.toggleCameraInput.text = kb_Settings.kb_ToggleCamera;
+        SettingsMenusRefs.Instance.toggleInterfaceInput.text = kb_Settings.kb_ToggleInterface;
     }
 
     /// <summary>
@@ -198,8 +198,8 @@ public class SettingsManager : MonoBehaviour
         else
             nullKeybinding = true;
 
-        if (SettingsMenusRefs.Instance.toggleCameraInput.text != null && SettingsMenusRefs.Instance.toggleCameraInput.text != "")
-            kb_Settings.kb_ToggleCamera = SettingsMenusRefs.Instance.toggleCameraInput.text;
+        if (SettingsMenusRefs.Instance.toggleInterfaceInput.text != null && SettingsMenusRefs.Instance.toggleInterfaceInput.text != "")
+            kb_Settings.kb_ToggleInterface = SettingsMenusRefs.Instance.toggleInterfaceInput.text;
         else
             nullKeybinding = true;
 
@@ -346,7 +346,7 @@ public class KeyBindings
     public string kb_RotateLeft = "a";
     public string kb_RotateRight = "d";
     public float kb_RotateKeySensitivity = .8f;
-    public string kb_ToggleCamera = "c";
+    public string kb_ToggleInterface = "c";
 
     public KeyBindings()
     {
