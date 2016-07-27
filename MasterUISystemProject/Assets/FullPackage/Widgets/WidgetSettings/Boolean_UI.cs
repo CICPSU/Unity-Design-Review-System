@@ -22,6 +22,7 @@ public class Boolean_UI : FieldUIs {
 
 	public override void SetFieldValue(object value)
 	{
+        descriptionText.text = description;
 
 		toggleInput.isOn = (value as bool?).Value;
 	}

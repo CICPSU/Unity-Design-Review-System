@@ -14,9 +14,8 @@ public class POI_ReferenceHub : MonoBehaviour{
 	public  RectTransform POIEditWindow;
 	public  RectTransform AddDeleteWindow;
 	public RectTransform BookmarkCurrentLocationWindow;
-	public  RectTransform ApplyBut;
-	public  RectTransform CancelBut;
 	public  RectTransform EditBut;
+    public RectTransform ExitBut;
 	public RectTransform InvalidInputWarning;
 	public RectTransform NameExistedWarning;
 	public RectTransform BookmarkCurrentLocationNameField;
@@ -50,4 +49,15 @@ public class POI_ReferenceHub : MonoBehaviour{
 		defaultMarkerPrefab = Resources.Load ("POIPanel/Pin");
 	}
 	
+    
+
+    public void FillPOIInfoFields(POI newPoint)
+    {
+        Instance.poiInfoFields[0].text = newPoint.buttonName;
+        Instance.poiInfoFields[1].text = newPoint.position.x.ToString("F2");
+        Instance.poiInfoFields[2].text = newPoint.position.y.ToString("F2");
+        Instance.poiInfoFields[3].text = newPoint.position.z.ToString("F2");
+        Instance.poiInfoFields[4].text = newPoint.rotation.y.ToString("F2");
+    }
+
 }

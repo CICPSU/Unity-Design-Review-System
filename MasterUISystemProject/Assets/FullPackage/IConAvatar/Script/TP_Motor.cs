@@ -17,22 +17,35 @@ public class TP_Motor : MonoBehaviour {
 	public float MaxControllableSlideMagnitude = 0.4f;
 	public bool gravityOn; 
 	public Transform virtualCamera;
-
+    
+    public Animator avatarAnimator;
 	
 	
 	public Vector3 MoveVector {get; set; }
 	
 	public float VerticalVelocity {get; set;}
-		
+
+    private float jumpStartTime = 0;
+    public bool hasJumped = false;
+    public bool stopRotation = false;
+
 	void Awake () {
 		if(Instance == null)
 			Instance = this;
 		gravityOn = true;
 	}
 	
+    void Update()
+    {
+
+
+        if (avatarAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && Time.time > jumpStartTime + 1.3f)
+            avatarAnimator.SetBool("Jump", false);
+        
+    }
 
 	public void UpdateMotor () {
-        if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting"))
+        if (!TP_Animator.Instance.avatarAnimator.GetBool("Sitting") && !stopRotation)
             SnapAlignCharacterWithCamera();
         ProcessMotion();
         
@@ -48,14 +61,15 @@ public class TP_Motor : MonoBehaviour {
 		// Normalize MoveVector if Magnitude > 1;
 		if (MoveVector.magnitude > 1)
 			MoveVector = Vector3.Normalize(MoveVector);
-		
-		// Multiply MoveVector by MoveSpeed;
-		MoveVector = MoveVector * MoveSpeed();
 
-		if(gravityOn){
+        // Multiply MoveVector by MoveSpeed;
+        MoveVector = MoveVector * MoveSpeed();
+        
+		if(gravityOn)
+        {
 			// Reapply VerticalVelocity MoveVector, as it should continue from previous frame but is erased by
 			//TPController. It is the falling speed.
-			MoveVector = new Vector3(MoveVector.x,VerticalVelocity, MoveVector.z);
+			MoveVector = new Vector3(MoveVector.x, VerticalVelocity, MoveVector.z);
 			// Apply gravity
 			ApplyGravity();
 		}
@@ -65,7 +79,8 @@ public class TP_Motor : MonoBehaviour {
 	}
 
 
-	void ApplyGravity(){
+	void ApplyGravity()
+    {
 		if(MoveVector.y > - TerminalVelocity)
 			MoveVector = new Vector3(MoveVector.x,MoveVector.y - Gravity * Time.deltaTime, MoveVector.z);
 		if (TP_Controller.characterController.isGrounded && MoveVector.y < -1)  // if the character is on the ground, we want to keep its y speed to a small number. 
@@ -73,14 +88,28 @@ public class TP_Motor : MonoBehaviour {
 			MoveVector = new Vector3(MoveVector.x,-1, MoveVector.z);
 	}
 	
+    public void CheckJump()
+    {
+        if (avatarAnimator.GetCurrentAnimatorStateInfo(0).IsName("Jump") && Time.time > jumpStartTime + .66f && !hasJumped)
+        {
+            hasJumped = true;
+            VerticalVelocity = JumpSpeed;
+        }
 
+    }
 	
-	public void Jump(){
-		if(TP_Controller.characterController.isGrounded)	
-			VerticalVelocity = JumpSpeed;
+	public void Jump()
+    {
+        if (TP_Controller.characterController.isGrounded)
+        {
+            hasJumped = false;
+            avatarAnimator.SetBool("Jump", true);
+            jumpStartTime = Time.time;
+        }
 	}
 	
-	void SnapAlignCharacterWithCamera(){
+	void SnapAlignCharacterWithCamera()
+    {
 //		if(MoveVector.x != 0 || MoveVector.z != 0){    // comment this out is to make the capsule follows the camera direction all the time
 //****************************!!!!!!!!!!!!!!***************** If ()added by me
 		if(Input.GetMouseButton(1)|| Input.GetMouseButton(2)){  

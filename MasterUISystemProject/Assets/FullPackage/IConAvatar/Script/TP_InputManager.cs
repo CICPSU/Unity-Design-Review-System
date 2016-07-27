@@ -13,10 +13,10 @@ public class TP_InputManager : MonoBehaviour {
 	public string gravity = "g";
 	public string rotateLeft = "a";
 	public string rotateRight = "d";
-	public float roateKeySensitivity = .8f;
+	public float rotateKeySensitivity = .8f;
 	public string increaseSpeed = "=";
 	public string decreaseSpeed = "-";
-	public string toggleCamera = "c";
+	public string toggleInterface = "c";
 	
 	
 	// Use this for initialization

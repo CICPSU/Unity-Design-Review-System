@@ -5,6 +5,8 @@ using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI.Extensions;
 
 public class POIButtonManager : MonoBehaviour {
 
@@ -14,15 +16,16 @@ public class POIButtonManager : MonoBehaviour {
     public static POIHandler originalHandler = new POIHandler();
     public RectTransform POIList;
     public GameObject buttonPrefab;
-    public int NumOfButtons = 0;    //
-    public float POIlistHeight = 7.0f;
+    public int NumOfButtons = 0;
 	public GameObject markerRoot; //empty obj, root of all markers. assigned through inspector
+
+    public GameObject markerMouseDown = null;
 
 	// Use this for initialization
 	void Start () {
 
-		if(POIButtonManager.instance ==null){
-			POIButtonManager.instance = this;
+		if(instance ==null){
+			instance = this;
 		}else{
 			Debug.LogError("More than one instance of POIButtonManager!");
 		}
@@ -53,7 +56,7 @@ public class POIButtonManager : MonoBehaviour {
 			SaveButsToXML();
 		}
 	}// start
-
+    
 	//whenever a new level is loaded, we regenerate the buttons from the xml file so that only the buttons for the current scene are visible
 	public void OnLevelWasLoaded(int level)
 	{
@@ -91,7 +94,8 @@ public class POIButtonManager : MonoBehaviour {
 		
 		NumOfButtons = 0;
 	}
-	//this is the combination of function loadButsFromXML and GenerateButsMarkers
+	
+    //this is the combination of function loadButsFromXML and GenerateButsMarkers
 	public void LoadAndGenerateButs(){
 		if (File.Exists(POI_GlobalVariables.XMLpath))
 		{
@@ -103,7 +107,6 @@ public class POIButtonManager : MonoBehaviour {
 			//generate new buttons
 			foreach(POI point in originalHandler.projectPOIs){
 				GenerateButMarkerPair(point);
-				POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
 				POIList.localPosition = Vector3.zero;
 			}
 		}
@@ -116,10 +119,9 @@ public class POIButtonManager : MonoBehaviour {
 	private void GenerateButsMarkers(POIHandler handler){
 		ClearButsMarkers ();
 
-		//generate new buttons
+		//generate new buttons from the xml file
 		foreach(POI point in handler.projectPOIs){
 			GenerateButMarkerPair(point);
-			POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
 			POIList.localPosition = Vector3.zero;
 		}
 	}
@@ -147,7 +149,7 @@ public class POIButtonManager : MonoBehaviour {
 		GameObject markerModel = Instantiate(prefab, point.position, Quaternion.Euler(point.rotation)) as GameObject;
 		markerModel.transform.parent = marker.transform;
 
-		if (point.sceneFlag != Application.loadedLevelName)
+		if (point.sceneFlag != SceneManager.GetActiveScene().name)
 			markerModel.SetActive (false);
 
 		point.marker = marker;
@@ -164,19 +166,15 @@ public class POIButtonManager : MonoBehaviour {
 		RectTransform buttonRectTransform = newButton.transform as RectTransform;
 		buttonRectTransform.SetParent(POIList);
 
-		// the following line positions the button correctly as a child of the POIList
-		// !!!! when we convert to using the Layout system, this will be automatically done
-		buttonRectTransform.localPosition = new Vector3(7.0f, -7.0f + NumOfButtons * (-buttonRectTransform.rect.height - 7.0f), 0.0f);
+        // this sets the TooltipTrigger text value to the name of the button
+        newButton.GetComponent<BoundTooltipTrigger>().text = point.buttonName;
 
 		newButton.GetComponent<POIInfoRef>().poiInfo = marker.GetComponent<POIInfo>() as POIInfo;
 
 		// update the text of the button to match the name of the POI 
 		newButton.transform.GetComponentInChildren<Text>().text = point.buttonName;
 
-		// the next two lines update our counter for the number of buttons that are currently in the scene, and resize the POIList
-		// !!!! these lines may not be necessary when switching to the Layout system
 		NumOfButtons++;
-		POIlistHeight += buttonRectTransform.rect.height + 7.0f;
 		
 		// code to add a listener to the button OnClicked() event
 		EventTrigger eTrigger = newButton.GetComponent<EventTrigger>();
@@ -207,9 +205,9 @@ public class POIButtonManager : MonoBehaviour {
 				buttonToRemove.transform.parent.GetChild(i).position += new Vector3(0,37,0);
 			}
 		}
-
+        
 		// The destroy call is what actually removes the button
-		GameObject.Destroy(buttonToRemove);
+		DestroyImmediate(buttonToRemove);
 
 		// numofbuttons is used for positioning and sizing the list and buttons
 		// !!!! it will be unnecessary in the Layout system
@@ -217,7 +215,8 @@ public class POIButtonManager : MonoBehaviour {
 	}
 
 	//save the buttons in the scene into the XML file and the orginalHandler
-	public void SaveButsToXML(){
+	public void SaveButsToXML()
+    {
 		Debug.Log("generating saved button files based on current project");
 		originalHandler = new POIHandler();
 		foreach (Transform child in POIList.transform)
@@ -256,24 +255,6 @@ public class POIButtonManager : MonoBehaviour {
 		}
 	}
 
-	public void ResetPOIMenu()
-	{
-		POIMenuStateManager.EditModeState = false;
-
-		//restoring the original window
-		POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.white;
-
-		POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
-		POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive (false);
-		POI_ReferenceHub.Instance.CancelBut.gameObject.SetActive(false);
-		POI_ReferenceHub.Instance.ApplyBut.gameObject.SetActive(false); 
-		POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive (false);
-
-		POI_ReferenceHub.Instance.EditBut.gameObject.SetActive(true);
-
-		LoadAndGenerateButs ();
-	}
-
 	//compare two POI classes by value
 	//return true if two points are the same
 	private bool IsPointSame(POI pointA, POI pointB){
@@ -298,7 +279,21 @@ public class POIButtonManager : MonoBehaviour {
 	
 	public void GeneratePairCurrentLocation()
 	{
-		POI newPOI = new POI (Application.loadedLevelName, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
+		POI newPOI = new POI (SceneManager.GetActiveScene().name, POI_ReferenceHub.Instance.BookmarkCurrentLocationNameField.GetComponent<InputField>().text, POI_ReferenceHub.Instance.Avatar.transform.position, POI_ReferenceHub.Instance.Avatar.transform.rotation.eulerAngles, POI_ReferenceHub.Instance.defaultMarkerPrefab.name);
 		GenerateButMarkerPair (newPOI);
 	}
+
+    private Camera FindMouseCamera()
+    {
+        List<Camera> camList = (from cam in GameObject.FindObjectsOfType<Camera>() where cam.targetTexture == null select cam).ToList();
+        foreach (Camera cam in camList)
+        {
+            if (Input.mousePosition.x > cam.pixelRect.xMin && Input.mousePosition.x < cam.pixelRect.xMax
+                && Input.mousePosition.y > cam.pixelRect.yMin && Input.mousePosition.y < cam.pixelRect.yMax)
+            {
+                return cam;
+            }
+        }
+        return null;
+    }
 }

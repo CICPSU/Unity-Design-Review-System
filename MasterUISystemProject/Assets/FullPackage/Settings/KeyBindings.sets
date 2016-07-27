@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<KeyBindings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <kb_Forward>w</kb_Forward>
+  <kb_Backward>s</kb_Backward>
+  <kb_Leftward>q</kb_Leftward>
+  <kb_Rightward>e</kb_Rightward>
+  <kb_Gravity>g</kb_Gravity>
+  <kb_RotateLeft>a</kb_RotateLeft>
+  <kb_RotateRight>d</kb_RotateRight>
+  <kb_RotateKeySensitivity>0.8</kb_RotateKeySensitivity>
+  <kb_ToggleInterface>c</kb_ToggleInterface>
+</KeyBindings>

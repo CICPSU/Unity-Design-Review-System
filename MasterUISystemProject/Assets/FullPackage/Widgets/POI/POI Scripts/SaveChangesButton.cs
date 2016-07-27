@@ -13,15 +13,18 @@ public class SaveChangesButton : MonoBehaviour {
 		POI newPoint = new POI ();
 
 		newPoint.sceneFlag = Application.loadedLevelName;
-		newPoint.buttonName = POI_ReferenceHub.Instance.poiInfoFields [4].text;
-		newPoint.position = new Vector3(float.Parse (POI_ReferenceHub.Instance.poiInfoFields[0].text),float.Parse(POI_ReferenceHub.Instance.poiInfoFields[1].text),float.Parse(POI_ReferenceHub.Instance.poiInfoFields[2].text));
-		newPoint.rotation = new Vector3(0,float.Parse(POI_ReferenceHub.Instance.poiInfoFields[3].text),0);
+		newPoint.buttonName = POI_ReferenceHub.Instance.poiInfoFields [0].text;
+		newPoint.position = new Vector3(float.Parse (POI_ReferenceHub.Instance.poiInfoFields[1].text),float.Parse(POI_ReferenceHub.Instance.poiInfoFields[2].text),float.Parse(POI_ReferenceHub.Instance.poiInfoFields[3].text));
+		newPoint.rotation = new Vector3(0,float.Parse(POI_ReferenceHub.Instance.poiInfoFields[4].text),0);
 
-		//update the Point in POIHandler 
-		activeButton.GetComponent<POIInfoRef>().poiInfo.Point.UpdateByValue(newPoint);
-
+        //update the Point in POIHandler 
+        //activeButton.GetComponent<POIInfoRef>().poiInfo.Point.UpdateByValue(newPoint);
+        activeButton.GetComponent<POIInfoRef>().poiInfo.Point = newPoint;
 		activeButton.GetComponentInChildren<Text> ().text = newPoint.buttonName;
 
-	}
+        POIMenuStateManager.CloseBookmarkEditWindow();
+
+
+    }
 
 }
