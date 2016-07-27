@@ -3,14 +3,14 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
-public class SettingsBarManager : MonoBehaviour {
+public class QuickAccessBarManager : MonoBehaviour {
 
     public GameObject toggleSettingsMenu;
     public GameObject dropCharacterButton;
     public GameObject errorWindow;
     public GameObject widgetRoot;
 	public GameObject backgroundBlueBar;
-	public GameObject settingBar;
+	public GameObject quickAccessBar;
 	public GameObject characterDropTool;
 	public Text settingButText;
     public Image settingsButtonImage;
@@ -45,7 +45,7 @@ public class SettingsBarManager : MonoBehaviour {
 
         //this closes all menu buttons along with any other panels that were opened
         GetComponent<ToggleGroup>().SetAllTogglesOff();
-		foreach(Transform child in settingBar.transform){
+		foreach(Transform child in quickAccessBar.transform){
 			child.gameObject.SetActive(false);
 		}
 
@@ -68,7 +68,7 @@ public class SettingsBarManager : MonoBehaviour {
     public void ToggleMenuButtons()
     {
         //check if UIs under the menu is playing animation, if yes, skip
-        foreach (Transform child in settingBar.transform) {
+        foreach (Transform child in quickAccessBar.transform) {
             if (iTween.Count(child.gameObject) != 0)
                 return;
         }
@@ -99,7 +99,7 @@ public class SettingsBarManager : MonoBehaviour {
             //this closes all menu buttons along with any other panels that were opened
             GetComponent<ToggleGroup>().SetAllTogglesOff();
 
-            foreach (Transform child in settingBar.transform)
+            foreach (Transform child in quickAccessBar.transform)
             {
                 child.gameObject.SetActive(false);
             }
@@ -117,7 +117,7 @@ public class SettingsBarManager : MonoBehaviour {
         {
             WidgetTransitions.Instance.SlideWidgetRoot();
             //all of the menu buttons need to be opened here
-            foreach (Transform child in settingBar.transform)
+            foreach (Transform child in quickAccessBar.transform)
             {
                 child.gameObject.SetActive(true);
                 iTween.MoveFrom(child.gameObject, iTween.Hash(iT.MoveBy.x, Screen.width, iT.MoveBy.easetype, "easeOutCubic", iT.MoveBy.time, .6)); // time is different to control button arrive time

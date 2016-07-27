@@ -42311,7 +42311,7 @@ GameObject:
   m_Component:
   - 224: {fileID: 1045597960}
   m_Layer: 0
-  m_Name: SettingBar
+  m_Name: QuickAccessBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -65228,7 +65228,7 @@ MonoBehaviour:
   errorWindow: {fileID: 1395791374}
   widgetRoot: {fileID: 2117851715}
   backgroundBlueBar: {fileID: 946766576}
-  settingBar: {fileID: 1045597959}
+  quickAccessBar: {fileID: 1045597959}
   characterDropTool: {fileID: 478083654}
   settingButText: {fileID: 296817659}
   settingsButtonImage: {fileID: 1196788810}
@@ -65252,7 +65252,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keybindingsPanel: {fileID: 2084490580}
-  settingBarManager_Ref: {fileID: 1574376128}
+  quickAccessBarManager_Ref: {fileID: 1574376128}
   tp_Motor_Ref: {fileID: 107944871}
   tp_InputManager_Ref: {fileID: 107944869}
   mm_Manager_Ref: {fileID: 2117851718}
@@ -65261,7 +65261,6 @@ MonoBehaviour:
   bm_GameObject: {fileID: 454426982}
   ci_Gameobject: {fileID: 1878917108}
   wc_Gameobject: {fileID: 1574376125}
-  avatar: {fileID: 107944866}
 --- !u!114 &1574376130
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class SettingsManager : MonoBehaviour
     public WidgetControlSettings wc_Settings = new WidgetControlSettings();
 
     public RectTransform keybindingsPanel;
-    public SettingsBarManager settingBarManager_Ref;
+    public QuickAccessBarManager quickAccessBarManager_Ref;
     public TP_Motor tp_Motor_Ref;
     public TP_InputManager tp_InputManager_Ref;
     public MiniMapManager mm_Manager_Ref;
@@ -244,7 +244,7 @@ public class SettingsManager : MonoBehaviour
         {
             ApplyKeyBindings();
             SaveKeyBindings();
-            settingBarManager_Ref.CloseMenu(keybindingsPanel);
+            quickAccessBarManager_Ref.CloseMenu(keybindingsPanel);
         }
     }
 
