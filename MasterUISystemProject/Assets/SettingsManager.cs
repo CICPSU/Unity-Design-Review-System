@@ -166,42 +166,74 @@ public class SettingsManager : MonoBehaviour
         if (SettingsMenusRefs.Instance.forwardInput.text != null && SettingsMenusRefs.Instance.forwardInput.text != "")
             kb_Settings.kb_Forward = SettingsMenusRefs.Instance.forwardInput.text;
         else
+        {
             nullKeybinding = true;
+            SettingsMenusRefs.Instance.forwardInput.Select();
+            SettingsMenusRefs.Instance.forwardInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.backwardInput.text != null && SettingsMenusRefs.Instance.backwardInput.text != "")
             kb_Settings.kb_Backward = SettingsMenusRefs.Instance.backwardInput.text;
         else
+        {
             nullKeybinding = true;
+            SettingsMenusRefs.Instance.backwardInput.Select();
+            SettingsMenusRefs.Instance.backwardInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.leftInput.text != null && SettingsMenusRefs.Instance.leftInput.text != "")
             kb_Settings.kb_Leftward = SettingsMenusRefs.Instance.leftInput.text;
         else
+        {
             nullKeybinding = true;
+            SettingsMenusRefs.Instance.leftInput.Select();
+            SettingsMenusRefs.Instance.leftInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.rightInput.text != null && SettingsMenusRefs.Instance.rightInput.text != "")
             kb_Settings.kb_Rightward = SettingsMenusRefs.Instance.rightInput.text;
         else
+        {
             nullKeybinding = true;
+            SettingsMenusRefs.Instance.rightInput.Select();
+            SettingsMenusRefs.Instance.rightInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.gravityInput.text != null && SettingsMenusRefs.Instance.gravityInput.text != "")
             kb_Settings.kb_Gravity = SettingsMenusRefs.Instance.gravityInput.text;
         else
+        {
             nullKeybinding = true;
+            SettingsMenusRefs.Instance.gravityInput.Select();
+            SettingsMenusRefs.Instance.gravityInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.rotateLeftInput.text != null && SettingsMenusRefs.Instance.rotateLeftInput.text != "")
             kb_Settings.kb_RotateLeft = SettingsMenusRefs.Instance.rotateLeftInput.text;
         else
+        {
             nullKeybinding = true;
+            SettingsMenusRefs.Instance.rotateLeftInput.Select();
+            SettingsMenusRefs.Instance.rotateLeftInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.rotateRightInput.text != null && SettingsMenusRefs.Instance.rotateRightInput.text != "")
             kb_Settings.kb_RotateRight = SettingsMenusRefs.Instance.rotateRightInput.text;
         else
+        {
             nullKeybinding = true;
+            SettingsMenusRefs.Instance.rotateRightInput.Select();
+            SettingsMenusRefs.Instance.rotateRightInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.toggleInterfaceInput.text != null && SettingsMenusRefs.Instance.toggleInterfaceInput.text != "")
             kb_Settings.kb_ToggleInterface = SettingsMenusRefs.Instance.toggleInterfaceInput.text;
         else
+        {
             nullKeybinding = true;
+            SettingsMenusRefs.Instance.toggleInterfaceInput.Select();
+            SettingsMenusRefs.Instance.toggleInterfaceInput.ActivateInputField();
+        }
 
         if (!nullKeybinding)
         {
