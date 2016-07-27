@@ -16,27 +16,27 @@ namespace UnityEngine.UI.Extensions
 
 		public void OnPointerEnter(PointerEventData eventData)
 		{
-            Debug.Log("pointer enter");
+            //Debug.Log("pointer enter");
 			StartHover();
 			
 		}
         
 		public void OnPointerExit(PointerEventData eventData)
 		{
-            Debug.Log("pointer exit");
+            //Debug.Log("pointer exit");
 			StopHover();
 		}
         
 		void StartHover()
 		{
-            Debug.Log("start hover");
+            //Debug.Log("start hover");
             Invoke("TriggerShowTooltip", 2f);
             
 		}
 
         private void TriggerShowTooltip()
         {
-            Debug.Log("trigger show");
+            //Debug.Log("trigger show");
             if (infoString != "")
                 BoundTooltipItem.Instance.ShowTooltip(infoString);
             else if (textObject != null && LayoutUtility.GetPreferredWidth(textObject.rectTransform) > GetComponent<RectTransform>().rect.width)
@@ -46,7 +46,7 @@ namespace UnityEngine.UI.Extensions
 
 		void StopHover()
 		{
-            Debug.Log("stop hover");
+            //Debug.Log("stop hover");
             CancelInvoke();
 			BoundTooltipItem.Instance.HideTooltip();
 		}

@@ -244,7 +244,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "This is an empty scene for you to develop your own walkthrough model. \n\nSetttings,
     parameters, and sample assets are configured and loaded.\n\nPlease delete this
-    Canvas before use.\n\n"
+    Canvas(\"Delete this Canvas\" object) before use.\n\n"
 --- !u!222 &136643808
 CanvasRenderer:
   m_ObjectHideFlags: 0

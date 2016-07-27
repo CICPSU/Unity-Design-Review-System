@@ -3,26 +3,41 @@
   <ProjectPOIs>
     <POI>
       <SceneFlag>BaseScene</SceneFlag>
-      <Name>first2</Name>
+      <Name>afsdadsf</Name>
       <Position>
-        <x>0</x>
+        <x>0.123999432</x>
         <y>-0.0200001</y>
-        <z>-0.02686102</z>
+        <z>-0.467537731</z>
       </Position>
       <Rotation>
         <x>0</x>
-        <y>5</y>
+        <y>343.33136</y>
         <z>0</z>
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>
     </POI>
     <POI>
       <SceneFlag>BaseScene</SceneFlag>
-      <Name>third</Name>
+      <Name>afsdaf</Name>
       <Position>
-        <x>1</x>
-        <y>2</y>
-        <z>3</z>
+        <x>0.37625885</x>
+        <y>-0.02000004</y>
+        <z>-0.929627836</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>342.425934</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
+    <POI>
+      <SceneFlag>BaseScene</SceneFlag>
+      <Name>2</Name>
+      <Position>
+        <x>0</x>
+        <y>-0.02000004</y>
+        <z>0</z>
       </Position>
       <Rotation>
         <x>0</x>
@@ -33,30 +48,60 @@
     </POI>
     <POI>
       <SceneFlag>BaseScene</SceneFlag>
-      <Name>4</Name>
+      <Name>5</Name>
       <Position>
-        <x>1</x>
-        <y>1</y>
-        <z>1</z>
+        <x>0</x>
+        <y>-0.02000004</y>
+        <z>0</z>
       </Position>
       <Rotation>
         <x>0</x>
-        <y>1</y>
+        <y>0</y>
         <z>0</z>
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>
     </POI>
     <POI>
       <SceneFlag>BaseScene</SceneFlag>
-      <Name>LONGPOINAMEEEEEEEE</Name>
+      <Name>6</Name>
       <Position>
-        <x>2.147352</x>
-        <y>-0.01999992</y>
-        <z>0.1506568</z>
+        <x>0</x>
+        <y>-0.02000004</y>
+        <z>0</z>
       </Position>
       <Rotation>
         <x>0</x>
-        <y>350.8611</y>
+        <y>0</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
+    <POI>
+      <SceneFlag>BaseScene</SceneFlag>
+      <Name>7</Name>
+      <Position>
+        <x>0</x>
+        <y>-0.02000004</y>
+        <z>0</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>0</y>
+        <z>0</z>
+      </Rotation>
+      <MarkerPrefabName>Pin</MarkerPrefabName>
+    </POI>
+    <POI>
+      <SceneFlag>BaseScene</SceneFlag>
+      <Name>8</Name>
+      <Position>
+        <x>0</x>
+        <y>-0.02000004</y>
+        <z>0</z>
+      </Position>
+      <Rotation>
+        <x>0</x>
+        <y>0</y>
         <z>0</z>
       </Rotation>
       <MarkerPrefabName>Pin</MarkerPrefabName>

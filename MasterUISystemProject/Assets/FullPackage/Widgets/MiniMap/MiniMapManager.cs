@@ -109,7 +109,13 @@ public class MiniMapManager : MonoBehaviour {
 		compassImage.sizeDelta = new Vector2 (mapDim + 10, mapDim + 10);
 		compassImage.localPosition = new Vector3 (miniMapMask.localPosition.x - 0.5f*mapDim, miniMapMask.localPosition.y - 0.5f*mapDim, 0);
 		miniMapCam.GetComponent<Camera>().orthographicSize = orthoCamRadiusFeet*feetToMetersFactor;
-	}
+
+
+        RectTransform miniMapPanelRect = miniMapPanel.GetComponent<RectTransform>();
+        miniMapPanelRect.sizeDelta = new Vector2(-miniMapMask.anchoredPosition.x + miniMapMask.sizeDelta.x, -miniMapMask.anchoredPosition.y + miniMapMask.sizeDelta.y);
+        miniMapPanel.GetComponent<BoxCollider2D>().offset = new Vector2(-miniMapPanelRect.sizeDelta.x / 2, -miniMapPanelRect.sizeDelta.y / 2);
+        miniMapPanel.GetComponent<BoxCollider2D>().size = miniMapPanelRect.sizeDelta;
+    }
 
     /// <summary>
     /// This function gets called by the buttons to change size in the MiniMap panel.
@@ -135,7 +141,8 @@ public class MiniMapManager : MonoBehaviour {
 
 		SetMiniMapCam ();
         SettingsManager.Instance.SetMiniMapFields(mapProportionOfScreen, orthoCamRadiusFeet);
-	}
+        
+    }
 
     /// <summary>
     /// This function gets called by the buttons to change the zoom in the MiniMap panel.

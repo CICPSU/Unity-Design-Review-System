@@ -13,13 +13,8 @@ public class SettingsMenusRefs : MonoBehaviour {
     public InputField rightInput;
     public InputField rotateLeftInput;
     public InputField rotateRightInput;
-    public InputField rotateSensitivityInput;
-    public InputField elevateInput;
-    public InputField descendInput;
     public InputField gravityInput;
-    public InputField increaseSpeedInput;
-    public InputField decreaseSpeedInput;
-    public InputField toggleCameraInput;
+    public InputField toggleInterfaceInput;
 
     // References for the WidgetControlMenu
     public Toggle minimapToggle;
@@ -36,10 +31,10 @@ public class SettingsMenusRefs : MonoBehaviour {
 
     // References for the SettingsSelectMenu
     public RectTransform SettingsContentPanel;
-    public RectTransform SettingsSelectMenu;
+    public RectTransform SettingsButtonMenu;
     public RectTransform SettingsHeader;
 
-    void Start()
+    void Awake()
     {
         if (Instance == null)
             Instance = this;

@@ -11,6 +11,8 @@ public class SettingsManager : MonoBehaviour
     public KeyBindings kb_Settings = new KeyBindings();
     public WidgetControlSettings wc_Settings = new WidgetControlSettings();
 
+    public RectTransform keybindingsPanel;
+    public QuickAccessBarManager quickAccessBarManager_Ref;
     public TP_Motor tp_Motor_Ref;
     public TP_InputManager tp_InputManager_Ref;
     public MiniMapManager mm_Manager_Ref;
@@ -18,6 +20,9 @@ public class SettingsManager : MonoBehaviour
     public GameObject sl_GameObject;
     public GameObject bm_GameObject;
     public GameObject ci_Gameobject;
+    public GameObject wc_Gameobject;
+
+    private bool nullKeybinding = false;
 
     void OnEnable()
     {
@@ -70,6 +75,11 @@ public class SettingsManager : MonoBehaviour
 	public void ApplyAvatarSettings()
     {
         tp_Motor_Ref.gravityOn = a_Settings.a_GravColl;
+        if (a_Settings.a_GravColl)
+            TP_Controller.Instance.TurnCharacterCollisionOn();
+        else
+            TP_Controller.Instance.TurnCharacterCollisionOff();
+
         tp_Motor_Ref.ForwardSpeed = a_Settings.a_ForwardSpeed;
         tp_Motor_Ref.BackwardSpeed = a_Settings.a_BackwardSpeed;
         tp_Motor_Ref.StrafingSpeed = a_Settings.a_StrafeSpeed;
@@ -130,15 +140,11 @@ public class SettingsManager : MonoBehaviour
         tp_InputManager_Ref.backward = kb_Settings.kb_Backward;
         tp_InputManager_Ref.leftward = kb_Settings.kb_Leftward;
         tp_InputManager_Ref.rightward = kb_Settings.kb_Rightward;
-        tp_InputManager_Ref.elevate = kb_Settings.kb_Elevate;
-        tp_InputManager_Ref.descend = kb_Settings.kb_Descend;
         tp_InputManager_Ref.gravity = kb_Settings.kb_Gravity;
         tp_InputManager_Ref.rotateLeft = kb_Settings.kb_RotateLeft;
         tp_InputManager_Ref.rotateRight = kb_Settings.kb_RotateRight;
         tp_InputManager_Ref.rotateKeySensitivity = kb_Settings.kb_RotateKeySensitivity;
-        tp_InputManager_Ref.increaseSpeed = kb_Settings.kb_IncreaseSpeed;
-        tp_InputManager_Ref.decreaseSpeed = kb_Settings.kb_DecreaseSpeed;
-        tp_InputManager_Ref.toggleCamera = kb_Settings.kb_ToggleCamera;
+        tp_InputManager_Ref.toggleInterface = kb_Settings.kb_ToggleInterface;
     }
 
     /// <summary>
@@ -150,15 +156,10 @@ public class SettingsManager : MonoBehaviour
         SettingsMenusRefs.Instance.backwardInput.text = kb_Settings.kb_Backward;
         SettingsMenusRefs.Instance.leftInput.text = kb_Settings.kb_Leftward;
         SettingsMenusRefs.Instance.rightInput.text = kb_Settings.kb_Rightward;
-        SettingsMenusRefs.Instance.elevateInput.text = kb_Settings.kb_Elevate;
-        SettingsMenusRefs.Instance.descendInput.text = kb_Settings.kb_Descend;
         SettingsMenusRefs.Instance.gravityInput.text = kb_Settings.kb_Gravity;
         SettingsMenusRefs.Instance.rotateLeftInput.text = kb_Settings.kb_RotateLeft;
         SettingsMenusRefs.Instance.rotateRightInput.text = kb_Settings.kb_RotateRight;
-        SettingsMenusRefs.Instance.rotateSensitivityInput.text = kb_Settings.kb_RotateKeySensitivity.ToString();
-        SettingsMenusRefs.Instance.increaseSpeedInput.text = kb_Settings.kb_IncreaseSpeed;
-        SettingsMenusRefs.Instance.decreaseSpeedInput.text = kb_Settings.kb_DecreaseSpeed;
-        SettingsMenusRefs.Instance.toggleCameraInput.text = kb_Settings.kb_ToggleCamera;
+        SettingsMenusRefs.Instance.toggleInterfaceInput.text = kb_Settings.kb_ToggleInterface;
     }
 
     /// <summary>
@@ -166,46 +167,85 @@ public class SettingsManager : MonoBehaviour
     /// </summary>
     public void UpdateKeyBindingsFromMenu()
     {
-        if(SettingsMenusRefs.Instance.forwardInput.text != null && SettingsMenusRefs.Instance.forwardInput.text != "")
+        nullKeybinding = false;
+        if (SettingsMenusRefs.Instance.forwardInput.text != null && SettingsMenusRefs.Instance.forwardInput.text != "")
             kb_Settings.kb_Forward = SettingsMenusRefs.Instance.forwardInput.text;
+        else
+        {
+            nullKeybinding = true;
+            SettingsMenusRefs.Instance.forwardInput.Select();
+            SettingsMenusRefs.Instance.forwardInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.backwardInput.text != null && SettingsMenusRefs.Instance.backwardInput.text != "")
             kb_Settings.kb_Backward = SettingsMenusRefs.Instance.backwardInput.text;
+        else
+        {
+            nullKeybinding = true;
+            SettingsMenusRefs.Instance.backwardInput.Select();
+            SettingsMenusRefs.Instance.backwardInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.leftInput.text != null && SettingsMenusRefs.Instance.leftInput.text != "")
             kb_Settings.kb_Leftward = SettingsMenusRefs.Instance.leftInput.text;
+        else
+        {
+            nullKeybinding = true;
+            SettingsMenusRefs.Instance.leftInput.Select();
+            SettingsMenusRefs.Instance.leftInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.rightInput.text != null && SettingsMenusRefs.Instance.rightInput.text != "")
             kb_Settings.kb_Rightward = SettingsMenusRefs.Instance.rightInput.text;
-
-        if (SettingsMenusRefs.Instance.elevateInput.text != null && SettingsMenusRefs.Instance.elevateInput.text != "")
-            kb_Settings.kb_Elevate = SettingsMenusRefs.Instance.elevateInput.text;
-
-        if (SettingsMenusRefs.Instance.descendInput.text != null && SettingsMenusRefs.Instance.descendInput.text != "")
-            kb_Settings.kb_Descend = SettingsMenusRefs.Instance.descendInput.text;
+        else
+        {
+            nullKeybinding = true;
+            SettingsMenusRefs.Instance.rightInput.Select();
+            SettingsMenusRefs.Instance.rightInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.gravityInput.text != null && SettingsMenusRefs.Instance.gravityInput.text != "")
             kb_Settings.kb_Gravity = SettingsMenusRefs.Instance.gravityInput.text;
+        else
+        {
+            nullKeybinding = true;
+            SettingsMenusRefs.Instance.gravityInput.Select();
+            SettingsMenusRefs.Instance.gravityInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.rotateLeftInput.text != null && SettingsMenusRefs.Instance.rotateLeftInput.text != "")
             kb_Settings.kb_RotateLeft = SettingsMenusRefs.Instance.rotateLeftInput.text;
+        else
+        {
+            nullKeybinding = true;
+            SettingsMenusRefs.Instance.rotateLeftInput.Select();
+            SettingsMenusRefs.Instance.rotateLeftInput.ActivateInputField();
+        }
 
         if (SettingsMenusRefs.Instance.rotateRightInput.text != null && SettingsMenusRefs.Instance.rotateRightInput.text != "")
             kb_Settings.kb_RotateRight = SettingsMenusRefs.Instance.rotateRightInput.text;
+        else
+        {
+            nullKeybinding = true;
+            SettingsMenusRefs.Instance.rotateRightInput.Select();
+            SettingsMenusRefs.Instance.rotateRightInput.ActivateInputField();
+        }
 
-        if (SettingsMenusRefs.Instance.rotateSensitivityInput.text != null && SettingsMenusRefs.Instance.rotateSensitivityInput.text != "")
-            kb_Settings.kb_RotateKeySensitivity = float.Parse(SettingsMenusRefs.Instance.rotateSensitivityInput.text);
+        if (SettingsMenusRefs.Instance.toggleInterfaceInput.text != null && SettingsMenusRefs.Instance.toggleInterfaceInput.text != "")
+            kb_Settings.kb_ToggleInterface = SettingsMenusRefs.Instance.toggleInterfaceInput.text;
+        else
+        {
+            nullKeybinding = true;
+            SettingsMenusRefs.Instance.toggleInterfaceInput.Select();
+            SettingsMenusRefs.Instance.toggleInterfaceInput.ActivateInputField();
+        }
 
-        if (SettingsMenusRefs.Instance.increaseSpeedInput.text != null && SettingsMenusRefs.Instance.increaseSpeedInput.text != "")
-            kb_Settings.kb_IncreaseSpeed = SettingsMenusRefs.Instance.increaseSpeedInput.text;
-
-        if (SettingsMenusRefs.Instance.decreaseSpeedInput.text != null && SettingsMenusRefs.Instance.decreaseSpeedInput.text != "")
-            kb_Settings.kb_DecreaseSpeed = SettingsMenusRefs.Instance.decreaseSpeedInput.text;
-
-        if (SettingsMenusRefs.Instance.toggleCameraInput.text != null && SettingsMenusRefs.Instance.toggleCameraInput.text != "")
-            kb_Settings.kb_ToggleCamera = SettingsMenusRefs.Instance.toggleCameraInput.text;
-
-        ApplyKeyBindings();
+        if (!nullKeybinding)
+        {
+            ApplyKeyBindings();
+            SaveKeyBindings();
+            quickAccessBarManager_Ref.CloseMenu(keybindingsPanel);
+        }
     }
 
     /// <summary>
@@ -213,7 +253,9 @@ public class SettingsManager : MonoBehaviour
     /// </summary>
     public void SaveKeyBindings()
     {
+
         XmlIO.Save(kb_Settings, Application.dataPath + "/FullPackage/Settings/KeyBindings.sets");
+
     }
 
     /// <summary>
@@ -227,7 +269,7 @@ public class SettingsManager : MonoBehaviour
         sl_GameObject.SetActive(wc_Settings.sl_Enabled);
         mm_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.mm_DefaultPosition;
         mm_GameObject.SetActive(wc_Settings.mm_Enabled);
-
+        
         mm_Manager_Ref.mapProportionOfScreen = wc_Settings.mm_ScreenSize;
         mm_Manager_Ref.orthoCamRadiusFeet = wc_Settings.mm_ScopeRadius;
         mm_Manager_Ref.SetMiniMapCam();
@@ -337,15 +379,11 @@ public class KeyBindings
     public string kb_Backward = "s";
     public string kb_Leftward = "q";
     public string kb_Rightward = "e";
-    public string kb_Elevate = "up";
-    public string kb_Descend = "down";
     public string kb_Gravity = "g";
     public string kb_RotateLeft = "a";
     public string kb_RotateRight = "d";
     public float kb_RotateKeySensitivity = .8f;
-    public string kb_IncreaseSpeed = "=";
-    public string kb_DecreaseSpeed = "-";
-    public string kb_ToggleCamera = "c";
+    public string kb_ToggleInterface = "c";
 
     public KeyBindings()
     {

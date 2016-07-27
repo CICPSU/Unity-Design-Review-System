@@ -4,13 +4,9 @@
   <kb_Backward>s</kb_Backward>
   <kb_Leftward>q</kb_Leftward>
   <kb_Rightward>e</kb_Rightward>
-  <kb_Elevate>up</kb_Elevate>
-  <kb_Descend>down</kb_Descend>
   <kb_Gravity>g</kb_Gravity>
   <kb_RotateLeft>a</kb_RotateLeft>
   <kb_RotateRight>d</kb_RotateRight>
   <kb_RotateKeySensitivity>0.8</kb_RotateKeySensitivity>
-  <kb_IncreaseSpeed>=</kb_IncreaseSpeed>
-  <kb_DecreaseSpeed>-</kb_DecreaseSpeed>
-  <kb_ToggleCamera>c</kb_ToggleCamera>
+  <kb_ToggleInterface>c</kb_ToggleInterface>
 </KeyBindings>

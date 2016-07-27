@@ -33,12 +33,13 @@ public class ToggleMenuButtonManager : MonoBehaviour {
                 neitherTime = 0;
                 if (hoverTime == 0)
                     hoverTime = Time.time;
-
+                /*
                 if (Input.GetMouseButtonUp(0))
                 {
                     clickedState = !clickedState;
                     clickTime = Time.time;
                 }
+                */
             }
         }
         else

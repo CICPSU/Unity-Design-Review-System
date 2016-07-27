@@ -16,13 +16,10 @@ public class POIButtonManager : MonoBehaviour {
     public static POIHandler originalHandler = new POIHandler();
     public RectTransform POIList;
     public GameObject buttonPrefab;
-    public int NumOfButtons = 0;    //
-    public float POIlistHeight = 7.0f;
+    public int NumOfButtons = 0;
 	public GameObject markerRoot; //empty obj, root of all markers. assigned through inspector
 
     public GameObject markerMouseDown = null;
-
-    public bool hasRaycastLock = false;
 
 	// Use this for initialization
 	void Start () {
@@ -59,50 +56,7 @@ public class POIButtonManager : MonoBehaviour {
 			SaveButsToXML();
 		}
 	}// start
-
-    void Update()
-    {
-        if(Input.GetMouseButtonDown(0) && !hasRaycastLock && RaycastLock.GetLock(false))
-        {
-            
-            hasRaycastLock = true;
-            RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
-            if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null)
-            {
-                markerMouseDown = RaycastLock.hit.transform.gameObject;
-                hasRaycastLock = false;
-                RaycastLock.GiveLock();
-            }
-            else
-            {
-                hasRaycastLock = false;
-                RaycastLock.GiveLock();
-                markerMouseDown = null;
-            }
-            
-        }
-        
-        // click on a marker to open up the MarkerInfoCanvas
-        if (Input.GetMouseButtonUp(0) && !hasRaycastLock && RaycastLock.GetLock(false))
-        {
-            hasRaycastLock = true;
-            RaycastLock.Raycast(FindMouseCamera().ScreenPointToRay(Input.mousePosition), ~(1 << 9 | 1 << 8));
-            if (RaycastLock.hit.transform != null && RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>() != null && markerMouseDown == RaycastLock.hit.transform.gameObject)
-            {
-                RaycastLock.hit.transform.GetComponent<MarkerInfoCanvasSetup>().SetupCanvas();
-            }
-            else
-            {
-                hasRaycastLock = false;
-                RaycastLock.GiveLock();
-            }
-            
-        }
-        
-    }
-
-
-
+    
 	//whenever a new level is loaded, we regenerate the buttons from the xml file so that only the buttons for the current scene are visible
 	public void OnLevelWasLoaded(int level)
 	{
@@ -140,7 +94,8 @@ public class POIButtonManager : MonoBehaviour {
 		
 		NumOfButtons = 0;
 	}
-	//this is the combination of function loadButsFromXML and GenerateButsMarkers
+	
+    //this is the combination of function loadButsFromXML and GenerateButsMarkers
 	public void LoadAndGenerateButs(){
 		if (File.Exists(POI_GlobalVariables.XMLpath))
 		{
@@ -152,7 +107,6 @@ public class POIButtonManager : MonoBehaviour {
 			//generate new buttons
 			foreach(POI point in originalHandler.projectPOIs){
 				GenerateButMarkerPair(point);
-				POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
 				POIList.localPosition = Vector3.zero;
 			}
 		}
@@ -168,7 +122,6 @@ public class POIButtonManager : MonoBehaviour {
 		//generate new buttons from the xml file
 		foreach(POI point in handler.projectPOIs){
 			GenerateButMarkerPair(point);
-			POIList.sizeDelta = new Vector2(POIList.sizeDelta.x , POIlistHeight);
 			POIList.localPosition = Vector3.zero;
 		}
 	}
@@ -216,19 +169,12 @@ public class POIButtonManager : MonoBehaviour {
         // this sets the TooltipTrigger text value to the name of the button
         newButton.GetComponent<BoundTooltipTrigger>().text = point.buttonName;
 
-		// the following line positions the button correctly as a child of the POIList
-		// !!!! when we convert to using the Layout system, this will be automatically done
-		buttonRectTransform.localPosition = new Vector3(7.0f, -7.0f + NumOfButtons * (-buttonRectTransform.rect.height - 7.0f), 0.0f);
-
 		newButton.GetComponent<POIInfoRef>().poiInfo = marker.GetComponent<POIInfo>() as POIInfo;
 
 		// update the text of the button to match the name of the POI 
 		newButton.transform.GetComponentInChildren<Text>().text = point.buttonName;
 
-		// the next two lines update our counter for the number of buttons that are currently in the scene, and resize the POIList
-		// !!!! these lines may not be necessary when switching to the Layout system
 		NumOfButtons++;
-		POIlistHeight += buttonRectTransform.rect.height + 7.0f;
 		
 		// code to add a listener to the button OnClicked() event
 		EventTrigger eTrigger = newButton.GetComponent<EventTrigger>();
@@ -259,9 +205,9 @@ public class POIButtonManager : MonoBehaviour {
 				buttonToRemove.transform.parent.GetChild(i).position += new Vector3(0,37,0);
 			}
 		}
-
+        
 		// The destroy call is what actually removes the button
-		GameObject.Destroy(buttonToRemove);
+		DestroyImmediate(buttonToRemove);
 
 		// numofbuttons is used for positioning and sizing the list and buttons
 		// !!!! it will be unnecessary in the Layout system
@@ -269,7 +215,8 @@ public class POIButtonManager : MonoBehaviour {
 	}
 
 	//save the buttons in the scene into the XML file and the orginalHandler
-	public void SaveButsToXML(){
+	public void SaveButsToXML()
+    {
 		Debug.Log("generating saved button files based on current project");
 		originalHandler = new POIHandler();
 		foreach (Transform child in POIList.transform)

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CharacterWander : MonoBehaviour {
+public class CharacterWander : MonoBehaviour, IAcceptRaycast {
 
     public enum WanderMode { Idle, Patrol, Explore, Bookmark }
 
@@ -32,6 +32,13 @@ public class CharacterWander : MonoBehaviour {
 
     private bool canceledMovement = false;
     private bool moving = false;
+
+    public void RaycastTrigger()
+    {
+        if(CharacterDropper.Instance.currentState == CharacterDropper.CharacterDropperState.SelectExisting 
+            && ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.None)
+            CharacterDropper.Instance.OpenCharacterInfo(gameObject);
+    }
 
     public void SetWanderMode()
     {
@@ -155,7 +162,7 @@ public class CharacterWander : MonoBehaviour {
         }
     }
 
-    void Start()
+    void Awake()
     {
         navAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();

@@ -13,7 +13,11 @@ public class S_AddCityBut : MonoBehaviour {
 	public RectTransform contentPanel;
 	public RectTransform CityExistedPanel;
 
+    /// <summary>
+    /// This button is called to add a city from the NewCityPanel.
+    /// </summary>
 	public void addCity(){
+        // If all of the fields are filled out, add the city.
 		if(cityNameInput.text != "" && longitudeInput.text != "" && latitudeInput.text != "" && timeZoneInput.text != "")
         {
 			City city = new City(cityNameInput.text, float.Parse(longitudeInput.text), float.Parse(latitudeInput.text), int.Parse(timeZoneInput.text));
@@ -32,14 +36,19 @@ public class S_AddCityBut : MonoBehaviour {
 				}
 			}
 			SunLightWidget.Instance.calcSunCoordination();
-            EditModeManager.ExitEditMode();
-		}
+
+            ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.Sunlight);
+        }
+        // If all of the fields are not filled out, show the warning window.
         else
         {
 			emptyInputWarningPanel.gameObject.SetActive(true);
 		}
 	}
 
+    /// <summary>
+    /// Overwrites a city with new data.
+    /// </summary>
 	public void overwriteCity(){
 		City city = new City(cityNameInput.text, float.Parse(longitudeInput.text), float.Parse(latitudeInput.text), int.Parse(timeZoneInput.text));
 		SunLightWidget.Instance.InputData.CurrentCity = city;

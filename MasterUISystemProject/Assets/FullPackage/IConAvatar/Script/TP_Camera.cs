@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using UnityEngine.EventSystems;
 
 public class TP_Camera : MonoBehaviour {
 	public static TP_Camera Instance;
@@ -18,12 +19,7 @@ public class TP_Camera : MonoBehaviour {
 	
 	public float X_MouseSensitivity = 5f;
 	public float Y_MouseSensitivity = 5f;
-
-    //****!!!!!!!! control the Q,E sensitivity NOTE: has been moved to TP_InputManager
-    //	public float RotateKeySensitivity = 0.8f;
-
-    //public bool allowPlayerInput = true;
-
+    
 	public float MouseWheelSensitivity = 2.5f;	
 	public float X_Smooth = 0.05f;
 	public float Y_Smooth = 0.1f;
@@ -145,7 +141,8 @@ public class TP_Camera : MonoBehaviour {
 		// This is where we will limit mouseY, mouseY will be limited between Y_MinLimit and Y_MaxLimit
 		mouseY = Helper.ClampAngle(mouseY, Y_MinLimit, Y_MaxLimit);
 		
-		if(Input.GetAxis("Mouse ScrollWheel") < - deadZone || Input.GetAxis("Mouse ScrollWheel") > deadZone){
+        /// EventSystem.current.IsPointerOverGameObject returns true if the mouse is over a UI element.  This is used to prevent the scrollwheel from zooming the camera in and out when over a menu.
+		if((Input.GetAxis("Mouse ScrollWheel") < - deadZone || Input.GetAxis("Mouse ScrollWheel") > deadZone) && !EventSystem.current.IsPointerOverGameObject()){
 			desiredDistance = Mathf.Clamp(Distance - Input.GetAxis("Mouse ScrollWheel")* MouseWheelSensitivity, DistanceMin, DistanceMax);
 			preOccludedDistance = desiredDistance;
 			distanceSmooth = DistanceSmooth;
@@ -174,30 +171,8 @@ public class TP_Camera : MonoBehaviour {
 		
 		//Toggle gravity with G
 		if(Input.GetKeyUp(TP_InputManager.instance.gravity)){
-		//	Debug.Log("G pressed");
-			if(TP_Motor.Instance.gravityOn){
-				TP_Motor.Instance.gravityOn = false;
-				//as models will by default be loaded in "Default" layer, 
-				//disable the collision between "ignore raycast", where player is in, and "default"
-				Physics.IgnoreLayerCollision(LayerMask.NameToLayer ("Ignore Raycast"), LayerMask.NameToLayer ("Default"), true);
-				//Users may add layers from layer 8 to layer 31
-				//For efficiency, we can safely assume that users usually won't create more than 7 layers
-				// therefore we only check "ignore raycast layer" against the first 7 user defined layers
-				for(int i = 8; i < 15; i++){
-					if(!String.IsNullOrEmpty(LayerMask.LayerToName(i))){
-						Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Ignore Raycast"), i,true);
-					}
-				}
-			}
-			else{
-				TP_Motor.Instance.gravityOn = true;
-				Physics.IgnoreLayerCollision(LayerMask.NameToLayer ("Ignore Raycast"), LayerMask.NameToLayer ("Default"), false);
-				for(int i = 8; i < 15; i++){
-					if(!String.IsNullOrEmpty(LayerMask.LayerToName(i))){
-						Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Ignore Raycast"), i,false);
-					}
-				}
-			}
+            //	Debug.Log("G pressed");
+            TP_Controller.Instance.ToggleCharacterCollisionBasedOnGravity();
 		}
 		
 		//check speed adjustment, if the speed is within limit, adjust speed.

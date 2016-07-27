@@ -11,12 +11,7 @@ using System.Linq;
 /// </summary>
 public class POIMenuStateManager : MonoBehaviour {
 
-	public List<MonoBehaviour> disableWhileMenuOpen = new List<MonoBehaviour> ();
-    public List<GameObject> disableGOWhileEdit = new List<GameObject>();
-
 	private static bool editModeState = false;
-
-	private bool finshedSetupForModeChange = false;
 
 	public delegate void stateChangeDelegate();
 
@@ -27,6 +22,15 @@ public class POIMenuStateManager : MonoBehaviour {
 	void Start(){
 		MenuStateChange += ChangeState;
 	}
+
+    public void ClosePOIWidget()
+    {
+        ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.Bookmark);
+        EditModeState = false;
+        SettingsManager.Instance.wc_Settings.bm_Enabled = false;
+        SettingsManager.Instance.SaveWidgetControlSettings();
+        gameObject.SetActive(false);
+    }
 
     public static void OpenAddDeleteWindow()
     {
@@ -151,57 +155,38 @@ public class POIMenuStateManager : MonoBehaviour {
 		}
 	}
 
-	void Update ()
-	{
-		if(!finshedSetupForModeChange)
-        {
-			//toggle all of the scripts in disableWhileMenuOpen
-            //scripts can be added to this list so that they will not be active while the POIMenu is in Edit mode.
-			foreach(MonoBehaviour mono in disableWhileMenuOpen)
-			{
-				mono.enabled = !editModeState;
-			}
-
-			finshedSetupForModeChange = true;
-		}
-	}
-
     private void ChangeState()
     {
-        editModeState = !editModeState;
-        // this means we are switching out of Edit mode
-        if (!editModeState)
+        if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.None || ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.Bookmark)
         {
-            //restoring the original window
-            POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.white;
-
-            POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
-            POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive(false);
-            POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive(false);
-            /*
-            foreach (GameObject gO in disableGOWhileEdit)
+            editModeState = !editModeState;
+            // this means we are switching out of Edit mode
+            if (!editModeState)
             {
-                gO.SetActive(true);
+                //restoring the original window
+                POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.white;
+
+                POI_ReferenceHub.Instance.POIEditWindow.gameObject.SetActive(false);
+                POI_ReferenceHub.Instance.AddDeleteWindow.gameObject.SetActive(false);
+                POI_ReferenceHub.Instance.BookmarkCurrentLocationWindow.gameObject.SetActive(false);
+
+                POIButtonManager.instance.LoadAndGenerateButs();
+
+                ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.Bookmark);
+
             }
-            */
-            EditModeManager.ExitEditMode();
-
-        }
-        // this means we are switching into Edit mode
-        else
-        {
-            OpenAddDeleteWindow();
-
-            //change the color of the POImenu
-            POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.black;
-
-            EditModeManager.EnterEditMode(GetComponent<RectTransform>());
-            /*
-            foreach (GameObject gO in disableGOWhileEdit)
+            // this means we are switching into Edit mode
+            else
             {
-                gO.SetActive(false);
+                if (ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.Bookmark))
+                {
+                    OpenAddDeleteWindow();
+
+                    //change the color of the POImenu
+                    POI_ReferenceHub.Instance.POIMenu.gameObject.GetComponent<Image>().color = Color.black;
+                }
+
             }
-            */
         }
     }
 }

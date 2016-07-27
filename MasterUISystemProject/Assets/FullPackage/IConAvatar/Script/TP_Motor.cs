@@ -17,7 +17,7 @@ public class TP_Motor : MonoBehaviour {
 	public float MaxControllableSlideMagnitude = 0.4f;
 	public bool gravityOn; 
 	public Transform virtualCamera;
-
+    
     public Animator avatarAnimator;
 	
 	
