@@ -171,30 +171,8 @@ public class TP_Camera : MonoBehaviour {
 		
 		//Toggle gravity with G
 		if(Input.GetKeyUp(TP_InputManager.instance.gravity)){
-		//	Debug.Log("G pressed");
-			if(TP_Motor.Instance.gravityOn){
-				TP_Motor.Instance.gravityOn = false;
-				//as models will by default be loaded in "Default" layer, 
-				//disable the collision between "ignore raycast", where player is in, and "default"
-				Physics.IgnoreLayerCollision(LayerMask.NameToLayer ("Ignore Raycast"), LayerMask.NameToLayer ("Default"), true);
-				//Users may add layers from layer 8 to layer 31
-				//For efficiency, we can safely assume that users usually won't create more than 7 layers
-				// therefore we only check "ignore raycast layer" against the first 7 user defined layers
-				for(int i = 8; i < 15; i++){
-					if(!String.IsNullOrEmpty(LayerMask.LayerToName(i))){
-						Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Ignore Raycast"), i,true);
-					}
-				}
-			}
-			else{
-				TP_Motor.Instance.gravityOn = true;
-				Physics.IgnoreLayerCollision(LayerMask.NameToLayer ("Ignore Raycast"), LayerMask.NameToLayer ("Default"), false);
-				for(int i = 8; i < 15; i++){
-					if(!String.IsNullOrEmpty(LayerMask.LayerToName(i))){
-						Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Ignore Raycast"), i,false);
-					}
-				}
-			}
+            //	Debug.Log("G pressed");
+            TP_Controller.Instance.ToggleCharacterCollisionBasedOnGravity();
 		}
 		
 		//check speed adjustment, if the speed is within limit, adjust speed.

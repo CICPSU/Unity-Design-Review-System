@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 
 public class TP_Controller : MonoBehaviour {
@@ -90,7 +91,54 @@ public class TP_Controller : MonoBehaviour {
 		TP_Motor.Instance.Jump();	
 	}
 	
-	void ToggleCharacterCollisionBasedOnGravity(){
-			
-	}
+	public void ToggleCharacterCollisionBasedOnGravity(){
+        if (TP_Motor.Instance.gravityOn)
+        {
+            TurnCharacterCollisionOff();
+        }
+        else
+        {
+            TurnCharacterCollisionOn();
+        }
+    }
+
+    public void TurnCharacterCollisionOn()
+    {
+        characterController.gameObject.GetComponent<NavMeshObstacle>().enabled = true;
+
+        TP_Motor.Instance.gravityOn = true;
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Avatar"), LayerMask.NameToLayer("Default"), false);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Avatar"), LayerMask.NameToLayer("Characters"), false);
+
+        for (int i = 8; i < 15; i++)
+        {
+            if (!String.IsNullOrEmpty(LayerMask.LayerToName(i)))
+            {
+                Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Avatar"), i, false);
+                Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Avatar"), i, false);
+            }
+        }
+    }
+
+    public void TurnCharacterCollisionOff()
+    {
+        characterController.gameObject.GetComponent<NavMeshObstacle>().enabled = false;
+        TP_Motor.Instance.gravityOn = false;
+        //as models will by default be loaded in "Default" layer, 
+        //disable the collision between "avatar", where player is in, and "default"
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Avatar"), LayerMask.NameToLayer("Default"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Avatar"), LayerMask.NameToLayer("Characters"), true);
+
+        //Users may add layers from layer 8 to layer 31
+        //For efficiency, we can safely assume that users usually won't create more than 7 layers
+        // therefore we only check "ignore raycast layer" against the first 7 user defined layers
+        for (int i = 8; i < 15; i++)
+        {
+            if (!String.IsNullOrEmpty(LayerMask.LayerToName(i)))
+            {
+                Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Avatar"), i, true);
+                Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Avatar"), i, true);
+            }
+        }
+    }
 }

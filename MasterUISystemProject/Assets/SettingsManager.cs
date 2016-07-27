@@ -75,6 +75,11 @@ public class SettingsManager : MonoBehaviour
 	public void ApplyAvatarSettings()
     {
         tp_Motor_Ref.gravityOn = a_Settings.a_GravColl;
+        if (a_Settings.a_GravColl)
+            TP_Controller.Instance.TurnCharacterCollisionOn();
+        else
+            TP_Controller.Instance.TurnCharacterCollisionOff();
+
         tp_Motor_Ref.ForwardSpeed = a_Settings.a_ForwardSpeed;
         tp_Motor_Ref.BackwardSpeed = a_Settings.a_BackwardSpeed;
         tp_Motor_Ref.StrafingSpeed = a_Settings.a_StrafeSpeed;

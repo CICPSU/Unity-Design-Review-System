@@ -5,7 +5,7 @@
     <x>5</x>
     <y>-5</y>
   </bm_DefaultPosition>
-  <sl_Enabled>false</sl_Enabled>
+  <sl_Enabled>true</sl_Enabled>
   <sl_DefaultPosition>
     <x>155</x>
     <y>-5</y>
