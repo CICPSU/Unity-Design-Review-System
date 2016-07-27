@@ -263,16 +263,21 @@ public class SettingsManager : MonoBehaviour
     /// </summary>
     public void ApplyWidgetControlSettings()
     {
-        bm_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.bm_DefaultPosition;
         bm_GameObject.SetActive(wc_Settings.bm_Enabled);
-        sl_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.sl_DefaultPosition;
         sl_GameObject.SetActive(wc_Settings.sl_Enabled);
-        mm_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.mm_DefaultPosition;
         mm_GameObject.SetActive(wc_Settings.mm_Enabled);
         
         mm_Manager_Ref.mapProportionOfScreen = wc_Settings.mm_ScreenSize;
         mm_Manager_Ref.orthoCamRadiusFeet = wc_Settings.mm_ScopeRadius;
         mm_Manager_Ref.SetMiniMapCam();
+    }
+
+    public void ResetWidgetsToDefaultPositions()
+    {
+        bm_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.bm_DefaultPosition;
+        sl_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.sl_DefaultPosition;
+        mm_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.mm_DefaultPosition;
+
     }
 
     /// <summary>

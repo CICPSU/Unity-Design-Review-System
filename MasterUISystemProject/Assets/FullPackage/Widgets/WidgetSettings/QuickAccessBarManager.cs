@@ -42,6 +42,7 @@ public class QuickAccessBarManager : MonoBehaviour {
     {
         // loads settings file when the application starts
         GetComponent<SettingsManager>().LoadSettingsFiles();
+        GetComponent<SettingsManager>().ResetWidgetsToDefaultPositions();
 
         //this closes all menu buttons along with any other panels that were opened
         GetComponent<ToggleGroup>().SetAllTogglesOff();
