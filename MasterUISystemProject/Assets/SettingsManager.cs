@@ -40,6 +40,7 @@ public class SettingsManager : MonoBehaviour
         if (File.Exists(Application.dataPath + "/FullPackage/Settings/AvatarSettings.sets"))
         {
             a_Settings = XmlIO.Load(Application.dataPath + "/FullPackage/Settings/AvatarSettings.sets", typeof(AvatarSettings)) as AvatarSettings;
+            a_Settings.a_Tracking = DIRE.Instance.trackingActive;  //match the tracking state per the tracking system check by DIRE
             ApplyAvatarSettings();
         }
         else
@@ -79,6 +80,9 @@ public class SettingsManager : MonoBehaviour
             TP_Controller.Instance.TurnCharacterCollisionOn();
         else
             TP_Controller.Instance.TurnCharacterCollisionOff();
+
+        //revert the tracking change if tracking system not active
+        a_Settings.a_Tracking = DIRE.Instance.GetComponent<ARTtrack>().SetTracking(a_Settings.a_Tracking);
 
         tp_Motor_Ref.ForwardSpeed = a_Settings.a_ForwardSpeed;
         tp_Motor_Ref.BackwardSpeed = a_Settings.a_BackwardSpeed;

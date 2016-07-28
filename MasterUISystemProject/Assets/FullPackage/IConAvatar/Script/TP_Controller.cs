@@ -110,6 +110,7 @@ public class TP_Controller : MonoBehaviour {
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Avatar"), LayerMask.NameToLayer("Default"), false);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Avatar"), LayerMask.NameToLayer("Characters"), false);
 
+        //assume there is no more than 15 layers
         for (int i = 8; i < 15; i++)
         {
             if (!String.IsNullOrEmpty(LayerMask.LayerToName(i)))

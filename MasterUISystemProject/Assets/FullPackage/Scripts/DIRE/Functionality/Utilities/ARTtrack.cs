@@ -46,9 +46,10 @@ public class ARTtrack : MonoBehaviour {
 
 	//A GUI button calls this
 	//Param: true to turn on 
-	public void SetTracking (bool turnOn){
+	public bool SetTracking (bool turnOn){
 		DIRE.Instance.trackingActive = turnOn && CheckTracking ();
-		//reset the head position when turnning tracking off
+		
+        //reset the head position when turnning tracking off
 		if(!DIRE.Instance.trackingActive){
 			transform.localPosition = Vector3.zero;
             //GetComponent<DisplaySetup>().offsetDisplayOriginByGeometricCenter();
@@ -56,6 +57,8 @@ public class ARTtrack : MonoBehaviour {
             GetComponent<DIRE>().offsetDisplayOriginByGeometricCenter();
             GetComponent<DIRE>().offsetHeadToGeometricCenter();
 		}
+
+        return DIRE.Instance.trackingActive;
 	}
 
 
