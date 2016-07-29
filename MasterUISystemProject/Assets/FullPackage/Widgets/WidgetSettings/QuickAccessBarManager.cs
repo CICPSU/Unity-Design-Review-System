@@ -22,8 +22,15 @@ public class QuickAccessBarManager : MonoBehaviour {
     public TP_Controller tpControlRef;
     public ToggleMenuButtonManager toggleMenuButtonManagerRef;
 
-    public bool menuButtonsOpen = false;
-    public bool settingsMenusOpen = false;
+    /// <summary>
+    /// true when QuickAccessBar is active
+    /// </summary>
+    public bool quickAccessBarOpen = false;
+    
+    /// <summary>
+    /// true when settingContentPanel is active
+    /// </summary>
+    public bool settingsMenusOpen = false; 
 
     private List<GameObject> openWidgets = new List<GameObject>();
 
@@ -61,11 +68,11 @@ public class QuickAccessBarManager : MonoBehaviour {
         SettingsMenusRefs.Instance.SettingsButtonMenu.gameObject.SetActive(false);
 
         characterDropTool.GetComponent<Widget>().Active = false;
-        menuButtonsOpen = false;
+        quickAccessBarOpen = false;
         tpControlRef.allowPlayerInput = true;
     }
 
-    public void ToggleMenuButtons()
+    public void ToggleQuickAccessBar()
     {
         //check if UIs under the menu is playing animation, if yes, skip
         foreach (Transform child in quickAccessBar.transform) {
@@ -81,14 +88,14 @@ public class QuickAccessBarManager : MonoBehaviour {
         }
 
         //no animation is playing in bottom menus.
-        if (menuButtonsOpen)
-            CloseMenu();
+        if (quickAccessBarOpen)
+            CloseQuickAccessBar();
         else
-            OpenMenu();
+            OpenQuickAccessBar();
              
     }
     
-    private void CloseMenu()
+    private void CloseQuickAccessBar()
     {
         if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.WidgetConfig)
         {
@@ -104,14 +111,14 @@ public class QuickAccessBarManager : MonoBehaviour {
                 child.gameObject.SetActive(false);
             }
             errorWindow.SetActive(false);
-            menuButtonsOpen = false;
+            quickAccessBarOpen = false;
             tpControlRef.allowPlayerInput = true;
             toggleMenuButtonManagerRef.clickedState = false;
             ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.WidgetConfig);
         }
     }
 
-    private void OpenMenu()
+    private void OpenQuickAccessBar()
     {
         if (ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.WidgetConfig))
         {
@@ -123,7 +130,7 @@ public class QuickAccessBarManager : MonoBehaviour {
                 iTween.MoveFrom(child.gameObject, iTween.Hash(iT.MoveBy.x, Screen.width, iT.MoveBy.easetype, "easeOutCubic", iT.MoveBy.time, .6)); // time is different to control button arrive time
             }
 
-            menuButtonsOpen = true;
+            quickAccessBarOpen = true;
             tpControlRef.allowPlayerInput = false;
             toggleMenuButtonManagerRef.clickedState = true;
             toggleMenuButtonManagerRef.clickTime = Time.time;
@@ -149,12 +156,34 @@ public class QuickAccessBarManager : MonoBehaviour {
         }
     }
 
+    public void ToggleDropCharacterMenu()
+    {
+        if (CharacterDropper.Instance.currentState == CharacterDropper.CharacterDropperState.DroppingNew)
+        {
+            CharacterDropper.Instance.CloseCharacterDrop();
+        }
+        else
+        {
+            CharacterDropper.Instance.OpenCharacterDrop();
+        }
+    }
+
+    /// <summary>
+    /// Opens sub-menus in SettingsContentPanel, such as AvatarSettingsPanel, KeyBindingPanel, and WidgetControlPanel
+    /// called by buttons in ButtonMenuPanel
+    /// </summary>
+    /// <param name="menuToOpen"></param>
     public void OpenMenu(RectTransform menuToOpen)
     {
         menuToOpen.gameObject.SetActive(true);
         SettingsMenusRefs.Instance.SettingsButtonMenu.gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Closes sub-menus in SettingsContentPanel, such as AvatarSettingsPanel, KeyBindingPanel, and WidgetControlPanel
+    /// called by buttons in ButtonMenuPanel
+    /// </summary>
+    /// <param name="menuToClose"></param>
     public void CloseMenu(RectTransform menuToClose)
     {
         menuToClose.gameObject.SetActive(false);

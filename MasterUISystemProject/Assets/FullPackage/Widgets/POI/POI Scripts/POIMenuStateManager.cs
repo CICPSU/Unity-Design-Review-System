@@ -32,6 +32,7 @@ public class POIMenuStateManager : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
+    
     public static void OpenAddDeleteWindow()
     {
         //show the add/delete window

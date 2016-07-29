@@ -12,5 +12,20 @@ public class KeepOnLoad : MonoBehaviour {
 			Destroy (gameObject);
 		gameObject.SetActive (firstCreated);
 		DontDestroyOnLoad (gameObject);
-	}
+
+        transform.position = Vector3.zero;
+
+    }
+
+    /// <summary>
+    /// Always make sure this object is located at world Origin (0,0,0)
+    /// </summary>
+    void Update()
+    {
+        if (transform.position != Vector3.zero)
+        {
+            transform.position = Vector3.zero;
+        }
+
+    }
 }

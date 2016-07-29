@@ -94,7 +94,7 @@ public class ContentManager : MonoBehaviour
         else
         {
             Debug.Log("Loading scene: " + scene);
-            Application.LoadLevel(scene);
+            UnityEngine.SceneManagement.SceneManager.LoadScene(scene);
         }
 	}
 }

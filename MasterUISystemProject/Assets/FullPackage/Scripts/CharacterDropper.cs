@@ -14,11 +14,8 @@ public class CharacterDropper : MonoBehaviour {
     /// GENERAL VARS
     /// </summary>
     public GameObject avatar;
-    public bool hasRaycastLock = false;
     public GameObject activeChar = null;
-
     private bool initializing = false;
-    private Camera mouseCam;
     private List<DroppedCharacter> droppedCharacters = new List<DroppedCharacter>();
     private string characterFilePath;
     
@@ -248,21 +245,6 @@ public class CharacterDropper : MonoBehaviour {
         CloseCharacterEdit();
         initializing = false;
         currentState = CharacterDropperState.None;
-    }
-
-    /// <summary>
-    /// Switches between the menu being open and closed.
-    /// </summary>
-    public void ToggleMenu()
-    {
-        if(currentState == CharacterDropperState.DroppingNew)
-        {
-            CloseCharacterDrop();
-        }
-        else
-        {
-            OpenCharacterDrop();
-        }
     }
 
     /// <summary>

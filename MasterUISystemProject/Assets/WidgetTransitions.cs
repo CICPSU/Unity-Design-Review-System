@@ -7,12 +7,13 @@ public class WidgetTransitions : MonoBehaviour {
 
     public RectTransform widgetRoot;
     public RectTransform widgetConfig;
+    
+    
+    public int rootDirection = 2; // for widgetRoot: value is multiple of screen height and positive is moving up 
+    public int configDirection = -2; // for widgetConfig: value is multiple of screen height and positive is moving up 
 
-    public int rootDirection = 2;
-    public int configDirection = -2;
-
-	// Use this for initialization
-	void Start ()
+    // Use this for initialization
+    void Start ()
     {
         if (Instance == null)
             Instance = this;
@@ -20,13 +21,7 @@ public class WidgetTransitions : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        /*
-        if (Input.GetKeyUp(KeyCode.R) && iTween.Count(widgetRoot.gameObject) == 0)
-            SlideWidgetRoot();
-
-        if (Input.GetKeyUp(KeyCode.C) && iTween.Count(widgetConfig.gameObject) == 0)
-            SlideWidgetConfig();
-            */
+ 
         if (Input.GetKeyUp(TP_InputManager.instance.toggleInterface) && iTween.Count(widgetRoot.gameObject) == 0 && iTween.Count(widgetConfig.gameObject) == 0)
             ClearScreen();
 

@@ -29,12 +29,13 @@ public class POIActiveButtonManager : MonoBehaviour {
 				activeButton.GetComponent<Image>().color = defaultColor;
 			}
 
+            //if active button is clicked again
 			if(activeButton == clicked)
 			{
                 // this will de-select the active button
 				resetActiveButton();
 			}
-			else
+			else //if clicking a new POI button
 			{
 				activeButton = clicked;
 				clicked.GetComponent<Button>().image.color = activeColor;
@@ -42,22 +43,23 @@ public class POIActiveButtonManager : MonoBehaviour {
 				Transform deleteBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("Delete") as Transform;
 				deleteBut.GetComponent<Button>().enabled = true; //enable delete button
 				Transform deleteButText = deleteBut.FindChild("Text") as Transform;
-				deleteButText.GetComponent<Text>().color = new Color(50f / 255, 50f / 255, 50f / 255, 1);
+				deleteButText.GetComponent<Text>().color = new Color(1, 1, 1, 1);
 
-				if(POI_ReferenceHub.Instance.POIEditWindow.gameObject.activeSelf)
+                //POIEditWindow is the window for adding custom or editing existing bookmarks
+				if(POI_ReferenceHub.Instance.POIEditWindow.gameObject.activeSelf) // if POIEditwindow is opened
 				{
 					//grey out edit bookmark
 					Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
 					editBut.GetComponent<Button>().enabled = false; //disable edit button
 					Transform editButText = editBut.FindChild("Text") as Transform;
-					editButText.GetComponent<Text>().color = new Color(0.57f,0.57f,0.57f);
+					editButText.GetComponent<Text>().color = new Color(50f / 255, 50f / 255, 50f / 255, 1);
 				}
 				else
 				{
 					Transform editBut = POI_ReferenceHub.Instance.AddDeleteWindow.FindChild("EditBookmark") as Transform;
 					editBut.GetComponent<Button>().enabled = true; //enable edit button
 					Transform editButText = editBut.FindChild("Text") as Transform;
-					editButText.GetComponent<Text>().color = new Color(50f/255,50f/255,50f/255,1);
+					editButText.GetComponent<Text>().color = new Color(1, 1, 1, 1);
 				}
 
 				// we also need to fill in the input fields in the edit window when a button is made active
