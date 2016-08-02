@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 
-public class ToggleMenuButtonManager : MonoBehaviour {
+public class ToggleQuickAssessBarManager : MonoBehaviour {
 
     public Vector2 hiddenPosition = new Vector2(-25, -25);
     public RectTransform toggleMenuButton;
@@ -22,7 +22,7 @@ public class ToggleMenuButtonManager : MonoBehaviour {
         thisRect = GetComponent<RectTransform>();
     }
 
-	// Update is called once per frame
+	// checks if cursor hover 
 	void Update ()
     {
         if (Input.mousePosition.x > thisRect.position.x && Input.mousePosition.x < thisRect.position.x + thisRect.sizeDelta.x)

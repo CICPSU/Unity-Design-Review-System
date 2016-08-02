@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 
 /// <summary>
-/// the event trigger is required to handle dragging
-/// the rigidbody2d and boxcollider2d are required to handle collision detection
+/// the event trigger is required to handle dragging: attach this to UIs that you want to be draggable
+/// the boxcollider2d are required to handle collision detection
 /// </summary>
 [RequireComponent(typeof(EventTrigger))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -36,26 +36,20 @@ public class FlexibleDraggableObject : MonoBehaviour
     /// <param name="data"></param>
     void OnDrag(BaseEventData data)
     {
-        PointerEventData ped = (PointerEventData)data;
+		if(Input.GetMouseButton(0)){
+        	PointerEventData ped = (PointerEventData)data;
 
-        targetRectTrans.Translate(ped.delta);
+        	targetRectTrans.Translate(ped.delta);
+		}
     }
 
     void OnDragBegin(BaseEventData data)
     {
-        // these two lines turn off camera rotation while dragging a menu object
-        TP_Motor.Instance.stopRotation = true;
-        TP_Camera.Instance.stopRotation = true;
-
-        startPos = targetRectTrans.anchoredPosition3D;
-        
+        startPos = targetRectTrans.anchoredPosition3D; //remembers the original pos of UI for restoring UI pos when overlapping	
     }
 
     void OnDragEnd(BaseEventData data)
     {
-        TP_Motor.Instance.stopRotation = false;
-        TP_Camera.Instance.stopRotation = false;
-
         if (targetCollider2D.IsTouchingLayers())
             targetRectTrans.anchoredPosition3D = startPos;
         

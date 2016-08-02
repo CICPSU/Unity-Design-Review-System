@@ -20,7 +20,7 @@ public class QuickAccessBarManager : MonoBehaviour {
     public RectTransform widgetPanel;
     
     public TP_Controller tpControlRef;
-    public ToggleMenuButtonManager toggleMenuButtonManagerRef;
+    public ToggleQuickAssessBarManager toggleMenuButtonManagerRef;
 
     /// <summary>
     /// true when QuickAccessBar is active
@@ -45,6 +45,10 @@ public class QuickAccessBarManager : MonoBehaviour {
        
     }
 
+	/// <summary>
+	/// setup Settings menu at start
+	/// loads settings file, move settings window to center of screen and disable
+	/// </summary>
     private void IntializeUI()
     {
         // loads settings file when the application starts
@@ -97,7 +101,7 @@ public class QuickAccessBarManager : MonoBehaviour {
     
     private void CloseQuickAccessBar()
     {
-        if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.WidgetConfig)
+        if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.QuickAccessBar)
         {
             WidgetTransitions.Instance.SlideWidgetRoot();
 
@@ -114,13 +118,13 @@ public class QuickAccessBarManager : MonoBehaviour {
             quickAccessBarOpen = false;
             tpControlRef.allowPlayerInput = true;
             toggleMenuButtonManagerRef.clickedState = false;
-            ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.WidgetConfig);
+            ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.QuickAccessBar);
         }
     }
 
     private void OpenQuickAccessBar()
     {
-        if (ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.WidgetConfig))
+        if (ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.QuickAccessBar))
         {
             WidgetTransitions.Instance.SlideWidgetRoot();
             //all of the menu buttons need to be opened here

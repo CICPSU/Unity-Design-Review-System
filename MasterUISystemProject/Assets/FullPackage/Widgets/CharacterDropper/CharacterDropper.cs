@@ -37,7 +37,7 @@ public class CharacterDropper : MonoBehaviour {
     private List<Toggle> toggleList = new List<Toggle>();
     private Vector3 dropLocation = Vector3.zero;
     private int randomCharIndex = -1;
-    private bool mouseDownDrop = false;
+    private bool mouseDown = false;
 
     /// <summary>
     /// CHAR INFO VARS
@@ -63,6 +63,9 @@ public class CharacterDropper : MonoBehaviour {
     public Image radiusSelectMask;
     public CharacterWander.WanderMode selectedMode;
 
+	/// <summary>
+	/// reference to the characterWander script on a selected character
+	/// </summary>
     private CharacterWander wanderToEdit;
 
     /// <summary>
@@ -78,13 +81,11 @@ public class CharacterDropper : MonoBehaviour {
     {
         patrolToggle.onValueChanged.AddListener(OnPatrolChanged);
         randomToggle.onValueChanged.AddListener(OnRandomChanged);
-        //characterFilePath = Application.dataPath + "/FullPackage/Settings/SavedChars.characters";
-        //LoadCharacters();
+		radiusInput.onValueChanged.AddListener(SetRadiusProjectorFromInputValueChanged);
 
         if (Instance == null)
             Instance = this;
 
-        radiusInput.onValueChanged.AddListener(SetRadiusProjectorFromInputValueChanged);
 
         ResetMenu();
         currentState = CharacterDropperState.SelectExisting;
@@ -136,8 +137,8 @@ public class CharacterDropper : MonoBehaviour {
                 if (!EventSystem.current.IsPointerOverGameObject())
                 {
                     if (Input.GetMouseButtonDown(0))
-                        mouseDownDrop = true;
-                    if (Input.GetMouseButtonUp(0) && mouseDownDrop)
+						mouseDown = true;
+                    if (Input.GetMouseButtonUp(0) && mouseDown)
                         DropCharacter();
                 }
 
@@ -149,8 +150,8 @@ public class CharacterDropper : MonoBehaviour {
                 }
                 
             }
-            else if (mouseDownDrop)
-                mouseDownDrop = false;
+            else if (mouseDown)
+                mouseDown = false;
 
             // If we are in radius select mode, we need to activate the radius projector and set its radius based on a raycast through the cursor.
             // When we left click, we stop the radius select and change states.
@@ -266,22 +267,13 @@ public class CharacterDropper : MonoBehaviour {
 
         radiusProjector.orthographicSize = float.Parse(radiusInput.text);
     }
-
-    /// <summary>
-    /// Sets the wander radius from the input field.
-    /// </summary>
-    public void SetWanderRadiusFromInput()
-    {
-        userSetRadius = true;
-        radiusProjector.orthographicSize = float.Parse(radiusInput.text);
-    }
-
+		
     /// <summary>
     /// Drops the active character at the selected location and updates its CharacterWander script.
     /// </summary>
     public void DropCharacter()
     {
-        mouseDownDrop = false;
+        mouseDown = false;
         activeChar.GetComponent<CapsuleCollider>().enabled = true;
         activeChar.GetComponent<NavMeshAgent>().enabled = true;
         activeChar.GetComponent<CharacterWander>().enabled = true;
@@ -290,7 +282,6 @@ public class CharacterDropper : MonoBehaviour {
         activeChar.GetComponent<CharacterWander>().poiDestination = -1;
 
         activeChar.transform.parent = charRoot.transform;
-        ;
 
         if ((CharacterWander.WanderMode)newCharWanderSelect.value == CharacterWander.WanderMode.Patrol)
         {
@@ -304,7 +295,6 @@ public class CharacterDropper : MonoBehaviour {
 
         droppedCharacters.Add(new DroppedCharacter(activeChar.GetComponent<CharacterWander>()));
         SaveCharacters();
-        
     }
 
     /// <summary>
@@ -312,7 +302,7 @@ public class CharacterDropper : MonoBehaviour {
     /// </summary>
     public void OpenCharacterDrop()
     {
-        if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.WidgetConfig)
+        if (ActiveWidgetManager.currentActive == ActiveWidgetManager.ActiveWidget.QuickAccessBar)
         {
             dropCharacterSelectPanel.gameObject.SetActive(true);
             modelToggleGroup.SetAllTogglesOff();
@@ -320,7 +310,7 @@ public class CharacterDropper : MonoBehaviour {
             activeChar = GetCharacter();
             buttonImage.color = Color.red;
             currentState = CharacterDropperState.DroppingNew;
-            ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.WidgetConfig);
+            ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.QuickAccessBar);
             ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
         }
     }
@@ -338,7 +328,7 @@ public class CharacterDropper : MonoBehaviour {
             buttonImage.color = Color.white;
             currentState = CharacterDropperState.SelectExisting;
             ActiveWidgetManager.DeactivateWidget(ActiveWidgetManager.ActiveWidget.CharacterDrop);
-            ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.WidgetConfig);
+            ActiveWidgetManager.ActivateWidget(ActiveWidgetManager.ActiveWidget.QuickAccessBar);
         }
     }
     
@@ -453,6 +443,7 @@ public class CharacterDropper : MonoBehaviour {
         radiusInput.text = wanderToEdit.localWanderRadius.ToString();
         wanderToEdit.localWanderCenter = activeChar.transform.position;
         Toggle toggleToActivate;
+		//bookmark mode is an internal mode and won't show on CharacterEdit panel
         if(wanderToEdit.mode == CharacterWander.WanderMode.Bookmark)
             toggleToActivate = charEditWanderToggleGroup.transform.GetChild((int)wanderToEdit.prevMode).GetComponent<Toggle>();
         else

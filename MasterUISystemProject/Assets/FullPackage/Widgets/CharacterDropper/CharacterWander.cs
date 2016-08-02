@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+/// <summary>
+/// control the wander of characters, attached to each character
+/// </summary>
 public class CharacterWander : MonoBehaviour, IAcceptRaycast {
 
     public enum WanderMode { Idle, Patrol, Explore, Bookmark }
@@ -18,7 +22,7 @@ public class CharacterWander : MonoBehaviour, IAcceptRaycast {
 
     public float normalSpeedRadius = 3f;
 
-    public float navSpeedRatio = 1;
+    public float navSpeedRatio = 1; //to make sure char does not slide when radius changes
 
     public int poiDestination = -1;
 
@@ -40,6 +44,10 @@ public class CharacterWander : MonoBehaviour, IAcceptRaycast {
             CharacterDropper.Instance.OpenCharacterInfo(gameObject);
     }
 
+
+	/// <summary>
+	/// Set the wander mode.
+	/// </summary>
     public void SetWanderMode()
     {
 

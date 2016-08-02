@@ -41,7 +41,9 @@ namespace UnityEngine.UI.Extensions
             }
         }
 
-
+		/// <summary>
+		/// place tooltip around the mouse
+		/// </summary>
         public void PlaceTooltip()
         {
             finalPos = Input.mousePosition;
@@ -49,7 +51,7 @@ namespace UnityEngine.UI.Extensions
             // need to check to keep the tootip on screen
             // open in a quadrant around the mouse to keep it on screen.
             if (Input.mousePosition.x + tooltipRect.sizeDelta.x > Screen.width)
-                finalPos -= new Vector3(tooltipRect.sizeDelta.x * .6f, 0, 0);
+                finalPos -= new Vector3(tooltipRect.sizeDelta.x * .6f, 0, 0); // .6f offset is the minimum distance that ensures tooltip does not overlap with mouse
             else
                 finalPos += new Vector3(tooltipRect.sizeDelta.x * .6f, 0, 0);
 
@@ -74,8 +76,6 @@ namespace UnityEngine.UI.Extensions
                 TooltipText.text = text;
 
             moveTooltip = true;
-
-            
 
             gameObject.SetActive(true);
             GetComponent<RectTransform>().sizeDelta = new Vector2(LayoutUtility.GetPreferredWidth(TooltipText.rectTransform) + 100, GetComponent<RectTransform>().sizeDelta.y);

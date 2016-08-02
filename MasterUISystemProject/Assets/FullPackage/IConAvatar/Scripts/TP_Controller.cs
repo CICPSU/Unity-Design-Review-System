@@ -37,16 +37,15 @@ public class TP_Controller : MonoBehaviour {
 		
 		TP_Motor.Instance.MoveVector = Vector3.zero; // zero out move vector
 		
-		//		if(Input.GetAxis("Vertical") > deadZone|| Input.GetAxis("Vertical") < -deadZone )
 		if(Input.GetKey (TP_InputManager.instance.forward))
 			TP_Motor.Instance.MoveVector += new Vector3 (0, 0, 1);
 		if(Input.GetKey (TP_InputManager.instance.backward))
 			TP_Motor.Instance.MoveVector += new Vector3(0,0,-1);
-		//if(Input.GetAxis("Horizontal") > deadZone|| Input.GetAxis("Horizontal") < -deadZone )
 		if(Input.GetKey (TP_InputManager.instance.leftward))
 			TP_Motor.Instance.MoveVector += new Vector3 (-1, 0, 0 );
 		if(Input.GetKey (TP_InputManager.instance.rightward))
 			TP_Motor.Instance.MoveVector += new Vector3 (1, 0, 0 );
+		
 		// the difference between GetMouseButton and GetMouseButtonDown is GetMouseButton checks if the button is at the state of being pressed
 		// GetMouseButtonDown checks if the button is clicked at that frame, so you cannot hold the button with this command
 		if(Input.GetMouseButton(2))
@@ -55,8 +54,6 @@ public class TP_Controller : MonoBehaviour {
 		//when tracking xbox controller, press A to move to the direction of pointing
 		if(Input.GetAxis("XboxPointGo") == 1){
 			Vector3 moveDirection = transform.InverseTransformDirection(DIRE.Instance.Hand.transform.forward);
-			//moveDirection = moveDirection.normalized;
-			//Debug.Log("Move Direction: " + moveDirection);
 			TP_Motor.Instance.MoveVector += moveDirection;
 			
 		}

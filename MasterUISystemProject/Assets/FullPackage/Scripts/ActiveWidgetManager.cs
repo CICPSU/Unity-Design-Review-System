@@ -3,7 +3,7 @@ using System.Collections;
 
 public class ActiveWidgetManager : MonoBehaviour {
     
-    public enum ActiveWidget { None, Sunlight, CharacterDrop, Bookmark, WidgetConfig}
+    public enum ActiveWidget { None, Sunlight, CharacterDrop, Bookmark, QuickAccessBar}
     public static ActiveWidget currentActive = ActiveWidget.None;
 
     public void ActivateWidgetFromButton(ActiveWidget widgetToActivate)
@@ -21,18 +21,18 @@ public class ActiveWidgetManager : MonoBehaviour {
         {
             // these two if statements will make sure that the widgets that are not being activated are disabled
             if (widgetToActivate != ActiveWidget.Bookmark)
-                SettingsManager.Instance.bm_GameObject.SetActive(false);
+                SettingsManager.Instance.bookmark_GameObject.SetActive(false);
             if (widgetToActivate != ActiveWidget.Sunlight)
-                SettingsManager.Instance.sl_GameObject.SetActive(false);
+                SettingsManager.Instance.sunlightWidget_GameObject.SetActive(false);
 
             // moves the widget config object off the screen
             if (WidgetTransitions.Instance != null
                 && widgetToActivate != ActiveWidget.CharacterDrop
-                && widgetToActivate != ActiveWidget.WidgetConfig)
+                && widgetToActivate != ActiveWidget.QuickAccessBar)
                 WidgetTransitions.Instance.SlideWidgetConfig();
 
             // since the minimap doesnt use an active state, it will always be disabled
-            SettingsManager.Instance.mm_GameObject.SetActive(false);
+            SettingsManager.Instance.miniMap_GameObject.SetActive(false);
             // set the reference for the currently active widget
             currentActive = widgetToActivate;
             return true;
@@ -56,17 +56,17 @@ public class ActiveWidgetManager : MonoBehaviour {
         {
             if (SettingsManager.Instance != null)
             {
-                if (!SettingsManager.Instance.bm_GameObject.activeSelf && SettingsManager.Instance.wc_Settings.bm_Enabled)
-                    SettingsManager.Instance.bm_GameObject.SetActive(true);
-                if (!SettingsManager.Instance.sl_GameObject.activeSelf && SettingsManager.Instance.wc_Settings.sl_Enabled)
-                    SettingsManager.Instance.sl_GameObject.SetActive(true);
-                if (!SettingsManager.Instance.mm_GameObject.activeSelf && SettingsManager.Instance.wc_Settings.mm_Enabled)
-                    SettingsManager.Instance.mm_GameObject.SetActive(true);
+                if (!SettingsManager.Instance.bookmark_GameObject.activeSelf && SettingsManager.Instance.wc_Settings.bm_Enabled)
+                    SettingsManager.Instance.bookmark_GameObject.SetActive(true);
+                if (!SettingsManager.Instance.sunlightWidget_GameObject.activeSelf && SettingsManager.Instance.wc_Settings.sl_Enabled)
+                    SettingsManager.Instance.sunlightWidget_GameObject.SetActive(true);
+                if (!SettingsManager.Instance.miniMap_GameObject.activeSelf && SettingsManager.Instance.wc_Settings.mm_Enabled)
+                    SettingsManager.Instance.miniMap_GameObject.SetActive(true);
             }
 
             if (WidgetTransitions.Instance != null
                 && currentActive != ActiveWidget.CharacterDrop
-                && currentActive != ActiveWidget.WidgetConfig)
+                && currentActive != ActiveWidget.QuickAccessBar)
                 WidgetTransitions.Instance.SlideWidgetConfig();
 
             currentActive = ActiveWidget.None;

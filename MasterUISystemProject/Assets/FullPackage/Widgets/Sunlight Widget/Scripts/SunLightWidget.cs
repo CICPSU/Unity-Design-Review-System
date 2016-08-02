@@ -67,7 +67,7 @@ public class SunLightWidget : MonoBehaviour {
 	public bool dayLightSaving; // default is false, true -> daylight saving -> deduct an hour from localtime during calculation
 
 	void Awake(){
-		xmlPath = Application.dataPath + "/sunlightWidgetData.xml";
+		xmlPath = Application.dataPath + "/FullPackage/Settings/sunlightWidgetData.xml";
 		if(Instance == null){
 			Instance = this;
 		}

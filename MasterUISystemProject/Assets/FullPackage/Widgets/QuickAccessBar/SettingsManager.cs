@@ -3,6 +3,9 @@ using System.IO;
 using System.Collections;
 using System.Xml;
 
+/// <summary>
+/// loads and applies settings from and to the .sets file
+/// </summary>
 public class SettingsManager : MonoBehaviour
 {
     public static SettingsManager Instance;
@@ -16,11 +19,13 @@ public class SettingsManager : MonoBehaviour
     public TP_Motor tp_Motor_Ref;
     public TP_InputManager tp_InputManager_Ref;
     public MiniMapManager mm_Manager_Ref;
-    public GameObject mm_GameObject;
-    public GameObject sl_GameObject;
-    public GameObject bm_GameObject;
-    public GameObject ci_Gameobject;
-    public GameObject wc_Gameobject;
+
+	public GameObject miniMap_GameObject;
+
+    public GameObject sunlightWidget_GameObject;
+    public GameObject bookmark_GameObject;
+    public GameObject characterInfo_Gameobject;
+    public GameObject widgetConfig_Gameobject;
 
     private bool nullKeybinding = false;
 
@@ -29,12 +34,12 @@ public class SettingsManager : MonoBehaviour
         if (Instance == null)
             Instance = this;
     }
+
     /// <summary>
     /// There are only three settings files we need to load
     /// AvatarSettings, KeyBindings and WidgetControlSettings
     /// If those files are not found, save a copy of them with default settings.
     /// </summary>
-
     public void LoadSettingsFiles()
     {
         if (File.Exists(Application.dataPath + "/FullPackage/Settings/AvatarSettings.sets"))
@@ -267,12 +272,12 @@ public class SettingsManager : MonoBehaviour
     /// </summary>
     public void ApplyWidgetControlSettings()
     {
-        bm_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.bm_DefaultPosition;
-        bm_GameObject.SetActive(wc_Settings.bm_Enabled);
-        sl_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.sl_DefaultPosition;
-        sl_GameObject.SetActive(wc_Settings.sl_Enabled);
-        mm_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.mm_DefaultPosition;
-        mm_GameObject.SetActive(wc_Settings.mm_Enabled);
+        bookmark_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.bm_DefaultPosition;
+        bookmark_GameObject.SetActive(wc_Settings.bm_Enabled);
+        sunlightWidget_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.sl_DefaultPosition;
+        sunlightWidget_GameObject.SetActive(wc_Settings.sl_Enabled);
+        miniMap_GameObject.GetComponent<RectTransform>().anchoredPosition = wc_Settings.mm_DefaultPosition;
+        miniMap_GameObject.SetActive(wc_Settings.mm_Enabled);
         
         mm_Manager_Ref.mapProportionOfScreen = wc_Settings.mm_ScreenSize;
         mm_Manager_Ref.orthoCamRadiusFeet = wc_Settings.mm_ScopeRadius;
