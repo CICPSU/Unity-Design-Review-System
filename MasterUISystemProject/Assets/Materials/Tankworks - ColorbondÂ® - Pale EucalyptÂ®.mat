@@ -6,7 +6,7 @@ Material:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: "Tankworks - Colorbond\xC2\xAE - Pale Eucalypt\xC2\xAE"
+  m_Name: "Tankworks - ColorbondA\u0302\xAE - Pale EucalyptA\u0302\xAE"
   m_Shader: {fileID: 7, guid: 0000000000000000f000000000000000, type: 0}
   m_ShaderKeywords: 
   m_LightmapFlags: 5
@@ -15,16 +15,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 2
     m_TexEnvs:
-      data:
-        first:
-          name: _MainTex
-        second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 1, y: 1}
-          m_Offset: {x: 0, y: 0}
-    m_Floats: {}
+    - first:
+        name: _MainTex
+      second:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats: []
     m_Colors:
-      data:
-        first:
-          name: _Color
-        second: {r: 0.7137255, g: 0.64705884, b: 0.47450984, a: 1}
+    - first:
+        name: _Color
+      second: {r: 0.7137255, g: 0.64705884, b: 0.47450984, a: 1}
