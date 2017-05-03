@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<SunlightWidgetData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <CurrentCity>
+    <CityName>Boston, MA</CityName>
+    <Longitude>-71.0589</Longitude>
+    <Latitude>42.3601</Latitude>
+    <TimeZone>-5</TimeZone>
+  </CurrentCity>
+  <ListOfCity>
+    <City>
+      <CityName>Washington, DC</CityName>
+      <Longitude>-77.09</Longitude>
+      <Latitude>33.89</Latitude>
+      <TimeZone>-5</TimeZone>
+    </City>
+    <City>
+      <CityName>New York City</CityName>
+      <Longitude>-74.0064</Longitude>
+      <Latitude>40.7142</Latitude>
+      <TimeZone>-5</TimeZone>
+    </City>
+    <City>
+      <CityName>San Francisco, CA</CityName>
+      <Longitude>-122.4183</Longitude>
+      <Latitude>37.775</Latitude>
+      <TimeZone>-8</TimeZone>
+    </City>
+    <City>
+      <CityName>Philadelphia, PA</CityName>
+      <Longitude>-75.1642</Longitude>
+      <Latitude>39.9522</Latitude>
+      <TimeZone>-5</TimeZone>
+    </City>
+    <City>
+      <CityName>Boston, MA</CityName>
+      <Longitude>-71.0589</Longitude>
+      <Latitude>42.3601</Latitude>
+      <TimeZone>-5</TimeZone>
+    </City>
+  </ListOfCity>
+  <Year>2014</Year>
+  <Month>2</Month>
+  <Date>20</Date>
+  <CurrentTime>0.10137435048818588</CurrentTime>
+</SunlightWidgetData>

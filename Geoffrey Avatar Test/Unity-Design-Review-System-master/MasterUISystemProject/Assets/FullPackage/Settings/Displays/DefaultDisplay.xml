@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<DisplaySettings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Screens>
+    <ScreenInfo>
+      <Name>Front</Name>
+      <Location>
+        <Position>
+          <x>-1.2192</x>
+          <y>.50344</y>
+          <z>1.6</z>
+        </Position>
+        <Orientation>
+          <x>0</x>
+          <y>0</y>
+          <z>0</z>
+        </Orientation>
+        <Width>2.4384</Width>
+        <Height>1.8288</Height>
+      </Location>
+      <Viewport>
+        <X>1600</X>
+        <Y>0</Y>
+        <Width>1600</Width>
+        <Height>1200</Height>
+      </Viewport>
+    </ScreenInfo>
+
+ <ScreenInfo>
+      <Name>Left</Name>
+      <Location>
+        <Position>
+          <x>-2.9434</x>
+          <y>.50344</y>
+          <z>-.1242</z>
+        </Position>
+        <Orientation>
+          <x>0</x>
+          <y>-45</y>
+          <z>0</z>
+        </Orientation>
+        <Width>2.4384</Width>
+        <Height>1.8288</Height>
+      </Location>
+      <Viewport>
+        <X>0</X>
+        <Y>0</Y>
+        <Width>1600</Width>
+        <Height>1200</Height>
+      </Viewport>
+    </ScreenInfo>
+
+
+ <ScreenInfo>
+      <Name>Right</Name>
+      <Location>
+        <Position>
+          <x>1.2192</x>
+          <y>.50344</y>
+          <z>1.6</z>
+        </Position>
+        <Orientation>
+          <x>0</x>
+          <y>45</y>
+          <z>0</z>
+        </Orientation>
+        <Width>2.4384</Width>
+        <Height>1.8288</Height>
+      </Location>
+      <Viewport>
+        <X>3200</X>
+        <Y>0</Y>
+        <Width>1600</Width>
+        <Height>1200</Height>
+      </Viewport>
+    </ScreenInfo>
+  </Screens>
+</DisplaySettings>
