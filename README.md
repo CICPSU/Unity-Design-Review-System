@@ -5,7 +5,7 @@ The project contains the following features:
 1. Animated avatar with integration of xbox controller.
 2. Minimap system
 3. Location bookmark system
-4. Display configuration system that enables correct 1 to 1 scale output mapping for any system with any number of flat displays. (similar to MiddleVR)
+4. Display configuration system that enables correct 1 to 1 scale output mapping for any system with any number of flat displays. (similar to VR suites that can adapt model display to display configuration)
 5. Assets that enables adding new characters into scene during run time. The added characters can perform AI path finding if Nav Mesh is baked into scene.
 6. More are under development.
 
