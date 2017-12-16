@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterUISystemProject.Plugins", "MasterUISystemProject.Plugins.csproj", "{855E019B-9EFE-EFFF-CCFF-D0FDCB1DD56C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterUISystemProject", "MasterUISystemProject.csproj", "{4165495F-EBA7-930F-377F-B4C653041DD6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterUISystemProject.Editor", "MasterUISystemProject.Editor.csproj", "{8D53962C-890A-11D9-E7F4-BA63A251A21A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{855E019B-9EFE-EFFF-CCFF-D0FDCB1DD56C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{855E019B-9EFE-EFFF-CCFF-D0FDCB1DD56C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{855E019B-9EFE-EFFF-CCFF-D0FDCB1DD56C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{855E019B-9EFE-EFFF-CCFF-D0FDCB1DD56C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4165495F-EBA7-930F-377F-B4C653041DD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4165495F-EBA7-930F-377F-B4C653041DD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4165495F-EBA7-930F-377F-B4C653041DD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4165495F-EBA7-930F-377F-B4C653041DD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D53962C-890A-11D9-E7F4-BA63A251A21A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D53962C-890A-11D9-E7F4-BA63A251A21A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D53962C-890A-11D9-E7F4-BA63A251A21A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D53962C-890A-11D9-E7F4-BA63A251A21A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
