@@ -1,0 +1,15 @@
+Unity-Design-Review System Version 1: (build in Unity Version 5.4.0f3)
+
+The project contains the following features:
+1. Animated avatar with integration of xbox controller
+2. Minimap system
+3. Location bookmark system
+4. Display configuration system that enables correct 1 to 1 scale output mapping for any system with any number of flat displays
+5. Assests that enable adding new third person character avatars into a scene during run time. The added characters can perform AI path finding if Nav Mesh is backed into scene
+
+
+Unity-Design-Review System Version 1.1: (build in Unity Version 5.6.1f1)
+
+The project contains the same features as Version 1. This updated version removes the third party assets, 'Curved UI' due to its obsolete codes.
+The asset does not affect any functionality of the features highlighted in Version 1.
+
